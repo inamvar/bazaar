@@ -25,7 +25,7 @@
 	<context:component-scan base-package="com.dariksoft.bazaar.aspect" />
 
 
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/**" location="/" />
 
 
 
@@ -91,7 +91,9 @@
 	<bean
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
-		p:fallbackToSystemLocale="false" />
+		p:fallbackToSystemLocale="false" 
+		p:fileEncodings="UTF-8" 
+    	p:defaultEncoding="UTF-8" />
 
 
 	<bean id="localeResolver"

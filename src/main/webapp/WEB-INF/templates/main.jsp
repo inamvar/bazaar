@@ -8,21 +8,18 @@
 <head>
     <title>Hello Spring mvc</title>
    
-   <link href="<c:url value="/resources/styles/bootstrap.min.css" />" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<c:url value="/resources/scripts/jquery-1.9.1.min.js" />"></script>
-   
-   <!-- 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/resources/styles/bootstrap.min.css" />
-	
-	 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/resources/scripts/jquery-1.9.1.min.js"></script>
-	 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/resources/scripts/bootstrap.min.js"></script>
-	  -->
+
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/bootstrap.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/my.css" />
+	 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
+	 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
+	 
 </head>
 <body>
     <div id="header">
        <div id="headerTitle"><tiles:insertAttribute name="header" /></div>
     </div>
-    <p>asdf sldfkjhdf</p>
     <div id="content">
        <tiles:insertAttribute name="body" />
     </div>
