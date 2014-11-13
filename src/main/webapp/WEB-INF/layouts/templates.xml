@@ -25,6 +25,9 @@
 	<definition name="home" extends=".adminTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/admin/home.jsp" />
 	</definition>
+	<definition name="login" extends=".adminTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+	</definition>
 
 </tiles-definitions>
                 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+ 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
@@ -27,37 +28,37 @@
 
 	<mvc:resources mapping="/**" location="/" />
 
+ <mvc:view-controller path="/login" view-name="login"/>
 
-
-	<bean id="myEmf"
+	<beans:bean id="myEmf"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.dariksoft.bazaar" />
-		<property name="jpaVendorAdapter">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="packagesToScan" value="com.dariksoft.bazaar" />
+		<beans:property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-		</property>
-		<property name="jpaProperties">
+		</beans:property>
+		<beans:property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 			</props>
-		</property>
-	</bean>
+		</beans:property>
+	</beans:bean>
 
-	<bean id="dataSource"
+	<beans:bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/bazaar" />
-		<property name="username" value="root" />
-		<property name="password" value="2238295" />
-	</bean>
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/bazaar" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="2238295" />
+	</beans:bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="myEmf" />
-	</bean>
+	<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<beans:property name="entityManagerFactory" ref="myEmf" />
+	</beans:bean>
 	<tx:annotation-driven />
 
-	<bean id="persistenceExceptionTranslationPostProcessor"
+	<beans:bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 
@@ -65,21 +66,21 @@
 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">
-			<bean id="jacksonMessageConverter"
+			<beans:bean id="jacksonMessageConverter"
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<bean id="viewResolver"
+	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
-	<bean id="tilesConfigurer"
+	<beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-		<property name="definitions">
+		<beans:property name="definitions">
 			<list>
 				<value>/WEB-INF/layouts/templates.xml</value>
 			</list>
-		</property>
-	</bean>
+		</beans:property>
+	</beans:bean>
 	<aop:aspectj-autoproxy />
 
 
@@ -88,7 +89,7 @@
 	<!-- Application Message Bundle <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
 		<property name="basenames" value="classpath:messages" /> <property name="defaultEncoding" 
 		value="UTF-8" /> </bean> -->
-	<bean
+	<beans:bean
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
 		p:fallbackToSystemLocale="false" 
@@ -96,12 +97,12 @@
     	p:defaultEncoding="UTF-8" />
 
 
-	<bean id="localeResolver"
+	<beans:bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="cookieName" value="podcastpediaPreferredLanguage" />
 		<property name="defaultLocale" value="en_US" />
 		<property name="cookieMaxAge" value="604800" />
-	</bean>
+	</beans:bean>
 
 	<mvc:interceptors>
 		<!-- Changes the locale when a 'lang' request parameter is sent; e.g. /?lang=de -->
@@ -121,4 +122,4 @@
 
 
 
-</beans>
+</beans:beans>

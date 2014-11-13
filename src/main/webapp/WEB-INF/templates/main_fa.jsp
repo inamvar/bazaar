@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div id="content">
-		<td><tiles:insertAttribute name="body" />
+		<tiles:insertAttribute name="body" />
 	</div>
 </body>
 </html>
