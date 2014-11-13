@@ -45,11 +45,7 @@ public class PersonDaoImp implements PersonDao {
 	}
 
 	public int update(Person person) {
-		Person original = findbyId(person.getId());
-		original.setFirstName(person.getFirstName());
-		original.setLastName(person.getLastName());
-		original.setEmail(person.getEmail());
-		entityManager.merge(original);
+		entityManager.merge(person);
 		return 0;
 	}
 

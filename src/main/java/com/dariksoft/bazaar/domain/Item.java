@@ -1,5 +1,6 @@
 package com.dariksoft.bazaar.domain;
 
+import java.awt.Image;
 import java.util.List;
 
 public class  Item {
@@ -11,6 +12,9 @@ public class  Item {
 	private ItemCategory Category;
 	private List<Promotion> promotions;
 	private Merchant merchant;
+	private List<Comment> comments;
+	private Image Thumbnail;
+	private Image image;
 	
 	
 	public int getId() {
@@ -51,6 +55,24 @@ public class  Item {
 	}
 	public void setStatus(ItemStatus status) {
 		this.status = status;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	public Image getThumbnail() {
+		return Thumbnail;
+	}
+	public void setThumbnail(Image thumbnail) {
+		Thumbnail = thumbnail;
+	}
+	public Image getImage() {
+		return image;
+	}
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 }
