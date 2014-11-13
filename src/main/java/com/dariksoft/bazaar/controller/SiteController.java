@@ -30,4 +30,10 @@ private static final Logger logger = LoggerFactory.getLogger(SiteController.clas
 		
 		return "website/index";
 	}
+	
+	@RequestMapping(value="/myerror", method = RequestMethod.GET)
+	public String myerror() throws Throwable  {
+		throw new Exception("This is a sample exception."); 
+		
+	}
 }

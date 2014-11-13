@@ -37,7 +37,11 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/templates/error_layout.jsp</location>
+		<location>/WEB-INF/templates/error_404_layout.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/templates/error_403_layout.jsp</location>
 	</error-page>
 
 	<filter>

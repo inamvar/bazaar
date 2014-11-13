@@ -1,5 +1,7 @@
 package com.dariksoft.bazaar.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,50 +27,26 @@ public class Person {
 	@Min(3)
 	@Max(100)
 	private String lastName;
-	@Column(nullable =false, name = "email",unique=true)	
-	private String email;
+	private Date birthday;
+	private Gender gender;
+	
+	@Column(nullable =false, name = "username",unique=true)	
+	private String username;
 	@Min(4)
 	private String password;
-	private String address;
-	private String mobile;
-	private String fax;
-	private String phone;
-	private String website;
-	public String getWebsite() {
-		return website;
+	private Contact contact;
+	private Account account;
+	public Contact getContact() {
+		return contact;
 	}
-	public void setWebsite(String website) {
-		this.website = website;
+	public void setContact(Contact address) {
+		this.contact = address;
 	}
-	public String getPhone() {
-		return phone;
+	public String getUsername() {
+		return username;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getFax() {
-		return fax;
-	}
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getLastName() {
 		return lastName;
@@ -85,14 +63,29 @@ public class Person {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	} 
 
 }

@@ -18,6 +18,11 @@
 	<put-attribute name="header" value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/error404.jsp" />
 	</definition>
+			<definition name="error403" extends=".adminTemplate">
+		<put-attribute name="header"
+			value="/WEB-INF/templates/error_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/error403.jsp" />
+	</definition>
 	<definition name="index" extends=".adminTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
 	</definition>
@@ -31,16 +36,6 @@
 		<put-attribute name="header"
 			value="/WEB-INF/templates/website-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/templates/blank.jsp" />
-	</definition>
-
-
-	<definition name="error" extends=".websiteTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
-	</definition>
-	<definition name="error404" extends=".websiteTemplate">
-		<put-attribute name="header"
-			value="/WEB-INF/templates/error_header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/error404.jsp" />
 	</definition>
 	<definition name="website/index" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/website/index.jsp" />
