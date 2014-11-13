@@ -9,6 +9,7 @@ public class  Item {
 	private String name;
 	private double price;
 	private ItemStatus status;
+	private Rate rate;
 	private ItemCategory Category;
 	private List<Promotion> promotions;
 	private Merchant merchant;
@@ -73,6 +74,12 @@ public class  Item {
 	}
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	public Rate getRate() {
+		return rate;
+	}
+	public void setRate(Rate rate) {
+		this.rate = rate;
 	}
 
 }
