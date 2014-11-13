@@ -18,33 +18,22 @@
 
 	<!-- Processes application requests -->
 	<servlet>
-		<servlet-name>AdminServlet</servlet-name>
+		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/admin-context.xml</param-value>
+			<param-value>/WEB-INF/spring/mvc-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<servlet>
-		<servlet-name>WebsiteServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/website-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+
 
 	<servlet-mapping>
-		<servlet-name>AdminServlet</servlet-name>
-		<url-pattern>/admin/*</url-pattern>
+		<servlet-name>AppServlet</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WebsiteServlet</servlet-name>
-		<url-pattern>/site</url-pattern>
-	</servlet-mapping>
+
 
 	<error-page>
 		<error-code>404</error-code>

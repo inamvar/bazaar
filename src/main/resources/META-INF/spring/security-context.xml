@@ -8,7 +8,8 @@
   <http auto-config='true'>
     <intercept-url pattern="/admin/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
      <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-    <intercept-url pattern="/**" access="ROLE_USER" />
+    <intercept-url pattern="/admin/*" access="ROLE_USER" />
+     <intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
     <form-login login-page="/admin/login"/>
   </http>
 
