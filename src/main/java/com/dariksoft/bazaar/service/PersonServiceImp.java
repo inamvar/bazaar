@@ -10,7 +10,7 @@ import com.dariksoft.bazaar.dao.PersonDao;
 import com.dariksoft.bazaar.domain.Person;
 
 @Service
-public class PersonManagerImp implements PersonManager {
+public class PersonServiceImp implements PersonService {
 
 	@Autowired
 	PersonDao personDao;

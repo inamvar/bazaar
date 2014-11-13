@@ -7,7 +7,7 @@
 
 <html >
 <head>
-<title>Hello Spring mvc</title>
+<title>${title}</title>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/my.css" />

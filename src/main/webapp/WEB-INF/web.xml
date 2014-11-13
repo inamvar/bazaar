@@ -7,7 +7,7 @@
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:META-INF/spring/root-context*.xml</param-value>
+		<param-value>classpath*:META-INF/spring/*-context.xml</param-value>
 		<!-- param-value>/WEB-INF/spring/root-context.xml</param-value -->
 	</context-param>
 

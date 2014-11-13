@@ -26,6 +26,7 @@
 					data-toggle="dropdown"><spring:message code="language"/> <span class="caret"></span> </a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="?lang=en">English</a></li>
+						<li><a href="?lang=ar">عربي</a></li>
 						<li><a href="?lang=fa">فارسی</a></li>
 					</ul> <c:if test="${pageContext['request'].userPrincipal != null}">
 						<li><a

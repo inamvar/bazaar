@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dariksoft.bazaar.domain.Person;
 
-public interface PersonManager {
+public interface PersonService {
 	void insert(Person person);
 	int delete(Person person);
 	int delete(int id);

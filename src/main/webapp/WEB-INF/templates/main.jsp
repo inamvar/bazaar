@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Hello Spring mvc</title>
+    <title>${title}</title>
    
 
 
