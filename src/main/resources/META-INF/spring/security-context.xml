@@ -5,15 +5,15 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
 
-  <http auto-config='true'>
- 
-    <intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
-    <intercept-url pattern="/admin*" access="ROLE_ADMIN" />
-      <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-     <intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-    <form-login login-page="/login"/>
-  </http>
- 
+	<http auto-config='true'>
+
+		<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/admin*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<form-login login-page="/login" />
+	</http>
+
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
@@ -21,17 +21,25 @@
 				<user name="demo" password="demo" authorities="ROLE_USER" />
 			</user-service>
 		</authentication-provider>
+		<authentication-provider>
+			<password-encoder hash="sha-256" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select email, password, enabled from users where email=?"
+				authorities-by-username-query="select users.email, user_roles.role from users, user_roles where users.email=? and users.user_role=user_roles.id" />
+		</authentication-provider>
 	</authentication-manager>
-	
 
-        <beans:bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-            <beans:property name="useReferer" value="true"/>
-        </beans:bean>
 
-   
-        <beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-            <beans:property name="defaultFailureUrl" value="/login?login_error=t" />
-        </beans:bean>
+	<beans:bean
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<beans:property name="useReferer" value="true" />
+	</beans:bean>
+
+
+	<beans:bean
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/login?login_error=t" />
+	</beans:bean>
 
 
 

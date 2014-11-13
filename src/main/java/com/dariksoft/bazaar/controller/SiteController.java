@@ -1,7 +1,5 @@
-package com.dariksoft.bazaar.controller.administration;
+package com.dariksoft.bazaar.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -13,14 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
-@RequestMapping(value = "/admin")
-public class AdminHomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(AdminHomeController.class);
+@RequestMapping(value = "/")
+public class SiteController {
+private static final Logger logger = LoggerFactory.getLogger(SiteController.class);
 	
 	
 	@Autowired
@@ -28,13 +22,12 @@ public class AdminHomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping( method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome to admin panel! The client locale is {}.", locale);
+		logger.info("Welcome to website! The client locale is {}.", locale);
 		
 		model.addAttribute("title", messageSource.getMessage("admin.home.title", null,locale) );
 		
-		return "index";
+		return "website/index";
 	}
-	
 }

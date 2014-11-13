@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 
 @Entity
@@ -16,11 +18,17 @@ public class Person {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	@Column(nullable =false, name = "firstname")
+	@Min(3)
+	@Max(100)
 	private String firstName;
 	@Column(nullable =false, name = "lastname")
+	@Min(3)
+	@Max(100)
 	private String lastName;
-	@Column(nullable =false, name = "email")
+	@Column(nullable =false, name = "email",unique=true)	
 	private String email;
+	@Min(4)
+	private String password;
 	private String address;
 	private String mobile;
 	private String fax;
@@ -79,6 +87,12 @@ public class Person {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	} 
 
 }

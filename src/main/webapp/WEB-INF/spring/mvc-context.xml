@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans:beans xmlns="http://www.springframework.org/schema/beans"
- 	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc  
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd 
 						http://www.springframework.org/schema/beans 
@@ -19,9 +18,8 @@
      					http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 	<context:component-scan
-		base-package="com.dariksoft.bazaar.controller.administration" />
-			<context:component-scan
-		base-package="com.dariksoft.bazaar.controller.website" />
+		base-package="com.dariksoft.bazaar.controller" />
+	<context:component-scan base-package="com.dariksoft.bazaar.controller.website" />
 	<context:component-scan base-package="com.dariksoft.bazaar.dao" />
 	<context:component-scan base-package="com.dariksoft.bazaar.service" />
 	<context:component-scan base-package="com.dariksoft.bazaar.domain" />
@@ -30,38 +28,8 @@
 
 	<mvc:resources mapping="/**" location="/" />
 
- <mvc:view-controller path="/login" view-name="login"/>
-
-	<beans:bean id="myEmf"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="com.dariksoft.bazaar" />
-		<beans:property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-		</beans:property>
-		<beans:property name="jpaProperties">
-			<props>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-			</props>
-		</beans:property>
-	</beans:bean>
-
-	<beans:bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<beans:property name="url" value="jdbc:mysql://localhost:3306/bazaar" />
-		<beans:property name="username" value="root" />
-		<beans:property name="password" value="2238295" />
-	</beans:bean>
-
-	<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<beans:property name="entityManagerFactory" ref="myEmf" />
-	</beans:bean>
+	<mvc:view-controller path="/login" view-name="login" />
 	<tx:annotation-driven />
-
-	<beans:bean id="persistenceExceptionTranslationPostProcessor"
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 
 
@@ -80,25 +48,18 @@
 		<beans:property name="definitions">
 			<list>
 				<value>/WEB-INF/layouts/templates.xml</value>
-				    <!-- Scan views directory for Tiles configurations -->
-                    <value>/WEB-INF/views/**/views.xml</value>
+				<!-- Scan views directory for Tiles configurations -->
+				<value>/WEB-INF/views/**/views.xml</value>
 			</list>
 		</beans:property>
 	</beans:bean>
 	<aop:aspectj-autoproxy />
 
-
-
-
-	<!-- Application Message Bundle <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
-		<property name="basenames" value="classpath:messages" /> <property name="defaultEncoding" 
-		value="UTF-8" /> </bean> -->
 	<beans:bean
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
-		p:fallbackToSystemLocale="false" 
-		p:fileEncodings="UTF-8" 
-    	p:defaultEncoding="UTF-8" />
+		p:fallbackToSystemLocale="false" p:fileEncodings="UTF-8"
+		p:defaultEncoding="UTF-8" />
 
 
 	<beans:bean id="localeResolver"
@@ -114,15 +75,6 @@
 			<property name="paramName" value="lang" />
 		</bean>
 	</mvc:interceptors>
-
-
-
-
-
-
-	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<property name="prefix" value="/WEB-INF/views/admin/" /> <property name="suffix" 
-		value=".jsp" /> </bean> -->
 
 
 
