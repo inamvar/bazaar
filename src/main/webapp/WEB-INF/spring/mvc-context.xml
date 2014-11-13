@@ -20,6 +20,8 @@
 
 	<context:component-scan
 		base-package="com.dariksoft.bazaar.controller.administration" />
+			<context:component-scan
+		base-package="com.dariksoft.bazaar.controller.website" />
 	<context:component-scan base-package="com.dariksoft.bazaar.dao" />
 	<context:component-scan base-package="com.dariksoft.bazaar.service" />
 	<context:component-scan base-package="com.dariksoft.bazaar.domain" />
@@ -77,7 +79,9 @@
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
 			<list>
-				<value>/WEB-INF/layouts/admin-templates.xml</value>
+				<value>/WEB-INF/layouts/templates.xml</value>
+				    <!-- Scan views directory for Tiles configurations -->
+                    <value>/WEB-INF/views/**/views.xml</value>
 			</list>
 		</beans:property>
 	</beans:bean>

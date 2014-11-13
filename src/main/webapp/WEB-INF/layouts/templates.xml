@@ -19,13 +19,39 @@
 		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
 	</definition>
 	<definition name="error404" extends=".adminTemplate">
-	<put-attribute name="header" value="/WEB-INF/templates/error_header.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/error404.jsp" />
 	</definition>
-	<definition name="home" extends=".adminTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/admin/home.jsp" />
+	<definition name="index" extends=".adminTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/admin/index.jsp" />
 	</definition>
 	<definition name="login" extends=".adminTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+	</definition>
+
+	<!--website Template -->
+	<definition name=".websiteTemplate" template="/WEB-INF/templates/main.jsp">
+		<put-attribute name="title" value="Simple Tiles 2 Example"
+			type="string" />
+		<put-attribute name="header"
+			value="/WEB-INF/templates/website-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/templates/blank.jsp" />
+	</definition>
+
+
+	<definition name="error" extends=".websiteTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
+	</definition>
+	<definition name="error404" extends=".websiteTemplate">
+		<put-attribute name="header"
+			value="/WEB-INF/templates/error_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/error404.jsp" />
+	</definition>
+	<definition name="index" extends=".websiteTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/website/index.jsp" />
+	</definition>
+	<definition name="login" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
 

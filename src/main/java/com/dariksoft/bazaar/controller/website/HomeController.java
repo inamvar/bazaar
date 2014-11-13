@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "/")
 public class HomeController {
 private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -27,6 +28,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		
 		model.addAttribute("title", messageSource.getMessage("admin.home.title", null,locale) );
 		
-		return "home";
+		return "website/index";
 	}
 }
