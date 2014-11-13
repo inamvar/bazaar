@@ -33,7 +33,7 @@
 							href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message
 									code="security.logout" /></a></li>
 					</c:if> <c:if test="${pageContext['request'].userPrincipal == null}">
-						<li><a href="${pageContext.request.contextPath}/admin/login"><spring:message
+						<li><a href="${pageContext.request.contextPath}/login"><spring:message
 									code="security.login" /></a></li>
 					</c:if>
 			</ul>

@@ -29,7 +29,7 @@
 
 
 	<!--website Template -->
-	<definition name=".websiteTemplate" template="/WEB-INF/templates/main-rtl.jsp">
+	<definition name=".websiteTemplate" template="/WEB-INF/templates/main_rtl.jsp">
 		<put-attribute name="title" value="Simple Tiles 2 Example"
 			type="string" />
 		<put-attribute name="header"

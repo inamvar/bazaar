@@ -6,13 +6,11 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
   <http auto-config='true'>
-  <!-- 
-    <intercept-url pattern="/admin/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-    
-    <intercept-url pattern="/admin/*" access="ROLE_USER" />
-     -->
+ 
+    <intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
+    <intercept-url pattern="/admin*" access="ROLE_ADMIN" />
       <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-     <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+     <intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
     <form-login login-page="/login"/>
   </http>
  
@@ -32,7 +30,7 @@
 
    
         <beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-            <beans:property name="defaultFailureUrl" value="/admin/login?login_error=t" />
+            <beans:property name="defaultFailureUrl" value="/login?login_error=t" />
         </beans:bean>
 
 
