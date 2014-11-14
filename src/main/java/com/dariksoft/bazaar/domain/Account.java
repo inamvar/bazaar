@@ -1,4 +1,4 @@
-package com.dariksoft.bazaar.domain;
+ package com.dariksoft.bazaar.domain;
 
 import java.util.List;
 

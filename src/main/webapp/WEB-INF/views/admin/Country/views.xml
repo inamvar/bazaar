@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+  <definition extends=".adminTemplate" name="country/list">
+    <put-attribute name="body" value="/WEB-INF/views/admin/country/list.jsp"/>
+  </definition>
+
+  <definition extends=".adminTemplate" name="country/add">
+    <put-attribute name="body" value="/WEB-INF/views/admin/country/add.jsp"/>
+  </definition>
+  
+
+
+</tiles-definitions>
