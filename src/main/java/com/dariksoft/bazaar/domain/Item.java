@@ -10,11 +10,11 @@ public class  Item {
 	private double price;
 	private ItemStatus status;
 	private Rate rate;
-	private ItemCategory Category;
+	private ItemCategory category;
 	private List<Promotion> promotions;
 	private Merchant merchant;
 	private List<Comment> comments;
-	private Image Thumbnail;
+	private Image thumbnail;
 	private Image image;
 	
 	
@@ -28,10 +28,10 @@ public class  Item {
 		this.promotions = promotions;
 	}
 	public ItemCategory getCategory() {
-		return Category;
+		return category;
 	}
 	public void setCategory(ItemCategory category) {
-		Category = category;
+		this.category = category;
 	}
 	public String getName() {
 		return name;
@@ -64,10 +64,10 @@ public class  Item {
 		this.comments = comments;
 	}
 	public Image getThumbnail() {
-		return Thumbnail;
+		return thumbnail;
 	}
 	public void setThumbnail(Image thumbnail) {
-		Thumbnail = thumbnail;
+		this.thumbnail = thumbnail;
 	}
 	public Image getImage() {
 		return image;

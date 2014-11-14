@@ -8,8 +8,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.stereotype.Repository;
+
 import com.dariksoft.bazaar.domain.Country;
 
+@Repository
 public class CountryDaoImp implements CountryDao {
 
 	@PersistenceContext
