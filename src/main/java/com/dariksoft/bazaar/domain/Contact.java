@@ -1,14 +1,24 @@
 package com.dariksoft.bazaar.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Contact {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	private String mobile;
 	private String fax;
 	private String phone;
 	private String website;
-	private Country country;
-	private Province province;
+	@ManyToOne
+	@JoinColumn(name="city_id", nullable=true)
 	private City city;
 	private String address;
 	private String email;
@@ -49,18 +59,7 @@ public class Contact {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	public Province getProvince() {
-		return province;
-	}
-	public void setProvince(Province province) {
-		this.province = province;
-	}
-	public Country getCountry() {
-		return country;
-	}
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+
 	public int getId() {
 		return id;
 	}

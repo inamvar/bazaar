@@ -1,30 +1,48 @@
 package com.dariksoft.bazaar.domain;
 
-import java.awt.Image;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class  Item {
-	
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	private String name;
 	private double price;
 	private ItemStatus status;
 	private Rate rate;
+	@ManyToOne
+	@JoinColumn(name="cat_id", nullable=false)
 	private ItemCategory category;
-	private List<Promotion> promotions;
+	
+	@OneToMany(targetEntity = Promotion.class, mappedBy = "item")
+	private Set<Promotion> promotions;
+	
+	@ManyToOne
+	@JoinColumn(name="merchant_id", nullable=false)
 	private Merchant merchant;
-	private List<Comment> comments;
-	private Image thumbnail;
-	private Image image;
+	
+	@OneToMany(targetEntity = Comment.class, mappedBy = "item")
+	private Set<Comment> comments;
+	private byte[] thumbnail;
+	private byte[] image;
 	
 	
 	public int getId() {
 		return id;
 	}
-	public List<Promotion> getPromotions() {
+	public Set<Promotion> getPromotions() {
 		return promotions;
 	}
-	public void setPromotions(List<Promotion> promotions) {
+	public void setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
 	}
 	public ItemCategory getCategory() {
@@ -57,22 +75,22 @@ public class  Item {
 	public void setStatus(ItemStatus status) {
 		this.status = status;
 	}
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
-	public Image getThumbnail() {
+	public byte[] getThumbnail() {
 		return thumbnail;
 	}
-	public void setThumbnail(Image thumbnail) {
+	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public Image getImage() {
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(Image image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 	public Rate getRate() {

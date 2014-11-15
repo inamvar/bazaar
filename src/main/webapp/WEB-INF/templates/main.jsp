@@ -6,8 +6,8 @@
 
 <html>
 <head>
-    <title>${title}</title>
-   
+   <%--  <title>${title}</title> --%>
+     <title>${title}</title>
 
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/bootstrap.min.css" />

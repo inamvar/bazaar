@@ -26,7 +26,7 @@ private static final Logger logger = LoggerFactory.getLogger(SiteController.clas
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome to website! The client locale is {}.", locale);
 		
-		model.addAttribute("title", messageSource.getMessage("admin.home.title", null,locale) );
+		model.addAttribute("title", messageSource.getMessage("website.home.title", null,locale) );
 		
 		return "website/index";
 	}

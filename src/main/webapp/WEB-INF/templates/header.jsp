@@ -20,14 +20,32 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<div class="nav navbar-nav"></div>
+			<ul class="nav navbar-nav navbar-left">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><spring:message
+							code="admin.menu.definitions" /> <span class="caret"></span> </a>
+							
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="${pageContext.request.contextPath}/admin/country"><spring:message
+									code="admin.menu.definitions.countires" /></a></li>
+					</ul>
+					</li>
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><spring:message code="language"/> (<c:out value="${pageContext.response.locale.language}"/>) <span class="caret"></span> </a>
+					data-toggle="dropdown"><spring:message code="language" /> (<c:out
+							value="${pageContext.response.locale.language}" />) <span
+						class="caret"></span> </a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="?lang=en"><img src="${pageContext.request.contextPath}/resources/images/gb.gif"/> English</a></li>
-						<li><a href="?lang=ar"><img src="${pageContext.request.contextPath}/resources/images/ae.gif"/> العربیه</a></li>
-						<li><a href="?lang=fa"><img src="${pageContext.request.contextPath}/resources/images/ir.gif"/> فارسی</a></li>
+						<li><a href="?lang=en"><img
+								src="${pageContext.request.contextPath}/resources/images/gb.gif" />
+								English</a></li>
+						<li><a href="?lang=ar"><img
+								src="${pageContext.request.contextPath}/resources/images/ae.gif" />
+								العربیه</a></li>
+						<li><a href="?lang=fa"><img
+								src="${pageContext.request.contextPath}/resources/images/ir.gif" />
+								فارسی</a></li>
 					</ul> <c:if test="${pageContext['request'].userPrincipal != null}">
 						<li><a
 							href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message

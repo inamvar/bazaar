@@ -2,6 +2,10 @@ package com.dariksoft.bazaar.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+
+@Entity
 public class Product extends Item {
 
 	private Date expireDate;

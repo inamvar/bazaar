@@ -5,21 +5,23 @@
 
 <div class="container">
 
-<p><spring:message code="country.insert.message"/></p>
-<form:form method="POST" commandname="country" action="${pageContext.request.contextPath}/country/add">
+<h2><spring:message code="country.insert.message"/></h2>
+<form:form method="POST" commandname="country" action="${pageContext.request.contextPath}/admin/country/add">
 <table>
 <tbody>
 	<tr>
 		<td><spring:message code="country.name"/></td>
-		<td><form:input path="name"></form:input></td>
+		<td><form:input class="form-control input-sm" path="name"></form:input></td>
 	</tr>
 	<tr>
 		<td><spring:message code="country.code"/></td>
-		<td><form:input path="code"></form:input></td>
+		<td><form:input class="form-control input-sm" path="code"></form:input></td>
 	</tr>
 	<tr>
-		<td><input value="<spring:message code="crud.add"/>" type="submit"></td>
 		<td></td>
+		<td>
+		<input  class="btn btn-danger btn-sm" value="<spring:message code="submit"/>" type="submit">
+		<a href="${pageContext.request.contextPath}/admin/country" class="btn btn-default btn-sm"><spring:message code="cancel"/></a></td>
 	</tr>
 </tbody>
 </table>

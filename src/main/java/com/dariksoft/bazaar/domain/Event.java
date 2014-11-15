@@ -2,6 +2,9 @@ package com.dariksoft.bazaar.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Event extends Item {
 
 	

@@ -4,26 +4,36 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-	<h1>
+	<h2>
 		<spring:message code="country.list" />
-	</h1>
-	<a class="btn btn-danger" href="${pageContext.request.contextPath}/country/add"><spring:message code="crud.add"/></a>
-	<table>
-		<thead>
+	</h2>
+	<hr />
+ 			<div class="col-sm-6 col-md-6">
+			<p>	<a class="btn btn-danger"
+		href="${pageContext.request.contextPath}/admin/country/add"><spring:message
+			code="crud.add" /></a></p>
+
+	<table class="table table-bordered">
+		<thead class="table-heading">
 			<tr>
-				<th><spring:message code="country.name" /> <spring:message
-						code="country.code" /></th>
+				<th><spring:message code="country.name" /></th>
+				<th><spring:message code="country.code" /></th>
+				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="table-body">
 			<c:forEach var="country" items="${countries}">
 				<tr>
-				 <td><c:out value="${country.code}"/></td>
-				 <td><c:out value="${country.name}"/></td>
+					<td><c:out value="${country.code}" /></td>
+					<td><c:out value="${country.name}" /></td>
+					<td><a
+						href="${pageContext.request.contextPath}/admin/country/delete/${country.id}"><spring:message
+								code="crud.delete" /></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </div>
 
 

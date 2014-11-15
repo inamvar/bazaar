@@ -1,12 +1,17 @@
 package com.dariksoft.bazaar.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -28,14 +33,19 @@ public class Person {
 	@Max(100)
 	private String lastName;
 	private Date birthday;
-	private Gender gender;
-	
+	private Gender gender;	
 	@Column(nullable =false, name = "username",unique=true)	
 	private String username;
 	@Min(4)
 	private String password;
+	@ManyToOne
+	@JoinColumn(name="contact_id", nullable=true)
 	private Contact contact;
+	@OneToOne(optional=false, mappedBy="person")
 	private Account account;
+
+	@OneToMany(targetEntity = Comment.class, mappedBy = "author")
+	private Set<Comment> Comments;
 	public Contact getContact() {
 		return contact;
 	}
@@ -86,6 +96,12 @@ public class Person {
 	}
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	public Set<Comment> getComments() {
+		return Comments;
+	}
+	public void setComments(Set<Comment> comments) {
+		Comments = comments;
 	} 
 
 }
