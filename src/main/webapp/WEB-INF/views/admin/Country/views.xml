@@ -12,6 +12,10 @@
     <put-attribute name="body" value="/WEB-INF/views/admin/country/add.jsp"/>
   </definition>
   
+  <definition extends=".adminTemplate" name="country/update">
+    <put-attribute name="body" value="/WEB-INF/views/admin/country/update.jsp"/>
+  </definition>
+  
 
 
 </tiles-definitions>

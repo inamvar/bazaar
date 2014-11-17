@@ -28,7 +28,10 @@
 					<td><c:out value="${country.name}" /></td>
 					<td><a
 						href="${pageContext.request.contextPath}/admin/country/delete/${country.id}"><spring:message
-								code="crud.delete" /></a></td>
+								code="crud.delete" /></a>
+								<a
+						href="${pageContext.request.contextPath}/admin/country/update/${country.id}"><spring:message
+								code="crud.edit" /></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

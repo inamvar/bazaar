@@ -27,7 +27,7 @@
 							
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${pageContext.request.contextPath}/admin/country"><spring:message
-									code="admin.menu.definitions.countires" /></a></li>
+									code="admin.menu.definitions.countries" /></a></li>
 					</ul>
 					</li>
 			</ul>
