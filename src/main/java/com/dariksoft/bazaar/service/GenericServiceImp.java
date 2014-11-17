@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dariksoft.bazaar.dao.GenericDao;
 import com.dariksoft.bazaar.domain.Country;
 
-public class GenericServiceImp<T> implements GenericService< T >{
+public class GenericServiceImp<T> implements CRUDService< T >{
 	
 	
 	private Class< T > type;
