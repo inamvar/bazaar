@@ -10,8 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.dariksoft.bazaar.domain.Person;
-
 public abstract class GenericDaoImp< T > implements GenericDao< T > {
 
     @PersistenceContext
@@ -44,7 +42,10 @@ public abstract class GenericDaoImp< T > implements GenericDao< T > {
 
     @Override
     public T update(final T t) {
-        return this.em.merge(t);    
+    	this.em.detach(t);
+        T merged = this.em.merge(t);
+        this.em.flush();
+        return merged;
     }
    
     @Override
