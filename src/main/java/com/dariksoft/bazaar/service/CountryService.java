@@ -5,5 +5,5 @@ import com.dariksoft.bazaar.domain.Country;
 
 public interface CountryService  extends GenericService<Country>{
 	
-	
+ 	
 }
