@@ -1,6 +1,6 @@
 package com.dariksoft.bazaar.dao;
 
-import antlr.debug.Event;
+import com.dariksoft.bazaar.domain.Event;;
 
 public interface EventDao extends GenericDao<Event>{
 

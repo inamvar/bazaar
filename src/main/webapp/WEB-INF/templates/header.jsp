@@ -24,12 +24,15 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><spring:message
 							code="admin.menu.definitions" /> <span class="caret"></span> </a>
-							
+
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="${pageContext.request.contextPath}/admin/country"><spring:message
+						<li><a
+							href="${pageContext.request.contextPath}/admin/country"><spring:message
 									code="admin.menu.definitions.countries" /></a></li>
-					</ul>
-					</li>
+						<li><a
+							href="${pageContext.request.contextPath}/admin/province"><spring:message
+									code="admin.menu.definitions.provinces" /></a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
