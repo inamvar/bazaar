@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dariksoft.bazaar.dao.GenericDao;
-import com.dariksoft.bazaar.domain.Country;
 
-public class GenericServiceImp<T> implements CRUDService< T >{
+public class CRUDServiceImp<T> implements CRUDService< T >{
 	
 	
+
 	private Class< T > type;
 	
 	@Autowired
 	GenericDao<T> genericDao;
 
-    public GenericServiceImp() {
+    public CRUDServiceImp() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
