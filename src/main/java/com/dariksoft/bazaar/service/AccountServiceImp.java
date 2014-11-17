@@ -5,6 +5,4 @@ import com.dariksoft.bazaar.domain.Account;
 @Service
 public class AccountServiceImp extends CRUDServiceImp<Account> implements AccountService {
 
-
-	
 }
