@@ -1,13 +1,17 @@
 package com.dariksoft.bazaar.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +19,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dariksoft.bazaar.domain.Province;
+import com.dariksoft.bazaar.service.CountryService;
 import com.dariksoft.bazaar.service.ProvinceService;
 
 @Controller
 @RequestMapping(value = "/admin/province")
 public class ProvinceController {
-
+	private static final Logger logger = LoggerFactory.getLogger(ProvinceController.class);
 	@Autowired
 	ProvinceService provinceService;
+
+	@Autowired
+	CountryService countryService;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -45,6 +53,7 @@ public class ProvinceController {
 		mv.addObject("title", messageSource.getMessage(
 				"province.insert.message", null, locale));
 		mv.addObject("province", new Province());
+		mv.addObject("countries", countryService.findAll());
 		mv.addObject("title", "Add province");
 
 		return mv;
@@ -55,8 +64,11 @@ public class ProvinceController {
 			BindingResult result, Locale locale) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		if (result.hasErrors()) {
-
-			model.put("errors", result.getAllErrors());
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors){
+				logger.warn(error.toString());
+			}
+			model.put("errors", errors);
 			model.put("title", messageSource.getMessage(
 					"province.update.message", null, locale));
 			return "province/add";

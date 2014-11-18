@@ -5,23 +5,30 @@
 
 <div class="container">
 
-<h2><spring:message code="country.insert.message"/></h2>
-<form:form method="POST" commandname="country" action="${pageContext.request.contextPath}/admin/country/add">
+<h2><spring:message code="province.insert.message"/></h2>
+<c:if test="${not empty errors}">
+<div class="alert alert-danger">
+	<c:forEach var="error" items="errors">
+		<p>${error}</p>
+	</c:forEach>
+</div>
+</c:if>
+<form:form method="POST" commandname="province" action="${pageContext.request.contextPath}/admin/province/add">
 <table>
 <tbody>
 	<tr>
-		<td><spring:message code="country.name"/></td>
+		<td><spring:message code="province.name"/></td>
 		<td><form:input class="form-control input-sm" path="name"></form:input></td>
 	</tr>
 	<tr>
-		<td><spring:message code="country.code"/></td>
-		<td><form:input class="form-control input-sm" path="code"></form:input></td>
+		<td><spring:message code="province.country"/></td>
+		<td><form:select  class="form-control input-sm" path="country" items="${countries}" itemValue="id" itemLabel="name"></form:select></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td>
 		<input  class="btn btn-danger btn-sm" value="<spring:message code="submit"/>" type="submit">
-		<a href="${pageContext.request.contextPath}/admin/country" class="btn btn-default btn-sm"><spring:message code="cancel"/></a></td>
+		<a href="${pageContext.request.contextPath}/admin/province" class="btn btn-default btn-sm"><spring:message code="cancel"/></a></td>
 	</tr>
 </tbody>
 </table>

@@ -1,5 +1,6 @@
 package com.dariksoft.bazaar.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Country {
 	private String Code;
 	
 	@OneToMany(targetEntity = Province.class, mappedBy = "country")
-	private Set<Province> provinces;	
+	private Set<Province> provinces = new HashSet<Province>();	
 	
 	public String getName() {
 		return name;
