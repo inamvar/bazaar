@@ -21,7 +21,7 @@ public class Country {
 	private String name;
 	private String Code;
 	
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Province.class, mappedBy = "country")
+	@OneToMany(targetEntity = Province.class, mappedBy = "country")
 	private Set<Province> provinces = new HashSet<Province>();	
 	
 	public String getName() {

@@ -20,7 +20,7 @@
 				<tr>
 					<th><spring:message code="country.code" /></th>
 					<th><spring:message code="country.name" /></th>
-					<th><spring:message code="province.name" /></th>
+					
 					<th></th>
 				</tr>
 			</thead>
@@ -29,12 +29,7 @@
 					<tr>
 						<td><c:out value="${country.code}" /></td>
 						<td><c:out value="${country.name}" /></td>
-						<td><c:if test="${not empty country.provinces }">
-
-								<c:forEach items="${country.provinces }" var="province">
-									<p>${province.name}</p>
-								</c:forEach>
-							</c:if></td>
+						
 						<td><a
 							href="${pageContext.request.contextPath}/admin/country/delete/${country.id}"><spring:message
 									code="crud.delete" /></a> <a
