@@ -96,6 +96,7 @@ public class ProvinceController {
 		modelAndView.addObject("province", province);
 		modelAndView.addObject("title", messageSource.getMessage(
 				"province.update.message", null, locale));
+		modelAndView.addObject("countries", countryService.findAll());
 		return modelAndView;
 	}
 
