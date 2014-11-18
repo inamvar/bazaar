@@ -16,8 +16,7 @@
 	<table class="table table-bordered">
 		<thead class="table-heading">
 			<tr>
-				<th><spring:message code="province.name" /></th>
-				<th><spring:message code="province.code" /></th>
+				<th><spring:message code="province.name" /></th>			
 				<th><spring:message code="province.country" /></th>
 				<th></th>
 			</tr>
@@ -25,7 +24,6 @@
 		<tbody class="table-body">
 			<c:forEach var="province" items="${provinces}">
 				<tr>
-					<td><c:out value="${province.code}" /></td>
 					<td><c:out value="${province.name}" /></td>
 					<td><c:out value="${province.country.name}" /></td>
 					<td><a

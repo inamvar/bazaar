@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Country {
 	private String name;
 	private String Code;
 	
-	@OneToMany(targetEntity = Province.class, mappedBy = "country")
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Province.class, mappedBy = "country")
 	private Set<Province> provinces = new HashSet<Province>();	
 	
 	public String getName() {

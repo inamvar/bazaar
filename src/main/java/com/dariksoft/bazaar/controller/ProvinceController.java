@@ -12,13 +12,17 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dariksoft.bazaar.domain.Country;
 import com.dariksoft.bazaar.domain.Province;
+import com.dariksoft.bazaar.propertyeditor.CountryEditor;
 import com.dariksoft.bazaar.service.CountryService;
 import com.dariksoft.bazaar.service.ProvinceService;
 
@@ -34,6 +38,13 @@ public class ProvinceController {
 
 	@Autowired
 	private MessageSource messageSource;
+	
+	private @Autowired CountryEditor countryEditor;
+	
+	@InitBinder
+	public void iniBinder(WebDataBinder binder){
+		binder.registerCustomEditor(Country.class, this.countryEditor);
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView home(Locale locale) {
