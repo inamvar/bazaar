@@ -18,60 +18,85 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dariksoft.bazaar.domain.City;
 import com.dariksoft.bazaar.domain.Country;
 import com.dariksoft.bazaar.domain.Province;
 import com.dariksoft.bazaar.propertyeditor.CountryEditor;
+import com.dariksoft.bazaar.propertyeditor.ProvinceEditor;
+import com.dariksoft.bazaar.service.CityService;
 import com.dariksoft.bazaar.service.CountryService;
 import com.dariksoft.bazaar.service.ProvinceService;
 
 @Controller
-@RequestMapping(value = "/admin/province")
-public class ProvinceController {
-	private static final Logger logger = LoggerFactory.getLogger(ProvinceController.class);
+@RequestMapping(value = "/admin/city")
+public class CityController {
+	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 	@Autowired
 	ProvinceService provinceService;
 
 	@Autowired
 	CountryService countryService;
+	
+	@Autowired
+	CityService cityService;
 
 	@Autowired
 	private MessageSource messageSource;
 	
 	private @Autowired CountryEditor countryEditor;
+	private @Autowired ProvinceEditor provinceEditor;
 	
 	@InitBinder
 	public void iniBinder(WebDataBinder binder){
 		binder.registerCustomEditor(Country.class, this.countryEditor);
+		binder.registerCustomEditor(Province.class, this.provinceEditor);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView list(Locale locale) {
+		
+
 		Map<String, Object> model = new HashMap<String, Object>();
 
-		model.put("provinces", provinceService.findAll());
+		model.put("cities", cityService.findAll());
 		model.put("title", messageSource.getMessage(
-				"admin.menu.definitions.provinces", null, locale));
-		return new ModelAndView("province/list", model);
+				"admin.menu.definitions.cities", null, locale));
+		return new ModelAndView("city/list", model);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addForm(@ModelAttribute("command") Province province,
+	public ModelAndView addForm(@ModelAttribute("command") City city,  @RequestParam(value = "province.country.id", required = false) Object country_id,
 			BindingResult result, Locale locale) {
-
-		ModelAndView mv = new ModelAndView("province/add");
+	
+		ModelAndView mv = new ModelAndView("city/add");
+		try{
 		mv.addObject("title", messageSource.getMessage(
 				"province.insert.message", null, locale));
-		mv.addObject("province", new Province());
+		city = new City();
+		
+		
 		mv.addObject("countries", countryService.findAll());
-		mv.addObject("title", "Add province");
-
+		if( country_id != null ){
+			Country country  =countryService.find(Integer.valueOf((String)country_id));
+		mv.addObject("country",country );
+		city.setProvince(new Province());
+		city.getProvince().setCountry(country);
+		}
+				mv.addObject("title",  messageSource.getMessage(
+				"city.insert.message", null, locale));
+				mv.addObject("city",city);
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			
+		}
 		return mv;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("command") Province province,
+	public String add(@ModelAttribute("command") City city,
 			BindingResult result, Locale locale) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		if (result.hasErrors()) {
@@ -81,40 +106,40 @@ public class ProvinceController {
 			}
 			model.put("errors", errors);
 			model.put("title", messageSource.getMessage(
-					"province.update.message", null, locale));
-			return "province/add";
+					"city.insert.message", null, locale));
+			return "city/add";
 		}
-		provinceService.create(province);
+		cityService.create(city);
 
-		return "redirect:/admin/province";
+		return "redirect:/admin/city";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public ModelAndView updateForm(@PathVariable Integer id, Locale locale) {
-		ModelAndView modelAndView = new ModelAndView("province/update");
-		Province province = provinceService.find(id);
-		modelAndView.addObject("province", province);
+		ModelAndView modelAndView = new ModelAndView("city/update");
+		City city = cityService.find(id);
+		modelAndView.addObject("city", city);
 		modelAndView.addObject("title", messageSource.getMessage(
-				"province.update.message", null, locale));
-		modelAndView.addObject("countries", countryService.findAll());
+				"city.update.message", null, locale));
+	
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@ModelAttribute("command") Province province,
+	public String update(@ModelAttribute("command") City city,
 			@PathVariable Integer id) {
 
-		provinceService.update(province);
+		cityService.update(city);
 
-		return "redirect:/admin/province";
+		return "redirect:/admin/city";
 	}
 
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable int id) {
 
-		provinceService.delete(id);
+		cityService.delete(id);
 
-		return "redirect:/admin/province";
+		return "redirect:/admin/city";
 	}
 
 }

@@ -28,7 +28,7 @@ public class CountryController {
 	private MessageSource messageSource;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView home(Locale locale){
+	public ModelAndView list(Locale locale){
 		 Map<String, Object> model = new HashMap<String, Object>(); 
 		 
 		  model.put("countries",  countryService.findAll());  
@@ -65,7 +65,7 @@ public class CountryController {
 	 
 	 
 		@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
-		public ModelAndView editTeamPage(@PathVariable Integer id,Locale locale) {
+		public ModelAndView updateFrom(@PathVariable Integer id,Locale locale) {
 			ModelAndView modelAndView = new ModelAndView("country/update");
 			Country country = countryService.find(id);			
 			modelAndView.addObject("country",country);
@@ -74,7 +74,7 @@ public class CountryController {
 		}
 
 		@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
-		public String edditingTeam(@ModelAttribute("command") Country country, @PathVariable Integer id) {
+		public String update(@ModelAttribute("command") Country country, @PathVariable Integer id) {
 
 			countryService.update(country);
 			
@@ -83,7 +83,7 @@ public class CountryController {
 	 
 	 
 	 @RequestMapping(value = "/delete/{id}")  
-	 public String add(@PathVariable int id) {  
+	 public String delete(@PathVariable int id) {  
 		 
 		 countryService.delete(id);
 	 	 
