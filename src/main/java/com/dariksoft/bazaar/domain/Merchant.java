@@ -2,6 +2,7 @@ package com.dariksoft.bazaar.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,20 +16,21 @@ public class Merchant {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
-	@ManyToOne
-	@JoinColumn(name="owner_id", nullable=false)
-	private Person owner;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="contact_point_id", nullable=false)
+	private Person contactPoint;
 	private String name;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_id", nullable=true)
 	private Contact contact;
+	
 	@OneToMany(targetEntity = Item.class, mappedBy = "merchant")
 	private Set<Item> items;
-	public Person getOwner() {
-		return owner;
+	public Person getContactPoint() {
+		return contactPoint;
 	}
-	public void setOwner(Person owner) {
-		this.owner = owner;
+	public void setContactPoint(Person contactPoint) {
+		this.contactPoint = contactPoint;
 	}
 	public int getId() {
 		return id;

@@ -23,31 +23,30 @@ public class  Item {
 	@JoinColumn(name="cat_id", nullable=false)
 	private ItemCategory category;
 	
-	@OneToMany(targetEntity = Promotion.class, mappedBy = "item")
-	private Set<Promotion> promotions;
+	@OneToMany(targetEntity = Deal.class, mappedBy = "item")
+	private Set<Deal> deals;
 	
 	@ManyToOne
 	@JoinColumn(name="merchant_id", nullable=false)
 	private Merchant merchant;
 	
-	@OneToMany(targetEntity = Comment.class, mappedBy = "item")
-	private Set<Comment> comments;
 	private byte[] thumbnail;
 	private byte[] image;
-	private String tags;
+	private String[] tags;
 	private String description;
 	private String details;
 	private String finePrint;
+
 	
 	
 	public int getId() {
 		return id;
 	}
-	public Set<Promotion> getPromotions() {
-		return promotions;
+	public Set<Deal> getDeals() {
+		return deals;
 	}
-	public void setPromotions(Set<Promotion> promotions) {
-		this.promotions = promotions;
+	public void setDeals(Set<Deal> promotions) {
+		this.deals = promotions;
 	}
 	public ItemCategory getCategory() {
 		return category;
@@ -79,12 +78,7 @@ public class  Item {
 	public void setStatus(ItemStatus status) {
 		this.status = status;
 	}
-	public Set<Comment> getComments() {
-		return comments;
-	}
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
+
 	public byte[] getThumbnail() {
 		return thumbnail;
 	}
@@ -103,10 +97,10 @@ public class  Item {
 	public void setRate(Rate rate) {
 		this.rate = rate;
 	}
-	public String getTags() {
+	public String[] getTags() {
 		return tags;
 	}
-	public void setTags(String tags) {
+	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
 	public String getDescription() {

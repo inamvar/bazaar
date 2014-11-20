@@ -16,92 +16,105 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-
 @Entity
-@Table(name="person")
+@Table(name = "person")
 public class Person {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(nullable =false, name = "firstname")
-	@Min(3)
-	@Max(100)
+	@Column(nullable = false, name = "firstname")
 	private String firstName;
-	@Column(nullable =false, name = "lastname")
-	@Min(3)
-	@Max(100)
+	@Column(nullable = false, name = "lastname")
 	private String lastName;
 	private Date birthday;
-	private Gender gender;	
-	@Column(nullable =false, name = "username",unique=true)	
+	private Gender gender;
+	@Column(nullable = false, name = "username", unique = true)
 	private String username;
-	@Min(4)
 	private String password;
 	@ManyToOne
-	@JoinColumn(name="contact_id", nullable=true)
+	@JoinColumn(name = "contact_id", nullable = true)
 	private Contact contact;
-	@OneToOne(optional=false, mappedBy="person")
+	@OneToOne(optional = true, mappedBy = "person")
 	private Account account;
 
 	@OneToMany(targetEntity = Comment.class, mappedBy = "author")
 	private Set<Comment> Comments;
+
 	public Contact getContact() {
 		return contact;
 	}
+
 	public void setContact(Contact address) {
 		this.contact = address;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Account getAccount() {
 		return account;
 	}
+
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
 	public Date getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+
 	public Gender getGender() {
 		return gender;
 	}
+
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
 	public Set<Comment> getComments() {
 		return Comments;
 	}
+
 	public void setComments(Set<Comment> comments) {
 		Comments = comments;
-	} 
+	}
 
 }

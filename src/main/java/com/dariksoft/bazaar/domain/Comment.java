@@ -22,9 +22,10 @@ public class Comment {
 	@JoinColumn(name = "author_id", nullable = false)
 	private Person author;
 	private boolean isAccepted;
+
 	@ManyToOne
-	@JoinColumn(name = "item_id", nullable = false)
-	private Item item;
+	@JoinColumn(name = "deal_id", nullable = true)
+	private Deal deal;
 
 	@ManyToOne
 	private Comment parent;
@@ -75,13 +76,6 @@ public class Comment {
 		this.comments = comments;
 	}
 
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
 
 	public Comment getParent() {
 		return parent;
@@ -89,6 +83,14 @@ public class Comment {
 
 	public void setParent(Comment parent) {
 		this.parent = parent;
+	}
+
+	public Deal getDeal() {
+		return deal;
+	}
+
+	public void setDeal(Deal deal) {
+		this.deal = deal;
 	}
 
 }

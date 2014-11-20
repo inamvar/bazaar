@@ -1,7 +1,7 @@
 package com.dariksoft.bazaar.domain;
 
 public enum CouponStatus {
-	PENDING,
+	VALID,
 	REDEMED,
 	EXPIRED
 	

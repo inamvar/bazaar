@@ -29,7 +29,7 @@ public class Order {
 	private Person person;
 	@ManyToOne
 	@JoinColumn(name = "contact_id", nullable = false)
-	private Contact contact;
+	private Contact location;
 	private boolean isGift;
 	private String note;
 
@@ -67,11 +67,11 @@ public class Order {
 	}
 
 	public Contact getContact() {
-		return contact;
+		return location;
 	}
 
 	public void setContact(Contact contact) {
-		this.contact = contact;
+		this.location = contact;
 	}
 
 	public boolean isGift() {
