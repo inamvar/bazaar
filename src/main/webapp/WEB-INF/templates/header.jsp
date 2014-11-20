@@ -34,6 +34,8 @@
 									code="admin.menu.definitions.provinces" /></a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/city"><spring:message
 									code="admin.menu.definitions.cities" /></a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/category"><spring:message
+									code="admin.menu.definitions.categories" /></a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

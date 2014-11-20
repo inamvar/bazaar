@@ -34,6 +34,10 @@ public class  Item {
 	private Set<Comment> comments;
 	private byte[] thumbnail;
 	private byte[] image;
+	private String tags;
+	private String description;
+	private String details;
+	private String finePrint;
 	
 	
 	public int getId() {
@@ -98,6 +102,30 @@ public class  Item {
 	}
 	public void setRate(Rate rate) {
 		this.rate = rate;
+	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	public String getFinePrint() {
+		return finePrint;
+	}
+	public void setFinePrint(String finePrint) {
+		this.finePrint = finePrint;
 	}
 
 }
