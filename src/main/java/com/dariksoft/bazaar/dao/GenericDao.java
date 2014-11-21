@@ -9,7 +9,7 @@ public interface GenericDao< T > {
 
     void delete(Object id);
 
-    T find(Object id);
+    T find(int id);
 
     T update(T t);
     

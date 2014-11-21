@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="country")
 public class Country {
@@ -18,6 +20,7 @@ public class Country {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
+	@NotEmpty
 	private String name;
 	private String Code;
 	

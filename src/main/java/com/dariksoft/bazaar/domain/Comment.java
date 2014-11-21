@@ -11,11 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotEmpty
 	private String text;
 	private Date date;
 	@ManyToOne
@@ -75,7 +78,6 @@ public class Comment {
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
-
 
 	public Comment getParent() {
 		return parent;

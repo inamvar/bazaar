@@ -4,61 +4,87 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Repository;
+import com.dariksoft.bazaar.controller.ProvinceController;
 
+public abstract class GenericDaoImp<T> implements GenericDao<T> {
 
-public abstract class GenericDaoImp< T > implements GenericDao< T > {
+	@Autowired
+	private SessionFactory sessionFactory;
 
-    @PersistenceContext
-    protected EntityManager em;
+	private static  Logger logger;
+	
+	public void setSessionFactory(SessionFactory sf) {
+		this.sessionFactory = sf;
+	
+	}
 
-    private Class< T > type;
-
+	private Class<T> type;
 
 	public GenericDaoImp() {
-        Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        type = (Class) pt.getActualTypeArguments()[0];
-    }
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class) pt.getActualTypeArguments()[0];
+		logger = LoggerFactory
+				.getLogger(type);
+	}
 
+	@Override
+	public T create(final T t) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(t);
+		logger.info("create object: " + t.toString());
+		return t;
+	}
 
-    @Override
-    public T create(final T t) {
-        this.em.persist(t);
-        return t;
-    }
+	@Override
+	public void delete(final Object id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		T p = (T) session.load(type, new Integer((Integer) id));
+		if (null != p) {
+			session.delete(p);
+			logger.info("delete object: " + p.toString());
+		}
+	}
 
-    @Override
-    public void delete(final Object id) {
-        this.em.remove(this.em.getReference(type, id));
-    }
+	@Override
+	public T find(int id) {
+		 Session session = null;
+	        T obj = null;
+	        try {
+	            session = this.sessionFactory.openSession();
+	            obj =(T)  session.load(type,
+	                    id);
+	            Hibernate.initialize(obj);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            if (session != null && session.isOpen()) {
+	                session.close();
+	            }
+	        }
+	        logger.info("find object: " + obj.toString());
+	        return obj;
+	}
 
-    @Override
-    public T find(final Object id) {
-        return (T) this.em.find(type, id);
-    }
+	@Override
+	public T update(final T t) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(t);
+		  logger.info("update object: " + t.toString());
+		return t;
+	}
 
-    @Override
-    public T update(final T t) {
-    	this.em.detach(t);
-        T merged = this.em.merge(t);
-        this.em.flush();
-        return merged;
-    }
-   
-    @Override
-    public List<T> findAll(){
-		CriteriaBuilder builder = this.em.getCriteriaBuilder();
-		CriteriaQuery<T> cq = builder.createQuery(type);
-		Root<T> root = cq.from(type);
-		cq.select(root);		
-		return this.em.createQuery(cq).getResultList();
-    }
+	@Override
+	public List<T> findAll() {
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createCriteria(type).list();
+	}
 
 }

@@ -10,11 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class  Item {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
+	@NotEmpty
 	private String name;
 	private double price;
 	private ItemStatus status;

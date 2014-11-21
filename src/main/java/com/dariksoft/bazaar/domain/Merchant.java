@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Merchant {
 	@Id
@@ -19,6 +21,7 @@ public class Merchant {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_point_id", nullable=false)
 	private Person contactPoint;
+	@NotEmpty
 	private String name;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_id", nullable=true)

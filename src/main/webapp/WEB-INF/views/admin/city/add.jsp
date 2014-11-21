@@ -8,13 +8,7 @@
 	<h2>
 		<spring:message code="city.insert.message" />
 	</h2>
-	<c:if test="${not empty errors}">
-		<div class="alert alert-danger">
-			<c:forEach var="error" items="errors">
-				<p>${error}</p>
-			</c:forEach>
-		</div>
-	</c:if>
+
 	<form:form method="GET" commandName="city"
 		action="${pageContext.request.contextPath}/admin/city/add">
 		<label><spring:message code="country.label" /></label>
@@ -27,7 +21,7 @@
 
 	</form:form>
 	<c:if test="${not empty country }">
-		<form:form method="POST" commandname="city"
+		<form:form method="POST" commandName="city"
 			action="${pageContext.request.contextPath}/admin/city/add">
 			<table>
 				<tbody>

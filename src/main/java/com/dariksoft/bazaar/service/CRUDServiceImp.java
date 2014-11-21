@@ -9,39 +9,41 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dariksoft.bazaar.dao.GenericDao;
 
-public class CRUDServiceImp<T> implements CRUDService< T >{
-	
-	
+public class CRUDServiceImp<T> implements CRUDService<T> {
 
-	private Class< T > type;
-	
+	private Class<T> type;
+
 	@Autowired
 	GenericDao<T> genericDao;
 
-    public CRUDServiceImp() {
-        Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        type = (Class) pt.getActualTypeArguments()[0];
-    }
+	public void setgenericDao(GenericDao<T> genericDao) {
+		this.genericDao = genericDao;
+	}
+
+	public CRUDServiceImp() {
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class) pt.getActualTypeArguments()[0];
+	}
 
 	@Override
 	@Transactional
 	public T create(T t) {
-		return  genericDao.create(t);
-	
+		return genericDao.create(t);
+
 	}
 
 	@Override
 	@Transactional
 	public void delete(int id) {
 		genericDao.delete(id);
-		
+
 	}
 
 	@Override
 	@Transactional
 	public T find(int id) {
-	 return genericDao.find(id);
+		return genericDao.find(id);
 	}
 
 	@Override

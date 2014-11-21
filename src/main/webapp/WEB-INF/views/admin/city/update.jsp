@@ -5,8 +5,8 @@
 
 <div class="container">
 
-<h2><spring:message code="province.update.message"/></h2>
-<form:form method="POST" commandName="city" action="${pageContext.request.contextPath}/admin/city/update/${province.id}">
+<h2><spring:message code="city.update.message"/></h2>
+<form:form method="POST" commandName="city" action="${pageContext.request.contextPath}/admin/city/update/${city.id}">
 
 <table>
 <tbody>

@@ -13,8 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "person")
@@ -23,10 +26,15 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotEmpty
 	@Column(nullable = false, name = "firstname")
 	private String firstName;
+	@NotEmpty
 	@Column(nullable = false, name = "lastname")
 	private String lastName;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@NotNull
+	@Past
 	private Date birthday;
 	private Gender gender;
 	@Column(nullable = false, name = "username", unique = true)

@@ -23,28 +23,37 @@
 			</div>
 			<div class="panel-body">
 
-				<form name='f' action="<c:url value='/j_spring_security_check' />"
+				<form:form name='f'
+					action="${pageContext.request.contextPath}/j_spring_security_check"
 					method='POST'>
+					<form:errors path="*" cssClass="alert alert-warning" element="div" />
 
-				
-						<div class="form-group">
-							<p ><spring:message code="security.username" />: </p>
-							<input class="form-control input-sm" type='text' name='j_username' value=''>
-						</div>
-						<div class="form-group">
-							<p ><spring:message code="security.password" />:</p>
-							<input class="form-control input-sm" type='password' name='j_password' />
-						</div>
-						<div class="form-group">
-						
-							<input class="btn btn-danger btn-sm" name="submit" type="submit"
-								value="<spring:message code="security.login"/>" />
-							<input class="btn btn-default btn-sm" name="reset" type="reset"
-								value="<spring:message code="reset"/>" />
-							
-						</div>
-					
-				</form>
+					<div class="form-group">
+						<p>
+							<spring:message code="security.username" />
+							:
+						</p>
+						<input class="form-control input-sm" type='text' name='j_username'
+							value=''>
+					</div>
+					<div class="form-group">
+						<p>
+							<spring:message code="security.password" />
+							:
+						</p>
+						<input class="form-control input-sm" type='password'
+							name='j_password' />
+					</div>
+					<div class="form-group">
+
+						<input class="btn btn-danger btn-sm" name="submit" type="submit"
+							value="<spring:message code="security.login"/>" /> <input
+							class="btn btn-default btn-sm" name="reset" type="reset"
+							value="<spring:message code="reset"/>" />
+
+					</div>
+
+				</form:form>
 			</div>
 		</div>
 	</div>

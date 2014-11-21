@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Contact {
 
@@ -15,12 +18,15 @@ public class Contact {
 	private int id;
 	private String mobile;
 	private String fax;
+	@NotEmpty
 	private String phone;
 	private String website;
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="city_id", nullable=true)
 	private City city;
 	private String address;
+	@NotEmpty
+	@Email
 	private String email;
 	
 	public String getWebsite() {

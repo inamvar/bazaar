@@ -6,16 +6,18 @@
 <div class="container">
 
 <h2><spring:message code="country.insert.message"/></h2>
-<form:form method="POST" commandname="country" action="${pageContext.request.contextPath}/admin/country/add">
+<form:form method="POST" commandName="country" action="${pageContext.request.contextPath}/admin/country/add">
 <table>
 <tbody>
 	<tr>
 		<td><spring:message code="country.name"/></td>
 		<td><form:input class="form-control input-sm" path="name"></form:input></td>
+		<td><form:errors path="name" cssClass="text text-danger" /></td>
 	</tr>
 	<tr>
 		<td><spring:message code="country.code"/></td>
 		<td><form:input class="form-control input-sm" path="code"></form:input></td>
+			
 	</tr>
 	<tr>
 		<td></td>

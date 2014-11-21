@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "item_category")
 public class ItemCategory {
@@ -17,6 +19,7 @@ public class ItemCategory {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(nullable = false, name = "cat_name")
+	@NotEmpty
 	private String name;
 	private String description;
 

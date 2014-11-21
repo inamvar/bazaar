@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Province {
@@ -19,6 +21,7 @@ public class Province {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
+	@NotEmpty
 	private String name;
 	
 	@ManyToOne

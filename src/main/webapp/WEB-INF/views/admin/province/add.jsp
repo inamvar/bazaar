@@ -13,12 +13,13 @@
 	</c:forEach>
 </div>
 </c:if>
-<form:form method="POST" commandname="province" action="${pageContext.request.contextPath}/admin/province/add">
+<form:form method="POST" commandName="province" action="${pageContext.request.contextPath}/admin/province/add">
 <table>
 <tbody>
 	<tr>
 		<td><spring:message code="province.name"/></td>
 		<td><form:input class="form-control input-sm" path="name"></form:input></td>
+		<td><form:errors path="name" cssClass="text text-danger" /></td>
 	</tr>
 	<tr>
 		<td><spring:message code="province.country"/></td>

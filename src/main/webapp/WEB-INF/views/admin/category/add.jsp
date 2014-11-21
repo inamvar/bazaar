@@ -6,12 +6,14 @@
 <div class="container">
 
 <h2><spring:message code="category.insert.message"/></h2>
-<form:form method="POST" commandname="category" action="${pageContext.request.contextPath}/admin/category/add">
+<form:form method="POST" commandName="category" action="${pageContext.request.contextPath}/admin/category/add">
+
 <table>
 <tbody>
 	<tr>
 		<td><spring:message code="category.name"/></td>
 		<td><form:input class="form-control input-sm" path="name"></form:input></td>
+		<td><form:errors path="name" cssClass="text text-danger" /></td>
 	</tr>
 	<tr>
 		<td></td>
