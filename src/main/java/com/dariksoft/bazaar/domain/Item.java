@@ -41,6 +41,9 @@ public class  Item {
 	private String finePrint;
 
 	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public int getId() {
 		return id;

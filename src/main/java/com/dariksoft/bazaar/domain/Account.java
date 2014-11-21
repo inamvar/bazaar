@@ -27,6 +27,9 @@ public class Account {
 	public int getId() {
 		return id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Set<Payment> getPayments() {
 		return payments;

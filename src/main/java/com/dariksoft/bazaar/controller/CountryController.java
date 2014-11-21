@@ -21,6 +21,8 @@ import com.dariksoft.bazaar.service.CountryService;
 @RequestMapping(value = "/admin/country")
 public class CountryController {
 
+
+
 	@Autowired
 	CountryService countryService;
 
@@ -62,8 +64,9 @@ public class CountryController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateFrom(@PathVariable Integer id, Locale locale, Model uiModel) {
-		
+	public String updateFrom(@PathVariable Integer id, Locale locale,
+			Model uiModel) {
+
 		Country country = countryService.find(id);
 		uiModel.addAttribute("country", country);
 		uiModel.addAttribute("title", messageSource.getMessage(
@@ -71,17 +74,18 @@ public class CountryController {
 		return "country/update";
 	}
 
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST )
 	public String update(@ModelAttribute("country") @Valid Country country,
-			@PathVariable Integer id, BindingResult result, Model uiModel, Locale locale) {
+			@PathVariable Integer id, BindingResult result, Model uiModel,
+			Locale locale) {
 
 		if (result.hasErrors()) {
 
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"country.update.message", null, locale));
-			return "country/update/"+ id;
+			return "country/update/" + id;
 		}
-		
+
 		countryService.update(country);
 
 		return "redirect:/admin/country";

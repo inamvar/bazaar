@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import com.dariksoft.bazaar.service.MerchantService;
 @RequestMapping(value = "/admin/merchant")
 public class MerchantController {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(MerchantController.class);
 	@Autowired
 	MerchantService merchantService;
 
@@ -54,7 +58,7 @@ public class MerchantController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addForm( Locale locale, Model uiModel) {
+	public String addForm(Locale locale, Model uiModel) {
 
 		uiModel.addAttribute("title", messageSource.getMessage(
 				"merchant.insert.message", null, locale));
@@ -79,6 +83,7 @@ public class MerchantController {
 		if (result.hasErrors()) {
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"merchant.insert.message", null, locale));
+			uiModel.addAttribute("cities", cityService.findAll());
 			return "merchant/add";
 		}
 		merchantService.create(merchant);
@@ -91,9 +96,12 @@ public class MerchantController {
 			Model uiModel) {
 
 		Merchant merchant = merchantService.find(id);
+		logger.info("get person id =" + merchant.getContactPoint().getId());
+		logger.info("get contact id =" + merchant.getContact().getId());
 		uiModel.addAttribute("merchant", merchant);
 		uiModel.addAttribute("title", messageSource.getMessage(
 				"merchant.update.message", null, locale));
+		uiModel.addAttribute("cities", cityService.findAll());
 		return "merchant/update";
 	}
 
@@ -101,13 +109,17 @@ public class MerchantController {
 	public String update(@ModelAttribute("merchant") @Valid Merchant merchant,
 			@PathVariable Integer id, BindingResult result, Locale locale,
 			Model uiModel) {
-
+		logger.info("id =" + merchant.getId());
+		logger.info("person id =" + merchant.getContactPoint().getId());
+		logger.info("contact id =" + merchant.getContact().getId());
+		logger.info("contact email =" + merchant.getContact().getEmail());
 		if (result.hasErrors()) {
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"merchant.update.message", null, locale));
-			return "merchant/update/"+id;
+			uiModel.addAttribute("cities", cityService.findAll());
+			return "merchant/update/" + id;
 		}
-		
+
 		merchantService.update(merchant);
 
 		return "redirect:/admin/merchant";

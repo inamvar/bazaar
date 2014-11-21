@@ -3,13 +3,12 @@ package com.dariksoft.bazaar.domain;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,22 +39,18 @@ public class Person {
 	@Column(nullable = false, name = "username", unique = true)
 	private String username;
 	private String password;
-	@ManyToOne
-	@JoinColumn(name = "contact_id", nullable = true)
-	private Contact contact;
+
 	@OneToOne(optional = true, mappedBy = "person")
 	private Account account;
 
+
+
+	
+	
 	@OneToMany(targetEntity = Comment.class, mappedBy = "author")
 	private Set<Comment> Comments;
 
-	public Contact getContact() {
-		return contact;
-	}
 
-	public void setContact(Contact address) {
-		this.contact = address;
-	}
 
 	public String getUsername() {
 		return username;
@@ -83,6 +78,9 @@ public class Person {
 
 	public int getId() {
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
@@ -124,5 +122,7 @@ public class Person {
 	public void setComments(Set<Comment> comments) {
 		Comments = comments;
 	}
+
+
 
 }

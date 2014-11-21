@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,8 @@ import com.dariksoft.bazaar.service.ProvinceService;
 @Controller
 @RequestMapping(value = "/admin/province")
 public class ProvinceController {
-
+	private static Logger logger = LoggerFactory
+			.getLogger(ProvinceController.class);
 	@Autowired
 	ProvinceService provinceService;
 
@@ -59,7 +62,7 @@ public class ProvinceController {
 				"province.insert.message", null, locale));
 		uiModel.addAttribute("province", new Province());
 		uiModel.addAttribute("countries", countryService.findAll());
-
+		
 		return "province/add";
 	}
 
@@ -71,6 +74,8 @@ public class ProvinceController {
 					"province.update.message", null, locale));
 			return "province/add";
 		}
+		
+		logger.debug("country id= "+province.getCountry().getId());
 		provinceService.create(province);
 
 		return "redirect:/admin/province";

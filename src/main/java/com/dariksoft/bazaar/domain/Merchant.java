@@ -19,7 +19,7 @@ public class Merchant {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="contact_point_id", nullable=false)
+	@JoinColumn(name="contact_point_id", nullable=true)
 	private Person contactPoint;
 	@NotEmpty
 	private String name;
@@ -37,6 +37,9 @@ public class Merchant {
 	}
 	public int getId() {
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;

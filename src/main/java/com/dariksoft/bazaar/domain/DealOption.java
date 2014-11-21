@@ -37,6 +37,16 @@ public class DealOption {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 
 }

@@ -45,6 +45,9 @@ public class ItemCategory {
 	public int getId() {
 		return id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Set<Item> getItems() {
 		return items;

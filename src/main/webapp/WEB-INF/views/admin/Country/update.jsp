@@ -6,7 +6,7 @@
 <div class="container">
 
 <h2><spring:message code="country.update.message"/></h2>
-<form:form method="POST" commandName="country" action="${pageContext.request.contextPath}/admin/country/update/${country.id}">
+<form:form method="PUT" commandName="country" action="${pageContext.request.contextPath}/admin/country/update/${country.id}">
 
 <table>
 <tbody>

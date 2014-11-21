@@ -36,6 +36,9 @@ public class Country {
 	public int getId() {
 		return id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getCode() {
 		return Code;
 	}

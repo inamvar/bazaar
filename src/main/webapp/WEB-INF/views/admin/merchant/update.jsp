@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
@@ -10,14 +10,17 @@
 	<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			
-					<spring:message code="merchant.update.message" />
-				
+
+				<spring:message code="merchant.update.message" />
+
 			</div>
 			<div class="panel-body">
 				<form:form method="POST" commandName="merchant" class="form"
-					action="${pageContext.request.contextPath}/admin/merchant/update/${merchand.id}">
-
+					action="${pageContext.request.contextPath}/admin/merchant/update/${merchant.id}">
+					<form:input class="form-control input-sm" path="contact.id"
+						type="hidden"></form:input>
+					<form:input class="form-control input-sm" path="contactPoint.id"
+						type="hidden"></form:input>
 					<div class="row">
 						<div class="form-group  col-sm-8">
 
@@ -37,13 +40,15 @@
 								<spring:message code="person.firstname" />
 								<form:input class="form-control input-sm"
 									path="contactPoint.firstName"></form:input>
-									<form:errors path="contactPoint.firstName" cssClass="text text-danger" />
+								<form:errors path="contactPoint.firstName"
+									cssClass="text text-danger" />
 							</div>
 							<div class="form-group">
 								<spring:message code="person.lastname" />
 								<form:input class="form-control input-sm"
 									path="contactPoint.lastName"></form:input>
-									<form:errors path="contactPoint.lastName" cssClass="text text-danger" />
+								<form:errors path="contactPoint.lastName"
+									cssClass="text text-danger" />
 							</div>
 
 						</div>
@@ -53,7 +58,8 @@
 								<spring:message code="person.birthday" />
 								<form:input class="form-control input-sm"
 									placeholder="e.g 1983/10/23" path="contactPoint.birthday"></form:input>
-									<form:errors path="contactPoint.birthday" cssClass="text text-danger" />
+								<form:errors path="contactPoint.birthday"
+									cssClass="text text-danger" />
 							</div>
 							<div class="form-group">
 								<spring:message code="person.gender" />
@@ -61,7 +67,8 @@
 									path="contactPoint.gender">
 									<form:options />
 								</form:select>
-									<form:errors path="contactPoint.gender" cssClass="text text-danger" />
+								<form:errors path="contactPoint.gender"
+									cssClass="text text-danger" />
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -69,13 +76,15 @@
 								<spring:message code="person.username" />
 								<form:input class="form-control input-sm"
 									path="contactPoint.username"></form:input>
-										<form:errors path="contactPoint.username" cssClass="text text-danger" />
+								<form:errors path="contactPoint.username"
+									cssClass="text text-danger" />
 							</div>
 							<div class="form-group">
 								<spring:message code="person.password" />
 								<form:input type="password" class="form-control input-sm"
 									path="contactPoint.password"></form:input>
-									<form:errors path="contactPoint.password" cssClass="text text-danger" />
+								<form:errors path="contactPoint.password"
+									cssClass="text text-danger" />
 							</div>
 						</div>
 					</div>
@@ -115,16 +124,18 @@
 							</div>
 							<div class="form-group">
 								<spring:message code="contact.city" />
-								<form:select class="form-control input-sm" path="contact.city" items="${cities}" itemValue="id" itemLabel="name">
-								<form:errors path="contact.city" cssClass="text text-danger" />
-									
+								<form:select class="form-control input-sm"
+									path="contact.city.id" items="${cities}" itemValue="id"
+									itemLabel="name">
+									<form:errors path="contact.city" cssClass="text text-danger" />
+
 								</form:select>
 							</div>
 
 						</div>
 
 					</div>
-<%-- 					<div class="form-group">
+					<%-- 					<div class="form-group">
 						<spring:message code="contact.address" />
 						<form:input class="form-control input-sm" path="contact.address	"></form:input>
 						<form:errors path="contact.address" cssClass="text text-danger" />
