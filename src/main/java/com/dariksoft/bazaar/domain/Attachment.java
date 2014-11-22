@@ -1,5 +1,6 @@
 package com.dariksoft.bazaar.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,16 +9,15 @@ import javax.persistence.Id;
 @Entity
 public class Attachment {
 
-
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private long size;
 	private String contentType;
 	private String fileName;
+	@Column(length = 10000000)
 	private byte[] content;
-	
 
 	public int getId() {
 		return id;

@@ -1,7 +1,9 @@
 package com.dariksoft.bazaar.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dariksoft.bazaar.domain.Attachment;
 import com.dariksoft.bazaar.domain.Item;
 import com.dariksoft.bazaar.domain.ItemCategory;
 import com.dariksoft.bazaar.domain.Merchant;
@@ -79,9 +82,9 @@ public class ItemController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(@ModelAttribute("item") @Valid Item item,BindingResult result,
-			//@RequestParam("images") MultipartFile[] images,
+			@RequestParam("files") MultipartFile[] files,
 			@RequestParam("file") MultipartFile thumbnail,
-			BindingResult uploadResult, Locale locale, Model uiModel) {
+			 Locale locale, Model uiModel) {
 		logger.info("saving item ...");
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
@@ -89,17 +92,17 @@ public class ItemController {
 					"item.insert.message", null, locale));
 			return "item/add";
 		}
-/*		Set<Attachment> attachments = new HashSet<Attachment>();
-		if (images != null && images.length >0) {
-			logger.info("images len = "+images.length);
-    		for(int i =0 ;i< images.length; i++){
+		Set<Attachment> attachments = new HashSet<Attachment>();
+		if (files != null && files.length >0) {
+			logger.info("images len = "+files.length);
+    		for(int i =0 ;i< files.length; i++){
 	            try {
 	            	Attachment att = new Attachment();
-	            	att.setFileName(images[i].getOriginalFilename());
-	            	att.setContentType(images[i].getContentType());
-	            	att.setSize(images[i].getSize());
-	            	att.setName(images[i].getName());
-	            	att.setContent(images[i].getBytes());
+	            	att.setFileName(files[i].getOriginalFilename());
+	            	att.setContentType(files[i].getContentType());
+	            	att.setSize(files[i].getSize());
+	            	att.setName(files[i].getName());
+	            	att.setContent(files[i].getBytes());
 	            	attachments.add(att);
 	            	logger.info("att name= "+att.getFileName());
 	            } catch (Exception e) {
@@ -111,7 +114,7 @@ public class ItemController {
     	
         } else {
         
-        }*/
+        }
 		logger.info("item name= "+item.getName());
 		if(thumbnail !=null){
 			logger.info(thumbnail.getOriginalFilename());

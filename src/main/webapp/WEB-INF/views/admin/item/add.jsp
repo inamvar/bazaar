@@ -12,7 +12,8 @@
 				<spring:message code="item.insert.message" />
 			</div>
 			<div class="panel-body">
-				<form:form method="POST" commandName="item" class="form" role="form" enctype="multipart/form-data"
+				<form:form method="POST" commandName="item" class="form" role="form"
+					enctype="multipart/form-data"
 					action="${pageContext.request.contextPath}/admin/item/add">
 					<div class="row">
 						<div class="col-sm-4">
@@ -101,8 +102,8 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-						
-						<div class="form-group">
+
+							<div class="form-group">
 								<p>
 									<spring:message code="merchant.label" />
 								</p>
@@ -111,14 +112,8 @@
 								</form:select>
 								<form:errors path="merchant" cssClass="text text-danger" />
 							</div>
-						
-		<%-- 					<div class="form-group">
-								<p>
-									<spring:message code="item.image" />
-								</p>
-								<form:input type="file" class="form-control input-sm" path="images"></form:input>
-							
-							</div> --%>
+
+
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
@@ -126,9 +121,24 @@
 									<spring:message code="item.thumbnail" />
 								</p>
 								<%-- <form:input type="file" path="thumbnail"></form:input> --%>
-								<input name="file" type="file"/>
+								<input name="file" type="file" />
 								<form:errors path="thumbnail" cssClass="text text-danger" />
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<div class="form-group">
+								<input id="addFile" class="btn btn-default btn-sm" type="button"
+									value="Add Attachment" />
+								<table id="fileTable">
+
+
+								</table>
+
+							</div>
+
+
 						</div>
 					</div>
 					<div class="row">
@@ -151,6 +161,26 @@
 
 
 </div>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						//add more file components if Add is clicked
+						$('#addFile')
+								.click(
+										function() {
+											var fileIndex = $('#fileTable tr')
+													.children().length - 1;
+											$('#fileTable')
+													.append(
+															'<tr><td>'
+																	+ '   <input type="file" name="files"/>'
+																	+ '</td></tr>');
+										});
+
+					});
+</script>
 
 
 

@@ -2,6 +2,7 @@ package com.dariksoft.bazaar.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,7 +38,7 @@ public class  Item {
 	 @Column( length = 10000000)
 	private byte[] thumbnail;
 	
-	@OneToMany(targetEntity = Attachment.class, fetch= FetchType.EAGER)
+	@OneToMany(targetEntity = Attachment.class, fetch= FetchType.EAGER, cascade= CascadeType.ALL)
 	private Set<Attachment> images;
 	private String[] tags;
 	private String description;
