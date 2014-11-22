@@ -2,7 +2,9 @@ package com.dariksoft.bazaar.domain;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,9 +34,11 @@ public class  Item {
 	@ManyToOne
 	@JoinColumn(name="merchant_id", nullable=false)
 	private Merchant merchant;
-	
+	 @Column( length = 10000000)
 	private byte[] thumbnail;
-	private byte[] image;
+	
+	@OneToMany(targetEntity = Attachment.class, fetch= FetchType.EAGER)
+	private Set<Attachment> images;
 	private String[] tags;
 	private String description;
 	private String details;
@@ -91,11 +95,11 @@ public class  Item {
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public byte[] getImage() {
-		return image;
+	public Set<Attachment> getImages() {
+		return images;
 	}
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setImages(Set<Attachment> images) {
+		this.images = images;
 	}
 	public Rate getRate() {
 		return rate;

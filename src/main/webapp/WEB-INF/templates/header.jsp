@@ -42,6 +42,8 @@
 					
 				<li><a href="${pageContext.request.contextPath}/admin/merchant"><spring:message
 							code="admin.menu.merchants" /></a></li>
+											<li><a href="${pageContext.request.contextPath}/admin/item"><spring:message
+							code="admin.menu.items" /></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
