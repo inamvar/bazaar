@@ -6,11 +6,11 @@
 <div class="container">
 
 
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 			
-					<spring:message code="merchant.insert.message" />
+				<span class="glyphicon glyphicon-plus-sign"></span>	<spring:message code="merchant.insert.message" />
 				
 			</div>
 			<div class="panel-body">
@@ -78,9 +78,6 @@
 							</div>
 						</div>
 					</div>
-					<h4>
-						<spring:message code="merchant.contact" />
-					</h4>
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">

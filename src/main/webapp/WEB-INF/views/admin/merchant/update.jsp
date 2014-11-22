@@ -7,11 +7,11 @@
 
 
 
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 
-				<spring:message code="merchant.update.message" />
+			 <span class="glyphicon glyphicon-pencil"></span> <spring:message code="merchant.update.message" />
 
 			</div>
 			<div class="panel-body">

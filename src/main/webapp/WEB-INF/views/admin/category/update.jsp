@@ -5,25 +5,34 @@
 
 <div class="container">
 
-<h2><spring:message code="category.update.message"/></h2>
-<form:form method="POST" commandName="category" action="${pageContext.request.contextPath}/admin/category/update/${category.id}">
 
-<table>
-<tbody>
-	<tr>
-		<td><spring:message code="country.name"/></td>
-		<td><form:input class="form-control input-sm" path="name"></form:input></td>
-	</tr>
 
-	<tr>
+	<div class="col-sm-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			 <span class="glyphicon glyphicon-pencil"></span> <spring:message code="category.update.message"/>
+			</div>
+			<div class="panel-body">
+				<form:form method="POST" commandName="category" class="form"
+					role="form"
+					action="${pageContext.request.contextPath}/admin/category/update/${category.id}">
+					<div class="form-group">
+						<p><spring:message code="category.name" /></p>
+						<form:input class="form-control input-sm" path="name"></form:input>
+						<form:errors path="name" cssClass="text text-danger" />
+					</div>
+					<div class="form-group">
+						<input class="btn btn-danger btn-sm"
+							value="<spring:message code="submit"/>" type="submit"> <a
+							href="${pageContext.request.contextPath}/admin/category"
+							class="btn btn-default btn-sm"><spring:message code="cancel" /></a>
+					</div>
 
-		<td>
-		<input  class="btn btn-danger btn-sm" value="<spring:message code="submit"/>" type="submit">
-		<a href="${pageContext.request.contextPath}/admin/category" class="btn btn-default btn-sm"><spring:message code="cancel"/></a></td>
-	</tr>
-</tbody>
-</table>
-</form:form>
+
+				</form:form>
+			</div>
+		</div>
+	</div>
 </div>
 
 

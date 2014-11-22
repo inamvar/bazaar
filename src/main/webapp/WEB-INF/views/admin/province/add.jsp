@@ -5,35 +5,38 @@
 
 <div class="container">
 
-<h2><spring:message code="province.insert.message"/></h2>
-<c:if test="${not empty errors}">
-<div class="alert alert-danger">
-	<c:forEach var="error" items="errors">
-		<p>${error}</p>
-	</c:forEach>
-</div>
-</c:if>
-<form:form method="POST" commandName="province" action="${pageContext.request.contextPath}/admin/province/add">
-<table>
-<tbody>
-	<tr>
-		<td><spring:message code="province.name"/></td>
-		<td><form:input class="form-control input-sm" path="name"></form:input></td>
-		<td><form:errors path="name" cssClass="text text-danger" /></td>
-	</tr>
-	<tr>
-		<td><spring:message code="province.country"/></td>
-		<td><form:select  class="form-control input-sm" path="country" items="${countries}" itemValue="id" itemLabel="name"></form:select></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
-		<input  class="btn btn-danger btn-sm" value="<spring:message code="submit"/>" type="submit">
-		<a href="${pageContext.request.contextPath}/admin/province" class="btn btn-default btn-sm"><spring:message code="cancel"/></a></td>
-	</tr>
-</tbody>
-</table>
-</form:form>
+
+<div class="col-sm-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				 <span class="glyphicon glyphicon-plus-sign"></span> <spring:message code="province.insert.message" />
+			</div>
+			<div class="panel-body">
+				<form:form method="POST" commandName="province" class="form"
+					role="form"
+					action="${pageContext.request.contextPath}/admin/province/add">
+					<div class="form-group">
+						<p><spring:message code="province.name" /></p>
+						<form:input class="form-control input-sm" path="name"></form:input>
+						<form:errors path="name" cssClass="text text-danger" />
+					</div>
+										<div class="form-group">
+						<p><spring:message code="province.country" /></p>
+						<form:select  class="form-control input-sm" path="country" items="${countries}" itemValue="id" itemLabel="name"></form:select>
+						<form:errors path="country" cssClass="text text-danger" />
+					</div>
+					<div class="form-group">
+						<input class="btn btn-danger btn-sm"
+							value="<spring:message code="submit"/>" type="submit"> <a
+							href="${pageContext.request.contextPath}/admin/province"
+							class="btn btn-default btn-sm"><spring:message code="cancel" /></a>
+					</div>
+
+
+				</form:form>
+			</div>
+		</div>
+	</div>
 </div>
 
 

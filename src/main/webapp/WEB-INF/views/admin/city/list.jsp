@@ -5,19 +5,19 @@
 
 <div class="container">
 	<h2>
-		<spring:message code="city.list" />
+	<span class=" glyphicon glyphicon glyphicon-th-list"> </span> <spring:message code="city.list" />
 	</h2>
 	<hr />
-	<div class="col-sm-6 col-md-6">
+	<div class="col-sm-8 col-md-8">
 	
 	
 		<p>
-			<a class="btn btn-danger"
-				href="${pageContext.request.contextPath}/admin/city/add"><spring:message
+			<a class="btn btn-danger btn-sm"
+				href="${pageContext.request.contextPath}/admin/city/add"><span class=" glyphicon glyphicon-plus-sign"> </span>  <spring:message
 					code="crud.add" /></a>
 		</p>
 
-		<table class="table table-bordered">
+		<table class="table">
 			<thead class="table-heading">
 				<tr>
 					<th><spring:message code="city.name" /></th>
@@ -32,10 +32,10 @@
 						<td><c:out value="${city.name}" /></td>
 						<td><c:out value="${city.province.name}" /></td>
 						<td><c:out value="${city.province.country.name}" /></td>
-						<td><a
-							href="${pageContext.request.contextPath}/admin/city/delete/${city.id}"><spring:message
-									code="crud.delete" /></a> <a
-							href="${pageContext.request.contextPath}/admin/city/update/${city.id}"><spring:message
+						<td><a class="btn btn-warning btn-xs"
+							href="${pageContext.request.contextPath}/admin/city/delete/${city.id}"><span class=" glyphicon glyphicon-trash"> </span> <spring:message
+									code="crud.delete" /></a> <a class="btn btn-success btn-xs"
+							href="${pageContext.request.contextPath}/admin/city/update/${city.id}"><span class=" glyphicon glyphicon-pencil"> </span> <spring:message
 									code="crud.edit" /></a></td>
 					</tr>
 				</c:forEach>
