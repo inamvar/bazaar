@@ -90,7 +90,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
 									<spring:message code="item.category" />
@@ -101,7 +101,7 @@
 								<form:errors path="category" cssClass="text text-danger" />
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 
 							<div class="form-group">
 								<p>
@@ -115,7 +115,10 @@
 
 
 						</div>
-						<div class="col-sm-4">
+
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
 							<div class="form-group">
 								<p>
 									<spring:message code="item.thumbnail" />
@@ -129,10 +132,12 @@
 					<div class="row">
 						<div class="col-sm-8">
 							<div class="form-group">
-								<input id="addFile" class="btn btn-default btn-sm" type="button"
-									value="Add Attachment" />
-								<table id="fileTable">
-
+								<a id="addFile" class="btn btn-default btn-sm" type="button">
+									<span class="glyphicon glyphicon-paperclip"></span> <spring:message
+										code="attachment.add" />
+								</a>
+								<p></p>
+								<table id="fileTable" class="table">
 
 								</table>
 
@@ -174,12 +179,23 @@
 													.children().length - 1;
 											$('#fileTable')
 													.append(
-															'<tr><td>'
+															'<tr id="idx'+fileIndex+'"><td>'
 																	+ '   <input type="file" name="files"/>'
-																	+ '</td></tr>');
-										});
 
-					});
+																	+ '</td>'
+																	+ '<td><a  class="text text-danger" onclick="javascript:removeAtt(this);" ><span class="glyphicon glyphicon-remove"></span></a></td>'
+																	+ '</tr>');
+										});
+						
+
+						
+
+		});
+	
+	function removeAtt(el) {
+		
+		$(el).parent().parent().remove();
+	};
 </script>
 
 

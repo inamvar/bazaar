@@ -1,5 +1,6 @@
 package com.dariksoft.bazaar.domain;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class  Item {
 	private byte[] thumbnail;
 	
 	@OneToMany(targetEntity = Attachment.class, fetch= FetchType.EAGER, cascade= CascadeType.ALL)
-	private Set<Attachment> images;
+	private List<Attachment> images;
 	private String[] tags;
 	private String description;
 	private String details;
@@ -96,10 +97,10 @@ public class  Item {
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public Set<Attachment> getImages() {
+	public List<Attachment> getImages() {
 		return images;
 	}
-	public void setImages(Set<Attachment> images) {
+	public void setImages(List<Attachment> images) {
 		this.images = images;
 	}
 	public Rate getRate() {

@@ -1,9 +1,9 @@
 package com.dariksoft.bazaar.controller;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -43,13 +43,13 @@ public class ItemController {
 	ItemService itemService;
 	@Autowired
 	ItemCategoryService categoryService;
-	
+
 	@Autowired
 	MerchantService merchantService;
 
 	@Autowired
 	private MessageSource messageSource;
-	
+
 	private @Autowired ItemCategoryEditor categoryEditor;
 	private @Autowired MerchantEditor merchantEditor;
 
@@ -63,8 +63,8 @@ public class ItemController {
 	public String list(Locale locale, Model uiModel) {
 
 		uiModel.addAttribute("items", itemService.findAll());
-		uiModel.addAttribute("title", messageSource.getMessage(
-				"admin.menu.items", null, locale));
+		uiModel.addAttribute("title",
+				messageSource.getMessage("admin.menu.items", null, locale));
 		return "item/list";
 	}
 
@@ -72,8 +72,8 @@ public class ItemController {
 	public String addForm(@ModelAttribute("item") @Valid Item item,
 			BindingResult result, Locale locale, Model uiModel) {
 
-		uiModel.addAttribute("title", messageSource.getMessage(
-				"item.insert.message", null, locale));
+		uiModel.addAttribute("title",
+				messageSource.getMessage("item.insert.message", null, locale));
 		uiModel.addAttribute("item", new Item());
 		uiModel.addAttribute("categories", categoryService.findAll());
 		uiModel.addAttribute("merchants", merchantService.findAll());
@@ -81,48 +81,47 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("item") @Valid Item item,BindingResult result,
-			@RequestParam("files") MultipartFile[] files,
-			@RequestParam("file") MultipartFile thumbnail,
-			 Locale locale, Model uiModel) {
-		logger.info("saving item ...");
+	public String add(@ModelAttribute("item") @Valid Item item,
+			BindingResult result, @RequestParam("files") MultipartFile[] files,
+			@RequestParam("file") MultipartFile thumbnail, Locale locale,
+			Model uiModel) {
+		
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"item.insert.message", null, locale));
 			return "item/add";
 		}
-		Set<Attachment> attachments = new HashSet<Attachment>();
-		if (files != null && files.length >0) {
-			logger.info("images len = "+files.length);
-    		for(int i =0 ;i< files.length; i++){
-	            try {
-	            	Attachment att = new Attachment();
-	            	att.setFileName(files[i].getOriginalFilename());
-	            	att.setContentType(files[i].getContentType());
-	            	att.setSize(files[i].getSize());
-	            	att.setName(files[i].getName());
-	            	att.setContent(files[i].getBytes());
-	            	attachments.add(att);
-	            	logger.info("att name= "+att.getFileName());
-	            } catch (Exception e) {
-	             
-	            }
-    		}
-    		
-    		item.setImages(attachments);
-    	
-        } else {
-        
-        }
-		logger.info("item name= "+item.getName());
-		if(thumbnail !=null){
-			logger.info(thumbnail.getOriginalFilename());
-			logger.info("size: "+thumbnail.getSize());
+		List<Attachment> attachments = new ArrayList<Attachment>();
+		if (files != null && files.length > 0) {
+		
+			for (int i = 0; i < files.length; i++) {
+				try {
+					Attachment att = new Attachment();
+					att.setFileName(files[i].getOriginalFilename());
+					att.setContentType(files[i].getContentType());
+					att.setSize(files[i].getSize());
+					att.setName(files[i].getName());
+					att.setContent(files[i].getBytes());
+					attachments.add(att);
+				
+				} catch (Exception e) {
+
+				}
+			}
+ 
+			item.setImages(attachments);
+
+		} else {
+
+		}
+		
+		if (thumbnail != null) {
+			
 			try {
 				item.setThumbnail(thumbnail.getBytes());
 			} catch (IOException e) {
-			
+
 				e.printStackTrace();
 			}
 		}
@@ -137,14 +136,17 @@ public class ItemController {
 
 		Item item = itemService.find(id);
 		uiModel.addAttribute("item", item);
-		uiModel.addAttribute("title", messageSource.getMessage(
-				"item.update.message", null, locale));
+		uiModel.addAttribute("title",
+				messageSource.getMessage("item.update.message", null, locale));
 		uiModel.addAttribute("categories", categoryService.findAll());
+		uiModel.addAttribute("merchants", merchantService.findAll());
 		return "item/update";
 	}
 
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST )
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@ModelAttribute("item") @Valid Item item,
+			@RequestParam("files") MultipartFile[] files,
+			@RequestParam("file") MultipartFile thumbnail,
 			@PathVariable Integer id, BindingResult result, Model uiModel,
 			Locale locale) {
 
@@ -153,6 +155,60 @@ public class ItemController {
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"item.update.message", null, locale));
 			return "item/update/" + id;
+		}
+		List<Attachment> deletedImages = new ArrayList<Attachment>();
+		List<Attachment> attachments = new ArrayList<Attachment>();
+		
+		Item originalItem = itemService.find(item.getId());
+	
+		for (Attachment att : item.getImages()) {
+			
+			if (att.getName().equals("deleted")) {
+				for(Attachment org : originalItem.getImages()){
+						if(att.getId() == org.getId()){
+							deletedImages.add(org);
+							break;
+						}
+				}
+
+			} 
+		}
+				
+		item.setImages(originalItem.getImages());
+		item.getImages().removeAll(deletedImages);
+		item.setThumbnail(originalItem.getThumbnail());
+
+		if (files != null && files.length > 0) {
+			
+			for (int i = 0; i < files.length; i++) {
+				try {
+					Attachment att = new Attachment();
+					att.setFileName(files[i].getOriginalFilename());
+					att.setContentType(files[i].getContentType());
+					att.setSize(files[i].getSize());
+					att.setName(files[i].getName());
+					att.setContent(files[i].getBytes());
+					attachments.add(att);
+					
+				} catch (Exception e) {
+
+				}
+			}
+			item.getImages().addAll(attachments);
+		
+
+		} else {
+
+		}
+	
+		if (thumbnail != null && thumbnail.getSize() > 0) {
+
+			try {
+				item.setThumbnail(thumbnail.getBytes());
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
 		}
 
 		itemService.update(item);
@@ -167,6 +223,13 @@ public class ItemController {
 
 		return "redirect:/admin/item";
 	}
+	
+	@RequestMapping(value = "/detail/{id}")
+	public String detail(@PathVariable int id, Model uiModel) {
 
+		uiModel.addAttribute("item", itemService.find(id));
+
+		return "item/detail";
+	}
 
 }
