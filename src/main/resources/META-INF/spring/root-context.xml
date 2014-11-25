@@ -11,7 +11,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/bazaar" />
+		<property name="url" value="jdbc:mysql://localhost:3306/kalatag" />
 		<property name="username" value="root" />
 		<property name="password" value="2238295" />
 	</bean>
@@ -21,7 +21,7 @@
     <bean id="hibernate4AnnotatedSessionFactory"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.dariksoft.bazaar" />
+        <property name="packagesToScan" value="com.dariksoft.kalatag" />
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect

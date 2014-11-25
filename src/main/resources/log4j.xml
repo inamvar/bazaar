@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.dariksoft.bazaar">
+	<logger name="com.dariksoft.kalatag">
 		<level value="debug" />
 	</logger>
 	
