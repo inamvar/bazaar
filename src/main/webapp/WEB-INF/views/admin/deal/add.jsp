@@ -9,17 +9,17 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-plus-sign"></span>
-				<spring:message code="item.insert.message" />
+				<spring:message code="deal.insert.message" />
 			</div>
 			<div class="panel-body">
-				<form:form method="POST" commandName="item" class="form" role="form"
+				<form:form method="POST" commandName="deal" class="form" role="form"
 					enctype="multipart/form-data"
-					action="${pageContext.request.contextPath}/admin/item/add">
+					action="${pageContext.request.contextPath}/admin/deal/add">
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.name" />
+									<spring:message code="deal.name" />
 								</p>
 								<form:input class="form-control input-sm" path="name"></form:input>
 								<form:errors path="name" cssClass="text text-danger" />
@@ -28,7 +28,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.price" />
+									<spring:message code="deal.price" />
 								</p>
 								<form:input class="form-control input-sm" path="price"></form:input>
 								<form:errors path="price" cssClass="text text-danger" />
@@ -37,7 +37,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.status" />
+									<spring:message code="deal.status" />
 								</p>
 								<form:select class="form-control input-sm" path="status">
 									<form:options />
@@ -50,7 +50,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.rate" />
+									<spring:message code="deal.rate" />
 								</p>
 								<form:select class="form-control input-sm" path="rate">
 									<form:options />
@@ -61,7 +61,7 @@
 						<div class="col-sm-8">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.description" />
+									<spring:message code="deal.description" />
 								</p>
 								<form:input class="form-control input-sm" path="description"></form:input>
 								<form:errors path="description" cssClass="text text-danger" />
@@ -72,20 +72,20 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.finePrint" />
+									<spring:message code="deal.features" />
 								</p>
-								<form:textarea class="form-control input-sm" path="finePrint"></form:textarea>
-								<form:errors path="finePrint" cssClass="text text-danger" />
+								<form:textarea class="form-control input-sm" path="features"></form:textarea>
+								<form:errors path="features" cssClass="text text-danger" />
 							</div>
 						</div>
 
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.details" />
+									<spring:message code="deal.termsOfUse" />
 								</p>
-								<form:textarea class="form-control input-sm" path="details"></form:textarea>
-								<form:errors path="details" cssClass="text text-danger" />
+								<form:textarea class="form-control input-sm" path="termsOfUse"></form:textarea>
+								<form:errors path="termsOfUse" cssClass="text text-danger" />
 							</div>
 						</div>
 					</div>
@@ -93,7 +93,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.category" />
+									<spring:message code="deal.category" />
 								</p>
 								<form:select class="form-control input-sm" path="category"
 									items="${categories}" itemValue="id" itemLabel="name">
@@ -117,11 +117,16 @@
 						</div>
 
 					</div>
+					<div class="alert alert-warning">
+						<p>
+							<spring:message code="jpg.warning" />
+						</p>
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.thumbnail" />
+									<spring:message code="deal.thumbnail" />
 								</p>
 								<%-- <form:input type="file" path="thumbnail"></form:input> --%>
 								<input name="file" type="file" />
@@ -152,7 +157,7 @@
 							<div class="form-group">
 								<input class="btn btn-danger btn-sm"
 									value="<spring:message code="submit"/>" type="submit">
-								<a href="${pageContext.request.contextPath}/admin/item"
+								<a href="${pageContext.request.contextPath}/admin/deal"
 									class="btn btn-default btn-sm"><spring:message
 										code="cancel" /></a>
 							</div>
@@ -186,14 +191,11 @@
 																	+ '<td><a  class="text text-danger" onclick="javascript:removeAtt(this);" ><span class="glyphicon glyphicon-remove"></span></a></td>'
 																	+ '</tr>');
 										});
-						
 
-						
+					});
 
-		});
-	
 	function removeAtt(el) {
-		
+
 		$(el).parent().parent().remove();
 	};
 </script>

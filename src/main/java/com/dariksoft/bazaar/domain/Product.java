@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class Product extends Item {
+public class Product extends Deal {
 
 	private Date expireDate;
 	

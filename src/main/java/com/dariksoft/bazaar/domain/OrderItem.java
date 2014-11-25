@@ -21,7 +21,7 @@ public class OrderItem {
 	
 	@ManyToOne
 	@JoinColumn(name="item_id", nullable=true)
-	private Item item;
+	private Deal item;
 	
 	@ManyToOne
 	@JoinColumn(name="coupon_id", nullable=true)
@@ -63,11 +63,11 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	public Item getItem() {
+	public Deal getItem() {
 		return item;
 	}
 
-	public void setItem(Item item) {
+	public void setItem(Deal item) {
 		this.item = item;
 	}
 

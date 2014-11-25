@@ -6,13 +6,13 @@
 <div class="container">
 	<h2>
 		<span class=" glyphicon glyphicon glyphicon-th-list"> </span>
-		<spring:message code="item.list" />
+		<spring:message code="deal.list" />
 	</h2>
 	<hr />
 	<div class="col-sm-10 col-md-10">
 		<p>
 			<a class="btn btn-danger btn-sm"
-				href="${pageContext.request.contextPath}/admin/item/add"><span
+				href="${pageContext.request.contextPath}/admin/deal/add"><span
 				class=" glyphicon glyphicon-plus-sign"> </span> <spring:message
 					code="crud.add" /></a>
 		</p>
@@ -21,27 +21,27 @@
 			<thead class="table-heading">
 				<tr>
 
-					<th><spring:message code="item.name" /></th>
-					<th><spring:message code="item.price" /></th>
-					<th><spring:message code="item.status" /></th>
-					<th><spring:message code="item.category" /></th>
+					<th><spring:message code="deal.name" /></th>
+					<th><spring:message code="deal.price" /></th>
+					<th><spring:message code="deal.status" /></th>
+					<th><spring:message code="deal.category" /></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody class="table-body">
-				<c:forEach var="item" items="${items}">
+				<c:forEach var="deal" items="${deals}">
 					<tr>
 
-						<td><a href="${pageContext.request.contextPath}/admin/item/detail/${item.id}"> <c:out value="${item.name}" /> </a></td>
-						<td><c:out value="${item.price}" /></td>
-						<td><c:out value="${item.status}" /></td>
-						<td><c:out value="${item.category.name}" /></td>
+						<td><a href="${pageContext.request.contextPath}/admin/deal/detail/${deal.id}"> <c:out value="${deal.name}" /> </a></td>
+						<td><c:out value="${deal.price}" /></td>
+						<td><c:out value="${deal.status}" /></td>
+						<td><c:out value="${deal.category.name}" /></td>
 
 						<td><a class="btn btn-warning btn-xs"
-							href="${pageContext.request.contextPath}/admin/item/delete/${item.id}"><span
+							href="${pageContext.request.contextPath}/admin/deal/delete/${deal.id}"><span
 								class=" glyphicon glyphicon-trash"> </span> <spring:message
 									code="crud.delete" /></a> <a class="btn btn-success btn-xs"
-							href="${pageContext.request.contextPath}/admin/item/update/${item.id}"><span
+							href="${pageContext.request.contextPath}/admin/deal/update/${deal.id}"><span
 								class=" glyphicon glyphicon-pencil"> </span> <spring:message
 									code="crud.edit" /></a></td>
 					</tr>

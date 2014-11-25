@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 @Entity
-public class Event extends Item {
+public class Event extends Deal {
 
 	
 	private Date openDate;

@@ -23,8 +23,8 @@ public class ItemCategory {
 	private String name;
 	private String description;
 
-	@OneToMany(targetEntity = Item.class, mappedBy = "category")
-	private Set<Item> items;
+	@OneToMany(targetEntity = Deal.class, mappedBy = "category")
+	private Set<Deal> deal;
 
 	public String getDescription() { 
 		return description;
@@ -49,12 +49,12 @@ public class ItemCategory {
 		this.id = id;
 	}
 
-	public Set<Item> getItems() {
-		return items;
+	public Set<Deal> getDeals() {
+		return deal;
 	}
 
-	public void setItems(Set<Item> items) {
-		this.items = items;
+	public void setDeals(Set<Deal> deals) {
+		this.deal = deals;
 	}
 
 }

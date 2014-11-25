@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dariksoft.bazaar.domain.Attachment;
-import com.dariksoft.bazaar.domain.Item;
+import com.dariksoft.bazaar.domain.Deal;
 import com.dariksoft.bazaar.service.AttachmentService;
-import com.dariksoft.bazaar.service.ItemService;
+import com.dariksoft.bazaar.service.DealService;
 
 @Controller
 @RequestMapping(value = "/files")
@@ -29,7 +29,7 @@ public class FilesController {
 	AttachmentService attachmentService;
 	
 	@Autowired
-	ItemService itemService;
+	DealService dealService;
 	
 	@RequestMapping(value = "/attachments/{id}/dynamicImage", method = RequestMethod.GET)
     public String getAttachmentContent(@PathVariable("id") int id, @RequestParam("width") int width, @RequestParam("height") int height, HttpServletResponse response, Model model) {
@@ -52,9 +52,9 @@ public class FilesController {
         return null;
     }
 	
-	@RequestMapping(value = "/items/{id}/thumbnail", method = RequestMethod.GET)
+	@RequestMapping(value = "/deals/{id}/thumbnail", method = RequestMethod.GET)
     public String getItemThumbnail(@PathVariable("id") int id, @RequestParam("width") int width, @RequestParam("height") int height, HttpServletResponse response, Model model) {
-       Item item = itemService.find(id);
+       Deal item = dealService.find(id);
         if (item != null) {
             byte[] imageInByte = item.getThumbnail();
             if (imageInByte != null) {

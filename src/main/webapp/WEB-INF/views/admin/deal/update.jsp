@@ -9,17 +9,17 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="glyphicon glyphicon-plus-sign"></span>
-				<spring:message code="item.insert.message" />
+				<spring:message code="deal.update.message" />
 			</div>
 			<div class="panel-body">
-				<form:form method="POST" commandName="item" class="form" role="form"
+				<form:form method="POST" commandName="deal" class="form" role="form"
 					enctype="multipart/form-data"
-					action="${pageContext.request.contextPath}/admin/item/update/${item.id}">
+					action="${pageContext.request.contextPath}/admin/deal/update/${deal.id}">
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.name" />
+									<spring:message code="deal.name" />
 								</p>
 								<form:input class="form-control input-sm" path="name"></form:input>
 								<form:errors path="name" cssClass="text text-danger" />
@@ -28,7 +28,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.price" />
+									<spring:message code="deal.price" />
 								</p>
 								<form:input class="form-control input-sm" path="price"></form:input>
 								<form:errors path="price" cssClass="text text-danger" />
@@ -37,7 +37,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.status" />
+									<spring:message code="deal.status" />
 								</p>
 								<form:select class="form-control input-sm" path="status">
 									<form:options />
@@ -50,7 +50,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.rate" />
+									<spring:message code="deal.rate" />
 								</p>
 								<form:select class="form-control input-sm" path="rate">
 									<form:options />
@@ -61,7 +61,7 @@
 						<div class="col-sm-8">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.description" />
+									<spring:message code="deal.description" />
 								</p>
 								<form:input class="form-control input-sm" path="description"></form:input>
 								<form:errors path="description" cssClass="text text-danger" />
@@ -72,20 +72,20 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.finePrint" />
+									<spring:message code="deal.features" />
 								</p>
 								<form:textarea class="form-control input-sm" path="finePrint"></form:textarea>
-								<form:errors path="finePrint" cssClass="text text-danger" />
+								<form:errors path="features" cssClass="text text-danger" />
 							</div>
 						</div>
 
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.details" />
+									<spring:message code="deal.termOfUse" />
 								</p>
 								<form:textarea class="form-control input-sm" path="details"></form:textarea>
-								<form:errors path="details" cssClass="text text-danger" />
+								<form:errors path="termOfUse" cssClass="text text-danger" />
 							</div>
 						</div>
 					</div>
@@ -93,10 +93,10 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.category" />
+									<spring:message code="deal.category" />
 								</p>
 								<form:select class="form-control input-sm" path="category"
-									items="${categories}" itemValue="id" itemLabel="name">
+									deals="${categories}" dealValue="id" dealLabel="name">
 								</form:select>
 								<form:errors path="category" cssClass="text text-danger" />
 							</div>
@@ -108,7 +108,7 @@
 									<spring:message code="merchant.label" />
 								</p>
 								<form:select class="form-control input-sm" path="merchant"
-									items="${merchants}" itemValue="id" itemLabel="name">
+									deals="${merchants}" dealValue="id" dealLabel="name">
 								</form:select>
 								<form:errors path="merchant" cssClass="text text-danger" />
 							</div>
@@ -121,9 +121,9 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<p>
-									<spring:message code="item.thumbnail" />
+									<spring:message code="deal.thumbnail" />
 								</p>
-								<img src="${pageContext.request.contextPath}/files/items/${item.id}/thumbnail?width=100&height=100" width="100" height="100" class="img img-thumbnail"/>
+								<img src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=100&height=100" width="100" height="100" class="img img-thumbnail"/>
 								<input name="file" type="file" />
 								<form:errors path="thumbnail" cssClass="text text-danger" />
 							</div>
@@ -140,7 +140,7 @@
 								</a>
 								<p></p>
 								<table id="fileTable" class="table">
-									<c:forEach items="${item.images}" varStatus="image" var="imageObj">
+									<c:forEach items="${deal.images}" varStatus="image" var="imageObj">
 										<tr>
 											<td><form:hidden path="images[${image.index}].name"></form:hidden>
 												<form:hidden path="images[${image.index}].id"></form:hidden>
@@ -165,7 +165,7 @@
 							<div class="form-group">
 								<input class="btn btn-danger btn-sm"
 									value="<spring:message code="submit"/>" type="submit">
-								<a href="${pageContext.request.contextPath}/admin/item"
+								<a href="${pageContext.request.contextPath}/admin/deal"
 									class="btn btn-default btn-sm"><spring:message
 										code="cancel" /></a>
 							</div>

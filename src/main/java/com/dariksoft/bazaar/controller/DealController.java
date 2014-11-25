@@ -7,8 +7,6 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -24,23 +22,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dariksoft.bazaar.domain.Attachment;
-import com.dariksoft.bazaar.domain.Item;
+import com.dariksoft.bazaar.domain.Deal;
 import com.dariksoft.bazaar.domain.ItemCategory;
 import com.dariksoft.bazaar.domain.Merchant;
 import com.dariksoft.bazaar.propertyeditor.ItemCategoryEditor;
 import com.dariksoft.bazaar.propertyeditor.MerchantEditor;
 import com.dariksoft.bazaar.service.ItemCategoryService;
-import com.dariksoft.bazaar.service.ItemService;
+import com.dariksoft.bazaar.service.DealService;
 import com.dariksoft.bazaar.service.MerchantService;
 
 @Controller
-@RequestMapping(value = "/admin/item")
-public class ItemController {
-	private static final Logger logger = LoggerFactory
-			.getLogger(ItemController.class);
+@RequestMapping(value = "/admin/deal")
+public class DealController {
+/*	private static final Logger logger = LoggerFactory
+			.getLogger(ItemController.class);*/
 
 	@Autowired
-	ItemService itemService;
+	DealService dealService;
 	@Autowired
 	ItemCategoryService categoryService;
 
@@ -62,26 +60,26 @@ public class ItemController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Locale locale, Model uiModel) {
 
-		uiModel.addAttribute("items", itemService.findAll());
+		uiModel.addAttribute("deals", dealService.findAll());
 		uiModel.addAttribute("title",
-				messageSource.getMessage("admin.menu.items", null, locale));
-		return "item/list";
+				messageSource.getMessage("admin.menu.deals", null, locale));
+		return "deal/list";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addForm(@ModelAttribute("item") @Valid Item item,
+	public String addForm(@ModelAttribute("deal") @Valid Deal item,
 			BindingResult result, Locale locale, Model uiModel) {
 
 		uiModel.addAttribute("title",
-				messageSource.getMessage("item.insert.message", null, locale));
-		uiModel.addAttribute("item", new Item());
+				messageSource.getMessage("deal.insert.message", null, locale));
+		uiModel.addAttribute("deal", new Deal());
 		uiModel.addAttribute("categories", categoryService.findAll());
 		uiModel.addAttribute("merchants", merchantService.findAll());
-		return "item/add";
+		return "deal/add";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("item") @Valid Item item,
+	public String add(@ModelAttribute("deal") @Valid Deal item,
 			BindingResult result, @RequestParam("files") MultipartFile[] files,
 			@RequestParam("file") MultipartFile thumbnail, Locale locale,
 			Model uiModel) {
@@ -89,8 +87,8 @@ public class ItemController {
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
 			uiModel.addAttribute("title", messageSource.getMessage(
-					"item.insert.message", null, locale));
-			return "item/add";
+					"deal.insert.message", null, locale));
+			return "deal/add";
 		}
 		List<Attachment> attachments = new ArrayList<Attachment>();
 		if (files != null && files.length > 0) {
@@ -125,26 +123,26 @@ public class ItemController {
 				e.printStackTrace();
 			}
 		}
-		itemService.create(item);
+		dealService.create(item);
 
-		return "redirect:/admin/item";
+		return "redirect:/admin/deal";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateFrom(@PathVariable Integer id, Locale locale,
 			Model uiModel) {
 
-		Item item = itemService.find(id);
+		Deal item = dealService.find(id);
 		uiModel.addAttribute("item", item);
 		uiModel.addAttribute("title",
-				messageSource.getMessage("item.update.message", null, locale));
+				messageSource.getMessage("deal.update.message", null, locale));
 		uiModel.addAttribute("categories", categoryService.findAll());
 		uiModel.addAttribute("merchants", merchantService.findAll());
-		return "item/update";
+		return "deal/update";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@ModelAttribute("item") @Valid Item item,
+	public String update(@ModelAttribute("deal") @Valid Deal item,
 			@RequestParam("files") MultipartFile[] files,
 			@RequestParam("file") MultipartFile thumbnail,
 			@PathVariable Integer id, BindingResult result, Model uiModel,
@@ -153,13 +151,13 @@ public class ItemController {
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
 			uiModel.addAttribute("title", messageSource.getMessage(
-					"item.update.message", null, locale));
-			return "item/update/" + id;
+					"deal.update.message", null, locale));
+			return "deal/update/" + id;
 		}
 		List<Attachment> deletedImages = new ArrayList<Attachment>();
 		List<Attachment> attachments = new ArrayList<Attachment>();
 		
-		Item originalItem = itemService.find(item.getId());
+		Deal originalItem = dealService.find(item.getId());
 	
 		for (Attachment att : item.getImages()) {
 			
@@ -211,25 +209,25 @@ public class ItemController {
 			}
 		}
 
-		itemService.update(item);
+		dealService.update(item);
 
-		return "redirect:/admin/item";
+		return "redirect:/admin/deal";
 	}
 
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable int id) {
 
-		itemService.delete(id);
+		dealService.delete(id);
 
-		return "redirect:/admin/item";
+		return "redirect:/admin/deal";
 	}
 	
 	@RequestMapping(value = "/detail/{id}")
 	public String detail(@PathVariable int id, Model uiModel) {
 
-		uiModel.addAttribute("item", itemService.find(id));
+		uiModel.addAttribute("deal", dealService.find(id));
 
-		return "item/detail";
+		return "deal/detail";
 	}
 
 }

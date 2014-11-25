@@ -14,6 +14,7 @@ public class DealOption {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	private double discount;
+	private String description;
 	
 	@ManyToOne
 	@JoinColumn(name="deal_id", nullable=true)
@@ -46,6 +47,16 @@ public class DealOption {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 

@@ -27,8 +27,8 @@ public class Merchant {
 	@JoinColumn(name="contact_id", nullable=true)
 	private Contact contact;
 	
-	@OneToMany(targetEntity = Item.class, mappedBy = "merchant")
-	private Set<Item> items;
+	@OneToMany(targetEntity = Deal.class, mappedBy = "merchant")
+	private Set<Deal> items;
 	public Person getContactPoint() {
 		return contactPoint;
 	}
@@ -53,10 +53,10 @@ public class Merchant {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-	public Set<Item> getItems() {
+	public Set<Deal> getItems() {
 		return items;
 	}
-	public void setItems(Set<Item> items) {
+	public void setItems(Set<Deal> items) {
 		this.items = items;
 	}
 

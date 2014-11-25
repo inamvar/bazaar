@@ -1,7 +1,9 @@
 package com.dariksoft.bazaar.domain;
 
 public enum ItemStatus {
-	AVAILABLE,
-	SUSPENDED,
+	ON,
+	OFF,
+	EXPIRED,
+	UNREACHED
 
 }
