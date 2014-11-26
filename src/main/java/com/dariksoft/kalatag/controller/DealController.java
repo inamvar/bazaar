@@ -36,7 +36,7 @@ import com.dariksoft.kalatag.propertyeditor.MerchantEditor;
 import com.dariksoft.kalatag.service.DealOptionService;
 import com.dariksoft.kalatag.service.DealService;
 import com.dariksoft.kalatag.service.ItemCategoryService;
-import com.dariksoft.kalatag.service.MerchantService;
+import com.dariksoft.kalatag.service.merchant.MerchantService;
 
 @Controller
 @RequestMapping(value = "/admin/deal")

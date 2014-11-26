@@ -24,7 +24,7 @@ import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.propertyeditor.CityEditor;
 import com.dariksoft.kalatag.service.CityService;
-import com.dariksoft.kalatag.service.MerchantService;
+import com.dariksoft.kalatag.service.merchant.MerchantService;
 
 @Controller
 @RequestMapping(value = "/admin/merchant")

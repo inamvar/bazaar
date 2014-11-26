@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Merchant;
-import com.dariksoft.kalatag.service.MerchantService;
+import com.dariksoft.kalatag.service.merchant.MerchantService;
 
 @Component
 public class MerchantEditor extends PropertyEditorSupport {

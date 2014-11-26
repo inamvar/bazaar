@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,8 +20,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -122,6 +127,8 @@ public class Person {
 		Comments = comments;
 	}
 
-
+	public String toString(){
+		return firstName + " " + lastName;
+	}
 
 }
