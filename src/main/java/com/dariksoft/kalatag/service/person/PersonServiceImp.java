@@ -26,17 +26,21 @@ public class PersonServiceImp  extends CRUDServiceImp<Person> implements PersonS
 	@Autowired
 	Destination registration;
 	
-//	@Autowired
-//	GenericMessageCreator<Person> messageCreator;
-	
+	@Autowired
+	GenericMessageCreator<Person> messageCreator;
+
 	@Override
 	@Transactional
 	public Person create(Person p) {
-		Person person = dao.create(p);
-		template.setDefaultDestination(registration);
-		MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
-		template.send(messageCreator);
-		return person;
+		try{
+			Person person = dao.create(p);
+			template.setDefaultDestination(registration);
+			//MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
+			template.send(messageCreator);
+			return person;
+		}catch(Exception e){
+			return null;
+		}
 	}
 
 	
