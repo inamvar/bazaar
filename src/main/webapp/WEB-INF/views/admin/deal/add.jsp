@@ -36,7 +36,7 @@
 								<form:errors path="price" cssClass="text text-danger" />
 							</div>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<div class="form-group">
 								<p>
 									<spring:message code="deal.status" />
@@ -45,6 +45,15 @@
 									<form:options />
 								</form:select>
 								<form:errors path="price" cssClass="text text-danger" />
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<p>
+									<spring:message code="deal.validity" />
+								</p>
+								<form:input class="form-control input-sm" path="validity" placeholder="eg 2001/11/09"></form:input>
+								<form:errors path="validity" cssClass="text text-danger" />
 							</div>
 						</div>
 

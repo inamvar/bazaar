@@ -16,13 +16,13 @@
 					action="#">
 					<div class="row">
 						<div class="col-sm-12">
-							<div id="carousel-example-generic" class="carousel slide" style="min-height:450;"
-								data-ride="carousel">
+							<div id="carousel-example-generic" class="carousel slide"
+								style="min-height: 450;" data-ride="carousel">
 
 								<div class="carousel-inner" role="listbox">
 									<c:forEach items="${deal.images}" var="image" varStatus="stat">
 										<c:if test="${stat.index == 0}">
-											<div class="deal active">
+											<div class="item active">
 												<img
 													src="${pageContext.request.contextPath}/files/attachments/${image.id}/dynamicImage?width=900&height=450"
 													alt="">
@@ -30,7 +30,7 @@
 											</div>
 										</c:if>
 										<c:if test="${stat.index > 0}">
-											<div class="deal">
+											<div class="item">
 												<img
 													src="${pageContext.request.contextPath}/files/attachments/${image.id}/dynamicImage?width=900&height=450"
 													alt="">
@@ -56,9 +56,9 @@
 								</a>
 							</div>
 						</div>
-						
+
 					</div>
-					<hr/>
+					<hr />
 					<div class="row">
 						<div class="col-sm-3">
 							<div class="form-group">
@@ -120,26 +120,47 @@
 							</div>
 						</div>
 					</div>
+					<h4><spring:message code="dealoption.label"/></h4>
+					<c:forEach items="${deal.options}" var="option" >
+					<div class="row">
+
+						<div class="col-sm-4">
+							<div class="form-group">
+								<input class="form-control input-sm  disabled"
+									value="${option.name}" disabled/>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<input class="form-control input-sm  disabled"
+									value="${option.discount}" disabled/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<input class="form-control input-sm  disabled"
+									value="${option.description}" disabled/>
+							</div>
+						</div>
+					</div>
+					</c:forEach>
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="deal.finePrint" />
+									<spring:message code="deal.features" />
 								</p>
-								<form:textarea class="form-control input-sm  disabled"
-									disabled="true" path="finePrint"></form:textarea>
-								<form:errors path="finePrint" cssClass="text text-danger" />
+								${deal.features}
 							</div>
 						</div>
 
 						<div class="col-sm-6">
 							<div class="form-group">
 								<p>
-									<spring:message code="deal.details" />
+									<spring:message code="deal.termsOfUse" />
 								</p>
-								<form:textarea class="form-control input-sm  disabled"
-									disabled="true" path="details"></form:textarea>
-								<form:errors path="details" cssClass="text text-danger" />
+								${deal.termsOfUse}
+
 							</div>
 						</div>
 					</div>

@@ -18,7 +18,7 @@ public class DealOption {
 	private double discount;
 	private String description;
 	@Transient
-	private Integer remove;
+	private int remove;
 	
 	@ManyToOne
 	@JoinColumn(name="deal_id", nullable=false)

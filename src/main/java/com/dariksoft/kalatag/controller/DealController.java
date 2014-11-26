@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class DealController {
 
 	@Autowired
 	MerchantService merchantService;
-	
+
 	@Autowired
 	DealOptionService optionService;
 
@@ -82,8 +83,9 @@ public class DealController {
 		uiModel.addAttribute("title",
 				messageSource.getMessage("deal.insert.message", null, locale));
 		Deal deal = new Deal();
-		List<DealOption> options = new  AutoPopulatingList<DealOption>(DealOption.class);
-		//options.add(new DealOption());
+		List<DealOption> options = new AutoPopulatingList<DealOption>(
+				DealOption.class);
+		// options.add(new DealOption());
 		deal.setOptions(options);
 		uiModel.addAttribute("deal", deal);
 		uiModel.addAttribute("categories", categoryService.findAll());
@@ -96,26 +98,26 @@ public class DealController {
 			BindingResult result, @RequestParam("files") MultipartFile[] files,
 			@RequestParam("file") MultipartFile thumbnail, Locale locale,
 			Model uiModel) {
-		
+
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"deal.insert.message", null, locale));
 			return "deal/add";
 		}
-		
-		logger.info("options count:"+ item.getOptions().size());
-		for(DealOption option : item.getOptions()){
-			
-			logger.info("Option id:"+option.getId());
-			logger.info("Option name:"+option.getName());
-			logger.info("Option discount:"+option.getDiscount());
+
+		logger.info("options count:" + item.getOptions().size());
+		for (DealOption option : item.getOptions()) {
+
+			logger.info("Option id:" + option.getId());
+			logger.info("Option name:" + option.getName());
+			logger.info("Option discount:" + option.getDiscount());
 		}
-		 manageOptions(item);
-		 
+		manageOptions(item);
+
 		List<Attachment> attachments = new ArrayList<Attachment>();
 		if (files != null && files.length > 0) {
-		
+
 			for (int i = 0; i < files.length; i++) {
 				try {
 					Attachment att = new Attachment();
@@ -125,20 +127,20 @@ public class DealController {
 					att.setName(files[i].getName());
 					att.setContent(files[i].getBytes());
 					attachments.add(att);
-				
+
 				} catch (Exception e) {
 
 				}
 			}
- 
+
 			item.setImages(attachments);
 
 		} else {
 
 		}
-		
+
 		if (thumbnail != null) {
-			
+
 			try {
 				item.setThumbnail(thumbnail.getBytes());
 			} catch (IOException e) {
@@ -155,8 +157,9 @@ public class DealController {
 	public String updateFrom(@PathVariable Integer id, Locale locale,
 			Model uiModel) {
 
-		Deal item = dealService.find(id);
-		uiModel.addAttribute("item", item);
+		Deal deal = dealService.find(id);
+
+		uiModel.addAttribute("deal", deal);
 		uiModel.addAttribute("title",
 				messageSource.getMessage("deal.update.message", null, locale));
 		uiModel.addAttribute("categories", categoryService.findAll());
@@ -179,28 +182,33 @@ public class DealController {
 		}
 		List<Attachment> deletedImages = new ArrayList<Attachment>();
 		List<Attachment> attachments = new ArrayList<Attachment>();
-		
+
 		Deal originalItem = dealService.find(item.getId());
-	
-		for (Attachment att : item.getImages()) {
-			
-			if (att.getName().equals("deleted")) {
-				for(Attachment org : originalItem.getImages()){
-						if(att.getId() == org.getId()){
+
+		if (item.getImages() != null) {
+			for (Attachment att : item.getImages()) {
+
+				if (att.getName().equals("deleted")) {
+					for (Attachment org : originalItem.getImages()) {
+						if (att.getId() == org.getId()) {
 							deletedImages.add(org);
 							break;
 						}
-				}
+					}
 
-			} 
+				}
+			}
 		}
-				
-		item.setImages(originalItem.getImages());
-		item.getImages().removeAll(deletedImages);
-		item.setThumbnail(originalItem.getThumbnail());
+
+		if (originalItem.getImages() != null)
+			item.setImages(originalItem.getImages());
+		if (deletedImages != null && deletedImages.size() > 0)
+			item.getImages().removeAll(deletedImages);
+		if (originalItem.getThumbnail() != null)
+			item.setThumbnail(originalItem.getThumbnail());
 
 		if (files != null && files.length > 0) {
-			
+
 			for (int i = 0; i < files.length; i++) {
 				try {
 					Attachment att = new Attachment();
@@ -210,18 +218,17 @@ public class DealController {
 					att.setName(files[i].getName());
 					att.setContent(files[i].getBytes());
 					attachments.add(att);
-					
+
 				} catch (Exception e) {
 
 				}
 			}
 			item.getImages().addAll(attachments);
-		
 
 		} else {
 
 		}
-	
+
 		if (thumbnail != null && thumbnail.getSize() > 0) {
 
 			try {
@@ -232,18 +239,18 @@ public class DealController {
 			}
 		}
 
-		
 		List<DealOption> options2remove = manageOptions(item);
-        // First, save the deal
+
+		// First, save the deal
 		dealService.update(item);
-        // Then, delete the previously linked options which should be now removed
-        for (DealOption option : options2remove) {
-            if (option.getId() > 0) {
-                optionService.delete(option.getId());
-            }
-        }
-		
-		
+		// Then, delete the previously linked options which should be now
+		// removed
+		for (DealOption option : options2remove) {
+			logger.info("option.id="+ option.getId());
+			if (option.getId() > 0) {
+				optionService.delete(option.getId());
+			}
+		}
 
 		return "redirect:/admin/deal";
 	}
@@ -255,7 +262,7 @@ public class DealController {
 
 		return "redirect:/admin/deal";
 	}
-	
+
 	@RequestMapping(value = "/detail/{id}")
 	public String detail(@PathVariable int id, Model uiModel) {
 
@@ -263,25 +270,26 @@ public class DealController {
 
 		return "deal/detail";
 	}
-	
+
 	// Manage dynamically added or removed options
-    private List<DealOption> manageOptions(Deal deal) {
-        // Store the employees which shouldn't be persisted
-        List<DealOption> options2remove = new ArrayList<DealOption>();
-        if (deal.getOptions() != null) {
-            for (Iterator<DealOption> i = deal.getOptions().iterator(); i.hasNext();) {
-            	DealOption option = i.next();
-                // If the remove flag is true, remove the option from the list
-                if (option.getRemove() == 1) {
-                    options2remove.add(option);
-                    i.remove();
-                // Otherwise, perform the links
-                } else {
-                    option.setDeal(deal);
-                }
-            }
-        }
-        return options2remove;
-    }
+	private List<DealOption> manageOptions(Deal deal) {
+		// Store the employees which shouldn't be persisted
+		List<DealOption> options2remove = new ArrayList<DealOption>();
+		if (deal.getOptions() != null) {
+			for (Iterator<DealOption> i = deal.getOptions().iterator(); i
+					.hasNext();) {
+				DealOption option = i.next();
+				// If the remove flag is true, remove the option from the list
+				if (option.getRemove() == 1) {
+					options2remove.add(option);
+					i.remove();
+					// Otherwise, perform the links
+				} else {
+					option.setDeal(deal);
+				}
+			}
+		}
+		return options2remove;
+	}
 
 }
