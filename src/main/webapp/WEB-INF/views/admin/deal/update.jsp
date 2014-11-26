@@ -44,7 +44,7 @@
 								<form:select class="form-control input-sm" path="status">
 									<form:options />
 								</form:select>
-								<form:errors path="price" cssClass="text text-danger" />
+								<form:errors path="status" cssClass="text text-danger" />
 							</div>
 						</div>
 						<div class="col-sm-3">

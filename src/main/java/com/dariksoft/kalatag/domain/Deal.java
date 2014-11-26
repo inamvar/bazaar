@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,8 +28,11 @@ public class Deal {
 	private double price;
 	private ItemStatus status;
 	private Rate rate;
+	@Lob
 	private String features;
+	@Lob
 	private String termsOfUse;
+	@Lob
 	private String description;
 	private int minCoupon;
 	private int maxCoupon;
