@@ -1,6 +1,8 @@
 package com.dariksoft.kalatag.service.listener;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -13,23 +15,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class GenericMessageCreator<T> implements MessageCreator{
 
-	T type;
+	private Class<T> type;
 	
-	
-	public T getType() {
+
+	public GenericMessageCreator() {
+		super();
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class) pt.getActualTypeArguments()[0];
+	}
+
+
+	public Class<T> getType() {
 		return type;
 	}
 
 
-	public void setType(T type) {
+	public void setType(Class<T> type) {
 		this.type = type;
 	}
 
 
-	public GenericMessageCreator(T type) {
+	public GenericMessageCreator(Class<T> type) {
 		super();
 		this.type = type;
 	}
+
+
+
 
 
 	@Override

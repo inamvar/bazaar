@@ -22,8 +22,8 @@ public class MerchantServiceImp extends CRUDServiceImp<Merchant> implements Merc
 	@Autowired
 	GenericDao<Merchant> dao;
 	
-//	@Autowired
-//	GenericMessageCreator<Merchant> messageCreator;
+	@Autowired
+	GenericMessageCreator<Merchant> messageCreator;
 	
 	@Autowired
 	Destination registration;
@@ -33,7 +33,7 @@ public class MerchantServiceImp extends CRUDServiceImp<Merchant> implements Merc
 	public Merchant create(Merchant m) {
 		Merchant merchant = dao.create(m);
 		template.setDefaultDestination(registration);
-		MessageCreator messageCreator = new GenericMessageCreator<Merchant>(merchant);
+//		messageCreator.setType(merchant);
 		template.send(messageCreator);
 		return merchant;
 	}

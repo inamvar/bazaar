@@ -26,15 +26,15 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements OrderServi
 	@Autowired
 	Destination orderConfirmation;
 	
-//	@Autowired
-//	GenericMessageCreator<Order> messageCreator;
+	@Autowired
+	GenericMessageCreator<Order> messageCreator;
 	
 	@Override
 	@Transactional
 	public Order create(Order o) {
 		Order order = dao.create(o);
 		template.setDefaultDestination(orderConfirmation);
-		MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
+//		messageCreator.setType(order);
 		template.send(messageCreator);
 		return order;
 	}
