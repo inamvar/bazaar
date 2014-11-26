@@ -48,6 +48,10 @@
 	<definition name="login" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
+	
+	<definition name="test" extends=".websiteTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
+	</definition>
 
 </tiles-definitions>
                 
