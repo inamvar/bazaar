@@ -101,6 +101,7 @@ public class DealController {
 
 		if (result.hasErrors()) {
 			uiModel.addAttribute("categories", categoryService.findAll());
+			uiModel.addAttribute("merchants", merchantService.findAll());
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"deal.insert.message", null, locale));
 			return "deal/add";
