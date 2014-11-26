@@ -21,8 +21,9 @@ public class GenericMessageCreator<T> implements MessageCreator{
 	public GenericMessageCreator() {
 		super();
 		Type t = getClass().getGenericSuperclass();
-		ParameterizedType pt = (ParameterizedType) t;
-		type = (Class) pt.getActualTypeArguments()[0];
+		//ParameterizedType pt = (ParameterizedType) t;
+		//type = (Class) pt.getActualTypeArguments()[0];
+		type = (Class) t.getClass();
 	}
 
 
