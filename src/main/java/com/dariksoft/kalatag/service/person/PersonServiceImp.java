@@ -4,6 +4,7 @@ import javax.jms.Destination;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +26,6 @@ public class PersonServiceImp  extends CRUDServiceImp<Person> implements PersonS
 	@Autowired
 	Destination registration;
 	
-	@Autowired
-	GenericMessageCreator<Person> messageCreator;
-
-	
 	
 	@Override
 	@Transactional
@@ -36,7 +33,7 @@ public class PersonServiceImp  extends CRUDServiceImp<Person> implements PersonS
 		try{
 			Person person = dao.create(p);
 			template.setDefaultDestination(registration);
-//			messageCreator.setType(person);
+			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
 			template.send(messageCreator);
 			return person;
 		}catch(Exception e){

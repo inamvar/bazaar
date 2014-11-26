@@ -14,9 +14,7 @@ public class RegisterationListener {
 	
 	public void onMessage(Person person) {
 		try {
-			System.out.println("----------------------------------" + person + "------------------");
-			
-			logger.info("User registeration: " + person);
+			logger.info("Registeration: " + person + " registered successfully.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
