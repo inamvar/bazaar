@@ -150,7 +150,7 @@
 											</p>
 										</div>
 									</div>
-																		<div class="col-sm-3">
+									<div class="col-sm-3">
 										<div class="form-group">
 											<p>
 												<spring:message code="dealoption.discount" />
@@ -169,23 +169,39 @@
 										</c:otherwise>
 									</c:choose>
 									<!-- Generate the fields -->
-									<form:input path="options[${loop.index}].name" />
-									<form:input path="options[${loop.index}].description" />
-									<form:input path="options[${loop.index}].discount" />
+									<div class="col-sm-4">
+										<div class="form-group">
+											<form:input path="options[${loop.index}].name" />
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<form:input path="options[${loop.index}].description" />
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="form-group">
+											<form:input path="options[${loop.index}].discount" />
+										</div>
+									</div>
 									<!-- Add the remove flag -->
-									<c:choose>
-										<c:when test="${options[loop.index].remove eq 1}">
-											<c:set var="hiddenValue" value="1" />
-										</c:when>
-										<c:otherwise>
-											<c:set var="hiddenValue" value="0" />
-										</c:otherwise>
-									</c:choose>
-									<form:hidden path="options[${loop.index}].remove"
-										value="${hiddenValue}" />
-									<!-- Add a link to remove the Employee -->
-									<a href="#" class="options.remove" data-index="${loop.index}"><spring:message
-											code="crud.delete" /></a>
+									<div class="col-sm-1">
+										<div class="form-group">
+											<c:choose>
+												<c:when test="${options[loop.index].remove eq 1}">
+													<c:set var="hiddenValue" value="1" />
+												</c:when>
+												<c:otherwise>
+													<c:set var="hiddenValue" value="0" />
+												</c:otherwise>
+											</c:choose>
+											<form:hidden path="options[${loop.index}].remove"
+												value="${hiddenValue}" />
+											<!-- Add a link to remove the Employee -->
+											<a href="#" class="options.remove" data-index="${loop.index}"><spring:message
+													code="crud.delete" /></a>
+										</div>
+									</div>
 							</div>
 							</c:forEach>
 

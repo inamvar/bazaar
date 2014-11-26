@@ -5,15 +5,19 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<html >
+<html>
 <head>
 <title>${title}</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/my.css" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/my.css" />
-	 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
-	 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
-	 
 </head>
 <body>
 	<div id="header">
