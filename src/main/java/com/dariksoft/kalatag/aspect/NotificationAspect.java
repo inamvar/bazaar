@@ -32,11 +32,11 @@ public class NotificationAspect {
 		Object[] args = pjp.getArgs();
 		Merchant merchant = (Merchant) args[0];
 		String password = Util.generateRandomPassword();
-		String encryptedPassword = Util.toSHA256(password) ;
-		merchant.getContactPoint().setPassword(encryptedPassword);
+		String encryptedPassword = Util.toSHA256(password);
+		Person person = merchant.getContactPoint();
+		person.setPassword(encryptedPassword);
 		try{
-			pjp.proceed();
-			Person person = merchant.getContactPoint();
+			pjp.proceed(new Object[]{merchant});
 			person.setPassword(password);	
 			template.setDefaultDestination(registration);
 			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
@@ -53,10 +53,10 @@ public class NotificationAspect {
 		Object[] args = pjp.getArgs();
 		Person person = (Person) args[0];
 		String password = Util.generateRandomPassword();
-		String encryptedPassword = Util.toSHA256(password) ;
+		String encryptedPassword = Util.toSHA256(password);
 		person.setPassword(encryptedPassword);
 		try{
-			pjp.proceed();
+			pjp.proceed(new Object[]{person});
 			person.setPassword(password);	
 			template.setDefaultDestination(registration);
 			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
