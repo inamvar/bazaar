@@ -37,13 +37,12 @@ public class RegisterationListener {
 		try {
 	          StringBuffer htmlText = new StringBuffer();
 	          htmlText.append("<html><body>");
-	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done issued successfully, thank you for using kalatag.</p>");
-	          htmlText.append("<p>Your password is: " + person.getPassword() +", please change after at your first login.</p>");
+	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done successfully, thank you for using kalatag."
+	          		+ "please change your generated password after first login.</p>");
+	          htmlText.append("<p>Your password is: " + person.getPassword() +", </p>");
+	          htmlText.append("<br><br><p>www.kalatag.com</p>");
 	          htmlText.append("</body>");
 	          htmlText.append("</html>");
-//	          System.out.println(htmlText.toString());
-//	          Properties emailProps = new Properties();
-	         // emailProps.load(getClass().getClassLoader().getResourceAsStream("META-INF/spring/email.properties"));
 	         
 	          MimeMessage mimeMessage = mailSender.createMimeMessage();
 	          MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
@@ -54,14 +53,11 @@ public class RegisterationListener {
 	          messageBodyPart.setContent(htmlText.toString(), "text/html");
 	          multipart.addBodyPart(messageBodyPart);
 	          
-	          
-	     
 	          mimeMessage.setContent(multipart);       
 	          helper.setTo(person.getUsername());
 	          helper.setSubject("Kalatag registeration");
 	          mailSender.send(mimeMessage);
 	         log.info("For registeration notification an email to "+ person.getUsername() + " has been sent.");
-//	          System.out.println("email to "+ user.getEmail()+ " sent for coupon: "+coupon.getCode());
 	          
 	      } catch (Exception e) {
 	          e.printStackTrace();
