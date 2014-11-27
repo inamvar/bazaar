@@ -47,11 +47,11 @@ public class Person implements Serializable{
 	
 	private String password;
 
-    @Value("true")
-    private Boolean enabled;
+ /*   @Value("true")
+    private Boolean enabled;*/
     
-    @ManyToOne
-    private PersonRole personRole;
+    /*@ManyToOne
+    private PersonRole personRole;*/
     
 
 	@OneToOne(optional = true, mappedBy = "person")
@@ -141,12 +141,12 @@ public class Person implements Serializable{
 		return firstName + " " + lastName;
 	}
 
-	public Boolean getEnabled() {
+/*	public Boolean getEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
-	}
+	}*/
 
 }

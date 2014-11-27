@@ -31,7 +31,7 @@ public class NotificationAspect {
 	
 	private Logger log = LoggerFactory.getLogger(RegisterationListener.class);
 	
-	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.merchant.MerchantServiceImp) execution(* create(..))")
+	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.merchant.MerchantServiceImp) && execution(* create(..))")
 	public void aroundMerchantCreate(ProceedingJoinPoint pjp) throws Throwable{
 		
 		Object[] args = pjp.getArgs();

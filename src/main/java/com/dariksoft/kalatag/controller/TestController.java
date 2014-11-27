@@ -1,6 +1,7 @@
 package com.dariksoft.kalatag.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dariksoft.kalatag.domain.Gender;
+import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Person;
+import com.dariksoft.kalatag.service.merchant.MerchantService;
 import com.dariksoft.kalatag.service.person.PersonService;
 import com.dariksoft.kalatag.util.Util;
 
@@ -29,6 +32,19 @@ public class TestController {
 
 	@Autowired
 	PersonService service;
+	@Autowired
+	MerchantService merchantService;
+	
+	@RequestMapping(value="/merchant", method = RequestMethod.GET)
+	public String merchant(Model model) {
+
+		List<Merchant> merchants = merchantService.findAll();
+		model.addAttribute("msg", merchants.size());
+
+		
+		
+		return "test";
+	}
 	
 	@RequestMapping(value="/pass", method = RequestMethod.GET)
 	public String generatePassword(Model model) {

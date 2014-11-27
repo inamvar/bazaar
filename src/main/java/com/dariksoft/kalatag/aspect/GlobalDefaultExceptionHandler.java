@@ -1,5 +1,8 @@
 package com.dariksoft.kalatag.aspect;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +28,15 @@ public class GlobalDefaultExceptionHandler {
 	            throw e;
 
 	        ModelAndView mav = new ModelAndView();
-	        mav.addObject("exception", e);
+	        e.printStackTrace();
+	        
+	        StringWriter sw = new StringWriter();
+	        e.printStackTrace(new PrintWriter(sw));
+	        String exceptionAsString = sw.toString();
+	        
+	        mav.addObject("exception",exceptionAsString);
 	        mav.addObject("url", req.getRequestURL());
-	    
+	        
 	        mav.setViewName(DEFAULT_ERROR_VIEW);
 	        return mav;
 	    }
