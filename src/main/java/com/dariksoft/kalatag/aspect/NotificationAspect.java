@@ -5,6 +5,8 @@ import javax.jms.Destination;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -12,6 +14,7 @@ import org.springframework.jms.core.MessageCreator;
 import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.listener.GenericMessageCreator;
+import com.dariksoft.kalatag.service.listener.RegisterationListener;
 import com.dariksoft.kalatag.util.Util;
 
 @Aspect
@@ -26,6 +29,8 @@ public class NotificationAspect {
 	@Autowired
 	Destination registration;
 	
+	private Logger log = LoggerFactory.getLogger(RegisterationListener.class);
+	
 	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.merchant.MerchantServiceImp) execution(* create(..))")
 	public void aroundMerchantCreate(ProceedingJoinPoint pjp) throws Throwable{
 		
@@ -35,8 +40,9 @@ public class NotificationAspect {
 		String encryptedPassword = Util.toSHA256(password);
 		Person person = merchant.getContactPoint();
 		person.setPassword(encryptedPassword);
+		person.setUsername(merchant.getContact().getEmail());
 		try{
-			pjp.proceed(new Object[]{merchant});
+			pjp.proceed();
 			person.setPassword(password);	
 			template.setDefaultDestination(registration);
 			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
@@ -54,9 +60,10 @@ public class NotificationAspect {
 		Person person = (Person) args[0];
 		String password = Util.generateRandomPassword();
 		String encryptedPassword = Util.toSHA256(password);
+		log.info("pass="+encryptedPassword);
 		person.setPassword(encryptedPassword);
 		try{
-			pjp.proceed(new Object[]{person});
+			pjp.proceed();
 			person.setPassword(password);	
 			template.setDefaultDestination(registration);
 			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);

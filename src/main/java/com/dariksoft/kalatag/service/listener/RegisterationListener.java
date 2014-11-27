@@ -25,7 +25,7 @@ public class RegisterationListener {
 	public void onMessage(Person person) {
 		
 		try {
-			log.info("Registeration: " + person + " registered successfully." + " Person pass=" + person.getPassword());
+			log.info("Registeration: " + person + " registered successfully.");
 			sendEmail(person);		
 		} catch (Exception e) {
 			e.printStackTrace();

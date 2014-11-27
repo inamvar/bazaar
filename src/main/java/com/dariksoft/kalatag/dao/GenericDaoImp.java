@@ -34,7 +34,7 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 	@Override
 	public T create(final T t) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(t);
+		session.merge(t);
 		logger.info("create object: " + t.toString());
 		return t;
 	}
