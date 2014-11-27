@@ -25,17 +25,20 @@ public class NotificationAspect {
 	@Autowired
 	Destination registration;
 	
-	@After("execution(* com.dariksoft.kalatag.service.merchant.MerchantServiceImp.create(..))")
+	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.merchant.MerchantServiceImp) execution(* create(..))")
 	public void afterMerchantCreate(JoinPoint jp){
 		template.setDefaultDestination(auditing);
 		Object[] args = jp.getArgs();
+		
 		MessageCreator messageCreator = new GenericMessageCreator<String>(((Merchant)args[0]).getName() + " created!");
 		template.send(messageCreator);
 	}
 	
 	
-	@After("execution(* com.dariksoft.kalatag.service.person.PersonServiceImp.create(..))")
+	
+	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.person.PersonServiceImp) && execution(* create(..))")
 	public void afterPersonCreate(JoinPoint jp){
+	
 		Object[] args = jp.getArgs();
 		template.setDefaultDestination(registration);
 		MessageCreator messageCreator = new GenericMessageCreator<Person>((Person) args[0]);

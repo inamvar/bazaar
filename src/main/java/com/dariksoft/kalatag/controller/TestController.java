@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dariksoft.kalatag.domain.Gender;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.person.PersonService;
-import com.dariksoft.kalatag.service.person.PersonServiceImp;
 import com.dariksoft.kalatag.util.Util;
 
 
@@ -33,7 +32,7 @@ public class TestController {
 	
 	@RequestMapping(value="/pass", method = RequestMethod.GET)
 	public String generatePassword(Model model) {
-		model.addAttribute("msg", Util.generatePassword());
+		model.addAttribute("msg", Util.generateRandomPassword());
 		return "test";
 	}
 	
