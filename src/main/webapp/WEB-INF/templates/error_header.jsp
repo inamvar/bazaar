@@ -23,7 +23,7 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}"><spring:message code="menu.home" /></a></li>
+				<%-- <li><a href="${pageContext.request.contextPath}"><spring:message code="menu.home" /></a></li> --%>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

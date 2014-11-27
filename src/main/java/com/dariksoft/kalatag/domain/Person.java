@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -47,11 +48,12 @@ public class Person implements Serializable{
 	
 	private String password;
 
- /*   @Value("true")
-    private Boolean enabled;*/
+    @Value("true")
+    private Boolean enabled;
     
-    /*@ManyToOne
-    private PersonRole personRole;*/
+    @ManyToOne
+    @JoinColumn(name = "person_role", nullable = true)
+    private PersonRole personRole;
     
 
 	@OneToOne(optional = true, mappedBy = "person")
@@ -141,12 +143,20 @@ public class Person implements Serializable{
 		return firstName + " " + lastName;
 	}
 
-/*	public Boolean getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
-	}*/
+	}
+
+	public PersonRole getPersonRole() {
+		return personRole;
+	}
+
+	public void setPersonRole(PersonRole personRole) {
+		this.personRole = personRole;
+	}
 
 }

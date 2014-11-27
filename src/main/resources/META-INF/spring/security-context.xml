@@ -12,6 +12,8 @@
 		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<form-login login-page="/login"  authentication-failure-url="/login?error"  />
+		<access-denied-handler error-page="/WEB-INF/templates/error_403_layout.jsp"/>
+		
 	</http>
 
 	<authentication-manager>
@@ -21,12 +23,12 @@
 				<user name="demo" password="demo" authorities="ROLE_USER" />
 			</user-service>
 		</authentication-provider>
-<!-- 		<authentication-provider>
+		<authentication-provider>
 			<password-encoder hash="sha-256" />
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select username, password, enabled from person where username=?"
 				authorities-by-username-query="select person.username, person_roles.role from person, person_roles where person.username=? and person.person_role=person_roles.id" />
-		</authentication-provider> -->
+		</authentication-provider>
 	</authentication-manager>
 
 

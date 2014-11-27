@@ -12,14 +12,14 @@
 
 		<div class="alert alert-warning">
 			<h2 class="text text-danger">
-				<spring:message code="error.code" />: 403
+				<%-- <spring:message code="error.code" />: --%> 403
 			</h2>
-			<spring:message code="error.403" />
-			
+			<%-- <spring:message code="error.403" /> --%>
+			Access Denied
 			<hr />
 			<a href="${pageContext.request.contextPath}" class="btn btn-default"><span
-				class="glyphicon glyphicon-home"></span> <spring:message
-					code="menu.home" /></a>
+				class="glyphicon glyphicon-home"></span><%--  <spring:message
+					code="menu.home" /> --%></a>
 
 		</div>
 	</div>

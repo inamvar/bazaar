@@ -32,9 +32,9 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 	}
 
 	@Override
-	public T create(final T t) {
+	public T create( T t) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(t);
+		t = (T) session.merge(t);
 		logger.info("create object: " + t.toString());
 		return t;
 	}
