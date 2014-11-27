@@ -9,7 +9,7 @@
 		<spring:message code="merchant.list" />
 	</h2>
 	<hr />
-	<div class="col-sm-10 col-md-10">
+	<div class="col-sm-12 col-md-12">
 		<p>
 			<a class="btn btn-danger btn-sm"
 				href="${pageContext.request.contextPath}/admin/merchant/add"><span

@@ -13,6 +13,7 @@ import com.dariksoft.kalatag.domain.Gender;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.person.PersonService;
 import com.dariksoft.kalatag.service.person.PersonServiceImp;
+import com.dariksoft.kalatag.util.Util;
 
 
 @Controller
@@ -29,6 +30,12 @@ public class TestController {
 
 	@Autowired
 	PersonService service;
+	
+	@RequestMapping(value="/pass", method = RequestMethod.GET)
+	public String generatePassword(Model model) {
+		model.addAttribute("msg", Util.generatePassword());
+		return "test";
+	}
 	
 	@RequestMapping( method = RequestMethod.GET)
 	public String addPerson(Model model) {

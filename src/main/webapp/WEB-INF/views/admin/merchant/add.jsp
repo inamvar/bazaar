@@ -63,7 +63,7 @@
 									<form:errors path="contactPoint.gender" cssClass="text text-danger" />
 							</div>
 						</div>
-						<div class="col-sm-4">
+<%-- 						<div class="col-sm-4">
 							<div class="form-group">
 								<spring:message code="person.username" />
 								<form:input class="form-control input-sm"
@@ -76,7 +76,7 @@
 									path="contactPoint.password"></form:input>
 									<form:errors path="contactPoint.password" cssClass="text text-danger" />
 							</div>
-						</div>
+						</div> --%>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
