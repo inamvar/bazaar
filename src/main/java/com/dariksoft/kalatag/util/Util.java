@@ -13,11 +13,12 @@ import org.springframework.security.core.userdetails.User;
 
 public class Util {
 
-	public static String generateRandomPassword(){
+	public static String generateRandomPassword() {
 		String plain = RandomStringUtils.randomAlphabetic(8);
 		return plain;
 	}
-	
+
+
 	public static String toSHA256(String password) {
 		MessageDigest md = null;
 		try {
@@ -80,22 +81,22 @@ public class Util {
 	}
 
 	public static String getCurrentUserName() {
-		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		return ((User) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal()).getUsername();
 	}
-
 
 	public static int getRandom(int lowerBound, int upperBound) {
 		return lowerBound + (int) (Math.random() * (upperBound - lowerBound));
 	}
-	
-	 public  static String getMonthForInt(int num) {
-	        String month = "wrong";
-	        DateFormatSymbols dfs = new DateFormatSymbols();
-	        String[] months = dfs.getMonths();
-	        if (num >= 1 && num <= 12 ) {
-	            month = months[num-1];
-	        }
-	        return month;
-	    }
+
+	public static String getMonthForInt(int num) {
+		String month = "wrong";
+		DateFormatSymbols dfs = new DateFormatSymbols();
+		String[] months = dfs.getMonths();
+		if (num >= 1 && num <= 12) {
+			month = months[num - 1];
+		}
+		return month;
+	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -42,7 +44,15 @@ public class Person implements Serializable{
 	private Gender gender;
 	@Column(nullable = false, name = "username", unique = true)
 	private String username;
+	
 	private String password;
+
+    @Value("true")
+    private Boolean enabled;
+    
+    @ManyToOne
+    private PersonRole personRole;
+    
 
 	@OneToOne(optional = true, mappedBy = "person")
 	private Account account;
@@ -129,6 +139,14 @@ public class Person implements Serializable{
 
 	public String toString(){
 		return firstName + " " + lastName;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

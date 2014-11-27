@@ -36,6 +36,8 @@ public class NotificationAspect {
 	
 	
 	
+
+	
 	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.person.PersonServiceImp) && execution(* create(..))")
 	public void afterPersonCreate(JoinPoint jp){
 	
