@@ -29,9 +29,9 @@ public class MerchantServiceImp extends CRUDServiceImp<Merchant> implements Merc
 	@Transactional
 	public Merchant create(Merchant m) {
 		Merchant merchant = dao.create(m);
-		template.setDefaultDestination(auditing);
+/*		template.setDefaultDestination(auditing);
 		MessageCreator messageCreator = new GenericMessageCreator<String>(merchant.getName() + " created!");
-		template.send(messageCreator);
+		template.send(messageCreator);*/
 		return merchant;
 	}
 

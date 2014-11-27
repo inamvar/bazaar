@@ -54,7 +54,9 @@
 	</beans:bean>
 
 	<aop:aspectj-autoproxy />
-
+	
+	<!-- Aspect -->
+	<bean id="notificationAspect" class="com.dariksoft.kalatag.aspect.NotificationAspect" />
 
 
 	<beans:bean
