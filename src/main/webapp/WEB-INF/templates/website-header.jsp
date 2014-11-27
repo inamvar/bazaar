@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-inverse" role="navigation">
 	<div class="container-fluid">
@@ -29,6 +30,7 @@
 						<li><a href="?lang=ar"><img src="${pageContext.request.contextPath}/resources/images/ae.gif"/> العربیه</a></li>
 						<li><a href="?lang=fa"><img src="${pageContext.request.contextPath}/resources/images/ir.gif"/> فارسی</a></li>
 					</ul> <c:if test="${pageContext['request'].userPrincipal != null}">
+					<li><a>${pageContext.request.userPrincipal.name} </a></li> 
 						<li><a
 							href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message
 									code="security.logout" /></a></li>
