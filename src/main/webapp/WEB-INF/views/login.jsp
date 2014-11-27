@@ -26,7 +26,7 @@
 				<form:form name='f'
 					action="${pageContext.request.contextPath}/j_spring_security_check"
 					method='POST'>
-					<form:errors path="*" cssClass="alert alert-warning" element="div" />
+					<div class="text text-danger"><p><form:errors path="*" /></p></div>
 
 					<div class="form-group">
 						<p>
