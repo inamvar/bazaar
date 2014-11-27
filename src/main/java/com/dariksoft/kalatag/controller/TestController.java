@@ -40,11 +40,11 @@ public class TestController {
 	public String addPerson(Model model) {
 		try {
 			Person p = new Person();
-			p.setFirstName("Mohammad");
+			p.setFirstName("Iman");
 			p.setLastName("Namvar");
 			p.setGender(Gender.Female);
-			p.setBirthday( new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH).parse("1974/09/06"));
-			p.setUsername("namvar@gmail.com");
+			p.setBirthday( new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH).parse("1984/09/06"));
+			p.setUsername("iman.namvar@gmail.com");
 			service.create(p);
 //			service.sendRegisterationNotification(p);
 			model.addAttribute("msg", p.toString());

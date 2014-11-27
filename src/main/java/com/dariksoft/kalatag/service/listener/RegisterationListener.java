@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMultipart;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -16,17 +17,16 @@ import com.dariksoft.kalatag.domain.Person;
 @Component("registerationListener")
 public class RegisterationListener {
 	
-	private Logger logger = LoggerFactory.getLogger(RegisterationListener.class);
+	private Logger log = LoggerFactory.getLogger(RegisterationListener.class);
 	
+	@Autowired
 	private JavaMailSender mailSender;
 	
 	public void onMessage(Person person) {
 		
 		try {
-		
-			logger.info("Registeration: " + person + " registered successfully.");
-			sendEmail(person);
-			
+			log.info("Registeration: " + person + " registered successfully." + " Person pass=" + person.getPassword());
+			sendEmail(person);		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,7 +37,8 @@ public class RegisterationListener {
 		try {
 	          StringBuffer htmlText = new StringBuffer();
 	          htmlText.append("<html><body>");
-	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done issued successfully, thank you for using kalatag.");
+	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done issued successfully, thank you for using kalatag.</p>");
+	          htmlText.append("<p>Your password is: " + person.getPassword() +", please change after at your first login.</p>");
 	          htmlText.append("</body>");
 	          htmlText.append("</html>");
 //	          System.out.println(htmlText.toString());
@@ -59,7 +60,7 @@ public class RegisterationListener {
 	          helper.setTo(person.getUsername());
 	          helper.setSubject("Kalatag registeration");
 	          mailSender.send(mimeMessage);
-	         
+	         log.info("For registeration notification an email to "+ person.getUsername() + " has been sent.");
 //	          System.out.println("email to "+ user.getEmail()+ " sent for coupon: "+coupon.getCode());
 	          
 	      } catch (Exception e) {
