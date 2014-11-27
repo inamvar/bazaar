@@ -29,7 +29,6 @@ public class NotificationAspect {
 	public void afterMerchantCreate(JoinPoint jp){
 		template.setDefaultDestination(auditing);
 		Object[] args = jp.getArgs();
-		
 		MessageCreator messageCreator = new GenericMessageCreator<String>(((Merchant)args[0]).getName() + " created!");
 		template.send(messageCreator);
 	}
@@ -37,7 +36,6 @@ public class NotificationAspect {
 	
 	@After("execution(* com.dariksoft.kalatag.service.person.PersonServiceImp.create(..))")
 	public void afterPersonCreate(JoinPoint jp){
-	
 		Object[] args = jp.getArgs();
 		template.setDefaultDestination(registration);
 		MessageCreator messageCreator = new GenericMessageCreator<Person>((Person) args[0]);
