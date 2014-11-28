@@ -69,7 +69,7 @@ public class SiteController {
 		Person customer = personService.findByUserName(Util.getCurrentUserName());
 		logger.info("customer= "+ customer.getId() +", " + customer.getFirstName() +" " +customer.getLastName());
 		Order order =new Order(deal, option, customer, qty);
-		orderService.create(order);
+		order = orderService.create(order);
 		uiModel.addAttribute("order",order);
 		return "website/orderconfirm";
 	}
