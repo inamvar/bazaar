@@ -4,7 +4,7 @@ import javax.jms.Destination;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -84,11 +84,12 @@ public class NotificationAspect {
 	
 	
 	
-	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))")
-	public void afterOrderCreate(JoinPoint jp) throws Throwable{
+	
+	 @AfterReturning(
+		      pointcut = "within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))",
+		      returning= "order")
+	public void afterOrderCreate(JoinPoint jp, Order order) throws Throwable{
 		log.info("after create order, sending order to qserver...");
-		Object[] args = jp.getArgs();
-		Order order = (Order) args[0];
 		template.setDefaultDestination(orderConfirmation);
 		MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
 		template.send(messageCreator);
