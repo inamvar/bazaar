@@ -19,6 +19,16 @@
 
 	<dependencies>
 
+
+<!-- <dependency>
+	<groupId>com.ibm.icu</groupId>
+	<artifactId>icu4j</artifactId>
+	<version>52.1</version>
+</dependency> -->
+
+
+
+
 		<!-- java Mail -->
 
 		<dependency>

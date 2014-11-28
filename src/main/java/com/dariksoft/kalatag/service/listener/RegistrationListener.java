@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -29,6 +28,7 @@ public class RegistrationListener {
 	@Autowired
 	private MessageSource messageSource;
 	
+	
 	public void onMessage(Person person) {
 		
 		try {
@@ -42,21 +42,18 @@ public class RegistrationListener {
 	public void sendEmail(Person person) {
         
 		try {
+	          
+//	         Locale locale = LocaleContextHolder.getLocale();
+//	         Locale locale = new Locale("es_ES");
+			Locale locale = new Locale("fa_IR");
+	          
+	          log.info("locale=" + locale);
+	          
 	          StringBuffer htmlText = new StringBuffer();
-//	          Locale locale = new Locale("fa");
-//	          LocaleResolver
-	          
-	          Locale locale = LocaleContextHolder.getLocale();
-	          
 	          htmlText.append("<html><body>");
-	          htmlText.append("<p>" + messageSource.getMessage("email.registration.header", null, locale));
-	          htmlText.append("<p>" +messageSource.getMessage("email.registration.body", null, locale));
-	          htmlText.append("<p>" +messageSource.getMessage("email.registration.footer", null, locale));
-//	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done successfully, thank you for using kalatag."
-//	          		+ "please change your generated password after first login.</p>");
-//	          htmlText.append("<p>Your password is: " + person.getPassword() +" </p>");
-//	          htmlText.append("<br><p>www.kalatag.com</p>");
-
+	          htmlText.append("<p>" + messageSource.getMessage("email.registration.header", new String[]{person.getFirstName(), person.getLastName()}, locale));
+	          htmlText.append("<p>" + messageSource.getMessage("email.registration.body", new String[]{person.getUsername(), person.getPassword()}, locale));
+	          htmlText.append("<p>" + messageSource.getMessage("email.registration.footer", null, locale));
 	          htmlText.append("</body></html>");
 	         
 	          MimeMessage mimeMessage = mailSender.createMimeMessage();

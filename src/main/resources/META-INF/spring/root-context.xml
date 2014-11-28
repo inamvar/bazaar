@@ -61,5 +61,12 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="podcastpediaPreferredLanguage" />
+		<property name="defaultLocale" value="en_US" />
+		<property name="cookieMaxAge" value="604800" />
+	</bean>
+
 
 </beans>
