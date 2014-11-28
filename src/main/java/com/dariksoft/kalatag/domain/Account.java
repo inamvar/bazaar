@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity	
-public class Account {
+public class Account  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;

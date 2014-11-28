@@ -1,6 +1,7 @@
 package com.dariksoft.kalatag.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,28 @@ public class Order implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Order(){
+		this.setCoupons(new ArrayList<Coupon>());
+	}
+	
+	public Order(Deal deal,DealOption option, Person customer, int qty) {
+		
+		if(deal !=null && customer !=null){
+				
+				this.setOrderDate(new Date());
+				this.setPerson(customer);
+				this.setDeal(deal);
+				this.setCoupons(new ArrayList<Coupon>());
+				this.setQuantity(qty);
+				this.setTotalPrice(deal.getPrice() * qty);
+				this.setStatus(OrderStatus.PENDING);
+				if(option != null){
+					this.setOption(option);
+					this.setTotalPrice((deal.getPrice() - ( (option.getDiscount()/100) * deal.getPrice() )) * qty);
+				}
+		}
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

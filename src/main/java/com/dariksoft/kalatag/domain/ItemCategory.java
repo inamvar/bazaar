@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,7 +15,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "item_category")
-public class ItemCategory {
+public class ItemCategory  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

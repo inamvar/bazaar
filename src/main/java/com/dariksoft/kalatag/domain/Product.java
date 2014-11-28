@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 @Entity
 public class Product extends Deal {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date expireDate;
 	
 	public Date getExpireDate() {

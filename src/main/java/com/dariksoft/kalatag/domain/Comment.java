@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,7 +15,11 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Comment {
+public class Comment  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

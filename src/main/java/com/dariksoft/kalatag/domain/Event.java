@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 public class Event extends Deal {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date openDate;
 	private Date closeDate;
 	

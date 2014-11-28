@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +16,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="country")
-public class Country {
+public class Country  implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
