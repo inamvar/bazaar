@@ -45,7 +45,7 @@ public class RegistrationListener {
 	          
 //	         Locale locale = LocaleContextHolder.getLocale();
 //	         Locale locale = new Locale("es_ES");
-			Locale locale = new Locale("fa_IR");
+			Locale locale = new Locale("ar_AE");
 	          
 	          log.info("locale=" + locale);
 	          
