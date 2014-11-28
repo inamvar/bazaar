@@ -86,7 +86,7 @@ public class NotificationAspect {
 	
 	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))")
 	public void afterOrderCreate(JoinPoint jp) throws Throwable{
-		log.info("after create order ...........");
+		log.info("after create order, sending order to qserver...");
 		Object[] args = jp.getArgs();
 		Order order = (Order) args[0];
 		template.setDefaultDestination(orderConfirmation);
