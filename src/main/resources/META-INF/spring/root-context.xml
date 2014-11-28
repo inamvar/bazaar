@@ -7,10 +7,26 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="fileEncodings" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>WEB-INF/i18n/messages</value>
+				<value>WEB-INF/i18n/application</value>
+			</list>
+		</property>
+	</bean>
+
+
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://kalatag.com:3306/kalatag?characterEncoding=UTF-8" /> 
+		<property name="url"
+			value="jdbc:mysql://kalatag.com:3306/kalatag?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="rootroot" />
 	</bean>

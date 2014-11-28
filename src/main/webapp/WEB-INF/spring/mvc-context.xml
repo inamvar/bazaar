@@ -62,7 +62,7 @@
 	<beans:bean
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
-		p:fallbackToSystemLocale="false" p:fileEncodings="UTF-8"
+		p:fallbackToSystemLocale="true" p:fileEncodings="UTF-8"
 		p:defaultEncoding="UTF-8" />
 
 
