@@ -7,4 +7,8 @@
   <definition extends=".websiteTemplate" name="website/index">
     <put-attribute name="body" value="/WEB-INF/views/website/index.jsp"/>
   </definition>
+  
+    <definition extends=".websiteTemplate" name="website/orderconfirm">
+    <put-attribute name="body" value="/WEB-INF/views/website/order-confirm.jsp"/>
+  </definition>
 </tiles-definitions>

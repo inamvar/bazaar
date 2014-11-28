@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dariksoft.kalatag.domain.Customer;
 import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.domain.DealOption;
-import com.dariksoft.kalatag.service.CustomerService;
+import com.dariksoft.kalatag.domain.Order;
+import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.DealOptionService;
 import com.dariksoft.kalatag.service.DealService;
 import com.dariksoft.kalatag.service.order.OrderService;
+import com.dariksoft.kalatag.service.person.PersonService;
 import com.dariksoft.kalatag.util.Util;
 
 @Controller
@@ -31,7 +32,7 @@ public class SiteController {
 	private MessageSource messageSource;
 
 	@Autowired
-	private CustomerService customerService;
+	private PersonService personService;
 	
 	@Autowired
 	private OrderService orderService ;
@@ -55,16 +56,20 @@ public class SiteController {
 		return "website/index";
 	}
 
-	@RequestMapping(value = "/neworder", method = RequestMethod.GET)
+	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	public String newOrder(@RequestParam("dealId") int dealId,
 			@RequestParam("optionId") int optionId,
 			@RequestParam("qty") int qty, Locale locale, Model uiModel) {
-		
+		logger.info("---------new order---------");
 		Deal deal = dealService.find(dealId);
+		logger.info("deal= "+ deal.getId() + ", " + deal.getName());
 		DealOption option = optionService.find(optionId);
-		Customer customer = customerService.findByUserName(Util.getCurrentUserName());
-		orderService.newOrder(deal, option, customer, qty);
-
+		logger.info("option= "+ option.getId() +", " + option.getName());
+		logger.info("username= "+ Util.getCurrentUserName());
+		Person customer = personService.findByUserName(Util.getCurrentUserName());
+		logger.info("customer= "+ customer.getId() +", " + customer.getFirstName() +" " +customer.getLastName());
+		Order order = orderService.newOrder(deal, option, customer, qty);
+		uiModel.addAttribute("order",order);
 		return "website/orderconfirm";
 	}
 

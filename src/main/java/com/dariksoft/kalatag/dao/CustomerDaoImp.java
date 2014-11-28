@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dariksoft.kalatag.domain.Customer;
-import com.dariksoft.kalatag.domain.Person;
 
 @Repository
 public class CustomerDaoImp extends GenericDaoImp<Customer>  implements CustomerDao{ 
@@ -18,7 +17,7 @@ public class CustomerDaoImp extends GenericDaoImp<Customer>  implements Customer
 	@SuppressWarnings("unchecked")
 	public Customer findByUserName(String username) {
  
-		List<Person> customers = new ArrayList<Person>();
+		List<Customer> customers = new ArrayList<Customer>();
  
 		customers = sessionFactory.getCurrentSession()
 			.createQuery("from Customer where username=?")

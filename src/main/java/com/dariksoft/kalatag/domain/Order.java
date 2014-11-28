@@ -35,7 +35,7 @@ public class Order implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
-	private Customer customer;
+	private Person person;
 	
 	private String note;
 
@@ -104,12 +104,12 @@ public class Order implements Serializable{
 		this.totalPrice = totalPrice;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public Deal getDeal() {
