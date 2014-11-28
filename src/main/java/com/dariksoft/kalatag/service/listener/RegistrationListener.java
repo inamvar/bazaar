@@ -1,5 +1,7 @@
 package com.dariksoft.kalatag.service.listener;
 
+import java.util.Locale;
+
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -8,19 +10,24 @@ import javax.mail.internet.MimeMultipart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Person;
 
-@Component("registerationListener")
+@Component("registrationListener")
 public class RegistrationListener {
 	
 	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	public void onMessage(Person person) {
 		
@@ -36,13 +43,21 @@ public class RegistrationListener {
         
 		try {
 	          StringBuffer htmlText = new StringBuffer();
+//	          Locale locale = new Locale("fa");
+//	          LocaleResolver
+	          
+	          Locale locale = LocaleContextHolder.getLocale();
+	          
 	          htmlText.append("<html><body>");
-	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done successfully, thank you for using kalatag."
-	          		+ "please change your generated password after first login.</p>");
-	          htmlText.append("<p>Your password is: " + person.getPassword() +" </p>");
-	          htmlText.append("<br><p>www.kalatag.com</p>");
-	          htmlText.append("</body>");
-	          htmlText.append("</html>");
+	          htmlText.append("<p>" + messageSource.getMessage("email.registration.header", null, locale));
+	          htmlText.append("<p>" +messageSource.getMessage("email.registration.body", null, locale));
+	          htmlText.append("<p>" +messageSource.getMessage("email.registration.footer", null, locale));
+//	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done successfully, thank you for using kalatag."
+//	          		+ "please change your generated password after first login.</p>");
+//	          htmlText.append("<p>Your password is: " + person.getPassword() +" </p>");
+//	          htmlText.append("<br><p>www.kalatag.com</p>");
+
+	          htmlText.append("</body></html>");
 	         
 	          MimeMessage mimeMessage = mailSender.createMimeMessage();
 	          MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");

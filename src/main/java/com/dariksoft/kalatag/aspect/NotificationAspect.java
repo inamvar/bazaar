@@ -14,7 +14,7 @@ import org.springframework.jms.core.MessageCreator;
 import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.listener.GenericMessageCreator;
-import com.dariksoft.kalatag.service.listener.RegisterationListener;
+import com.dariksoft.kalatag.service.listener.RegistrationListener;
 import com.dariksoft.kalatag.util.Util;
 
 @Aspect
@@ -29,7 +29,7 @@ public class NotificationAspect {
 	@Autowired
 	Destination registration;
 	
-	private Logger log = LoggerFactory.getLogger(RegisterationListener.class);
+	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
 	
 	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.merchant.MerchantServiceImp) && execution(* create(..))")
 	public void aroundMerchantCreate(ProceedingJoinPoint pjp) throws Throwable{
