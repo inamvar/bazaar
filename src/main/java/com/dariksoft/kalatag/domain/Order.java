@@ -2,9 +2,10 @@ package com.dariksoft.kalatag.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,26 +27,31 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private int quantity;
+	@OneToMany(targetEntity = Coupon.class, mappedBy = "order", fetch= FetchType.EAGER)
+	private List<Coupon> coupons;
+	
+	private Date orderDate;	
 
-	@OneToMany(targetEntity = OrderItem.class, mappedBy = "order")
-	private Set<OrderItem> orderItems;
-	private Date orderDate;
 	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
-	@ManyToOne
-	@JoinColumn(name = "contact_id", nullable = false)
-	private Contact location;
-	private boolean isGift;
+	@JoinColumn(name = "customer_id", nullable = false)
+	private Customer customer;
+	
 	private String note;
 
+	@ManyToOne
+	@JoinColumn(name = "deal_id", nullable = false)
+	private Deal deal;
+
+	@ManyToOne
+	@JoinColumn(name = "deal_option_id", nullable = true)
+	private DealOption option;
+	
+	
 	@OneToOne(optional = true)
 	@JoinColumn(name = "payment_id", unique = true, nullable = true)
 	private Payment payment;
 	private OrderStatus status;
-	@ManyToOne
-	@JoinColumn(name = "shipping_id", nullable = true)
-	private Shipping shipping;
 	private double totalPrice;
 
 	public int getId() {
@@ -64,29 +70,6 @@ public class Order implements Serializable{
 		this.orderDate = orderDate;
 	}
 
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public Contact getContact() {
-		return location;
-	}
-
-	public void setContact(Contact contact) {
-		this.location = contact;
-	}
-
-	public boolean isGift() {
-		return isGift;
-	}
-
-	public void setGift(boolean isGift) {
-		this.isGift = isGift;
-	}
 
 	public String getNote() {
 		return note;
@@ -111,14 +94,7 @@ public class Order implements Serializable{
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
-
-	public Shipping getShipping() {
-		return shipping;
-	}
-
-	public void setShipping(Shipping shipping) {
-		this.shipping = shipping;
-	}
+	
 
 	public double getTotalPrice() {
 		return totalPrice;
@@ -128,12 +104,45 @@ public class Order implements Serializable{
 		this.totalPrice = totalPrice;
 	}
 
-	public Set<OrderItem> getOrderItems() {
-		return orderItems;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setOrderItems(Set<OrderItem> orderItems) {
-		this.orderItems = orderItems;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
+
+	public Deal getDeal() {
+		return deal;
+	}
+
+	public void setDeal(Deal deal) {
+		this.deal = deal;
+	}
+
+	public List<Coupon> getCoupons() {
+		return coupons;
+	}
+
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
+	}
+
+	public DealOption getOption() {
+		return option;
+	}
+
+	public void setOption(DealOption option) {
+		this.option = option;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 
 }

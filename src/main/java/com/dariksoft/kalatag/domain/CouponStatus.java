@@ -1,8 +1,9 @@
 package com.dariksoft.kalatag.domain;
 
 public enum CouponStatus {
-	VALID,
+	NOT_REDEMED,
 	REDEMED,
+	INVALID,
 	EXPIRED
 	
 }

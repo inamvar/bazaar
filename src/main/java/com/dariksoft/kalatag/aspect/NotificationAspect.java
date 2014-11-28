@@ -2,7 +2,9 @@ package com.dariksoft.kalatag.aspect;
 
 import javax.jms.Destination;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
 import com.dariksoft.kalatag.domain.Merchant;
+import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.listener.GenericMessageCreator;
 import com.dariksoft.kalatag.service.listener.RegistrationListener;
@@ -28,6 +31,10 @@ public class NotificationAspect {
 	
 	@Autowired
 	Destination registration;
+	
+	@Autowired
+	Destination orderConfirmation;
+	
 	
 	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
 	
@@ -73,6 +80,17 @@ public class NotificationAspect {
 		}
 		
 
+	}
+	
+	
+	
+	@After("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))")
+	public void afterOrderCreate(JoinPoint jp) throws Throwable{
+		Object[] args = jp.getArgs();
+		Order order = (Order) args[0];
+		template.setDefaultDestination(orderConfirmation);
+		MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
+		template.send(messageCreator);
 	}
 
 }

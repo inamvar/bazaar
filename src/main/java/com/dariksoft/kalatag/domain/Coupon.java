@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,19 +13,20 @@ import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Coupon {
+public class Coupon implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotEmpty
 	private String code;
 	@ManyToOne
-	@JoinColumn(name = "merchant_id", nullable = false)
-	private Merchant merchant;
-	@ManyToOne
-	@JoinColumn(name = "customer_id", nullable = false)
-	private Customer customer;
+	@JoinColumn(name = "order_id", nullable = false)
+	private Order order;
 	private byte[] qrcode;
 	private byte[] barcode;
 	private Date expireDate;
