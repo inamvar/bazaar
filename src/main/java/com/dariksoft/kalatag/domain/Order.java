@@ -28,7 +28,7 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private int quantity;
-	@OneToMany(targetEntity = Coupon.class, mappedBy = "order", fetch= FetchType.EAGER)
+	@OneToMany(targetEntity = Coupon.class, mappedBy = "order")
 	private List<Coupon> coupons;
 	
 	private Date orderDate;	
