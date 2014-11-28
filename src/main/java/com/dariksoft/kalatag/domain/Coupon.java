@@ -77,21 +77,6 @@ public class Coupon implements Serializable{
 		this.qrcode = qrcode;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Merchant getMerchant() {
-		return merchant;
-	}
-
-	public void setMerchant(Merchant merchant) {
-		this.merchant = merchant;
-	}
 
 	public String getCode() {
 		return code;
