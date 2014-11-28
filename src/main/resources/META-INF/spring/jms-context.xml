@@ -49,7 +49,7 @@
 	<!-- Listeners -->
 		
 	<jms:listener-container connection-factory="connectionFactory">
-		<jms:listener destination="RegistrationQueue" method="onMessage" ref="registerationListener" />
+		<jms:listener destination="RegistrationQueue" method="onMessage" ref="registrationListener" />
 	</jms:listener-container>
 	
 	<jms:listener-container connection-factory="connectionFactory">

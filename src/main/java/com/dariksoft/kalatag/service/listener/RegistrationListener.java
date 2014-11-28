@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import com.dariksoft.kalatag.domain.Person;
 
 @Component("registerationListener")
-public class RegisterationListener {
+public class RegistrationListener {
 	
-	private Logger log = LoggerFactory.getLogger(RegisterationListener.class);
+	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -39,8 +39,8 @@ public class RegisterationListener {
 	          htmlText.append("<html><body>");
 	          htmlText.append("<p>Dear " + person.getFirstName() + ",<br><br> Congratulations! your registeration is done successfully, thank you for using kalatag."
 	          		+ "please change your generated password after first login.</p>");
-	          htmlText.append("<p>Your password is: " + person.getPassword() +", </p>");
-	          htmlText.append("<br><br><p>www.kalatag.com</p>");
+	          htmlText.append("<p>Your password is: " + person.getPassword() +" </p>");
+	          htmlText.append("<br><p>www.kalatag.com</p>");
 	          htmlText.append("</body>");
 	          htmlText.append("</html>");
 	         
