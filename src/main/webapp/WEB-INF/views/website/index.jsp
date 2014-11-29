@@ -40,7 +40,7 @@
 					</div>
 					<c:if test="${not empty deal.options}">
 						<div class="saleoffrate">
-							<b>${deal.options[0].discount} %</b><br>OFF
+							<b>${deal.options[0].discount} %</b><br> <spring:message code="kalatag.off"/>
 						</div>
 					</c:if>
 				</div>
