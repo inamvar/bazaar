@@ -101,6 +101,10 @@ public class SiteController {
 			if(result > 0)
 				uiModel.addAttribute("successMsg",messageSource.getMessage("security.password.change.success",null, locale));
 		}
+		uiModel.addAttribute("title",
+				messageSource.getMessage("website.home.title", null, locale));
+		uiModel.addAttribute("categories", categoryService.findAll() );
+		uiModel.addAttribute("deals", dealService.findDealsByStatus(ItemStatus.ON));
 		return "website/index";
 
 	}
