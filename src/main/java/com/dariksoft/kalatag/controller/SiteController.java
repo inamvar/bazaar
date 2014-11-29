@@ -19,6 +19,7 @@ import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.DealOptionService;
 import com.dariksoft.kalatag.service.DealService;
+import com.dariksoft.kalatag.service.ItemCategoryService;
 import com.dariksoft.kalatag.service.order.OrderService;
 import com.dariksoft.kalatag.service.person.PersonService;
 import com.dariksoft.kalatag.util.Util;
@@ -42,6 +43,9 @@ public class SiteController {
 	private DealService dealService ;
 	
 	@Autowired
+	private ItemCategoryService categoryService ;
+	
+	@Autowired
 	private DealOptionService optionService ;
 
 	/**
@@ -53,6 +57,7 @@ public class SiteController {
 
 		model.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
+		model.addAttribute("categories", categoryService.findAll() );
 		model.addAttribute("deals", dealService.findDealsByStatus(ItemStatus.ON));
 		return "website/index";
 	}
