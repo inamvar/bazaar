@@ -79,4 +79,20 @@ public class SiteController {
 		throw new Exception("This is a sample exception.");
 
 	}
+	
+	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+	public String changePassword(Model uiModel) throws Throwable {
+		
+		return "website/changePassword";
+	}
+	
+	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+	public String changePassword(@RequestParam("new_password") String newPassword, Model uiModel) throws Throwable {
+		
+		Person person = personService.findByUserName(Util.getCurrentUserName());
+		if(person !=null && person.getId() > 0)
+			personService.changePassword(person.getId(), newPassword);
+		return "website/index";
+
+	}
 }

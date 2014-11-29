@@ -11,4 +11,8 @@
     <definition extends=".websiteTemplate" name="website/orderconfirm">
     <put-attribute name="body" value="/WEB-INF/views/website/order-confirm.jsp"/>
   </definition>
+  
+      <definition extends=".websiteTemplate" name="website/changePassword">
+    <put-attribute name="body" value="/WEB-INF/views/website/change-password.jsp"/>
+  </definition>
 </tiles-definitions>

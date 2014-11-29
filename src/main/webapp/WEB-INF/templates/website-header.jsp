@@ -30,11 +30,19 @@
 						<li><a href="?lang=ar"><img src="${pageContext.request.contextPath}/resources/images/ae.gif"/> العربیه</a></li>
 						<li><a href="?lang=fa"><img src="${pageContext.request.contextPath}/resources/images/ir.gif"/> فارسی</a></li>
 					</ul> <c:if test="${pageContext['request'].userPrincipal != null}">
-					<li><a>${pageContext.request.userPrincipal.name} </a></li> 
+									
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> ${pageContext.request.userPrincipal.name}<span class="caret"></span> </a>
+					<ul class="dropdown-menu" role="menu">
+					<li><a href="${pageContext.request.contextPath}/changepassword"> <spring:message
+									code="security.password.change" /></a> </li>
 						<li><a
 							href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message
 									code="security.logout" /></a></li>
-					</c:if> <c:if test="${pageContext['request'].userPrincipal == null}">
+					</ul> 
+					
+					</c:if> 
+					<c:if test="${pageContext['request'].userPrincipal == null}">
 						<li><a href="${pageContext.request.contextPath}/login"><spring:message
 									code="security.login" /></a></li>
 					</c:if>

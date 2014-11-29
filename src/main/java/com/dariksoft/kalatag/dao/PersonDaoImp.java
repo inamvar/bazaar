@@ -3,11 +3,13 @@ package com.dariksoft.kalatag.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dariksoft.kalatag.domain.Person;
+import com.dariksoft.kalatag.util.Util;
 
 @Repository
 public class PersonDaoImp  extends GenericDaoImp<Person> implements PersonDao {
@@ -31,6 +33,17 @@ public class PersonDaoImp  extends GenericDaoImp<Person> implements PersonDao {
 			return null;
 		}
  
+	}
+
+	@Override
+	public int changePassword(int id, String newPassword) {
+		String hql = "UPDATE Person set password = :password "  + 
+	             "WHERE id = :person_id";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	query.setParameter("password", Util.toSHA256(newPassword));
+	query.setParameter("person_id", id);
+	int result = query.executeUpdate();
+		return result;
 	}
 	
 }
