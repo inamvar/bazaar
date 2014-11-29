@@ -90,6 +90,8 @@ public class NotificationAspect {
 		      returning= "order")
 	public void afterOrderCreate(JoinPoint jp, Order order) throws Throwable{
 		log.info("after create order, sending order to qserver...");
+		order.getDeal().setImages(null);
+		order.getDeal().setThumbnail(null);
 		template.setDefaultDestination(orderConfirmation);
 		MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
 		template.send(messageCreator);
