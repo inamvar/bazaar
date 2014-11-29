@@ -54,11 +54,11 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="http://placehold.it/700x300" alt="...">
+						<img src="http://placehold.it/900x300" alt="...">
 						<div class="carousel-caption">...</div>
 					</div>
 					<div class="item">
-						<img src="http://placehold.it/700x300" alt="...">
+						<img src="http://placehold.it/900x300" alt="...">
 						<div class="carousel-caption">...</div>
 					</div>
 					...
