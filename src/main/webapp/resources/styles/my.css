@@ -31,11 +31,11 @@ p, a, h1, h2, h3, h4, h5, h6 {
 	color: #AAFCAE;
 }
 
-h5 {
+.caption h5 {
 	margin-top: 0px;
 	color: white;
 	max-height: 30px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .img-responsive img {
