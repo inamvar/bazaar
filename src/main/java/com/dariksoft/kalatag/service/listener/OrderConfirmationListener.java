@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Coupon;
 import com.dariksoft.kalatag.domain.Order;
+import com.dariksoft.kalatag.service.CouponService;
 
 @Component("orderConfirmationListener")
 public class OrderConfirmationListener {
@@ -31,6 +32,9 @@ public class OrderConfirmationListener {
 
 	@Autowired
 	private MessageSource messageSource;
+	
+//	@Autowired
+//	private CouponService couponService;
 	
 	private Logger log = LoggerFactory
 			.getLogger(OrderConfirmationListener.class);
@@ -48,9 +52,13 @@ public class OrderConfirmationListener {
 			 */
 			List<Coupon> coupons = new ArrayList<Coupon>();
 			for(int i=0; i < order.getQuantity(); i++){
+//				Coupon c = couponService.create(t);
+//				coupons.add(c);
 				coupons.add(new Coupon());
+				
 			}
 			order.setCoupons(coupons);
+			
 			
 			sendEmail(order);
 			
@@ -62,6 +70,12 @@ public class OrderConfirmationListener {
 	public void sendEmail(Order order) {
 
 		try {
+			
+//			JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+			
+			System.setProperty("file.encoding","UTF-8");
+			
+			
 			Locale locale = LocaleContextHolder.getLocale();
 
 			String[] params = new String[11];
@@ -73,7 +87,7 @@ public class OrderConfirmationListener {
 			params[5] = order.getDeal().getMerchant().getName();
 			params[6] = order.getDeal().getMerchant().getContact().getAddress();
 			params[7] = order.getCoupons().get(0).getIssueDate().toString();
-			params[8] = (order.getDeal().getPrice() - (order.getOption().getDiscount() * order.getDeal().getPrice() /100)) + "";
+			params[8] = order.getOption().getPrice() + "";
 			params[9] = "RLS";
 			
 			StringBuffer sb = new StringBuffer();

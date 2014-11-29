@@ -17,7 +17,7 @@
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>tcp://kalatag.com:61616</value>
+			<value>tcp://localhost:61616</value>
 		</property>
 	</bean>
 	
