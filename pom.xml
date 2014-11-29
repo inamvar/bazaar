@@ -15,6 +15,7 @@
 		<hibernate.version>4.2.1.Final</hibernate.version>
 		<activmq-version>5.4.2</activmq-version>
 		<javamail-version>1.4.1</javamail-version>
+		<zxing-version>3.1.0</zxing-version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,19 @@
 </dependency> -->
 
 
+
+
+		<!-- barcode and QR code utility  -->
+		<dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing-version}</version>
+        </dependency>
+        <dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+		<version>${zxing-version}</version>
+		</dependency>
 
 
 		<!-- java Mail -->
