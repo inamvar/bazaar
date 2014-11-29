@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <div class="container">
 
@@ -25,12 +27,15 @@
 					</div>
 					<div class="caption">
 						<h5>${deal.name}</h5>
-						<s class="text-muted">${deal.price}</s>
+						<s class="text-muted"><fmt:formatNumber type="number" maxFractionDigits="0" value="${deal.price}"/></s>
 						<c:if test="${not empty deal.options}">
-							<b class="finalprice"> ${deal.options[0].price}  <spring:message code="kalatag.currenncy"/> </b>
+							<b class="finalprice"> <fmt:formatNumber type="number"
+									maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
+									code="kalatag.currenncy" />
+							</b>
 							<!-- from <b>Amazon</b> -->
 						</c:if>
-<!-- 						<a href="#" class="btn btn-default btn-xs pull-right"
+						<!-- 						<a href="#" class="btn btn-default btn-xs pull-right"
 							role="button"><i class="glyphicon glyphicon-zoom-in"></i></a> -->
 						<p>
 							<button type="button" class="btn btn-success btn-md btn-block">
@@ -40,7 +45,9 @@
 					</div>
 					<c:if test="${not empty deal.options}">
 						<div class="saleoffrate">
-							<b>${deal.options[0].discount} %</b><br> <spring:message code="kalatag.off"/>
+							<b><fmt:formatNumber type="number" maxFractionDigits="0"
+									value=" ${deal.options[0].discount}" /> %</b><br>
+							<spring:message code="kalatag.off" />
 						</div>
 					</c:if>
 				</div>
