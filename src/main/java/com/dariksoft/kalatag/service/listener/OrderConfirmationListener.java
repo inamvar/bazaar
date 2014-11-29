@@ -43,6 +43,7 @@ public class OrderConfirmationListener {
 					+ order.getStatus());
 			
 			/*
+			 * ******************************************** WARNING! ********************************************
 			 *  if number of sold >= order.getDeal().getMinCoupon() should be checked
 			 */
 			List<Coupon> coupons = new ArrayList<Coupon>();
@@ -85,7 +86,7 @@ public class OrderConfirmationListener {
 			String htmlText = messageSource.getMessage("email.user.receipt", params, locale);
 
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
 
@@ -94,32 +95,44 @@ public class OrderConfirmationListener {
 			multipart.addBodyPart(messageBodyPart);
 
 			//add image
-	          messageBodyPart = new MimeBodyPart();
-	          ByteArrayDataSource dealImgDs = new ByteArrayDataSource(order.getDeal().getThumbnail(), "image/jpeg");
-	          messageBodyPart.setDataHandler(new DataHandler(dealImgDs));
-	          messageBodyPart.setHeader("Content-ID", "<image>");
-	          multipart.addBodyPart(messageBodyPart);
+			byte[] thumbnail = order.getDeal().getThumbnail();
+			if(thumbnail != null){
+				messageBodyPart = new MimeBodyPart();
+		          ByteArrayDataSource dealImgDs = new ByteArrayDataSource(thumbnail, "image/jpeg");
+		          messageBodyPart.setDataHandler(new DataHandler(dealImgDs));
+		          messageBodyPart.setHeader("Content-ID", "<image>");
+		          multipart.addBodyPart(messageBodyPart);
+			}
+	          
 	          
 	         
 	          /*
+	           * ******************************************** WARNING! ********************************************
 	           * should be change for all coupons
 	           */
-//	          if(!order.getCoupons().isEmpty())
-//	          {
-//	        	  //add QR code
-//		          messageBodyPart = new MimeBodyPart();
-//		          ByteArrayDataSource qrCodeDs = new ByteArrayDataSource(order.getCoupons().get(0).getQrcode(), "image/jpeg");
-//		          messageBodyPart.setDataHandler(new DataHandler(qrCodeDs));
-//		          messageBodyPart.setHeader("Content-ID", "<qrcode>");
-//		          multipart.addBodyPart(messageBodyPart);
-//	          
-//		          //add barcode
-//		          messageBodyPart = new MimeBodyPart();
-//		          ByteArrayDataSource barcodeDs = new ByteArrayDataSource(order.getCoupons().get(0).getBarcode(), "image/jpeg");
-//		          messageBodyPart.setDataHandler(new DataHandler(barcodeDs));
-//		          messageBodyPart.setHeader("Content-ID", "<barcode>");
-//		          multipart.addBodyPart(messageBodyPart);
-//	          }
+	          if(!order.getCoupons().isEmpty())
+	          {
+	        	  //add QR code
+	        	  byte[] qrcode = order.getCoupons().get(0).getQrcode();
+	        	  if(qrcode != null){
+	        		  messageBodyPart = new MimeBodyPart();
+			          ByteArrayDataSource qrCodeDs = new ByteArrayDataSource(qrcode, "image/jpeg");
+			          messageBodyPart.setDataHandler(new DataHandler(qrCodeDs));
+			          messageBodyPart.setHeader("Content-ID", "<qrcode>");
+			          multipart.addBodyPart(messageBodyPart);  
+	        	  }
+		          
+	          
+		          //add barcode
+	        	  byte[] barcode = order.getCoupons().get(0).getBarcode();
+	        	  if(barcode != null){
+			          messageBodyPart = new MimeBodyPart();
+			          ByteArrayDataSource barcodeDs = new ByteArrayDataSource(barcode, "image/jpeg");
+			          messageBodyPart.setDataHandler(new DataHandler(barcodeDs));
+			          messageBodyPart.setHeader("Content-ID", "<barcode>");
+			          multipart.addBodyPart(messageBodyPart);
+		          }
+	          }
 	          
 			 mimeMessage.setContent(multipart);
 			 helper.setTo(order.getPerson().getUsername());
