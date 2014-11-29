@@ -55,11 +55,11 @@ public class Deal implements Serializable {
 	@Column(length = 10000000)
 	private byte[] thumbnail;
 
-	@OneToMany(targetEntity = Attachment.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = Attachment.class,  cascade = CascadeType.ALL)
 	private List<Attachment> images;
 	private String[] tags;
 
-	@OneToMany(targetEntity = DealOption.class, cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = DealOption.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<DealOption> options;
 
 	public void setId(int id) {

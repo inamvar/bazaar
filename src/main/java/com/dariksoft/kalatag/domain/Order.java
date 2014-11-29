@@ -25,11 +25,12 @@ public class Order implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public Order(){
+		super();
 		this.setCoupons(new ArrayList<Coupon>());
 	}
 	
 	public Order(Deal deal,DealOption option, Person customer, int qty) {
-		
+		super();
 		if(deal !=null && customer !=null){
 				
 				this.setOrderDate(new Date());

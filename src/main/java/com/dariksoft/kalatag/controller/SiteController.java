@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.domain.DealOption;
+import com.dariksoft.kalatag.domain.ItemStatus;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
 import com.dariksoft.kalatag.service.DealOptionService;
@@ -48,11 +49,11 @@ public class SiteController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome to website! The client locale is {}.", locale);
+		//logger.info("Welcome to website! The client locale is {}.", locale);
 
 		model.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
-
+		model.addAttribute("deals", dealService.findDealsByStatus(ItemStatus.ON));
 		return "website/index";
 	}
 
@@ -87,11 +88,14 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-	public String changePassword(@RequestParam("new_password") String newPassword, Model uiModel) throws Throwable {
+	public String changePassword(@RequestParam("new_password") String newPassword, Model uiModel, Locale locale) throws Throwable {
 		
 		Person person = personService.findByUserName(Util.getCurrentUserName());
-		if(person !=null && person.getId() > 0)
-			personService.changePassword(person.getId(), newPassword);
+		if(person !=null && person.getId() > 0){
+			int result = personService.changePassword(person.getId(), newPassword);
+			if(result > 0)
+				uiModel.addAttribute("successMsg",messageSource.getMessage("security.password.change.success",null, locale));
+		}
 		return "website/index";
 
 	}

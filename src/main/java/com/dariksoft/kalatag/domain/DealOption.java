@@ -26,6 +26,13 @@ public class DealOption  implements Serializable{
 	@Transient
 	private int remove;
 	
+	@Transient
+	private double price;
+	
+	public double getPrice(){
+		return (deal.getPrice() - ( (this.discount/100) * deal.getPrice() ));
+	}
+	
 	@ManyToOne
 	@JoinColumn(name="deal_id", nullable=false)
 	private Deal deal;

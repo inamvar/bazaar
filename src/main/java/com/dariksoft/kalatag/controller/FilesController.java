@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dariksoft.kalatag.domain.Attachment;
+import com.dariksoft.kalatag.domain.Coupon;
 import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.service.AttachmentService;
+import com.dariksoft.kalatag.service.CouponService;
 import com.dariksoft.kalatag.service.DealService;
 
 @Controller
@@ -30,6 +32,9 @@ public class FilesController {
 	
 	@Autowired
 	DealService dealService;
+	
+	@Autowired
+	CouponService couponService;
 	
 	@RequestMapping(value = "/attachments/{id}/dynamicImage", method = RequestMethod.GET)
     public String getAttachmentContent(@PathVariable("id") int id, @RequestParam("width") int width, @RequestParam("height") int height, HttpServletResponse response, Model model) {
@@ -73,5 +78,46 @@ public class FilesController {
         return null;
     }
 	
+	@RequestMapping(value = "/coupons/{id}/qrcode", method = RequestMethod.GET)
+    public String getCouponQrcode(@PathVariable("id") int id, @RequestParam("width") int width, @RequestParam("height") int height, HttpServletResponse response, Model model) {
+      Coupon coupon = couponService.find(id);
+        if (coupon != null) {
+            byte[] imageInByte = coupon.getQrcode();
+            if (imageInByte != null) {
+                try {
+                    response.setContentType("image/jpeg");
+                    OutputStream out = response.getOutputStream();
+                    ByteArrayInputStream ins = new ByteArrayInputStream(imageInByte);
+                    BufferedImage scaledImg = Scalr.resize(ImageIO.read(ins), Scalr.Method.QUALITY, Scalr.Mode.FIT_EXACT, width, height);
+                    ImageIO.write(scaledImg, "jpg", out);
+                    out.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+	
+	@RequestMapping(value = "/coupons/{id}/barcode", method = RequestMethod.GET)
+    public String getCouponBarcode(@PathVariable("id") int id, @RequestParam("width") int width, @RequestParam("height") int height, HttpServletResponse response, Model model) {
+      Coupon coupon = couponService.find(id);
+        if (coupon != null) {
+            byte[] imageInByte = coupon.getBarcode();
+            if (imageInByte != null) {
+                try {
+                    response.setContentType("image/jpeg");
+                    OutputStream out = response.getOutputStream();
+                    ByteArrayInputStream ins = new ByteArrayInputStream(imageInByte);
+                    BufferedImage scaledImg = Scalr.resize(ImageIO.read(ins), Scalr.Method.QUALITY, Scalr.Mode.FIT_EXACT, width, height);
+                    ImageIO.write(scaledImg, "jpg", out);
+                    out.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
 	
 }

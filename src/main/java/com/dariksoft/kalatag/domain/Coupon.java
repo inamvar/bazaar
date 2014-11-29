@@ -50,7 +50,7 @@ public class Coupon implements Serializable{
 	public Coupon() {
 		super();
 		this.code = UUID.randomUUID().toString().substring(0, 18).toUpperCase();
-		this.qrcode = BarcodeUtil.byteArrayBarcode(code);
+		this.barcode = BarcodeUtil.byteArrayBarcode(code);
 		this.qrcode = BarcodeUtil.byteArrayQrCode(code);
 		this.issueDate = new Date();
 	}
