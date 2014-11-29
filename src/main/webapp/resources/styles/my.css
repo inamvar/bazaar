@@ -63,9 +63,12 @@ line-height: 13px;
 }
 @media (min-width: 384px) and (max-width: 768px) {
   .img-responsive img{
-      max-width: 50%;
+      max-width: 80%;
   }
   .img-responsive{
       text-align: center;
   }  
+  
+  .productbox {
+	 max-width: 50%;
 }
