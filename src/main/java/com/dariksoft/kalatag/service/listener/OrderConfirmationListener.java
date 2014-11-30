@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Coupon;
 import com.dariksoft.kalatag.domain.Order;
-import com.dariksoft.kalatag.service.CouponService;
 
 @Component("orderConfirmationListener")
 public class OrderConfirmationListener {
@@ -73,7 +72,7 @@ public class OrderConfirmationListener {
 			
 //			JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
 			
-			System.setProperty("file.encoding","UTF-8");
+			//System.setProperty("file.encoding","UTF-8");
 			
 			
 			Locale locale = LocaleContextHolder.getLocale();
