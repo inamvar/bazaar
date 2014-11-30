@@ -13,6 +13,12 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/bootstrap.min.css" />
+	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/b-roya.css" />
+	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/website.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/my.css" />
 <script type="text/javascript"

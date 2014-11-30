@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -8,7 +10,9 @@
 
 
 <div class="container">
-
+	<div class="alert alert-warning">
+		<h3><span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت در دست ساخت است. کلیه کالابرگ ها آزمایشی و غیر واقعی هستند</h3>
+	</div>
 
 	<c:if test="${not empty successMsg}">
 		<div class="alert alert-success">
