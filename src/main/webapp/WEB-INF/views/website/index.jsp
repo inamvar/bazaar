@@ -24,7 +24,7 @@
 		<div class="col-sm-3">
 			<div class="sidebar-nav">
 				<div class="well">
-					<ul class="nav nav-list">
+					<ul class="nav nav-tabs nav-stacked nav-coupon-category">
 						<li class="nav-header"><spring:message
 								code="admin.menu.definitions.categories" /></li>
 						<li class="active"><a href="index"><i

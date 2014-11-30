@@ -45,6 +45,7 @@ public class Deal implements Serializable {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date validity;
 
+	private DealLabel label;
 	@ManyToOne
 	@JoinColumn(name = "cat_id", nullable = false)
 	private ItemCategory category;
@@ -196,6 +197,14 @@ public class Deal implements Serializable {
 
 	public void setMaxCoupon(int maxCoupon) {
 		this.maxCoupon = maxCoupon;
+	}
+
+	public DealLabel getLabel() {
+		return label;
+	}
+
+	public void setLabel(DealLabel label) {
+		this.label = label;
 	}
 
 }
