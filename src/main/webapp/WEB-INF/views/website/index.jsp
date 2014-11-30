@@ -27,18 +27,18 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<div class="sidebar-nav">
-				<div class="well">
-					<ul class="nav nav-tabs nav-stacked nav-coupon-category">
-						<li class="nav-header"><spring:message
-								code="admin.menu.definitions.categories" /></li>
-						<li class="active"><a href="${pageContext.request.contextPath}"><i
+				
+					<ul class="nav nav-pills nav-stacked nav-success">
+						<li class="active"><a><spring:message
+								code="admin.menu.definitions.categories" /></a></li>
+						<li ><a href="${pageContext.request.contextPath}"><i
 								class="glyphicon glyphicon-th"></i> <spring:message
 									code="deal.all" /></a></li>
 						<c:forEach items="${categories}" var="category">
-							<li><a href="${pageContext.request.contextPath}?category=${category.id}"><i class="icon-edit"></i>${category.name}</a></li>
+							<li><a href="${pageContext.request.contextPath}?category=${category.id}"><span class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
 						</c:forEach>
 					</ul>
-				</div>
+			
 			</div>
 
 		</div>
