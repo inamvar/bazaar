@@ -60,13 +60,24 @@
 					</div>
 					<div class="row">
 
-						<div class="col-sm-12">
+						<div class="col-sm-9">
 							<div class="form-group">
 								<p>
 									<spring:message code="deal.description" />
 								</p>
 								<form:input class="form-control input-sm" path="description"></form:input>
 								<form:errors path="description" cssClass="text text-danger" />
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<p>
+									<spring:message code="deal.label" />
+								</p>
+								<form:select class="form-control input-sm" path="label">
+									<form:options />
+								</form:select>
+								<form:errors path="label" cssClass="text text-danger" />
 							</div>
 						</div>
 					</div>

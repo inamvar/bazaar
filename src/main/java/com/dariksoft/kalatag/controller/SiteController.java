@@ -1,5 +1,6 @@
 package com.dariksoft.kalatag.controller;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dariksoft.kalatag.domain.Deal;
+import com.dariksoft.kalatag.domain.DealLabel;
 import com.dariksoft.kalatag.domain.DealOption;
+import com.dariksoft.kalatag.domain.ItemCategory;
 import com.dariksoft.kalatag.domain.ItemStatus;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
@@ -35,30 +38,47 @@ public class SiteController {
 
 	@Autowired
 	private PersonService personService;
-	
+
 	@Autowired
-	private OrderService orderService ;
-	
+	private OrderService orderService;
+
 	@Autowired
-	private DealService dealService ;
-	
+	private DealService dealService;
+
 	@Autowired
-	private ItemCategoryService categoryService ;
-	
+	private ItemCategoryService categoryService;
+
 	@Autowired
-	private DealOptionService optionService ;
+	private DealOptionService optionService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		//logger.info("Welcome to website! The client locale is {}.", locale);
-
+	public String home(
+			@RequestParam(value = "category", required = false) Integer catergoryId,
+			Locale locale, Model model) {
+		
 		model.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
-		model.addAttribute("categories", categoryService.findAll() );
-		model.addAttribute("deals", dealService.findDealsByStatus(ItemStatus.ON));
+		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("featureds", dealService.findDealsByLabelAndStatus(
+				DealLabel.FEATURED, ItemStatus.ON));
+		if (catergoryId !=null && catergoryId > 0) {
+			ItemCategory category = categoryService.find(catergoryId);
+			if (category != null){
+				model.addAttribute("deals", dealService
+						.findDealsByCategoryAndStatusAndNotLabel(category,
+								DealLabel.FEATURED, ItemStatus.ON));
+				}else{
+					model.addAttribute("deals", new ArrayList<Deal>());
+				}
+			
+		} else {
+			model.addAttribute("deals", dealService
+					.findDealsByStatusAndNotLabel(DealLabel.FEATURED,
+							ItemStatus.ON));
+		}
 		return "website/index";
 	}
 
@@ -68,15 +88,17 @@ public class SiteController {
 			@RequestParam("qty") int qty, Locale locale, Model uiModel) {
 		logger.info("---------new order---------");
 		Deal deal = dealService.find(dealId);
-		logger.info("deal= "+ deal.getId() + ", " + deal.getName());
+		logger.info("deal= " + deal.getId() + ", " + deal.getName());
 		DealOption option = optionService.find(optionId);
-		logger.info("option= "+ option.getId() +", " + option.getName());
-		logger.info("username= "+ Util.getCurrentUserName());
-		Person customer = personService.findByUserName(Util.getCurrentUserName());
-		logger.info("customer= "+ customer.getId() +", " + customer.getFirstName() +" " +customer.getLastName());
-		Order order =new Order(deal, option, customer, qty);
+		logger.info("option= " + option.getId() + ", " + option.getName());
+		logger.info("username= " + Util.getCurrentUserName());
+		Person customer = personService.findByUserName(Util
+				.getCurrentUserName());
+		logger.info("customer= " + customer.getId() + ", "
+				+ customer.getFirstName() + " " + customer.getLastName());
+		Order order = new Order(deal, option, customer, qty);
 		order = orderService.create(order);
-		uiModel.addAttribute("order",order);
+		uiModel.addAttribute("order", order);
 		return "website/orderconfirm";
 	}
 
@@ -85,26 +107,33 @@ public class SiteController {
 		throw new Exception("This is a sample exception.");
 
 	}
-	
+
 	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
 	public String changePassword(Model uiModel) throws Throwable {
-		
+
 		return "website/changePassword";
 	}
-	
+
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-	public String changePassword(@RequestParam("new_password") String newPassword, Model uiModel, Locale locale) throws Throwable {
-		
+	public String changePassword(
+			@RequestParam("new_password") String newPassword, Model uiModel,
+			Locale locale) throws Throwable {
+
 		Person person = personService.findByUserName(Util.getCurrentUserName());
-		if(person !=null && person.getId() > 0){
-			int result = personService.changePassword(person.getId(), newPassword);
-			if(result > 0)
-				uiModel.addAttribute("successMsg",messageSource.getMessage("security.password.change.success",null, locale));
+		if (person != null && person.getId() > 0) {
+			int result = personService.changePassword(person.getId(),
+					newPassword);
+			if (result > 0)
+				uiModel.addAttribute("successMsg", messageSource.getMessage(
+						"security.password.change.success", null, locale));
 		}
 		uiModel.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
-		uiModel.addAttribute("categories", categoryService.findAll() );
-		uiModel.addAttribute("deals", dealService.findDealsByStatus(ItemStatus.ON));
+		uiModel.addAttribute("categories", categoryService.findAll());
+		uiModel.addAttribute("featureds", dealService
+				.findDealsByLabelAndStatus(DealLabel.FEATURED, ItemStatus.ON));
+		uiModel.addAttribute("deals", dealService.findDealsByStatusAndNotLabel(
+				DealLabel.FEATURED, ItemStatus.ON));
 		return "website/index";
 
 	}

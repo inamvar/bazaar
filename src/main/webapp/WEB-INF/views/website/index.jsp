@@ -27,11 +27,11 @@
 					<ul class="nav nav-tabs nav-stacked nav-coupon-category">
 						<li class="nav-header"><spring:message
 								code="admin.menu.definitions.categories" /></li>
-						<li class="active"><a href="index"><i
+						<li class="active"><a href="${pageContext.request.contextPath}"><i
 								class="glyphicon glyphicon-th"></i> <spring:message
 									code="deal.all" /></a></li>
 						<c:forEach items="${categories}" var="category">
-							<li><a href="#"><i class="icon-edit"></i>${category.name}</a></li>
+							<li><a href="${pageContext.request.contextPath}?category=${category.id}"><i class="icon-edit"></i>${category.name}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -43,25 +43,52 @@
 
 			<div id="carousel-example-generic" class="carousel slide"
 				data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#carousel-example-generic" data-slide-to="0"
-						class="active"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-				</ol>
+
 
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="http://placehold.it/900x300" alt="...">
-						<div class="carousel-caption">...</div>
-					</div>
-					<div class="item">
-						<img src="http://placehold.it/900x300" alt="...">
-						<div class="carousel-caption">...</div>
-					</div>
-					...
+					<c:forEach items="${featureds}" var="featured" varStatus="status">
+						<c:if test="${status.index == 0}">
+							<div class="item active">
+								<img
+									src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
+									alt="${featured.name}">
+								<div class="carousel-caption">
+									<h3>${featured.name}</h3>
+									<p>${featured.description}</p>
+									<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+											code="kalatag.viewdeal" /></a>
+								</div>
+								<c:if test="${not empty featured.options}">
+									<div class="saleoffrate">
+										<b><fmt:formatNumber type="number" maxFractionDigits="0"
+												value=" ${featured.options[0].discount}" /> %</b><br>
+										<spring:message code="kalatag.off" />
+									</div>
+								</c:if>
+							</div>
+						</c:if>
+						<c:if test="${status.index > 0}">
+							<div class="item">
+								<img
+									src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
+									alt="${featured.name}">
+								<div class="carousel-caption">
+									<h3>${featured.name}</h3>
+									<p>${featured.description}</p>
+									<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+											code="kalatag.viewdeal" /></a>
+								</div>
+								<c:if test="${not empty featured.options}">
+									<div class="saleoffrate">
+										<b><fmt:formatNumber type="number" maxFractionDigits="0"
+												value=" ${featured.options[0].discount}" /> %</b><br>
+										<spring:message code="kalatag.off" />
+									</div>
+								</c:if>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 
 				<!-- Controls -->

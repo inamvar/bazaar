@@ -6,6 +6,14 @@ p, a, h1, h2, h3, h4, h5, h6 {
 	font-family: "Segoe UI";
 }
 
+.carousel-caption{
+	
+}
+
+.carousel-caption p , h3{
+		background-color: rgba(0, 0, 0, 0.8);
+}
+
 /* CSS used here will be applied after bootstrap.css */
 .productbox {
 	position: relative;

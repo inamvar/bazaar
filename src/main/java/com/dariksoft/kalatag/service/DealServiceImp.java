@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dariksoft.kalatag.dao.DealDao;
 import com.dariksoft.kalatag.domain.Deal;
+import com.dariksoft.kalatag.domain.DealLabel;
+import com.dariksoft.kalatag.domain.ItemCategory;
 import com.dariksoft.kalatag.domain.ItemStatus;
 
 @Service
@@ -26,6 +28,24 @@ public class DealServiceImp extends CRUDServiceImp<Deal> implements DealService{
 	public List<Deal> findDealsByStatus(ItemStatus status) {
 		return dealDao.findDealsByStatus(status);
 	}
-
 	
+	@Override
+	@Transactional
+	public List<Deal> findDealsByLabelAndStatus(DealLabel label, ItemStatus status){
+		return dealDao.findDealsByLabelAndStatus(label, status);
+	}
+
+	@Override
+	@Transactional
+	public List<Deal> findDealsByStatusAndNotLabel(DealLabel label, ItemStatus status){
+		
+		return dealDao.findDealsByStatusAndNotLabel(label, status);
+	}
+
+	@Override
+	@Transactional
+	public List<Deal> findDealsByCategoryAndStatusAndNotLabel(
+			ItemCategory category, DealLabel label, ItemStatus status) {
+		return dealDao.findDealsByCategoryAndStatusAndNotLabel(category, label, status);
+	}
 }
