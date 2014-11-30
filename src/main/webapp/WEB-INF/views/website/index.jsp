@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="alert alert-warning">
-		<h3><span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت در دست ساخت است. کلیه کالابرگ ها آزمایشی و غیر واقعی هستند</h3>
+		<h3><span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند</h3>
 	</div>
 
 	<c:if test="${not empty successMsg}">
