@@ -111,7 +111,7 @@
 
 
 			<c:forEach items="${deals}" var="deal">
-				<div class="col-xs-12 col-sm-4 col-md-4">
+				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="productbox">
 						<div class="imgthumb img-responsive">
 							<img

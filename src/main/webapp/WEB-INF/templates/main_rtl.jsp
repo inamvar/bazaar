@@ -9,6 +9,7 @@
 <head>
 <title>${title}</title>
 <meta charset="UTF-8">
+  <link rel="stylesheet" href="http://ifont.ir/apicode/38">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
 <link rel="stylesheet"
