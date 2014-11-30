@@ -62,7 +62,7 @@
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	padding-top: 13px;
+	padding-top: 18px;
 	text-align: center;
 	background-color: rgba(76, 174, 76, 0.8);
 	color: #FFFFFF;
@@ -79,11 +79,11 @@
 }
 
 .productbox:hover .saleoffrate {
-	height: 100px;
-	width: 100px;
+	height: 80px;
+	width: 80px;
 	line-height: 20px;
 	font-size: 1.4em;
-	padding-top: 25px;
+	padding-top: 30px;
 		background-color: rgba(76, 174, 76, 1);
 }
 

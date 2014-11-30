@@ -67,7 +67,7 @@
 									<div class="saleoffrate">
 										<b><fmt:formatNumber type="number" maxFractionDigits="0"
 												value=" ${featured.options[0].discount}" /> %</b><br>
-										<spring:message code="kalatag.off" />
+									<%-- 	<spring:message code="kalatag.off" /> --%>
 									</div>
 								</c:if>
 							</div>
@@ -87,7 +87,7 @@
 									<div class="saleoffrate">
 										<b><fmt:formatNumber type="number" maxFractionDigits="0"
 												value=" ${featured.options[0].discount}" /> %</b><br>
-										<spring:message code="kalatag.off" />
+									<%-- 	<spring:message code="kalatag.off" /> --%>
 									</div>
 								</c:if>
 							</div>
@@ -130,17 +130,17 @@
 							</c:if>
 							<!-- 						<a href="#" class="btn btn-default btn-xs pull-right"
 							role="button"><i class="glyphicon glyphicon-zoom-in"></i></a> -->
-							<p>
+<%-- 							<p>
 								<button type="button" class="btn btn-success btn-md btn-block">
 									<spring:message code="kalatag.viewdeal" />
 								</button>
-							</p>
+							</p> --%>
 						</div>
 						<c:if test="${not empty deal.options}">
 							<div class="saleoffrate">
 								<b><fmt:formatNumber type="number" maxFractionDigits="0"
 										value=" ${deal.options[0].discount}" /> %</b><br>
-								<spring:message code="kalatag.off" />
+							<%-- 	<spring:message code="kalatag.off" /> --%>
 							</div>
 						</c:if>
 					</div>
