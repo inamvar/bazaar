@@ -118,7 +118,7 @@
 								src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
 						</div>
 						<div class="caption">
-							<h5>${deal.name}</h5>
+							<p>${deal.name}</p>
 							<s class="text-muted"><fmt:formatNumber type="number"
 									maxFractionDigits="0" value="${deal.price}" /></s>
 							<c:if test="${not empty deal.options}">
