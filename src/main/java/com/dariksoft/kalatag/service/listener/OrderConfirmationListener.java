@@ -43,16 +43,18 @@ public class OrderConfirmationListener {
 
 	public void onMessage(Order order) {
 		try {
-			log.info("---------->new order received from Qserver. order id=" + order.getId());
+			log.info("---------->new order received from Qserver. order id="
+					+ order.getId());
 			List<Order> orders = orderService.confirmOrder(order);
-			for (Order ord : orders) {
-				log.info("Order confirmation: id:" + ord.getId()
-						+ ", Customer: " + ord.getPerson().getFirstName() + " "
-						+ ord.getPerson().getLastName() + ", Status: "
-						+ ord.getStatus());
+			if (orders.size() > 0)
+				for (Order ord : orders) {
+					log.info("Order confirmation: id:" + ord.getId()
+							+ ", Customer: " + ord.getPerson().getFirstName()
+							+ " " + ord.getPerson().getLastName()
+							+ ", Status: " + ord.getStatus());
 
-				sendEmail(ord);
-			}
+					sendEmail(ord);
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

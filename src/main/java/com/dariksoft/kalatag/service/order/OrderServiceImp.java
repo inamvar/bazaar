@@ -42,7 +42,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 		System.out.println("deal.id = " + deal.getId());
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
-		if (dealService.getSold(deal) + order.getQuantity() >= minimum) {
+		if (dealService.getSold(deal) >= minimum) {
 
 			List<Order> pendings = this.findPendingOrders(deal);
 			boolean exist = false;
