@@ -50,7 +50,7 @@
 		<div class="col-sm-10">
 
 
-			<div id="carousel-example-generic" class="carousel slide"
+			<div id="carousel-example-generic" class="carousel slide col-sm-9"
 				data-ride="carousel">
 
 
@@ -111,7 +111,9 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
-
+<div class="col-sm-3">
+	
+</div>
 
 
 
