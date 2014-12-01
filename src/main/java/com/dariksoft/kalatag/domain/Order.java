@@ -55,6 +55,7 @@ public class Order implements Serializable{
 	private List<Coupon> coupons;
 	
 	private Date orderDate;	
+	private Date finilizeDate;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
@@ -165,6 +166,14 @@ public class Order implements Serializable{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public Date getFinilizeDate() {
+		return finilizeDate;
+	}
+
+	public void setFinilizeDate(Date finilizeDate) {
+		this.finilizeDate = finilizeDate;
 	}
 
 

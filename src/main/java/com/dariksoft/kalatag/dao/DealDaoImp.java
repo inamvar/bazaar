@@ -104,7 +104,8 @@ public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("deal", deal);
 		query.setParameter("status", OrderStatus.CANCELED);
-	    int  result = (Integer) query.uniqueResult();
+		java.lang.Long l = (java.lang.Long) query.uniqueResult();
+	    int result  = l != null ? l.intValue() : 0;
 		return result;
 	}
 	
