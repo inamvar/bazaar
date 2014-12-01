@@ -100,7 +100,7 @@ public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
 
 	@Override
 	public int getSold(Deal deal) {
-		String hql = "select count(*) from Order O WHERE O.deal = :deal AND O.status <> :status";	
+		String hql = "select sum(O.quantity) from Order O WHERE O.deal = :deal AND O.status <> :status";	
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("deal", deal);
 		query.setParameter("status", OrderStatus.CANCELED);

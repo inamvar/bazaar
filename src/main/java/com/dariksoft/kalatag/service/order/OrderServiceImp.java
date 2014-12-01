@@ -33,7 +33,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 		Deal deal = order.getDeal();
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
-		if (minimum == 0 || dealService.getSold(deal) + 1 >= minimum) {
+		if (minimum == 0 || dealService.getSold(deal) + order.getQuantity() >= minimum) {
 
 			orders.add(order);
 			if (minimum > 0) {
