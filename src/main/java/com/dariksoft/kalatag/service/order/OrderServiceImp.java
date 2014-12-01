@@ -14,6 +14,7 @@ import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.OrderStatus;
 import com.dariksoft.kalatag.service.CRUDServiceImp;
+import com.dariksoft.kalatag.service.CouponService;
 import com.dariksoft.kalatag.service.DealService;
 
 @Service
@@ -26,6 +27,9 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	@Autowired
 	OrderDao orderDao;
 
+	@Autowired
+	CouponService couponService;
+
 	@Override
 	@Transactional
 	public List<Order> confirmOrder(Order order) {
@@ -33,7 +37,8 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 		Deal deal = order.getDeal();
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
-		if (minimum == 0 || dealService.getSold(deal) + order.getQuantity() >= minimum) {
+		if (minimum == 0
+				|| dealService.getSold(deal) + order.getQuantity() >= minimum) {
 
 			orders.add(order);
 			if (minimum > 0) {
@@ -43,7 +48,12 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 				for (Order ord : orders) {
 					List<Coupon> coupons = new ArrayList<Coupon>();
 					for (int i = 0; i < ord.getQuantity(); i++) {
-						coupons.add(new Coupon());
+						Coupon coupon = new Coupon();
+						coupon.setDeal(deal);
+						coupon.setPrice(ord.getOption().getPrice());
+						coupon.setOrder(ord);
+						coupons.add(coupon);
+						
 					}
 					ord.setCoupons(coupons);
 					ord.setStatus(OrderStatus.DONE);

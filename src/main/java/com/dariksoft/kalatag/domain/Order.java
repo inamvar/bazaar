@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,7 +52,7 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private int quantity;
-	@OneToMany(targetEntity = Coupon.class, mappedBy = "order")
+	@OneToMany(targetEntity = Coupon.class, mappedBy = "order", cascade= CascadeType.ALL)
 	private List<Coupon> coupons;
 	
 	private Date orderDate;	

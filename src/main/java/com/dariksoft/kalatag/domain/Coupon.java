@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,9 @@ public class Coupon implements Serializable{
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
 	
+	@Column(length = 10000000)
 	private byte[] qrcode;
-	
+	@Column(length = 10000000)
 	private byte[] barcode;
 	
 	private Date expireDate;
@@ -46,6 +48,8 @@ public class Coupon implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "deal_id", nullable = false)
 	private Deal deal;
+	
+
 
 	public Coupon() {
 		super();
@@ -53,6 +57,7 @@ public class Coupon implements Serializable{
 		this.barcode = BarcodeUtil.byteArrayBarcode(code);
 		this.qrcode = BarcodeUtil.byteArrayQrCode(code);
 		this.issueDate = new Date();
+		this.status = CouponStatus.NOT_REDEMED;
 	}
 
 	
@@ -117,7 +122,7 @@ public class Coupon implements Serializable{
 		return deal;
 	}
 
-	public void setItem(Deal deal) {
+	public void setDeal(Deal deal) {
 		this.deal = deal;
 	}
 
@@ -127,6 +132,16 @@ public class Coupon implements Serializable{
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }
