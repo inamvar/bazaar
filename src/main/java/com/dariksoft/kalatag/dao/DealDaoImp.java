@@ -13,6 +13,7 @@ import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.domain.DealLabel;
 import com.dariksoft.kalatag.domain.ItemCategory;
 import com.dariksoft.kalatag.domain.ItemStatus;
+import com.dariksoft.kalatag.domain.OrderStatus;
 
 @Repository
 public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
@@ -30,9 +31,6 @@ public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
 		return deal;
 
 	}
-	
-	
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -95,6 +93,19 @@ public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
 	     results = query.list();
 	     
 	 	return results;
+	}
+
+
+
+
+	@Override
+	public int getSold(Deal deal) {
+		String hql = "select count(*) from Order O WHERE O.deal = :deal AND O.status <> :status";	
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("deal", deal);
+		query.setParameter("status", OrderStatus.CANCELED);
+	    int  result = (Integer) query.uniqueResult();
+		return result;
 	}
 	
 

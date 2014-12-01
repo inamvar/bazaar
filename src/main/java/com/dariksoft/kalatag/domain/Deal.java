@@ -19,13 +19,15 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.dariksoft.kalatag.service.DealServiceImp;
+
 @Entity
 public class Deal implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -56,12 +58,13 @@ public class Deal implements Serializable {
 	@Column(length = 10000000)
 	private byte[] thumbnail;
 
-	@OneToMany(targetEntity = Attachment.class,  cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = Attachment.class, cascade = CascadeType.ALL)
 	private List<Attachment> images;
 	private String[] tags;
 
 	@OneToMany(targetEntity = DealOption.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<DealOption> options;
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -206,5 +209,7 @@ public class Deal implements Serializable {
 	public void setLabel(DealLabel label) {
 		this.label = label;
 	}
+
+
 
 }

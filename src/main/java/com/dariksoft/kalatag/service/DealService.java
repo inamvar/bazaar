@@ -9,7 +9,7 @@ import com.dariksoft.kalatag.domain.ItemStatus;
 
 public interface DealService extends CRUDService<Deal> {
 
-	int getSold();
+	int getSold(Deal deal);
 
 	List<Deal> findDealsByStatus(ItemStatus status);
 

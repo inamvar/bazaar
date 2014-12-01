@@ -28,25 +28,26 @@
 	</c:if>
 
 	<div class="row">
-		
-			<div class="sidebar-nav col-sm-2">
 
-				<ul class="nav nav-pills nav-stacked nav-success">
-<%-- 					<li class="text-info"><a><spring:message
+		<div class="sidebar-nav col-sm-2">
+
+			<ul class="nav nav-pills nav-stacked nav-success">
+				<%-- 					<li class="text-info"><a><spring:message
 								code="admin.menu.definitions.categories" /></a></li> --%>
-					<li ><a  class="text-success" href="${pageContext.request.contextPath}"><i
-							class="glyphicon glyphicon-th"></i> <spring:message
-								code="deal.all" /></a></li>
-					<c:forEach items="${categories}" var="category">
-						<li><a class="text-success"
-							href="${pageContext.request.contextPath}?category=${category.id}"><span
-								class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
-					</c:forEach>
-				</ul>
+				<li><a class="text-success"
+					href="${pageContext.request.contextPath}"><i
+						class="glyphicon glyphicon-th"></i> <spring:message
+							code="deal.all" /></a></li>
+				<c:forEach items="${categories}" var="category">
+					<li><a class="text-success"
+						href="${pageContext.request.contextPath}?category=${category.id}"><span
+							class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
+				</c:forEach>
+			</ul>
 
-			</div>
+		</div>
 
-		
+
 		<div class="col-sm-10">
 
 			<div class="row">
@@ -131,8 +132,8 @@
 							</div>
 							<div class="caption">
 								<p>${deal.name}
-									<span class="pull-right label label-success"><i
-										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span>
+									<!-- 									<span class="pull-right label label-success"><i
+										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span> -->
 								</p>
 								<s class="text-muted"><fmt:formatNumber type="number"
 										maxFractionDigits="0" value="${deal.price}" /></s>
