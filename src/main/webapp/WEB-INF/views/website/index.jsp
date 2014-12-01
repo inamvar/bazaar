@@ -11,7 +11,10 @@
 
 <div class="container">
 	<div class="alert alert-warning">
-		<h3><span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند</h3>
+		<h3>
+			<span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت
+			در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند
+		</h3>
 	</div>
 
 	<c:if test="${not empty successMsg}">
@@ -25,24 +28,26 @@
 	</c:if>
 
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<div class="sidebar-nav">
-				
-					<ul class="nav nav-pills nav-stacked nav-success">
-						<li class="active"><a><spring:message
+
+				<ul class="nav nav-pills nav-stacked nav-success">
+					<li class="active"><a><spring:message
 								code="admin.menu.definitions.categories" /></a></li>
-						<li ><a href="${pageContext.request.contextPath}"><i
-								class="glyphicon glyphicon-th"></i> <spring:message
-									code="deal.all" /></a></li>
-						<c:forEach items="${categories}" var="category">
-							<li><a href="${pageContext.request.contextPath}?category=${category.id}"><span class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
-						</c:forEach>
-					</ul>
-			
+					<li><a href="${pageContext.request.contextPath}"><i
+							class="glyphicon glyphicon-th"></i> <spring:message
+								code="deal.all" /></a></li>
+					<c:forEach items="${categories}" var="category">
+						<li><a
+							href="${pageContext.request.contextPath}?category=${category.id}"><span
+								class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
+					</c:forEach>
+				</ul>
+
 			</div>
 
 		</div>
-		<div class="col-sm-9">
+		<div class="col-sm-10">
 
 
 			<div id="carousel-example-generic" class="carousel slide"
@@ -67,7 +72,7 @@
 									<div class="saleoffrate">
 										<b><fmt:formatNumber type="number" maxFractionDigits="0"
 												value=" ${featured.options[0].discount}" /> %</b><br>
-									<%-- 	<spring:message code="kalatag.off" /> --%>
+										<%-- 	<spring:message code="kalatag.off" /> --%>
 									</div>
 								</c:if>
 							</div>
@@ -87,7 +92,7 @@
 									<div class="saleoffrate">
 										<b><fmt:formatNumber type="number" maxFractionDigits="0"
 												value=" ${featured.options[0].discount}" /> %</b><br>
-									<%-- 	<spring:message code="kalatag.off" /> --%>
+										<%-- 	<spring:message code="kalatag.off" /> --%>
 									</div>
 								</c:if>
 							</div>
@@ -111,14 +116,17 @@
 
 
 			<c:forEach items="${deals}" var="deal">
-				<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="col-xs-12 col-sm-4 col-md-3">
 					<div class="productbox">
 						<div class="imgthumb img-responsive">
 							<img
 								src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
 						</div>
 						<div class="caption">
-							<p>${deal.name}</p>
+							<p>${deal.name}
+								<span class="pull-right label label-success"><i
+									class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span>
+							</p>
 							<s class="text-muted"><fmt:formatNumber type="number"
 									maxFractionDigits="0" value="${deal.price}" /></s>
 							<c:if test="${not empty deal.options}">
@@ -128,21 +136,21 @@
 								</b>
 								<!-- from <b>Amazon</b> -->
 							</c:if>
-							<!-- 						<a href="#" class="btn btn-default btn-xs pull-right"
-							role="button"><i class="glyphicon glyphicon-zoom-in"></i></a> -->
-<%-- 							<p>
-								<button type="button" class="btn btn-success btn-md btn-block">
-									<spring:message code="kalatag.viewdeal" />
-								</button>
-							</p> --%>
+							
+
+
+
 						</div>
 						<c:if test="${not empty deal.options}">
 							<div class="saleoffrate">
 								<b><fmt:formatNumber type="number" maxFractionDigits="0"
 										value=" ${deal.options[0].discount}" /> %</b><br>
-							<%-- 	<spring:message code="kalatag.off" /> --%>
+								<%-- 	<spring:message code="kalatag.off" /> --%>
 							</div>
 						</c:if>
+						<%-- 						<button type="button" class="btn btn-success btn-md btn-block">
+							<spring:message code="kalatag.viewdeal" />
+						</button> --%>
 					</div>
 				</div>
 			</c:forEach>
