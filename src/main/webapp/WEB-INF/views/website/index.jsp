@@ -111,7 +111,7 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
-<div class="col-sm-3">
+<div class="col-sm-3" style="min-height:350px; max-height:350px;">
 	<div class="panel panel-success">
 	<div class="panel-heading">...</div>
 	<div class="panel-body">
