@@ -49,118 +49,119 @@
 		</div>
 		<div class="col-sm-10">
 
+			<div class="row">
+				<div id="carousel-example-generic" class="carousel slide col-sm-9"
+					data-ride="carousel">
 
-			<div id="carousel-example-generic" class="carousel slide col-sm-9"
-				data-ride="carousel">
 
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					<c:forEach items="${featureds}" var="featured" varStatus="status">
-						<c:if test="${status.index == 0}">
-							<div class="item active">
-								<img
-									src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
-									alt="${featured.name}">
-								<div class="carousel-caption">
-									<h3>${featured.name}</h3>
-									<p>${featured.description}</p>
-									<a href="#" class="btn btn-success btn-md btn-block"><spring:message
-											code="kalatag.viewdeal" /></a>
-								</div>
-								<c:if test="${not empty featured.options}">
-									<div class="saleoffrate">
-										<b><fmt:formatNumber type="number" maxFractionDigits="0"
-												value=" ${featured.options[0].discount}" /> %</b><br>
-										<%-- 	<spring:message code="kalatag.off" /> --%>
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<c:forEach items="${featureds}" var="featured" varStatus="status">
+							<c:if test="${status.index == 0}">
+								<div class="item active">
+									<img
+										src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
+										alt="${featured.name}">
+									<div class="carousel-caption">
+										<h3>${featured.name}</h3>
+										<p>${featured.description}</p>
+										<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+												code="kalatag.viewdeal" /></a>
 									</div>
-								</c:if>
-							</div>
-						</c:if>
-						<c:if test="${status.index > 0}">
-							<div class="item">
-								<img
-									src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
-									alt="${featured.name}">
-								<div class="carousel-caption">
-									<h3>${featured.name}</h3>
-									<p>${featured.description}</p>
-									<a href="#" class="btn btn-success btn-md btn-block"><spring:message
-											code="kalatag.viewdeal" /></a>
+									<c:if test="${not empty featured.options}">
+										<div class="saleoffrate">
+											<b><fmt:formatNumber type="number" maxFractionDigits="0"
+													value=" ${featured.options[0].discount}" /> %</b><br>
+											<%-- 	<spring:message code="kalatag.off" /> --%>
+										</div>
+									</c:if>
 								</div>
-								<c:if test="${not empty featured.options}">
-									<div class="saleoffrate">
-										<b><fmt:formatNumber type="number" maxFractionDigits="0"
-												value=" ${featured.options[0].discount}" /> %</b><br>
-										<%-- 	<spring:message code="kalatag.off" /> --%>
-									</div>
-								</c:if>
-							</div>
-						</c:if>
-					</c:forEach>
-				</div>
-
-				<!-- Controls -->
-				<a class="left carousel-control" href="#carousel-example-generic"
-					role="button" data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#carousel-example-generic"
-					role="button" data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-<div class="col-sm-3">
-	<div class="panel panel-success"  style="min-height:300px; max-height:300px;">
-	<div class="panel-heading">...</div>
-	<div class="panel-body">
-	...
-	</div>
-	</div>
-</div>
-
-
-
-			<c:forEach items="${deals}" var="deal">
-				<div class="col-xs-12 col-sm-4 col-md-3">
-					<div class="productbox">
-						<div class="imgthumb img-responsive">
-							<img
-								src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
-						</div>
-						<div class="caption">
-							<p>${deal.name}
-								<span class="pull-right label label-success"><i
-									class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span>
-							</p>
-							<s class="text-muted"><fmt:formatNumber type="number"
-									maxFractionDigits="0" value="${deal.price}" /></s>
-							<c:if test="${not empty deal.options}">
-								<b class="finalprice"> <fmt:formatNumber type="number"
-										maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
-										code="kalatag.currenncy" />
-								</b>
-								<!-- from <b>Amazon</b> -->
 							</c:if>
-							
+							<c:if test="${status.index > 0}">
+								<div class="item">
+									<img
+										src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
+										alt="${featured.name}">
+									<div class="carousel-caption">
+										<h3>${featured.name}</h3>
+										<p>${featured.description}</p>
+										<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+												code="kalatag.viewdeal" /></a>
+									</div>
+									<c:if test="${not empty featured.options}">
+										<div class="saleoffrate">
+											<b><fmt:formatNumber type="number" maxFractionDigits="0"
+													value=" ${featured.options[0].discount}" /> %</b><br>
+											<%-- 	<spring:message code="kalatag.off" /> --%>
+										</div>
+									</c:if>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
 
-
-
-						</div>
-						<c:if test="${not empty deal.options}">
-							<div class="saleoffrate">
-								<b><fmt:formatNumber type="number" maxFractionDigits="0"
-										value=" ${deal.options[0].discount}" /> %</b><br>
-								<%-- 	<spring:message code="kalatag.off" /> --%>
-							</div>
-						</c:if>
-						<%-- 						<button type="button" class="btn btn-success btn-md btn-block">
-							<spring:message code="kalatag.viewdeal" />
-						</button> --%>
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<div class="col-sm-3">
+					<div class="panel panel-success"
+						style="min-height: 280px; max-height: 280px;">
+						<div class="panel-heading">...</div>
+						<div class="panel-body">...</div>
 					</div>
 				</div>
-			</c:forEach>
+
+
+			</div>
+			<div class="row">
+				<c:forEach items="${deals}" var="deal">
+					<div class="col-xs-12 col-sm-4 col-md-3">
+						<div class="productbox">
+							<div class="imgthumb img-responsive">
+								<img
+									src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
+							</div>
+							<div class="caption">
+								<p>${deal.name}
+									<span class="pull-right label label-success"><i
+										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span>
+								</p>
+								<s class="text-muted"><fmt:formatNumber type="number"
+										maxFractionDigits="0" value="${deal.price}" /></s>
+								<c:if test="${not empty deal.options}">
+									<b class="finalprice"> <fmt:formatNumber type="number"
+											maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
+											code="kalatag.currenncy" />
+									</b>
+									<!-- from <b>Amazon</b> -->
+								</c:if>
+
+
+
+
+							</div>
+							<c:if test="${not empty deal.options}">
+								<div class="saleoffrate">
+									<b><fmt:formatNumber type="number" maxFractionDigits="0"
+											value=" ${deal.options[0].discount}" /> %</b><br>
+									<%-- 	<spring:message code="kalatag.off" /> --%>
+								</div>
+							</c:if>
+							<%-- 						<button type="button" class="btn btn-success btn-md btn-block">
+							<spring:message code="kalatag.viewdeal" />
+						</button> --%>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </div>
