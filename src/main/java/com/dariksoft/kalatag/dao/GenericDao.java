@@ -13,5 +13,7 @@ public interface GenericDao< T > {
 
     T update(T t);
     
+    Integer save(T t);
+    
     List<T> findAll();
 }

@@ -65,7 +65,7 @@ public class Deal implements Serializable {
 	@OneToMany(targetEntity = DealOption.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<DealOption> options;
 
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}

@@ -38,6 +38,15 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 		logger.info("create object: " + t.toString());
 		return t;
 	}
+	
+	@Override
+	public Integer save( T t) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Integer ret = (Integer) session.save(t);
+		logger.info("save object: " + t.toString());
+		return ret;
+	}
+
 
 	@Override
 	public void delete(final Object id) {

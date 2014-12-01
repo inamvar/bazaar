@@ -58,4 +58,10 @@ public class CRUDServiceImp<T> implements CRUDService<T> {
 		return genericDao.findAll();
 	}
 
+	@Override
+	@Transactional
+	public Integer save(T t) {
+		return genericDao.save(t);
+	}
+
 }

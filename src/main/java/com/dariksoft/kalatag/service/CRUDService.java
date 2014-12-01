@@ -10,6 +10,8 @@ public interface CRUDService<T> {
     T find(int id);
 
     T update(T t);
+
+    Integer save(T t);
     
     List<T> findAll();
 }

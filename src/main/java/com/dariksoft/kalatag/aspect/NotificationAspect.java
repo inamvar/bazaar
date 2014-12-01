@@ -89,9 +89,9 @@ public class NotificationAspect {
 		      pointcut = "within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))",
 		      returning= "order")
 	public void afterOrderCreate(JoinPoint jp, Order order) throws Throwable{
-		log.info("after create order, sending order to qserver...");
-		order.getDeal().setImages(null);
-		order.getDeal().setThumbnail(null);
+		log.info("after create order id="+order.getId()+", sending order to qserver...");
+		//order.getDeal().setImages(null);
+		//order.getDeal().setThumbnail(null);
 		template.setDefaultDestination(orderConfirmation);
 		MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
 		template.send(messageCreator);

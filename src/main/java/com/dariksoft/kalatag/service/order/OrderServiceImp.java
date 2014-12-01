@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +31,16 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	@Autowired
 	CouponService couponService;
 
+
 	@Override
 	@Transactional
 	public List<Order> confirmOrder(Order order) {
-
+		
+		System.out.println( "Confirming  order number "+order.getId());
 		Deal deal = order.getDeal();
+       // Hibernate.initialize(deal.getImages());
+       // Hibernate.initialize(deal.getThumbnail());
+		System.out.println("deal.id = " + deal.getId());
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
 		if (minimum == 0
@@ -48,6 +54,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 				for (Order ord : orders) {
 					List<Coupon> coupons = new ArrayList<Coupon>();
 					for (int i = 0; i < ord.getQuantity(); i++) {
+						
 						Coupon coupon = new Coupon();
 						coupon.setDeal(deal);
 						coupon.setPrice(ord.getOption().getPrice());
