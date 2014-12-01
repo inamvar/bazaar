@@ -28,17 +28,17 @@
 	</c:if>
 
 	<div class="row">
-		<div class="col-sm-2">
-			<div class="sidebar-nav">
+		
+			<div class="sidebar-nav col-sm-2">
 
 				<ul class="nav nav-pills nav-stacked nav-success">
-					<li class="active"><a><spring:message
-								code="admin.menu.definitions.categories" /></a></li>
-					<li><a href="${pageContext.request.contextPath}"><i
+<%-- 					<li class="text-info"><a><spring:message
+								code="admin.menu.definitions.categories" /></a></li> --%>
+					<li ><a  class="text-success" href="${pageContext.request.contextPath}"><i
 							class="glyphicon glyphicon-th"></i> <spring:message
 								code="deal.all" /></a></li>
 					<c:forEach items="${categories}" var="category">
-						<li><a
+						<li><a class="text-success"
 							href="${pageContext.request.contextPath}?category=${category.id}"><span
 								class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
 					</c:forEach>
@@ -46,7 +46,7 @@
 
 			</div>
 
-		</div>
+		
 		<div class="col-sm-10">
 
 			<div class="row">
