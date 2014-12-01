@@ -31,36 +31,46 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	@Autowired
 	CouponService couponService;
 
-
 	@Override
 	@Transactional
 	public List<Order> confirmOrder(Order order) {
-		
-		System.out.println( "Confirming  order number "+order.getId());
+
+		System.out.println("Confirming  order number " + order.getId());
 		Deal deal = order.getDeal();
-       // Hibernate.initialize(deal.getImages());
-       // Hibernate.initialize(deal.getThumbnail());
+		// Hibernate.initialize(deal.getImages());
+		// Hibernate.initialize(deal.getThumbnail());
 		System.out.println("deal.id = " + deal.getId());
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
-		if (minimum == 0
-				|| dealService.getSold(deal) + order.getQuantity() >= minimum) {
+		if (dealService.getSold(deal) + order.getQuantity() >= minimum) {
 
-			orders.add(order);
-			if (minimum > 0) {
-				orders.addAll(this.findPendingOrders(deal));
+			List<Order> pendings = this.findPendingOrders(deal);
+			boolean exist = false;
+			for(Order pending : pendings){
+				if(pending.getId() == order.getId()){
+					exist = true;
+				}
+				orders.add(pending);
+				
 			}
+			
+			if(!exist)
+				orders.add(order);
+			
 			if (orders.size() > 0) {
 				for (Order ord : orders) {
+
+						
+					
 					List<Coupon> coupons = new ArrayList<Coupon>();
 					for (int i = 0; i < ord.getQuantity(); i++) {
-						
+
 						Coupon coupon = new Coupon();
 						coupon.setDeal(deal);
 						coupon.setPrice(ord.getOption().getPrice());
 						coupon.setOrder(ord);
 						coupons.add(coupon);
-						
+
 					}
 					ord.setCoupons(coupons);
 					ord.setStatus(OrderStatus.DONE);
