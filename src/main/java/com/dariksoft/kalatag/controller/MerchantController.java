@@ -113,6 +113,8 @@ public class MerchantController {
 		logger.info("person id =" + merchant.getContactPoint().getId());
 		logger.info("contact id =" + merchant.getContact().getId());
 		logger.info("contact email =" + merchant.getContact().getEmail());
+		logger.info("merchant username =" + merchant.getContactPoint().getUsername());
+		logger.info("merchant role =" + merchant.getContactPoint().getPersonRole().getRole());
 		if (result.hasErrors()) {
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"merchant.update.message", null, locale));

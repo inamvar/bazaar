@@ -73,19 +73,31 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
-								<spring:message code="person.username" />
-								<form:input class="form-control input-sm"
-									path="contactPoint.username"></form:input>
-								<form:errors path="contactPoint.username"
-									cssClass="text text-danger" />
+							<label></label>
+								<div class="checkbox">
+									<label> <input type="checkbox"  name="contactPoint.enabled" checked> <spring:message code="person.enabled" />
+									</label>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								
+								<form:hidden class="form-control input-sm" 
+									path="contactPoint.username"></form:hidden >
+								
 							</div>
 							<div class="form-group">
-								<spring:message code="person.password" />
-								<form:input type="password" class="form-control input-sm"
-									path="contactPoint.password"></form:input>
-								<form:errors path="contactPoint.password"
-									cssClass="text text-danger" />
+								
+								<form:hidden  class="form-control input-sm" hidden="true"
+									path="contactPoint.password"></form:hidden>
+								
 							</div>
+							<form:hidden class="form-control input-sm" 
+									path="contactPoint.personRole.id" ></form:hidden>
+									<form:hidden  class="form-control input-sm" 
+									path="contactPoint.personRole.role" ></form:hidden>
 						</div>
 					</div>
 					<h4>

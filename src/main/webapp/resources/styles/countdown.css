@@ -1,0 +1,94 @@
+/*COUNTDOWN*/
+.countdown {
+  width: 400px;
+  overflow: hidden;
+  height: 58px;
+  margin: 20px 0;
+  display: table;
+}
+.countdown > div {
+  display: table-cell;
+}
+.countdown > div > span {
+  display: block;
+  text-align: center;
+  font-family: sans-serif;
+}
+span.count {
+  font-size: 48px;
+  line-height: 48px;
+}
+.countdown.countdown-inline {
+  width: 100%;
+  margin: 10px 0 0 0;
+  height: auto;
+}
+.countdown.countdown-inline > div {
+  display: inline;
+}
+.countdown.countdown-inline > div:first-child span.count {
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5px;
+  color: #7fa832;
+}
+.countdown.countdown-inline > div:first-child span.title {
+  font-size: 20px;
+  font-weight: bold;
+  display: inline;
+  margin-right: 10px;
+  color: #7fa832;
+}
+.countdown.countdown-inline > div:first-child span.count:after,
+.countdown.countdown-inline > div:last-child span.count:after {
+  content: '';
+  margin: 0;
+}
+.countdown.countdown-inline > div > span {
+  display: inline;
+  line-height: 1em;
+}
+.countdown.countdown-inline > div span.count {
+  font-size: 20px;
+}
+.countdown.countdown-inline > div span.count:after {
+  content: ':';
+  margin: 0 2px;
+}
+.countdown.countdown-inline > div span.title {
+  display: none;
+}
+.countdown-caption {
+  left: 0;
+  right: 0;
+  position: absolute;
+  padding: 30px;
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+  bottom: auto;
+  top: 50%;
+  -webkit-transform: translate3d(0, -50%, 0);
+  -moz-transform: translate3d(0, -50%, 0);
+  -o-transform: translate3d(0, -50%, 0);
+  -ms-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+  background: rgba(0,0,0,0.5);
+}
+.countdown-caption h3 {
+  color: #fff;
+  margin-bottom: 0;
+}
+.countdown-caption .countdown {
+  margin: 20px auto;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+.countdown-caption .countdown span.count {
+  color: #fff;
+}
+.countdown-caption .countdown .title {
+  color: rgba(255,255,255,0.7);
+}
+/*END COUNTDOWN*/

@@ -9,9 +9,10 @@
 	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			
-				<span class="glyphicon glyphicon-plus-sign"></span>	<spring:message code="merchant.insert.message" />
-				
+
+				<span class="glyphicon glyphicon-plus-sign"></span>
+				<spring:message code="merchant.insert.message" />
+
 			</div>
 			<div class="panel-body">
 				<form:form method="POST" commandName="merchant" class="form"
@@ -36,13 +37,15 @@
 								<spring:message code="person.firstname" />
 								<form:input class="form-control input-sm"
 									path="contactPoint.firstName"></form:input>
-									<form:errors path="contactPoint.firstName" cssClass="text text-danger" />
+								<form:errors path="contactPoint.firstName"
+									cssClass="text text-danger" />
 							</div>
 							<div class="form-group">
 								<spring:message code="person.lastname" />
 								<form:input class="form-control input-sm"
 									path="contactPoint.lastName"></form:input>
-									<form:errors path="contactPoint.lastName" cssClass="text text-danger" />
+								<form:errors path="contactPoint.lastName"
+									cssClass="text text-danger" />
 							</div>
 
 						</div>
@@ -52,7 +55,8 @@
 								<spring:message code="person.birthday" />
 								<form:input class="form-control input-sm"
 									placeholder="e.g 1983/10/23" path="contactPoint.birthday"></form:input>
-									<form:errors path="contactPoint.birthday" cssClass="text text-danger" />
+								<form:errors path="contactPoint.birthday"
+									cssClass="text text-danger" />
 							</div>
 							<div class="form-group">
 								<spring:message code="person.gender" />
@@ -60,10 +64,21 @@
 									path="contactPoint.gender">
 									<form:options />
 								</form:select>
-									<form:errors path="contactPoint.gender" cssClass="text text-danger" />
+								<form:errors path="contactPoint.gender"
+									cssClass="text text-danger" />
 							</div>
 						</div>
-<%-- 						<div class="col-sm-4">
+						<div class="col-sm-4">
+							<div class="form-group">
+							<label></label>
+								<div class="checkbox">
+									<label> <input type="checkbox"  name="contactPoint.enabled" checked> <spring:message code="person.enabled" />
+									</label>
+								</div>
+
+							</div>
+						</div>
+						<%-- 						<div class="col-sm-4">
 							<div class="form-group">
 								<spring:message code="person.username" />
 								<form:input class="form-control input-sm"
@@ -111,16 +126,17 @@
 							</div>
 							<div class="form-group">
 								<spring:message code="contact.city" />
-								<form:select class="form-control input-sm" path="contact.city" items="${cities}" itemValue="id" itemLabel="name">
-								<form:errors path="contact.city" cssClass="text text-danger" />
-									
+								<form:select class="form-control input-sm" path="contact.city"
+									items="${cities}" itemValue="id" itemLabel="name">
+									<form:errors path="contact.city" cssClass="text text-danger" />
+
 								</form:select>
 							</div>
 
 						</div>
 
 					</div>
-<%-- 					<div class="form-group">
+					<%-- 					<div class="form-group">
 						<spring:message code="contact.address" />
 						<form:input class="form-control input-sm" path="contact.address	"></form:input>
 						<form:errors path="contact.address" cssClass="text text-danger" />
