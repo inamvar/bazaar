@@ -3,6 +3,7 @@ package com.dariksoft.kalatag.controller;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,19 @@ public class SiteController {
 		}
 		return "website/index";
 	}
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail(@RequestParam("deal") int dealId, Locale locale , Model uiModel){
+		Deal deal = dealService.find(dealId);
+		if(deal == null)
+			  throw new ResourceNotFoundException(dealId +"");
+		else{
+			uiModel.addAttribute("deal", deal);
+		}
+		
+		return "website/detail";
+	}
+	
 
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	public String newOrder(@RequestParam("dealId") int dealId,

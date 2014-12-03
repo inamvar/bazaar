@@ -125,41 +125,44 @@
 			<div class="row">
 				<c:forEach items="${deals}" var="deal">
 					<div class="col-xs-12 col-sm-4 col-md-3">
+
 						<div class="productbox">
-							<div class="imgthumb img-responsive">
-								<img
-									src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
-							</div>
-							<div class="caption">
-								<p>${deal.name}
-									<!-- 									<span class="pull-right label label-success"><i
-										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span> -->
-								</p>
-								<s class="text-muted"><fmt:formatNumber type="number"
-										maxFractionDigits="0" value="${deal.price}" /></s>
-								<c:if test="${not empty deal.options}">
-									<b class="finalprice"> <fmt:formatNumber type="number"
-											maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
-											code="kalatag.currenncy" />
-									</b>
-									<!-- from <b>Amazon</b> -->
-								</c:if>
-
-
-
-
-							</div>
-							<c:if test="${not empty deal.options}">
-								<div class="saleoffrate">
-									<b><fmt:formatNumber type="number" maxFractionDigits="0"
-											value=" ${deal.options[0].discount}" /> %</b><br>
-									<%-- 	<spring:message code="kalatag.off" /> --%>
+							<a
+								href="${pageContext.request.contextPath}/detail?deal=${deal.id}">
+								<div class="imgthumb img-responsive">
+									<img
+										src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
 								</div>
-							</c:if>
-							<%-- 						<button type="button" class="btn btn-success btn-md btn-block">
+								<div class="caption">
+									<p>${deal.name}
+										<!-- 									<span class="pull-right label label-success"><i
+										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span> -->
+									</p>
+									<s class="text-muted"><fmt:formatNumber type="number"
+											maxFractionDigits="0" value="${deal.price}" /></s>
+									<c:if test="${not empty deal.options}">
+										<b class="finalprice"> <fmt:formatNumber type="number"
+												maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
+												code="kalatag.currenncy" />
+										</b>
+										<!-- from <b>Amazon</b> -->
+									</c:if>
+
+
+
+
+								</div> <c:if test="${not empty deal.options}">
+									<div class="saleoffrate">
+										<b><fmt:formatNumber type="number" maxFractionDigits="0"
+												value=" ${deal.options[0].discount}" /> %</b><br>
+										<%-- 	<spring:message code="kalatag.off" /> --%>
+									</div>
+								</c:if> <%-- 						<button type="button" class="btn btn-success btn-md btn-block">
 							<spring:message code="kalatag.viewdeal" />
 						</button> --%>
+							</a>
 						</div>
+
 					</div>
 				</c:forEach>
 			</div>
