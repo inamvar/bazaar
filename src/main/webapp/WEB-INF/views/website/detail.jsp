@@ -89,16 +89,29 @@
 			<ul class="list-group col-sm-12">
 				<c:forEach items="${deal.options}" var="opt">
 					<li class="list-group-item col-sm-12">
-						<p class="col-sm-3">${opt.name}</p>
-						<p class="col-sm-5">${opt.description}</p>
-						<p class="text-primary col-sm-2">
+						<div class="col-sm-4">
+							<span class="glyphicon glyphicon-tag"> </span> ${opt.name}
+						</div>
+						<p class="col-sm-8">${opt.description}</p>
+						<h4 class="text-danger col-sm-5">
 							<fmt:formatNumber type="number" maxFractionDigits="0"
-								value="${opt.price}" />  <spring:message code="kalatag.currenncy" />
-						</p>
+								value="${opt.discount}" />
+							%
+
+							<spring:message code="kalatag.off" />
+							.
+							<spring:message code="kalatag.yourpay" />
+							<fmt:formatNumber type="number" maxFractionDigits="0"
+								value="${opt.price}" />
+							<spring:message code="kalatag.currenncy" />
+						</h4>
+
+
 						<div class="col-sm-2">
 							<a class="btn btn-success  btn-sm btn-block"
 								href="${pageContext.request.contextPath}/buy?dealId=${deal.id}&optionId=${opt.id}&qty=1">
-								<spring:message code="kalatag.buy" />
+								<span class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
+										code="kalatag.buy" /></b>
 							</a>
 						</div>
 					</li>

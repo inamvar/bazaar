@@ -66,7 +66,7 @@
 									<div class="carousel-caption">
 										<h3>${featured.name}</h3>
 										<p>${featured.description}</p>
-										<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+										<a href="${pageContext.request.contextPath}/detail?deal=${featured.id}" class="btn btn-success btn-md btn-block"><spring:message
 												code="kalatag.viewdeal" /></a>
 									</div>
 									<c:if test="${not empty featured.options}">
@@ -86,7 +86,7 @@
 									<div class="carousel-caption">
 										<h3>${featured.name}</h3>
 										<p>${featured.description}</p>
-										<a href="#" class="btn btn-success btn-md btn-block"><spring:message
+										<a href="${pageContext.request.contextPath}/detail?deal=${featured.id}" class="btn btn-success btn-md btn-block"><spring:message
 												code="kalatag.viewdeal" /></a>
 									</div>
 									<c:if test="${not empty featured.options}">

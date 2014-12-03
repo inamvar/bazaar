@@ -2,6 +2,10 @@
 	
 }
 
+.productbox a:hover{
+	text-decoration: none;
+}
+
 .carousel-caption p, .carousel-caption h3{
 		background-color: rgba(0, 0, 0, 0.8);
 }
