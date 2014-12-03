@@ -136,36 +136,40 @@
 							</div>
 
 						</div>
-											<div class="col-sm-6">
+						<div class="col-sm-6">
 							<div class="form-group">
-								<spring:message code="contact.geoLocation" />
-								<form:input class="form-control input-sm" path="contact.geoLocation"></form:input>
-								<form:errors path="contact.geoLocation" cssClass="text text-danger" />
+								<spring:message code="contact.geoLocation" /> 
+																								<a href="https://www.google.com/maps" target="_blank">Get
+									location from google map...</a>
+								<form:input class="form-control input-sm"
+									path="contact.geoLocation"></form:input>
+								<form:errors path="contact.geoLocation"
+									cssClass="text text-danger" />
 							</div>
 						</div>
 					</div>
-						<div class="col-sm-12">
-							<div class="form-group">
-								<spring:message code="contact.address" />
-								<form:input class="form-control input-sm" path="contact.address"></form:input>
-								<form:errors path="contact.address" cssClass="text text-danger" />
-							</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+							<spring:message code="contact.address" />
+							<form:input class="form-control input-sm" path="contact.address"></form:input>
+							<form:errors path="contact.address" cssClass="text text-danger" />
 						</div>
 					</div>
-
-					<div class="form-group">
-
-						<input class="btn btn-danger btn-sm"
-							value="<spring:message code="submit"/>" type="submit"> <a
-							href="${pageContext.request.contextPath}/admin/merchant"
-							class="btn btn-default btn-sm"><spring:message code="cancel" /></a>
-					</div>
-
-
-				</form:form>
 			</div>
+
+			<div class="form-group">
+
+				<input class="btn btn-danger btn-sm"
+					value="<spring:message code="submit"/>" type="submit"> <a
+					href="${pageContext.request.contextPath}/admin/merchant"
+					class="btn btn-default btn-sm"><spring:message code="cancel" /></a>
+			</div>
+
+
+			</form:form>
 		</div>
 	</div>
+</div>
 </div>
 
 
