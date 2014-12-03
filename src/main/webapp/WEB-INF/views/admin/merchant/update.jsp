@@ -11,7 +11,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 
-			 <span class="glyphicon glyphicon-pencil"></span> <spring:message code="merchant.update.message" />
+				<span class="glyphicon glyphicon-pencil"></span>
+				<spring:message code="merchant.update.message" />
 
 			</div>
 			<div class="panel-body">
@@ -73,9 +74,11 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
-							<label></label>
+								<label></label>
 								<div class="checkbox">
-									<label> <input type="checkbox"  name="contactPoint.enabled" checked> <spring:message code="person.enabled" />
+									<label> <input type="checkbox"
+										name="contactPoint.enabled" checked> <spring:message
+											code="person.enabled" />
 									</label>
 								</div>
 
@@ -83,21 +86,21 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
-								
-								<form:hidden class="form-control input-sm" 
-									path="contactPoint.username"></form:hidden >
-								
+
+								<form:hidden class="form-control input-sm"
+									path="contactPoint.username"></form:hidden>
+
 							</div>
 							<div class="form-group">
-								
-								<form:hidden  class="form-control input-sm" hidden="true"
+
+								<form:hidden class="form-control input-sm" hidden="true"
 									path="contactPoint.password"></form:hidden>
-								
+
 							</div>
-							<form:hidden class="form-control input-sm" 
-									path="contactPoint.personRole.id" ></form:hidden>
-									<form:hidden  class="form-control input-sm" 
-									path="contactPoint.personRole.role" ></form:hidden>
+							<form:hidden class="form-control input-sm"
+								path="contactPoint.personRole.id"></form:hidden>
+							<form:hidden class="form-control input-sm"
+								path="contactPoint.personRole.role"></form:hidden>
 						</div>
 					</div>
 					<h4>
@@ -145,7 +148,25 @@
 							</div>
 
 						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<spring:message code="contact.geoLocation" /> 
+																<a href="https://www.google.com/maps" target="_blank">Get
+									location from google map...</a>
+								<form:input class="form-control input-sm"
+									path="contact.geoLocation"></form:input>
+								<form:errors path="contact.geoLocation"
+									cssClass="text text-danger" />
+							</div>
+						</div>
 
+						<div class="col-sm-12">
+							<div class="form-group">
+								<spring:message code="contact.address" />
+								<form:input class="form-control input-sm" path="contact.address"></form:input>
+								<form:errors path="contact.address" cssClass="text text-danger" />
+							</div>
+						</div>
 					</div>
 					<%-- 					<div class="form-group">
 						<spring:message code="contact.address" />

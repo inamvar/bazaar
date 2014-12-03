@@ -42,7 +42,7 @@
 						<span class="glyphicon glyphicon-envelope"> </span>
 						${deal.merchant.contact.email}
 					</p>
-					<div class="gmap"></div>
+					<div id="gmap" class="gmap"></div>
 				</div>
 			</div>
 
@@ -145,9 +145,14 @@
 
 <script>
 $(document).ready(function(){
+	var loc = "<c:out value="${deal.merchant.contact.geoLocation}"/>";
+	console.log(loc);
 	startCountdown();
+	showMap(loc);
+	
 });
 
 </script>
 
-
+<script type="text/javascript"
+src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<c:out value="${pageContext.response.locale.language}"/>"></script>

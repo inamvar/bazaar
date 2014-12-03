@@ -34,6 +34,8 @@
 	src="${pageContext.request.contextPath}/resources/scripts/gmap3.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/myscript.js"></script>
+	
+	
 </head>
 <body>
 	<div id="header">

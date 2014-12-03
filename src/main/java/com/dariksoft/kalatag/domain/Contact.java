@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.Email;
@@ -30,7 +31,14 @@ public class Contact  implements Serializable{
 	@ManyToOne 
 	@JoinColumn(name="city_id", nullable=true)
 	private City city;
+	
+	@Lob
 	private String address;
+	
+	@Lob
+	private String geoLocation;
+	
+	
 	@NotEmpty
 	@Email
 	private String email;
@@ -85,6 +93,12 @@ public class Contact  implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getGeoLocation() {
+		return geoLocation;
+	}
+	public void setGeoLocation(String geoLocation) {
+		this.geoLocation = geoLocation;
 	}
 
 

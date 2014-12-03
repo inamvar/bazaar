@@ -1,9 +1,10 @@
 
 function showMap(address){
+	var loc = address.split(',');
     try {
-        $('#gmap').gmap3({
+       $('#gmap').gmap3({
             marker: {
-                address: address
+            	 latLng:[loc[0], loc[1]]
             },
             map: {
                 options: {
@@ -11,6 +12,8 @@ function showMap(address){
                 }
             }
         });
+    	
+
     }catch(e) {};
 };
 

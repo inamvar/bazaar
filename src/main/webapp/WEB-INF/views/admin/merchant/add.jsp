@@ -70,9 +70,11 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
-							<label></label>
+								<label></label>
 								<div class="checkbox">
-									<label> <input type="checkbox"  name="contactPoint.enabled" checked> <spring:message code="person.enabled" />
+									<label> <input type="checkbox"
+										name="contactPoint.enabled" checked> <spring:message
+											code="person.enabled" />
 									</label>
 								</div>
 
@@ -134,13 +136,23 @@
 							</div>
 
 						</div>
-
+											<div class="col-sm-6">
+							<div class="form-group">
+								<spring:message code="contact.geoLocation" />
+								<form:input class="form-control input-sm" path="contact.geoLocation"></form:input>
+								<form:errors path="contact.geoLocation" cssClass="text text-danger" />
+							</div>
+						</div>
 					</div>
-					<%-- 					<div class="form-group">
-						<spring:message code="contact.address" />
-						<form:input class="form-control input-sm" path="contact.address	"></form:input>
-						<form:errors path="contact.address" cssClass="text text-danger" />
-					</div> --%>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<spring:message code="contact.address" />
+								<form:input class="form-control input-sm" path="contact.address"></form:input>
+								<form:errors path="contact.address" cssClass="text text-danger" />
+							</div>
+						</div>
+					</div>
+
 					<div class="form-group">
 
 						<input class="btn btn-danger btn-sm"
