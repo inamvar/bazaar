@@ -1,23 +1,41 @@
 /*COUNTDOWN*/
 .countdown {
-  width: 400px;
+  width: auto;
   overflow: hidden;
   height: 58px;
-  margin: 20px 0;
+  margin: 15px 0;
   display: table;
 }
+
+.days{
+	display: inline;
+	color:#7fa832;
+	padding-left:10px;
+}
+
+.days .count{
+		display: inline;
+	font-size:23px;
+}
+.days .title{
+		display: inline;
+	font-size:25px;
+}
+
 .countdown > div {
   display: table-cell;
 }
 .countdown > div > span {
   display: block;
   text-align: center;
-  font-family: sans-serif;
+  font-family: "B Yekan", sans-serif;
 }
 span.count {
-  font-size: 48px;
-  line-height: 48px;
+  font-size: 18px;
+  line-height: 25px;
+  padding-left: 10px;
 }
+
 .countdown.countdown-inline {
   width: 100%;
   margin: 10px 0 0 0;
@@ -29,14 +47,14 @@ span.count {
 .countdown.countdown-inline > div:first-child span.count {
   font-size: 25px;
   font-weight: bold;
-  margin-right: 5px;
+  margin-left: 5px;
   color: #7fa832;
 }
 .countdown.countdown-inline > div:first-child span.title {
   font-size: 20px;
   font-weight: bold;
   display: inline;
-  margin-right: 10px;
+  margin-left: 10px;
   color: #7fa832;
 }
 .countdown.countdown-inline > div:first-child span.count:after,

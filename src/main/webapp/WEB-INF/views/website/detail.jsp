@@ -21,7 +21,10 @@
 							value="${deal.price}" />
 						<spring:message code="kalatag.currenncy" />
 					</h4>
-					<p>${deal.validity}</p>
+						<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
+						<div  class="countdown" data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
+            value="${deal.validity}" />"></div>
+						
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -140,5 +143,11 @@
 
 </div>
 
+<script>
+$(document).ready(function(){
+	startCountdown();
+});
+
+</script>
 
 
