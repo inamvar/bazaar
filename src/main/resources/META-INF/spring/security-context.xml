@@ -9,11 +9,13 @@
 
 		<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/buy*" access="ROLE_CUSTOMER,ROLE_MERCHANT" />
 		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<form-login login-page="/login"  authentication-failure-url="/login?error"  />
-		<access-denied-handler error-page="/WEB-INF/templates/error_403_layout.jsp"/>
-		
+
+		<form-login login-page="/login" authentication-failure-url="/login?error" />
+		<access-denied-handler error-page="/WEB-INF/templates/error_403_layout.jsp" />
+
 	</http>
 
 	<authentication-manager>
