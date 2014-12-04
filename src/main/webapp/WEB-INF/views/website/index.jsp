@@ -66,7 +66,9 @@
 									<div class="carousel-caption">
 										<h3>${featured.name}</h3>
 										<p>${featured.description}</p>
-										<a href="${pageContext.request.contextPath}/detail?deal=${featured.id}" class="btn btn-success btn-md btn-block"><spring:message
+										<a
+											href="${pageContext.request.contextPath}/detail?deal=${featured.id}"
+											class="btn btn-success btn-md btn-block"><spring:message
 												code="kalatag.viewdeal" /></a>
 									</div>
 									<c:if test="${not empty featured.options}">
@@ -86,7 +88,9 @@
 									<div class="carousel-caption">
 										<h3>${featured.name}</h3>
 										<p>${featured.description}</p>
-										<a href="${pageContext.request.contextPath}/detail?deal=${featured.id}" class="btn btn-success btn-md btn-block"><spring:message
+										<a
+											href="${pageContext.request.contextPath}/detail?deal=${featured.id}"
+											class="btn btn-success btn-md btn-block"><spring:message
 												code="kalatag.viewdeal" /></a>
 									</div>
 									<c:if test="${not empty featured.options}">
@@ -113,11 +117,9 @@
 					</a>
 				</div>
 				<div class="col-sm-3">
-					<div class="panel panel-success"
-						style="min-height: 280px; max-height: 280px;">
-						<div class="panel-heading">...</div>
-						<div class="panel-body">...</div>
-					</div>
+				
+						<a href="${pageContext.request.contextPath}/register" class="btn btn-primary btn-block"><spring:message code="register"/></a>
+		
 				</div>
 
 
