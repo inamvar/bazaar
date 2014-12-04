@@ -18,22 +18,19 @@
 				<form:form name='f'
 					action="${pageContext.request.contextPath}/register"
 					commandName="customer" method='POST'>
-					<div class="text text-danger">
-						<p>
-							<form:errors path="*" />
-						</p>
-					</div>
+
 					<div class="col-sm-6">
 						<div class="form-group">
 							<p>
-								<spring:message code="security.username" />
+								<spring:message code="contact.email" />
 							</p>
 							<form:input path="username" class="form-control input-sm" />
+							<form:errors path="username" cssClass="text text-danger" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<spring:message code="person.gender" />
+							<p><spring:message code="person.gender" /></p>
 							<form:select class="form-control input-sm" path="gender">
 								<form:options />
 							</form:select>
@@ -67,14 +64,14 @@
 
 						<div class="form-group">
 							<spring:message code="contact.mobile" />
-							<form:input class="form-control input-sm" path="contact.mobile"></form:input>
+							<form:input class="form-control input-sm" path="contact.mobile" placeholder="00989120000000"></form:input>
 							<form:errors path="contact.mobile" cssClass="text text-danger" />
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<spring:message code="contact.phone" />
-							<form:input class="form-control input-sm" path="contact.phone"></form:input>
+							<form:input class="form-control input-sm" path="contact.phone" placeholder="00982144000000"></form:input>
 							<form:errors path="contact.phone" cssClass="text text-danger" />
 						</div>
 					</div>
@@ -83,15 +80,14 @@
 							<spring:message code="contact.city" />
 							<form:select class="form-control input-sm" path="contact.city"
 								items="${cities}" itemValue="id" itemLabel="name">
-								<form:errors path="contact.city" cssClass="text text-danger" />
-
 							</form:select>
+							<form:errors path="contact.city" cssClass="text text-danger" />
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-2">
 						<div class="form-group">
 
-							<input class="btn btn-danger btn-sm" name="submit" type="submit"
+							<input class="btn btn-danger btn-block btn-sm" name="submit" type="submit"
 								value="<spring:message code="submit"/>" />
 
 						</div>

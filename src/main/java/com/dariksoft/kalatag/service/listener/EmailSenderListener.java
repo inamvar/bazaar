@@ -1,6 +1,5 @@
 package com.dariksoft.kalatag.service.listener;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -11,7 +10,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-import com.dariksoft.kalatag.domain.Merchant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,11 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Coupon;
+import com.dariksoft.kalatag.domain.Customer;
+import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
+import com.dariksoft.kalatag.service.order.OrderService;
 
 @Component("emailSenderListener")
 public class EmailSenderListener {
@@ -35,8 +36,62 @@ public class EmailSenderListener {
 
 	@Autowired
 	private MessageSource messageSource;
+	
+	@Autowired
+	private OrderService orderService;
 
-	public void onUserRegistration(Person person) {
+	
+	public void onMessage(Customer customer) {
+
+		try {
+			log.info("Registeration customer: " + customer+ " registered successfully.");
+			sendCustomerRegisterEmail(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onMessage(Merchant merchant	) {
+
+		try {
+			log.info("Registeration merchant: " + merchant+ " registered successfully.");
+			sendCustomerRegisterEmail(merchant.getContactPoint());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
+	public void onMessage(Person person) {
+
+		try {
+			log.info("Change password: " + person+ " password changed successfully.");
+			//TODO: sen an email for change pasword
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void onMessage(Order order){
+		try {
+			log.info("---------->new order received from Qserver. order id="
+					+ order.getId());
+			List<Order> orders = orderService.confirmOrder(order);
+			if (orders.size() > 0)
+				for (Order ord : orders) {
+					log.info("Order confirmation: id:" + ord.getId()
+							+ ", Customer: " + ord.getPerson().getFirstName()
+							+ " " + ord.getPerson().getLastName()
+							+ ", Status: " + ord.getStatus());
+
+					sendOrderCreateEmail(ord);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void sendCustomerRegisterEmail(Person person) {
 
 		try {
 			Locale locale = LocaleContextHolder.getLocale();
@@ -67,7 +122,7 @@ public class EmailSenderListener {
 			helper.setTo(person.getUsername());
 			helper.setSubject(messageSource.getMessage("email.user.registration.subject", null, locale));
 			mailSender.send(mimeMessage);
-			log.info("For registration notification an email to "
+			log.info("For registeration notification an email to "
 					+ person.getUsername() + " has been sent.");
 
 		} catch (Exception e) {
@@ -75,39 +130,14 @@ public class EmailSenderListener {
 		}
 
 	}
-
-	public void onMerchantRegistration(Merchant merchant) {
-		log.info("Merchant registered: " + merchant);
-	}
-	
-	public void onUserChangePassword(Person person) {
-		
-		log.info("Password change for: " + person);
-		
-	}
-	
-	public void onOrderConfirmation(Order order) {
+	public void sendOrderCreateEmail(Order order) {
 
 		try {
-			log.info("Order confirmation: id:" + order.getId()
-					+ ", Customer: " + order.getPerson().getFirstName() + " "
-					+ order.getPerson().getLastName() + ", Status: "
-					+ order.getStatus());
-			
-			/*
-			 * ******************************************** WARNING! ********************************************
-			 *  if number of sold >= order.getDeal().getMinCoupon() should be checked
-			 */
-			List<Coupon> coupons = new ArrayList<Coupon>();
-			for(int i=0; i < order.getQuantity(); i++){
-//				Coupon c = couponService.create(t);
-//				coupons.add(c);
-				coupons.add(new Coupon());
-				
-			}
-			order.setCoupons(coupons);
-			
-			
+
+			// JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+
+			// System.setProperty("file.encoding","UTF-8");
+
 			Locale locale = LocaleContextHolder.getLocale();
 
 			String[] params = new String[11];
@@ -115,24 +145,29 @@ public class EmailSenderListener {
 			params[1] = order.getDeal().getMerchant().getName();
 			params[2] = order.getDeal().getName();
 			params[3] = order.getOption().getName();
-			params[4] = order.getPerson().getFirstName() + " " + order.getPerson().getLastName();
+			params[4] = order.getPerson().getFirstName() + " "
+					+ order.getPerson().getLastName();
 			params[5] = order.getDeal().getMerchant().getName();
 			params[6] = order.getDeal().getMerchant().getContact().getAddress();
 			params[7] = order.getCoupons().get(0).getIssueDate().toString();
 			params[8] = order.getOption().getPrice() + "";
-			params[9] = "RLS";
-			
+			params[9] = messageSource.getMessage("kalatag.currenncy", null,
+					locale);
+			;
+
 			StringBuffer sb = new StringBuffer();
-			for(Coupon c : order.getCoupons()){
+			for (Coupon c : order.getCoupons()) {
 				sb.append(c.getCode());
 				sb.append("<br>");
 			}
 			params[10] = sb.toString();
-			
-			String htmlText = messageSource.getMessage("email.user.receipt", params, locale);
+
+			String htmlText = messageSource.getMessage("email.user.receipt",
+					params, locale);
 
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true,
+					"utf-8");
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
 
@@ -140,59 +175,57 @@ public class EmailSenderListener {
 			messageBodyPart.setContent(htmlText, "text/html");
 			multipart.addBodyPart(messageBodyPart);
 
-			//add image
+			// add image
 			byte[] thumbnail = order.getDeal().getThumbnail();
-			if(thumbnail != null){
+			if (thumbnail != null) {
 				messageBodyPart = new MimeBodyPart();
-		          ByteArrayDataSource dealImgDs = new ByteArrayDataSource(thumbnail, "image/jpeg");
-		          messageBodyPart.setDataHandler(new DataHandler(dealImgDs));
-		          messageBodyPart.setHeader("Content-ID", "<image>");
-		          multipart.addBodyPart(messageBodyPart);
+				ByteArrayDataSource dealImgDs = new ByteArrayDataSource(
+						thumbnail, "image/jpeg");
+				messageBodyPart.setDataHandler(new DataHandler(dealImgDs));
+				messageBodyPart.setHeader("Content-ID", "<image>");
+				multipart.addBodyPart(messageBodyPart);
 			}
-	          
-	          
-	         
-	          /*
-	           * ******************************************** WARNING! ********************************************
-	           * should be change for all coupons
-	           */
-	          if(!order.getCoupons().isEmpty())
-	          {
-	        	  //add QR code
-	        	  byte[] qrcode = order.getCoupons().get(0).getQrcode();
-	        	  if(qrcode != null){
-	        		  messageBodyPart = new MimeBodyPart();
-			          ByteArrayDataSource qrCodeDs = new ByteArrayDataSource(qrcode, "image/jpeg");
-			          messageBodyPart.setDataHandler(new DataHandler(qrCodeDs));
-			          messageBodyPart.setHeader("Content-ID", "<qrcode>");
-			          multipart.addBodyPart(messageBodyPart);  
-	        	  }
-		          
-	          
-		          //add barcode
-	        	  byte[] barcode = order.getCoupons().get(0).getBarcode();
-	        	  if(barcode != null){
-			          messageBodyPart = new MimeBodyPart();
-			          ByteArrayDataSource barcodeDs = new ByteArrayDataSource(barcode, "image/jpeg");
-			          messageBodyPart.setDataHandler(new DataHandler(barcodeDs));
-			          messageBodyPart.setHeader("Content-ID", "<barcode>");
-			          multipart.addBodyPart(messageBodyPart);
-		          }
-	          }
-	          
-			 mimeMessage.setContent(multipart);
-			 helper.setTo(order.getPerson().getUsername());
-			 helper.setSubject(messageSource.getMessage("email.user.receipt.subject", null, locale));
-			 mailSender.send(mimeMessage);
-			 log.info("For order confirmation an email to "+ order.getPerson().getUsername() + " has been sent.");
 
-			
+			/*
+			 * ******************************************** WARNING!
+			 * ******************************************** should be change for
+			 * all coupons
+			 */
+			if (!order.getCoupons().isEmpty()) {
+				// add QR code
+				byte[] qrcode = order.getCoupons().get(0).getQrcode();
+				if (qrcode != null) {
+					messageBodyPart = new MimeBodyPart();
+					ByteArrayDataSource qrCodeDs = new ByteArrayDataSource(
+							qrcode, "image/jpeg");
+					messageBodyPart.setDataHandler(new DataHandler(qrCodeDs));
+					messageBodyPart.setHeader("Content-ID", "<qrcode>");
+					multipart.addBodyPart(messageBodyPart);
+				}
+
+				// add barcode
+				byte[] barcode = order.getCoupons().get(0).getBarcode();
+				if (barcode != null) {
+					messageBodyPart = new MimeBodyPart();
+					ByteArrayDataSource barcodeDs = new ByteArrayDataSource(
+							barcode, "image/jpeg");
+					messageBodyPart.setDataHandler(new DataHandler(barcodeDs));
+					messageBodyPart.setHeader("Content-ID", "<barcode>");
+					multipart.addBodyPart(messageBodyPart);
+				}
+			}
+
+			mimeMessage.setContent(multipart);
+			helper.setTo(order.getPerson().getUsername());
+			helper.setSubject(messageSource.getMessage(
+					"email.user.receipt.subject", null, locale));
+			mailSender.send(mimeMessage);
+			log.info("For order confirmation an email to "
+					+ order.getPerson().getUsername() + " has been sent.");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-
-	
-
 }

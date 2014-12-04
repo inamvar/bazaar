@@ -168,13 +168,7 @@ public class SiteController {
 				uiModel.addAttribute("successMsg", messageSource.getMessage(
 						"security.password.change.success", null, locale));
 		}
-		uiModel.addAttribute("title",
-				messageSource.getMessage("website.home.title", null, locale));
-		uiModel.addAttribute("categories", categoryService.findAll());
-		uiModel.addAttribute("featureds", dealService
-				.findDealsByLabelAndStatus(DealLabel.FEATURED, ItemStatus.ON));
-		uiModel.addAttribute("deals", dealService.findDealsByStatusAndNotLabel(
-				DealLabel.FEATURED, ItemStatus.ON));
+		uiModel = fillModelForIndex(uiModel, locale);
 		return "website/index";
 
 	}
@@ -203,13 +197,29 @@ public class SiteController {
 			return "website/register";
 		}
 		customer = customerService.create(customer);
+		logger.info("customer= " + customer.getId() + ", "
+				+ customer.getFirstName() + " " + customer.getLastName());
 		if(customer !=null && customer.getId() > 0){
-			uiModel.addAttribute("msg", messageSource.getMessage(
+			uiModel.addAttribute("successMsg", messageSource.getMessage(
 					"customer.register.success", null, locale) );
-		}else{
-			
 		}
+		
+		uiModel = fillModelForIndex(uiModel, locale);
 			
 		return "website/index";
+	}
+	
+	
+	
+	private Model fillModelForIndex(Model uiModel, Locale locale){
+		uiModel.addAttribute("title",
+				messageSource.getMessage("website.home.title", null, locale));
+		uiModel.addAttribute("categories", categoryService.findAll());
+		uiModel.addAttribute("featureds", dealService
+				.findDealsByLabelAndStatus(DealLabel.FEATURED, ItemStatus.ON));
+		uiModel.addAttribute("deals", dealService.findDealsByStatusAndNotLabel(
+				DealLabel.FEATURED, ItemStatus.ON));
+		
+		return uiModel;
 	}
 }

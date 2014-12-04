@@ -43,6 +43,7 @@ public class Person implements Serializable{
 	@Past
 	private Date birthday;
 	private Gender gender;
+	@NotEmpty
 	@Column(nullable = false, name = "username", unique = true)
 	private String username;
 	
