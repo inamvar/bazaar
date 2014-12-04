@@ -138,8 +138,8 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<spring:message code="contact.geoLocation" /> 
-																								<a href="https://www.google.com/maps" target="_blank">Get
+								<spring:message code="contact.geoLocation" />
+								<a href="https://www.google.com/maps" target="_blank">Get
 									location from google map...</a>
 								<form:input class="form-control input-sm"
 									path="contact.geoLocation"></form:input>

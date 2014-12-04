@@ -3,6 +3,8 @@ package com.dariksoft.kalatag.controller;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.validation.Valid;
+
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dariksoft.kalatag.domain.City;
+import com.dariksoft.kalatag.domain.Contact;
+import com.dariksoft.kalatag.domain.Customer;
 import com.dariksoft.kalatag.domain.Deal;
 import com.dariksoft.kalatag.domain.DealLabel;
 import com.dariksoft.kalatag.domain.DealOption;
@@ -21,6 +30,9 @@ import com.dariksoft.kalatag.domain.ItemCategory;
 import com.dariksoft.kalatag.domain.ItemStatus;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
+import com.dariksoft.kalatag.propertyeditor.CityEditor;
+import com.dariksoft.kalatag.service.CityService;
+import com.dariksoft.kalatag.service.CustomerService;
 import com.dariksoft.kalatag.service.DealOptionService;
 import com.dariksoft.kalatag.service.DealService;
 import com.dariksoft.kalatag.service.ItemCategoryService;
@@ -51,10 +63,22 @@ public class SiteController {
 
 	@Autowired
 	private DealOptionService optionService;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	
+	@Autowired
+	private CityService cityService;
+	
+	private @Autowired CityEditor cityEditor;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	@InitBinder
+	public void iniBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(City.class, this.cityEditor);
+	}
+
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(
 			@RequestParam(value = "category", required = false) Integer catergoryId,
@@ -92,6 +116,8 @@ public class SiteController {
 			uiModel.addAttribute("deal", deal);
 		}
 		
+		uiModel.addAttribute("title", messageSource.getMessage(
+				"website.detail.title", null, locale));
 		return "website/detail";
 	}
 	
@@ -151,5 +177,39 @@ public class SiteController {
 				DealLabel.FEATURED, ItemStatus.ON));
 		return "website/index";
 
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String RegisterCustomer(Model uiModel, Locale locale){
+		
+		uiModel.addAttribute("title", messageSource.getMessage(
+				"website.register.title", null, locale));
+		uiModel.addAttribute("cities", cityService.findAll());
+		Customer customer = new Customer();
+		customer.setContact(new Contact());
+		uiModel.addAttribute("customer",customer);
+		return "website/register";
+	}
+	
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String RegisterCustomerPost(@ModelAttribute("customer") @Valid Customer customer,
+			BindingResult result, Locale locale, Model uiModel) {
+
+		if (result.hasErrors()) {
+			uiModel.addAttribute("title", messageSource.getMessage(
+					"website.register.title", null, locale));
+			uiModel.addAttribute("cities", cityService.findAll());
+			return "website/register";
+		}
+		customer = customerService.create(customer);
+		if(customer !=null && customer.getId() > 0){
+			uiModel.addAttribute("msg", messageSource.getMessage(
+					"customer.register.success", null, locale) );
+		}else{
+			
+		}
+			
+		return "website/index";
 	}
 }

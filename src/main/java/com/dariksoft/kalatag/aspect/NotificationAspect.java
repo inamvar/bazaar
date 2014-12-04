@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
+import com.dariksoft.kalatag.domain.Customer;
 import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
@@ -74,6 +75,29 @@ public class NotificationAspect {
 			person.setPassword(password);	
 			template.setDefaultDestination(registration);
 			MessageCreator messageCreator = new GenericMessageCreator<Person>(person);
+			template.send(messageCreator);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	
+	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.CustomerServiceImp) && execution(* create(..))")
+	public void aroundCustomerCreate(ProceedingJoinPoint pjp) throws Throwable{
+		
+		Object[] args = pjp.getArgs();
+		Customer customer = (Customer) args[0];
+		String password = Util.generateRandomPassword();
+		String encryptedPassword = Util.toSHA256(password);
+		log.info("pass="+encryptedPassword);
+		customer.setPassword(encryptedPassword);
+		try{
+			pjp.proceed();
+			customer.setPassword(password);	
+			template.setDefaultDestination(registration);
+			MessageCreator messageCreator = new GenericMessageCreator<Customer>(customer);
 			template.send(messageCreator);
 		}catch(Exception e){
 			e.printStackTrace();

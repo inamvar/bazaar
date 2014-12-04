@@ -23,7 +23,7 @@
 			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/error404.jsp" />
 	</definition>
-		<definition name="error403" extends=".adminTemplate">
+	<definition name="error403" extends=".adminTemplate">
 		<put-attribute name="header"
 			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/error403.jsp" />
@@ -48,7 +48,9 @@
 	<definition name="login" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
-	
+	<definition name="website/register" extends=".websiteTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+	</definition>
 	<definition name="test" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
 	</definition>
