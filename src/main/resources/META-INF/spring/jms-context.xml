@@ -16,21 +16,32 @@
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>tcp://192.168.100.200:61616</value>
+			<value>tcp://localhost:61616</value>
 		</property>
 	</bean>
 
 
 	<!-- Queues -->
 	<!-- <bean id="registration" class="org.apache.activemq.command.ActiveMQQueue"> 
-		<constructor-arg value="RegistrationQueue" /> </bean> <bean id="orderConfirmation" 
-		class="org.apache.activemq.command.ActiveMQQueue"> <constructor-arg value="orderConfirmationQueue" 
-		/> </bean> <bean id="auditing" class="org.apache.activemq.command.ActiveMQQueue"> 
-		<constructor-arg value="auditingQueue" /> </bean> <bean id="smsNotification" 
-		class="org.apache.activemq.command.ActiveMQQueue"> <constructor-arg value="smsNotificationQueue" 
-		/> </bean> -->
+		<constructor-arg value="RegistrationQueue" /> </bean> <bean id="auditing" 
+		class="org.apache.activemq.command.ActiveMQQueue"> <constructor-arg value="auditingQueue" 
+		/> </bean> <bean id="smsNotification" class="org.apache.activemq.command.ActiveMQQueue"> 
+		<constructor-arg value="smsNotificationQueue" /> </bean> -->
+
+	<bean id="orderConfirmation" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="orderConfirmationQueue" />
+	</bean>
+
 	<bean id="emailNotification" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg value="emailNotificationQueue" />
+	</bean>
+
+	<bean id="changePasswordNotification" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="changePasswordNotificationQueue" />
+	</bean>
+
+	<bean id="resetPasswordNotification" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="resetPasswordNotificationQueue" />
 	</bean>
 
 
@@ -47,8 +58,6 @@
 	<!-- <jms:listener-container connection-factory="connectionFactory"> <jms:listener 
 		destination="RegistrationQueue" method="onMessage" ref="registrationListener" 
 		/> </jms:listener-container> <jms:listener-container connection-factory="connectionFactory"> 
-		<jms:listener destination="orderConfirmationQueue" method="onMessage" ref="orderConfirmationListener" 
-		/> </jms:listener-container> <jms:listener-container connection-factory="connectionFactory"> 
 		<jms:listener destination="auditingQueue" method="onMessage" ref="auditingListener" 
 		/> </jms:listener-container> <jms:listener-container connection-factory="connectionFactory"> 
 		<jms:listener destination="smsNotificationQueue" method="onMessage" ref="smsNotificationListener" 
@@ -57,6 +66,21 @@
 	<jms:listener-container connection-factory="connectionFactory">
 		<jms:listener destination="emailNotificationQueue"
 			method="onMessage" ref="emailSenderListener" />
+	</jms:listener-container>
+
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="orderConfirmationQueue"
+			method="onMessage" ref="orderConfirmationListener" />
+	</jms:listener-container>
+
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="changePasswordNotificationQueue"
+			method="onMessage" ref="changePasswordListener" />
+	</jms:listener-container>
+
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="resetPasswordNotificationQueue"
+			method="onMessage" ref="resetPasswordListener" />
 	</jms:listener-container>
 
 

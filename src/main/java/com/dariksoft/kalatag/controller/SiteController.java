@@ -160,9 +160,9 @@ public class SiteController {
 			@RequestParam("email") String email, Model uiModel,
 			Locale locale) throws Throwable {
 
-		Person person = personService.findByUserName(Util.getCurrentUserName());
+		Person person = personService.findByUserName(email);
 		if (person != null && person.getId() > 0) {
-			int result = personService.resetPassword(person.getId());
+			int result = personService.resetPassword(person.getId(), null);
 			if (result > 0)
 				uiModel.addAttribute("successMsg", messageSource.getMessage(
 						"security.resetpass.success.message", null, locale));
@@ -176,7 +176,7 @@ public class SiteController {
 	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
 	public String changePassword(Model uiModel) throws Throwable {
 			
-		return "website/changepass";
+		return "website/changePassword";
 	}
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)

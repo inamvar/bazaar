@@ -18,27 +18,30 @@ import org.springframework.stereotype.Component;
 
 import com.dariksoft.kalatag.domain.Person;
 
-@Component("registrationListener")
-public class RegistrationListener {
 
-	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
+@Component("changePasswordListener")
+public class ChangePasswordListener {
 
+	private Logger log = LoggerFactory.getLogger(ChangePasswordListener.class);
+	
 	@Autowired
 	private JavaMailSender mailSender;
 
 	@Autowired
 	private MessageSource messageSource;
-
+	
+	
 	public void onMessage(Person person) {
 
 		try {
-			log.info("Registeration: " + person + " registered successfully.");
+			
 			sendEmail(person);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void sendEmail(Person person) {
 
 		try {
@@ -46,7 +49,7 @@ public class RegistrationListener {
 			log.info("locale from context=" + locale);
 			// locale = new Locale("es_ES");
 			// locale = new Locale("ar_AE");
-			locale = new Locale("fa_IR");
+			locale = new Locale("fa");
 			log.info("locale=" + locale);
 
 			String[] params = new String[4];
@@ -55,10 +58,10 @@ public class RegistrationListener {
 			params[2] = person.getUsername();
 			params[3] = person.getPassword();
 
-			String htmlText = messageSource.getMessage("email.user.registration", params, locale);
-
+			String htmlText = messageSource.getMessage("email.user.password.change", params, locale);
+			System.setProperty("mail.mime.charset", "UTF-8");
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
 
@@ -68,9 +71,9 @@ public class RegistrationListener {
 
 			mimeMessage.setContent(multipart);
 			helper.setTo(person.getUsername());
-			helper.setSubject(messageSource.getMessage("email.user.registration.subject", null, locale));
+			helper.setSubject(messageSource.getMessage("email.user.password.change.subject", null, locale));
 			mailSender.send(mimeMessage);
-			log.info("For registeration notification an email to "
+			log.info("For change password notification an email to "
 					+ person.getUsername() + " has been sent.");
 
 		} catch (Exception e) {
@@ -78,5 +81,5 @@ public class RegistrationListener {
 		}
 
 	}
-
+	
 }

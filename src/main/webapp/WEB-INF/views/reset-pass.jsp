@@ -15,7 +15,9 @@
 
 			</div>
 			<div class="panel-body">
-				<p><spring:message code="security.resetpass.message" /></p>
+				<p>
+					<spring:message code="security.resetpass.message" />
+				</p>
 				<form:form name='f'
 					action="${pageContext.request.contextPath}/resetpass" method='POST'>
 					<div class="text text-danger">

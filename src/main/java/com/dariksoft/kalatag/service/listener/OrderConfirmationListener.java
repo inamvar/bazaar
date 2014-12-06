@@ -37,13 +37,16 @@ public class OrderConfirmationListener {
 
 	// @Autowired
 	// private CouponService couponService;
+	
+	Locale locale = new Locale("fa");
 
 	private Logger log = LoggerFactory
 			.getLogger(OrderConfirmationListener.class);
 
 	public void onMessage(Order order) {
+
 		try {
-			log.info("---------->new order received from Qserver. order id="
+			log.info("---------->Order confirmation message from Qserver. order id="
 					+ order.getId());
 			List<Order> orders = orderService.confirmOrder(order);
 			if (orders.size() > 0)
@@ -53,23 +56,19 @@ public class OrderConfirmationListener {
 							+ " " + ord.getPerson().getLastName()
 							+ ", Status: " + ord.getStatus());
 
-					sendEmail(ord);
+					sendOrderConfirmEmail(ord);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void sendEmail(Order order) {
+	public void sendOrderConfirmEmail(Order order) {
 
 		try {
 
-			// JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
 
-			// System.setProperty("file.encoding","UTF-8");
-
-			Locale locale = LocaleContextHolder.getLocale();
-
+			
 			String[] params = new String[11];
 			params[0] = order.getPerson().getFirstName();
 			params[1] = order.getDeal().getMerchant().getName();
@@ -102,7 +101,7 @@ public class OrderConfirmationListener {
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			// add html part
-			messageBodyPart.setContent(htmlText, "text/html");
+			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 			multipart.addBodyPart(messageBodyPart);
 
 			// add image

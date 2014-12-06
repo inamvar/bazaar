@@ -17,9 +17,9 @@ import com.dariksoft.kalatag.domain.Customer;
 import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
-import com.dariksoft.kalatag.service.listener.ChangePasswordMessageCreator;
 import com.dariksoft.kalatag.service.listener.GenericMessageCreator;
 import com.dariksoft.kalatag.service.listener.RegistrationListener;
+import com.dariksoft.kalatag.service.person.PersonService;
 import com.dariksoft.kalatag.util.Util;
 
 @Aspect
@@ -30,6 +30,15 @@ public class NotificationAspect {
 
 	@Autowired
 	Destination emailNotification;
+
+	@Autowired
+	Destination changePasswordNotification;
+
+	@Autowired
+	Destination resetPasswordNotification;
+
+	@Autowired
+	PersonService personService;
 
 	private Logger log = LoggerFactory.getLogger(RegistrationListener.class);
 
@@ -126,25 +135,63 @@ public class NotificationAspect {
 		int ret = 0;
 		Object[] args = pjp.getArgs();
 		int id = (Integer) args[0];
+		Person person = personService.find(id);
+		if (person != null) {
+			String password = (String) args[1];
+			String encryptedPassword = Util.toSHA256(password);
+			log.info("pass=" + encryptedPassword);
 
-		String password = (String) args[1];
-		String encryptedPassword = Util.toSHA256(password);
-		log.info("pass=" + encryptedPassword);
+			try {
+				ret = (Integer) pjp.proceed();
+				person.setPassword(password);
+				template.setDefaultDestination(changePasswordNotification);
 
-		try {
-			ret = (Integer) pjp.proceed();
-			template.setDefaultDestination(emailNotification);
-			MessageCreator messageCreator = new ChangePasswordMessageCreator(
-					id, false);
-			template.send(messageCreator);
-			return ret;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		} catch (Throwable e) {
-			e.printStackTrace();
-			return -2;
-		}
+				MessageCreator messageCreator = new GenericMessageCreator<Person>(
+						person);
+				template.send(messageCreator);
+				person.setPassword(encryptedPassword);
+				return ret;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return -1;
+			} catch (Throwable e) {
+				e.printStackTrace();
+				return -2;
+			}
+		} else
+			return -3;
+	}
+
+	@Around("within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.person.PersonServiceImp) && execution(* resetPassword(..))")
+	public int afterPerosnResetPassword(ProceedingJoinPoint pjp) {
+		int ret = 0;
+		Object[] args = pjp.getArgs();
+		int id = (Integer) args[0];
+		Person person = personService.find(id);
+		if (person != null) {
+			String password = Util.generateRandomPassword();
+			 String encryptedPassword = Util.toSHA256(password);
+			// log.info("pass=" + encryptedPassword);
+
+			try {
+				ret = (Integer) pjp.proceed(new Object[] { id, password });
+				person.setPassword(password);
+				template.setDefaultDestination(resetPasswordNotification);
+
+				MessageCreator messageCreator = new GenericMessageCreator<Person>(
+						person);
+				template.send(messageCreator);
+				person.setPassword(encryptedPassword);
+				return ret;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return -1;
+			} catch (Throwable e) {
+				e.printStackTrace();
+				return -2;
+			}
+		} else
+			return -3;
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.dariksoft.kalatag.service.listener;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.activation.DataHandler;
+import javax.jms.Destination;
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -15,11 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import com.dariksoft.kalatag.domain.Coupon;
 import com.dariksoft.kalatag.domain.Customer;
 import com.dariksoft.kalatag.domain.Merchant;
 import com.dariksoft.kalatag.domain.Order;
@@ -33,59 +34,57 @@ public class EmailSenderListener {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	JmsTemplate template;
 
 	@Autowired
 	private MessageSource messageSource;
-	
+
 	@Autowired
 	private OrderService orderService;
 
-	
+	@Autowired
+	Destination orderConfirmation;
+
+	Locale locale = new Locale("fa");
+
 	public void onMessage(Customer customer) {
 
 		try {
-			log.info("Registeration customer: " + customer+ " registered successfully.");
+			log.info("Registeration customer: " + customer
+					+ " registered successfully.");
 			sendCustomerRegisterEmail(customer);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void onMessage(Merchant merchant	) {
+
+	public void onMessage(Merchant merchant) {
 
 		try {
-			log.info("Registeration merchant: " + merchant+ " registered successfully.");
+			log.info("Registeration merchant: " + merchant
+					+ " registered successfully.");
 			sendCustomerRegisterEmail(merchant.getContactPoint());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-		
-	public void onMessage(Person person) {
 
-		try {
-			log.info("Change password: " + person+ " password changed successfully.");
-			//TODO: sen an email for change pasword
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public void onMessage(Order order){
+	public void onMessage(Order order) {
 		try {
 			log.info("---------->new order received from Qserver. order id="
 					+ order.getId());
-			List<Order> orders = orderService.confirmOrder(order);
-			if (orders.size() > 0)
-				for (Order ord : orders) {
-					log.info("Order confirmation: id:" + ord.getId()
-							+ ", Customer: " + ord.getPerson().getFirstName()
-							+ " " + ord.getPerson().getLastName()
-							+ ", Status: " + ord.getStatus());
+			log.info("Order confirmation: id:" + order.getId()
+					+ ", Customer: " + order.getPerson().getFirstName()
+					+ " " + order.getPerson().getLastName()
+					+ ", Status: " + order.getStatus());
 
-					sendOrderCreateEmail(ord);
-				}
+			template.setDefaultDestination(orderConfirmation);
+			MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
+			template.send(messageCreator);
+			sendOrderCreateEmail(order);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,11 +94,6 @@ public class EmailSenderListener {
 
 		try {
 			Locale locale = LocaleContextHolder.getLocale();
-			log.info("locale from context=" + locale);
-			// locale = new Locale("es_ES");
-			// locale = new Locale("ar_AE");
-			locale = new Locale("fa_IR");
-			log.info("locale=" + locale);
 
 			String[] params = new String[4];
 			params[0] = person.getFirstName();
@@ -107,20 +101,23 @@ public class EmailSenderListener {
 			params[2] = person.getUsername();
 			params[3] = person.getPassword();
 
-			String htmlText = messageSource.getMessage("email.user.registration", params, locale);
+			String htmlText = messageSource.getMessage(
+					"email.user.registration", params, locale);
 
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,
+					false, "utf-8");
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			// add html part
-			messageBodyPart.setContent(htmlText, "text/html");
+			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 			multipart.addBodyPart(messageBodyPart);
 
 			mimeMessage.setContent(multipart);
 			helper.setTo(person.getUsername());
-			helper.setSubject(messageSource.getMessage("email.user.registration.subject", null, locale));
+			helper.setSubject(messageSource.getMessage(
+					"email.user.registration.subject", null, locale));
 			mailSender.send(mimeMessage);
 			log.info("For registeration notification an email to "
 					+ person.getUsername() + " has been sent.");
@@ -130,40 +127,34 @@ public class EmailSenderListener {
 		}
 
 	}
+
 	public void sendOrderCreateEmail(Order order) {
 
 		try {
+			
 
-			// JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
 
-			// System.setProperty("file.encoding","UTF-8");
-
-			Locale locale = LocaleContextHolder.getLocale();
-
-			String[] params = new String[11];
+			String[] params = new String[9];
 			params[0] = order.getPerson().getFirstName();
-			params[1] = order.getDeal().getMerchant().getName();
-			params[2] = order.getDeal().getName();
-			params[3] = order.getOption().getName();
-			params[4] = order.getPerson().getFirstName() + " "
+			params[1] = order.getDeal().getName();
+			params[2] = order.getOption().getName();
+			params[3] = order.getPerson().getFirstName() + " "
 					+ order.getPerson().getLastName();
-			params[5] = order.getDeal().getMerchant().getName();
-			params[6] = order.getDeal().getMerchant().getContact().getAddress();
-			params[7] = order.getCoupons().get(0).getIssueDate().toString();
-			params[8] = order.getOption().getPrice() + "";
-			params[9] = messageSource.getMessage("kalatag.currenncy", null,
+			params[4] = order.getDeal().getMerchant().getName();
+			params[5] = order.getDeal().getMerchant().getContact().getAddress();
+			params[6] = order.getOrderDate().toString();
+			params[7] = order.getOption().getPrice() + "";
+			params[8] = messageSource.getMessage("kalatag.currenncy", null,
 					locale);
 			;
 
-			StringBuffer sb = new StringBuffer();
-			for (Coupon c : order.getCoupons()) {
-				sb.append(c.getCode());
-				sb.append("<br>");
-			}
-			params[10] = sb.toString();
 
-			String htmlText = messageSource.getMessage("email.user.receipt",
+			String htmlText = messageSource.getMessage("email.order.new",
 					params, locale);
+			
+		
+			
+			//log.info(htmlText);
 
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true,
@@ -172,7 +163,7 @@ public class EmailSenderListener {
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			// add html part
-			messageBodyPart.setContent(htmlText, "text/html");
+			messageBodyPart.setContent(htmlText, "text/html; charset=utf-8");
 			multipart.addBodyPart(messageBodyPart);
 
 			// add image
@@ -186,41 +177,13 @@ public class EmailSenderListener {
 				multipart.addBodyPart(messageBodyPart);
 			}
 
-			/*
-			 * ******************************************** WARNING!
-			 * ******************************************** should be change for
-			 * all coupons
-			 */
-			if (!order.getCoupons().isEmpty()) {
-				// add QR code
-				byte[] qrcode = order.getCoupons().get(0).getQrcode();
-				if (qrcode != null) {
-					messageBodyPart = new MimeBodyPart();
-					ByteArrayDataSource qrCodeDs = new ByteArrayDataSource(
-							qrcode, "image/jpeg");
-					messageBodyPart.setDataHandler(new DataHandler(qrCodeDs));
-					messageBodyPart.setHeader("Content-ID", "<qrcode>");
-					multipart.addBodyPart(messageBodyPart);
-				}
-
-				// add barcode
-				byte[] barcode = order.getCoupons().get(0).getBarcode();
-				if (barcode != null) {
-					messageBodyPart = new MimeBodyPart();
-					ByteArrayDataSource barcodeDs = new ByteArrayDataSource(
-							barcode, "image/jpeg");
-					messageBodyPart.setDataHandler(new DataHandler(barcodeDs));
-					messageBodyPart.setHeader("Content-ID", "<barcode>");
-					multipart.addBodyPart(messageBodyPart);
-				}
-			}
-
+			
 			mimeMessage.setContent(multipart);
 			helper.setTo(order.getPerson().getUsername());
 			helper.setSubject(messageSource.getMessage(
-					"email.user.receipt.subject", null, locale));
+					"email.order.new.subject", null, locale));
 			mailSender.send(mimeMessage);
-			log.info("For order confirmation an email to "
+			log.info("For order Issue an email to "
 					+ order.getPerson().getUsername() + " has been sent.");
 
 		} catch (Exception e) {

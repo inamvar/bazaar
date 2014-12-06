@@ -29,8 +29,8 @@ public class PersonServiceImp  extends CRUDServiceImp<Person> implements PersonS
 
 	@Override
 	@Transactional
-	public int resetPassword(int id) {
-		String newPassword = Util.generateRandomPassword();
+	public int resetPassword(int id, String newPassword) {
+		
 		return personDao.changePassword(id, newPassword);
 	}
 	
