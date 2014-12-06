@@ -148,11 +148,35 @@ public class SiteController {
 		throw new Exception("This is a sample exception.");
 
 	}
+	
+	@RequestMapping(value = "/resetpass", method = RequestMethod.GET)
+	public String resetPassword(Model uiModel) throws Throwable {
+
+		return "website/resetpass";
+	}
+
+	@RequestMapping(value = "/resetpass", method = RequestMethod.POST)
+	public String resetPassword(
+			@RequestParam("email") String email, Model uiModel,
+			Locale locale) throws Throwable {
+
+		Person person = personService.findByUserName(Util.getCurrentUserName());
+		if (person != null && person.getId() > 0) {
+			int result = personService.resetPassword(person.getId());
+			if (result > 0)
+				uiModel.addAttribute("successMsg", messageSource.getMessage(
+						"security.resetpass.success.message", null, locale));
+		}
+		uiModel = fillModelForIndex(uiModel, locale);
+		return "website/index";
+
+	}
+	
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
 	public String changePassword(Model uiModel) throws Throwable {
-
-		return "website/changePassword";
+			
+		return "website/changepass";
 	}
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)

@@ -35,7 +35,7 @@
 				<%-- 					<li class="text-info"><a><spring:message
 								code="admin.menu.definitions.categories" /></a></li> --%>
 				<li><a class="text-success"
-					href="${pageContext.request.contextPath}"><i
+					href="${pageContext.request.contextPath}/"><i
 						class="glyphicon glyphicon-th"></i> <spring:message
 							code="deal.all" /></a></li>
 				<c:forEach items="${categories}" var="category">

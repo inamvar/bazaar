@@ -14,7 +14,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><spring:message
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/"><spring:message
 					code="website.header.brand" /></a>
 		</div>
 
@@ -24,7 +24,7 @@
 			<div class="nav navbar-nav"></div>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><spring:message code="language"/> (<c:out value="${pageContext.response.locale.language}"/>) <span class="caret"></span> </a>
+					data-toggle="dropdown"><c:out value="${pageContext.response.locale.language}"/> <span class="caret"></span> </a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="?lang=en"><img src="${pageContext.request.contextPath}/resources/images/gb.gif"/> English</a></li>
 						<li><a href="?lang=ar"><img src="${pageContext.request.contextPath}/resources/images/ae.gif"/> العربیه</a></li>

@@ -26,7 +26,11 @@
 				<form:form name='f'
 					action="${pageContext.request.contextPath}/j_spring_security_check"
 					method='POST'>
-					<div class="text text-danger"><p><form:errors path="*" /></p></div>
+					<div class="text text-danger">
+						<p>
+							<form:errors path="*" />
+						</p>
+					</div>
 
 					<div class="form-group">
 						<p>
@@ -50,9 +54,15 @@
 							value="<spring:message code="security.login"/>" /> <input
 							class="btn btn-default btn-sm" name="reset" type="reset"
 							value="<spring:message code="reset"/>" />
-
 					</div>
-
+					<div class="form-group">
+						<a href="${pageContext.request.contextPath}/resetpass"><spring:message
+								code="security.login.forgotpassrowd" /></a>
+					</div>
+					<div class="form-group">
+						<a href="${pageContext.request.contextPath}/register"><spring:message
+								code="register.notRegistered" /></a>
+					</div>
 				</form:form>
 			</div>
 		</div>

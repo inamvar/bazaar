@@ -30,7 +30,9 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<p><spring:message code="person.gender" /></p>
+							<p>
+								<spring:message code="person.gender" />
+							</p>
 							<form:select class="form-control input-sm" path="gender">
 								<form:options />
 							</form:select>
@@ -64,14 +66,16 @@
 
 						<div class="form-group">
 							<spring:message code="contact.mobile" />
-							<form:input class="form-control input-sm" path="contact.mobile" placeholder="00989120000000"></form:input>
+							<form:input class="form-control input-sm" path="contact.mobile"
+								placeholder="00989120000000"></form:input>
 							<form:errors path="contact.mobile" cssClass="text text-danger" />
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<spring:message code="contact.phone" />
-							<form:input class="form-control input-sm" path="contact.phone" placeholder="00982144000000"></form:input>
+							<form:input class="form-control input-sm" path="contact.phone"
+								placeholder="00982144000000"></form:input>
 							<form:errors path="contact.phone" cssClass="text text-danger" />
 						</div>
 					</div>
@@ -87,9 +91,16 @@
 					<div class="col-sm-2">
 						<div class="form-group">
 
-							<input class="btn btn-danger btn-block btn-sm" name="submit" type="submit"
-								value="<spring:message code="submit"/>" />
+							<input class="btn btn-danger btn-block btn-sm" name="submit"
+								type="submit" value="<spring:message code="submit"/>" />
 
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<p></p>
+							<a href="${pageContext.request.contextPath}/login"><spring:message
+									code="register.already" /></a>
 						</div>
 					</div>
 				</form:form>

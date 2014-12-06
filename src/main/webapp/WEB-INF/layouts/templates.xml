@@ -51,6 +51,10 @@
 	<definition name="website/register" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />
 	</definition>
+		<definition name="website/resetpass" extends=".websiteTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/reset-pass.jsp" />
+	</definition>
+	
 	<definition name="test" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
 	</definition>
