@@ -117,9 +117,11 @@
 					</a>
 				</div>
 				<div class="col-sm-3">
-				
-						<a href="${pageContext.request.contextPath}/register" class="btn btn-primary btn-block"><spring:message code="register"/></a>
-		
+
+					<a href="${pageContext.request.contextPath}/register"
+						class="btn btn-primary btn-block"><spring:message
+							code="register" /></a>
+
 				</div>
 
 
