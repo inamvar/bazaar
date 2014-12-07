@@ -8,4 +8,5 @@ import com.dariksoft.kalatag.domain.Order;
 public interface OrderDao extends GenericDao<Order>{
 
 	List<Order> findPendingOrders(Deal deal);
+	List<Order> findOrdersByDeal(Deal deal);
 }

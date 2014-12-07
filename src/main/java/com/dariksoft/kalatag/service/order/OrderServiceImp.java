@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,6 +86,11 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	@Transactional
 	public List<Order> findPendingOrders(Deal deal) {
 		return orderDao.findPendingOrders(deal);
+	}
+
+	@Override
+	public List<Order> findOrdersByDeal(Deal deal) {
+		return orderDao.findOrdersByDeal(deal);
 	}
 
 }

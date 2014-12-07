@@ -34,7 +34,7 @@ public class EmailSenderListener {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
+
 	@Autowired
 	JmsTemplate template;
 
@@ -75,13 +75,14 @@ public class EmailSenderListener {
 		try {
 			log.info("---------->new order received from Qserver. order id="
 					+ order.getId());
-			log.info("Order confirmation: id:" + order.getId()
-					+ ", Customer: " + order.getPerson().getFirstName()
-					+ " " + order.getPerson().getLastName()
-					+ ", Status: " + order.getStatus());
+			log.info("Order confirmation: id:" + order.getId() + ", Customer: "
+					+ order.getPerson().getFirstName() + " "
+					+ order.getPerson().getLastName() + ", Status: "
+					+ order.getStatus());
 
 			template.setDefaultDestination(orderConfirmation);
-			MessageCreator messageCreator = new GenericMessageCreator<Order>(order);
+			MessageCreator messageCreator = new GenericMessageCreator<Order>(
+					order);
 			template.send(messageCreator);
 			sendOrderCreateEmail(order);
 
@@ -131,8 +132,6 @@ public class EmailSenderListener {
 	public void sendOrderCreateEmail(Order order) {
 
 		try {
-			
-
 
 			String[] params = new String[9];
 			params[0] = order.getPerson().getFirstName();
@@ -148,13 +147,10 @@ public class EmailSenderListener {
 					locale);
 			;
 
-
 			String htmlText = messageSource.getMessage("email.order.new",
 					params, locale);
-			
-		
-			
-			//log.info(htmlText);
+
+			// log.info(htmlText);
 
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true,
@@ -177,7 +173,6 @@ public class EmailSenderListener {
 				multipart.addBodyPart(messageBodyPart);
 			}
 
-			
 			mimeMessage.setContent(multipart);
 			helper.setTo(order.getPerson().getUsername());
 			helper.setSubject(messageSource.getMessage(

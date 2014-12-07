@@ -7,6 +7,10 @@ h1,h2,h3,h4 {
 	font-family:  "B Roya";
 }
 
+table {
+	font-size: 0.9em;
+	
+}
 
 .gmap{
 width:100%;

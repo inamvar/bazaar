@@ -44,11 +44,15 @@
 							code="admin.menu.merchants" /></a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/deal"><spring:message
 							code="admin.menu.deals" /></a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/customer"><spring:message
+							code="admin.menu.definitions.customers" /></a></li></li>
+								<li><a href="${pageContext.request.contextPath}/admin/order"><spring:message
+							code="admin.menu.orders" /></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><spring:message code="language" /> (<c:out
-							value="${pageContext.response.locale.language}" />) <span
+					data-toggle="dropdown"><c:out
+							value="${pageContext.response.locale.language}" /> <span
 						class="caret"></span> </a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="?lang=en"><img

@@ -10,4 +10,5 @@ public interface OrderService extends CRUDService<Order>{
 
 	List<Order> confirmOrder(Order order);
 	List<Order> findPendingOrders(Deal deal);
+	List<Order> findOrdersByDeal(Deal deal);
 }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+  <definition extends=".adminTemplate" name="order/list">
+    <put-attribute name="body" value="/WEB-INF/views/admin/order/list.jsp"/>
+  </definition>
+
+  <definition extends=".adminTemplate" name="order/add">
+    <put-attribute name="body" value="/WEB-INF/views/admin/order/add.jsp"/>
+  </definition>
+  
+  <definition extends=".adminTemplate" name="order/update">
+    <put-attribute name="body" value="/WEB-INF/views/admin/order/update.jsp"/>
+  </definition>
+  
+
+
+</tiles-definitions>
