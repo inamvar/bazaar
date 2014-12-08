@@ -11,7 +11,7 @@ private Logger logger = LoggerFactory.getLogger(SmsNotificationListener.class);
 	
 	public void onMessage(String message) {
 		try {
-			logger.info("SMS notification: " + message);
+			logger.debug("SMS notification: " + message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

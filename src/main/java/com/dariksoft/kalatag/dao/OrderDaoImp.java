@@ -3,6 +3,7 @@ package com.dariksoft.kalatag.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,15 @@ public class OrderDaoImp extends GenericDaoImp<Order> implements OrderDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Override
+	public Order find(int id) {
+		Order order = (Order) this.sessionFactory.getCurrentSession().get(
+				Order.class, id);
+		Hibernate.initialize(order.getCoupons());
+		return order;
+
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findPendingOrders(Deal deal) {
@@ -27,7 +37,7 @@ public class OrderDaoImp extends GenericDaoImp<Order> implements OrderDao {
 		query.setParameter("deal", deal);
 		results = query.list();
 		if (results == null)
-				results = new ArrayList<Order>();
+			results = new ArrayList<Order>();
 		return results;
 	}
 
@@ -40,7 +50,7 @@ public class OrderDaoImp extends GenericDaoImp<Order> implements OrderDao {
 		query.setParameter("deal", deal);
 		results = query.list();
 		if (results == null)
-				results = new ArrayList<Order>();
+			results = new ArrayList<Order>();
 		return results;
 	}
 

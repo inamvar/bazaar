@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dariksoft.kalatag.dao.OrderDao;
 import com.dariksoft.kalatag.domain.Coupon;
 import com.dariksoft.kalatag.domain.Deal;
+import com.dariksoft.kalatag.domain.ItemStatus;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.OrderStatus;
+import com.dariksoft.kalatag.exception.DealExpiredException;
 import com.dariksoft.kalatag.service.CRUDServiceImp;
 import com.dariksoft.kalatag.service.CouponService;
 import com.dariksoft.kalatag.service.DealService;
@@ -29,15 +31,14 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 
 	@Autowired
 	CouponService couponService;
+	
+	
 
 	@Override
 	@Transactional
 	public List<Order> confirmOrder(Order order) {
 
-		System.out.println("Confirming  order number " + order.getId());
 		Deal deal = order.getDeal();
-		// Hibernate.initialize(deal.getImages());
-		// Hibernate.initialize(deal.getThumbnail());
 		System.out.println("deal.id = " + deal.getId());
 		int minimum = deal.getMinCoupon();
 		List<Order> orders = new ArrayList<Order>();
@@ -89,6 +90,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	}
 
 	@Override
+	@Transactional
 	public List<Order> findOrdersByDeal(Deal deal) {
 		return orderDao.findOrdersByDeal(deal);
 	}

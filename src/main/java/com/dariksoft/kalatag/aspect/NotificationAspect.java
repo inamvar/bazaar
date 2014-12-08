@@ -75,7 +75,7 @@ public class NotificationAspect {
 		Person person = (Person) args[0];
 		String password = Util.generateRandomPassword();
 		String encryptedPassword = Util.toSHA256(password);
-		log.info("pass=" + encryptedPassword);
+		log.debug("pass=" + encryptedPassword);
 		person.setPassword(encryptedPassword);
 		try {
 			person = (Person) pjp.proceed();
@@ -101,7 +101,7 @@ public class NotificationAspect {
 		Customer customer = (Customer) args[0];
 		String password = Util.generateRandomPassword();
 		String encryptedPassword = Util.toSHA256(password);
-		log.info("pass=" + encryptedPassword);
+		
 		customer.setPassword(encryptedPassword);
 		try {
 			customer = (Customer) pjp.proceed();
@@ -121,7 +121,7 @@ public class NotificationAspect {
 
 	@AfterReturning(pointcut = "within(com.dariksoft.kalatag.service.CRUDService+) && target(com.dariksoft.kalatag.service.order.OrderServiceImp) && execution(* create(..))", returning = "order")
 	public void afterOrderCreate(JoinPoint jp, Order order) throws Throwable {
-		log.info("after create order id=" + order.getId()
+		log.debug("after create order id=" + order.getId()
 				+ ", sending order to qserver...");
 		// order.getDeal().setImages(null);
 		// order.getDeal().setThumbnail(null);
@@ -139,7 +139,7 @@ public class NotificationAspect {
 		if (person != null) {
 			String password = (String) args[1];
 			String encryptedPassword = Util.toSHA256(password);
-			log.info("pass=" + encryptedPassword);
+			
 
 			try {
 				ret = (Integer) pjp.proceed();
@@ -171,7 +171,7 @@ public class NotificationAspect {
 		if (person != null) {
 			String password = Util.generateRandomPassword();
 			 String encryptedPassword = Util.toSHA256(password);
-			// log.info("pass=" + encryptedPassword);
+		
 
 			try {
 				ret = (Integer) pjp.proceed(new Object[] { id, password });

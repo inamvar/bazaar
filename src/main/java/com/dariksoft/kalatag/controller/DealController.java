@@ -107,12 +107,12 @@ public class DealController {
 			return "deal/add";
 		}
 
-		logger.info("options count:" + item.getOptions().size());
+		logger.debug("options count:" + item.getOptions().size());
 		for (DealOption option : item.getOptions()) {
 
-			logger.info("Option id:" + option.getId());
-			logger.info("Option name:" + option.getName());
-			logger.info("Option discount:" + option.getDiscount());
+			logger.debug("Option id:" + option.getId());
+			logger.debug("Option name:" + option.getName());
+			logger.debug("Option discount:" + option.getDiscount());
 		}
 		manageOptions(item);
 
@@ -247,7 +247,7 @@ public class DealController {
 		// Then, delete the previously linked options which should be now
 		// removed
 		for (DealOption option : options2remove) {
-			logger.info("option.id="+ option.getId());
+			logger.debug("option.id="+ option.getId());
 			if (option.getId() > 0) {
 				optionService.delete(option.getId());
 			}

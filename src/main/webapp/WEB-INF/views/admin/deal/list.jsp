@@ -9,7 +9,7 @@
 		<spring:message code="deal.list" />
 	</h2>
 	<hr />
-	<div class="col-sm-10 col-md-10">
+	<div class="col-sm-12 col-md-12">
 		<p>
 			<a class="btn btn-danger btn-sm"
 				href="${pageContext.request.contextPath}/admin/deal/add"><span
@@ -43,7 +43,12 @@
 									code="crud.delete" /></a> <a class="btn btn-success btn-xs"
 							href="${pageContext.request.contextPath}/admin/deal/update/${deal.id}"><span
 								class=" glyphicon glyphicon-pencil"> </span> <spring:message
-									code="crud.edit" /></a></td>
+									code="crud.edit" /></a>
+									<a class="btn btn-default btn-xs"
+							href="${pageContext.request.contextPath}/admin/order?deal=${deal.id}"><span
+								class="glyphicon glyphicon-list"> </span> <spring:message
+									code="deal.orders" /></a>
+									</td>
 					</tr>
 				</c:forEach>
 			</tbody>

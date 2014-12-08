@@ -73,9 +73,9 @@ public class EmailSenderListener {
 
 	public void onMessage(Order order) {
 		try {
-			log.info("---------->new order received from Qserver. order id="
+			log.debug("---------->new order received from Qserver. order id="
 					+ order.getId());
-			log.info("Order confirmation: id:" + order.getId() + ", Customer: "
+			log.debug("Order confirmation: id:" + order.getId() + ", Customer: "
 					+ order.getPerson().getFirstName() + " "
 					+ order.getPerson().getLastName() + ", Status: "
 					+ order.getStatus());
@@ -143,7 +143,7 @@ public class EmailSenderListener {
 			params[5] = order.getDeal().getMerchant().getContact().getAddress();
 			params[6] = order.getOrderDate().toString();
 			params[7] = order.getOption().getPrice() + "";
-			params[8] = messageSource.getMessage("kalatag.currenncy", null,
+			params[8] = messageSource.getMessage("kalatag.currency", null,
 					locale);
 			;
 

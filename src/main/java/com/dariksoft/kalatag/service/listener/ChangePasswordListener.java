@@ -46,11 +46,11 @@ public class ChangePasswordListener {
 
 		try {
 			Locale locale = LocaleContextHolder.getLocale();
-			log.info("locale from context=" + locale);
+			log.debug("locale from context=" + locale);
 			// locale = new Locale("es_ES");
 			// locale = new Locale("ar_AE");
 			locale = new Locale("fa");
-			log.info("locale=" + locale);
+			log.debug("locale=" + locale);
 
 			String[] params = new String[4];
 			params[0] = person.getFirstName();

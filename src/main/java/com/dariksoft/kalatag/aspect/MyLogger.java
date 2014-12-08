@@ -15,6 +15,6 @@ public class MyLogger {
 
     @After("execution(* com.dariksoft.kalatag.service.person.PersonServiceImp.create(..))")
     public void log(JoinPoint point) {
-        log.info("------------>"+point.getSignature().getName() + " called...");
+        log.debug("------------>"+point.getSignature().getName() + " called...");
     }
 }

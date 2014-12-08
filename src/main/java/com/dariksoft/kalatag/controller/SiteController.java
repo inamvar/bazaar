@@ -1,6 +1,7 @@
 package com.dariksoft.kalatag.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -30,6 +31,7 @@ import com.dariksoft.kalatag.domain.ItemCategory;
 import com.dariksoft.kalatag.domain.ItemStatus;
 import com.dariksoft.kalatag.domain.Order;
 import com.dariksoft.kalatag.domain.Person;
+import com.dariksoft.kalatag.exception.DealExpiredException;
 import com.dariksoft.kalatag.propertyeditor.CityEditor;
 import com.dariksoft.kalatag.service.CityService;
 import com.dariksoft.kalatag.service.CustomerService;
@@ -63,14 +65,13 @@ public class SiteController {
 
 	@Autowired
 	private DealOptionService optionService;
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
-	
+
 	@Autowired
 	private CityService cityService;
-	
+
 	private @Autowired CityEditor cityEditor;
 
 	@InitBinder
@@ -78,27 +79,26 @@ public class SiteController {
 		binder.registerCustomEditor(City.class, this.cityEditor);
 	}
 
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(
 			@RequestParam(value = "category", required = false) Integer catergoryId,
 			Locale locale, Model model) {
-		
+
 		model.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("featureds", dealService.findDealsByLabelAndStatus(
 				DealLabel.FEATURED, ItemStatus.ON));
-		if (catergoryId !=null && catergoryId > 0) {
+		if (catergoryId != null && catergoryId > 0) {
 			ItemCategory category = categoryService.find(catergoryId);
-			if (category != null){
+			if (category != null) {
 				model.addAttribute("deals", dealService
 						.findDealsByCategoryAndStatusAndNotLabel(category,
 								DealLabel.FEATURED, ItemStatus.ON));
-				}else{
-					model.addAttribute("deals", new ArrayList<Deal>());
-				}
-			
+			} else {
+				model.addAttribute("deals", new ArrayList<Deal>());
+			}
+
 		} else {
 			model.addAttribute("deals", dealService
 					.findDealsByStatusAndNotLabel(DealLabel.FEATURED,
@@ -106,40 +106,46 @@ public class SiteController {
 		}
 		return "website/index";
 	}
-	
+
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String detail(@RequestParam("deal") int dealId, Locale locale , Model uiModel){
+	public String detail(@RequestParam("deal") int dealId, Locale locale,
+			Model uiModel) {
 		Deal deal = dealService.find(dealId);
-		if(deal == null)
-			  throw new ResourceNotFoundException(dealId +"");
-		else{
+		if (deal == null)
+			throw new ResourceNotFoundException(dealId + "");
+		else {
 			uiModel.addAttribute("deal", deal);
 		}
-		
-		uiModel.addAttribute("title", messageSource.getMessage(
-				"website.detail.title", null, locale));
+
+		uiModel.addAttribute("title",
+				messageSource.getMessage("website.detail.title", null, locale));
 		return "website/detail";
 	}
-	
 
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	public String newOrder(@RequestParam("dealId") int dealId,
 			@RequestParam("optionId") int optionId,
-			@RequestParam("qty") int qty, Locale locale, Model uiModel) {
-		logger.info("---------new order---------");
+			@RequestParam("qty") int qty, Locale locale, Model uiModel)
+			throws DealExpiredException {
+		logger.debug("---------new order---------");
 		Deal deal = dealService.find(dealId);
-		logger.info("deal= " + deal.getId() + ", " + deal.getName());
+		logger.debug("deal= " + deal.getId() + ", " + deal.getName());
 		DealOption option = optionService.find(optionId);
-		logger.info("option= " + option.getId() + ", " + option.getName());
-		logger.info("username= " + Util.getCurrentUserName());
+		logger.debug("option= " + option.getId() + ", " + option.getName());
+		logger.debug("username= " + Util.getCurrentUserName());
 		Person customer = personService.findByUserName(Util
 				.getCurrentUserName());
-		logger.info("customer= " + customer.getId() + ", "
+		logger.debug("customer= " + customer.getId() + ", "
 				+ customer.getFirstName() + " " + customer.getLastName());
-		Order order = new Order(deal, option, customer, qty);
-		order= orderService.create(order);
-		
-		uiModel.addAttribute("order", order);
+		Date now = new Date();
+		if ((deal.getValidity().compareTo(now) < 0 ) || deal.getStatus() != ItemStatus.ON ) {
+			throw new DealExpiredException();
+		} else {
+			Order order = new Order(deal, option, customer, qty);
+			order = orderService.create(order);
+			// order = orderService.find(order.getId());
+			uiModel.addAttribute("order", order);
+		}
 		return "website/orderconfirm";
 	}
 
@@ -148,7 +154,7 @@ public class SiteController {
 		throw new Exception("This is a sample exception.");
 
 	}
-	
+
 	@RequestMapping(value = "/resetpass", method = RequestMethod.GET)
 	public String resetPassword(Model uiModel) throws Throwable {
 
@@ -156,9 +162,8 @@ public class SiteController {
 	}
 
 	@RequestMapping(value = "/resetpass", method = RequestMethod.POST)
-	public String resetPassword(
-			@RequestParam("email") String email, Model uiModel,
-			Locale locale) throws Throwable {
+	public String resetPassword(@RequestParam("email") String email,
+			Model uiModel, Locale locale) throws Throwable {
 
 		Person person = personService.findByUserName(email);
 		if (person != null && person.getId() > 0) {
@@ -171,11 +176,10 @@ public class SiteController {
 		return "website/index";
 
 	}
-	
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
 	public String changePassword(Model uiModel) throws Throwable {
-			
+
 		return "website/changePassword";
 	}
 
@@ -196,22 +200,22 @@ public class SiteController {
 		return "website/index";
 
 	}
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String RegisterCustomer(Model uiModel, Locale locale){
-		
+	public String RegisterCustomer(Model uiModel, Locale locale) {
+
 		uiModel.addAttribute("title", messageSource.getMessage(
 				"website.register.title", null, locale));
 		uiModel.addAttribute("cities", cityService.findAll());
 		Customer customer = new Customer();
 		customer.setContact(new Contact());
-		uiModel.addAttribute("customer",customer);
+		uiModel.addAttribute("customer", customer);
 		return "website/register";
 	}
-	
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String RegisterCustomerPost(@ModelAttribute("customer") @Valid Customer customer,
+	public String RegisterCustomerPost(
+			@ModelAttribute("customer") @Valid Customer customer,
 			BindingResult result, Locale locale, Model uiModel) {
 
 		if (result.hasErrors()) {
@@ -221,21 +225,19 @@ public class SiteController {
 			return "website/register";
 		}
 		customer = customerService.create(customer);
-		logger.info("customer= " + customer.getId() + ", "
+		logger.debug("customer= " + customer.getId() + ", "
 				+ customer.getFirstName() + " " + customer.getLastName());
-		if(customer !=null && customer.getId() > 0){
+		if (customer != null && customer.getId() > 0) {
 			uiModel.addAttribute("successMsg", messageSource.getMessage(
-					"customer.register.success", null, locale) );
+					"customer.register.success", null, locale));
 		}
-		
+
 		uiModel = fillModelForIndex(uiModel, locale);
-			
+
 		return "website/index";
 	}
-	
-	
-	
-	private Model fillModelForIndex(Model uiModel, Locale locale){
+
+	private Model fillModelForIndex(Model uiModel, Locale locale) {
 		uiModel.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
 		uiModel.addAttribute("categories", categoryService.findAll());
@@ -243,7 +245,7 @@ public class SiteController {
 				.findDealsByLabelAndStatus(DealLabel.FEATURED, ItemStatus.ON));
 		uiModel.addAttribute("deals", dealService.findDealsByStatusAndNotLabel(
 				DealLabel.FEATURED, ItemStatus.ON));
-		
+
 		return uiModel;
 	}
 }

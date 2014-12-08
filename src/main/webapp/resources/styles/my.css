@@ -14,5 +14,5 @@ table {
 
 .gmap{
 width:100%;
-height:200px;
+min-height:175px;
 }

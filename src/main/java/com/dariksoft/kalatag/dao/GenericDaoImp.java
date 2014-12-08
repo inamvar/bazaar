@@ -35,7 +35,7 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 	public T create( T t) {
 		Session session = this.sessionFactory.getCurrentSession();
 		t = (T) session.merge(t);
-		logger.info("create object: " + t.toString());
+		logger.debug("create object: " + t.toString());
 		return t;
 	}
 	
@@ -43,7 +43,7 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 	public Integer save( T t) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Integer ret = (Integer) session.save(t);
-		logger.info("save object: " + t.toString());
+		logger.debug("save object: " + t.toString());
 		return ret;
 	}
 
@@ -54,7 +54,7 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 		T p = find( (Integer)id);
 		if (null != p) {
 			session.delete(p);
-			logger.info("delete object: " + p.toString());
+			logger.debug("delete object: " + p.toString());
 		}
 	}
 
@@ -84,7 +84,7 @@ public abstract class GenericDaoImp<T> implements GenericDao<T> {
 	public T update(final T t) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(t);
-		logger.info("update object: " + t.toString());
+		logger.debug("update object: " + t.toString());
 		return t;
 	}
 

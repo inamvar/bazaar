@@ -34,7 +34,7 @@
 					<th><spring:message code="order.customer" /></th>
 					<th><spring:message code="order.merchant" /></th>
 					<th><spring:message code="order.dealName" /></th>
-					<th><spring:message code="order.totalprice" /> (<spring:message code="kalatag.currenncy"/>)</th>
+					<th><spring:message code="order.totalprice" /> (<spring:message code="kalatag.currency"/>)</th>
 					<th></th>
 				</tr>
 			</thead>

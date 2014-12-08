@@ -96,8 +96,8 @@ public class MerchantController {
 			Model uiModel) {
 
 		Merchant merchant = merchantService.find(id);
-		logger.info("get person id =" + merchant.getContactPoint().getId());
-		logger.info("get contact id =" + merchant.getContact().getId());
+		logger.debug("get person id =" + merchant.getContactPoint().getId());
+		logger.debug("get contact id =" + merchant.getContact().getId());
 		uiModel.addAttribute("merchant", merchant);
 		uiModel.addAttribute("title", messageSource.getMessage(
 				"merchant.update.message", null, locale));
@@ -109,12 +109,12 @@ public class MerchantController {
 	public String update(@ModelAttribute("merchant") @Valid Merchant merchant,
 			@PathVariable Integer id, BindingResult result, Locale locale,
 			Model uiModel) {
-		logger.info("id =" + merchant.getId());
-		logger.info("person id =" + merchant.getContactPoint().getId());
-		logger.info("contact id =" + merchant.getContact().getId());
-		logger.info("contact email =" + merchant.getContact().getEmail());
-		logger.info("merchant username =" + merchant.getContactPoint().getUsername());
-		logger.info("merchant role =" + merchant.getContactPoint().getPersonRole().getRole());
+		logger.debug("id =" + merchant.getId());
+		logger.debug("person id =" + merchant.getContactPoint().getId());
+		logger.debug("contact id =" + merchant.getContact().getId());
+		logger.debug("contact email =" + merchant.getContact().getEmail());
+		logger.debug("merchant username =" + merchant.getContactPoint().getUsername());
+		logger.debug("merchant role =" + merchant.getContactPoint().getPersonRole().getRole());
 		if (result.hasErrors()) {
 			uiModel.addAttribute("title", messageSource.getMessage(
 					"merchant.update.message", null, locale));

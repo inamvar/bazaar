@@ -19,7 +19,7 @@
 						<spring:message code="kalatag.realPrice" />
 						<fmt:formatNumber type="number" maxFractionDigits="0"
 							value="${deal.price}" />
-						<spring:message code="kalatag.currenncy" />
+						<spring:message code="kalatag.currency" />
 					</h4>
 						<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
 						<div  class="countdown" data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
@@ -106,7 +106,7 @@
 							<spring:message code="kalatag.yourpay" />
 							<fmt:formatNumber type="number" maxFractionDigits="0"
 								value="${opt.price}" />
-							<spring:message code="kalatag.currenncy" />
+							<spring:message code="kalatag.currency" />
 						</h4>
 
 

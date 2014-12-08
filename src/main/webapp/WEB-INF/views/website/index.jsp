@@ -147,7 +147,7 @@
 									<c:if test="${not empty deal.options}">
 										<b class="finalprice"> <fmt:formatNumber type="number"
 												maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
-												code="kalatag.currenncy" />
+												code="kalatag.currency" />
 										</b>
 										<!-- from <b>Amazon</b> -->
 									</c:if>

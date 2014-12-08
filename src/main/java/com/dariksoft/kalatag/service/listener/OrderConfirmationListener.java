@@ -46,12 +46,12 @@ public class OrderConfirmationListener {
 	public void onMessage(Order order) {
 
 		try {
-			log.info("---------->Order confirmation message from Qserver. order id="
+			log.debug("---------->Order confirmation message from Qserver. order id="
 					+ order.getId());
 			List<Order> orders = orderService.confirmOrder(order);
 			if (orders.size() > 0)
 				for (Order ord : orders) {
-					log.info("Order confirmation: id:" + ord.getId()
+					log.debug("Order confirmation: id:" + ord.getId()
 							+ ", Customer: " + ord.getPerson().getFirstName()
 							+ " " + ord.getPerson().getLastName()
 							+ ", Status: " + ord.getStatus());
@@ -67,8 +67,6 @@ public class OrderConfirmationListener {
 
 		try {
 
-
-			
 			String[] params = new String[11];
 			params[0] = order.getPerson().getFirstName();
 			params[1] = order.getDeal().getMerchant().getName();
@@ -80,7 +78,7 @@ public class OrderConfirmationListener {
 			params[6] = order.getDeal().getMerchant().getContact().getAddress();
 			params[7] = order.getCoupons().get(0).getIssueDate().toString();
 			params[8] = order.getOption().getPrice() + "";
-			params[9] = messageSource.getMessage("kalatag.currenncy", null,
+			params[9] = messageSource.getMessage("kalatag.currency", null,
 					locale);
 			;
 

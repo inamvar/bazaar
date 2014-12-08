@@ -28,7 +28,7 @@ public class AdminController {
 	 */
 	@RequestMapping( method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome to admin panel! The client locale is {}.", locale);
+		logger.debug("Welcome to admin panel! The client locale is {}.", locale);
 		
 		model.addAttribute("title", messageSource.getMessage("admin.home.title", null,locale) );
 		
