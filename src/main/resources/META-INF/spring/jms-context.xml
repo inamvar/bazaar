@@ -11,12 +11,12 @@
                            http://activemq.apache.org/schema/core
                            http://activemq.apache.org/schema/core/activemq-core.xsd">
 
-	<context:component-scan base-package="com.dariksoft.kalatag" />
+	<context:component-scan base-package="com.kalatag" />
 
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>tcp://localhost:61616</value>
+			<value>tcp://192.168.100.200:61616</value>
 		</property>
 	</bean>
 

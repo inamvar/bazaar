@@ -26,9 +26,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/kalatag?characterEncoding=UTF-8" />
+			value="jdbc:mysql://192.168.100.200:3306/kalatag?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="rootroot" />
+		<property name="password" value="2238295" />
 	</bean>
 
 
@@ -36,7 +36,7 @@
 	<bean id="hibernate4AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.dariksoft.kalatag" />
+		<property name="packagesToScan" value="com.kalatag" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.connection.useUnicode">true</prop>
