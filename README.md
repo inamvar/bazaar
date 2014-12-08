@@ -1,4 +1,4 @@
 bazaar
 ======
 
-Spring mvc online shopping
+Spring mvc online deal management system
