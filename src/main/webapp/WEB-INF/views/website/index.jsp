@@ -61,6 +61,7 @@
 					</ul>
 				</div>
 				<div class="col-sm-4" style="padding: 15px;">
+
 					<h3>${featureds[0].name}</h3>
 					<h4>${featureds[0].description}</h4>
 					<p class="text text-info" style="font-size: 1.4em">
@@ -79,11 +80,13 @@
 						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
             value="${featureds[0].validity}" />"></div>
 
-					<a class="btn btn-success btn-block"  href="${pageContext.request.contextPath}/detail?deal=${featureds[0].id}"><span
+					<a class="btn btn-success btn-block"
+						href="${pageContext.request.contextPath}/detail?deal=${featureds[0].id}"><span
 						class="glyphicon glyphicon-shopping-cart"></span> <spring:message
 							code="kalatag.view" /></a>
-				</div>
 
+
+				</div>
 
 			</div>
 			<div class="row">
