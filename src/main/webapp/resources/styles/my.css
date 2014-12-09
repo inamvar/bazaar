@@ -1,29 +1,29 @@
 body {
-	font-family:  "B Yekan";
-	font-size:13;
+	font-family: "B Yekan";
+	font-size: 13;
 }
 
-h1,h2,h3,h4 {
-	font-family:  "B Roya";
+h1, h2, h3, h4 {
+	font-family: "B Roya";
 }
 
 table {
 	font-size: 0.9em;
-	
 }
 
-.gmap{
-width:100%;
-min-height:175px;
+.gmap {
+	width: 100%;
+	min-height: 175px;
 }
 
-
-.ps-current{
+.ps-current {
 	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;
 	box-shadow: 0 0 7px #ccc;
-	border:  1px solid #fff;
+	border: 1px solid #fff;
 	left: -5px;
 	background: #fff;
 	displaye: block;
 }
+
+

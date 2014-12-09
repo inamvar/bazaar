@@ -1,13 +1,13 @@
-.carousel-caption{
+.carousel-caption {
 	
 }
 
-.productbox a:hover{
+.productbox a:hover {
 	text-decoration: none;
 }
 
-.carousel-caption p, .carousel-caption h3{
-		background-color: rgba(0, 0, 0, 0.8);
+.carousel-caption p, .carousel-caption h3 {
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* CSS used here will be applied after bootstrap.css */
@@ -31,12 +31,8 @@
 	color: #FFF;
 }
 
-
-
-} 
-
-.caption s{
-	
+}
+.caption s {
 	font-size: 17px;
 }
 
@@ -92,18 +88,53 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.featured{
+	position: relative;
+}
+
+.featured .discount {
+	position:relative;
+	display:inline-block;
+	font-size: 1.7em;
+	line-height: 27px;
+	height: 60px;
+	width: 60px;
+	background-color: rgba(76, 174, 76, 1);
+	color: #FFFFFF;
+	text-align: center;	
+	padding: 15px;
+	 margin:0; 	
+	border-radius: 50%;
+	left: 13px;
+	z-index:2;
+}
+
+.featured .square {
+	display:inline-block;
+	z-index:1;
+	height: 40px;
+	background: #F0F0FF;
+	margin: 0;
+	position: relative;
+	
+	padding-top: 4px;
+	padding-left:18px;
+	padding-right:10px;
+	text-align: center;
+	border-radius: 5%;
+}
+
 .productbox:hover .saleoffrate {
 	height: 80px;
 	width: 80px;
 	line-height: 20px;
 	font-size: 1.4em;
 	padding-top: 30px;
-		background-color: rgba(76, 174, 76, 1);
+	background-color: rgba(76, 174, 76, 1);
 }
 
-.productbox:hover .caption{
+.productbox:hover .caption {
 	background-color: rgba(0, 0, 0, 0.8);
-	
 }
 
 @media ( min-width : 384px) and (max-width: 768px) {
@@ -117,4 +148,3 @@
 		max-width: 50%;
 	}
 }
-

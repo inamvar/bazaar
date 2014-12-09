@@ -60,7 +60,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="col-sm-4" style="padding: 15px;">
+				<div class=" col-sm-4" style="padding: 15px;">
 
 					<h3>${featureds[0].name}</h3>
 					<h4>${featureds[0].description}</h4>
@@ -70,12 +70,18 @@
 							value="${featureds[0].price}" />
 						<spring:message code="kalatag.currency" />
 					</p>
-					<p class="text text-danger" style="font-size: 1.4em">
-						<spring:message code="kalatag.yourpay" />
-						<fmt:formatNumber type="number" maxFractionDigits="0"
-							value="${featureds[0].options[0].price}" />
-						<spring:message code="kalatag.currency" />
-					</p>
+					<div class="featured">
+						<span class="square"> <spring:message
+								code="kalatag.yourpay" /> <span class="text text-success"
+							style="font-size: 1.6em;"> <fmt:formatNumber type="number"
+									maxFractionDigits="0" value="${featureds[0].options[0].price}" />
+
+						</span> <spring:message code="kalatag.currency" />
+						</span> <span class="discount"> <fmt:formatNumber type="number"
+								maxFractionDigits="0"
+								value="${featureds[0].options[0].discount}" />%
+						</span>
+					</div>
 					<div class="countdown"
 						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
             value="${featureds[0].validity}" />"></div>
