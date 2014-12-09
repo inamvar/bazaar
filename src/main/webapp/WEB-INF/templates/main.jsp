@@ -19,6 +19,8 @@
 	
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/website.css" />
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/pgwslider.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/my.css" />
 	
@@ -28,6 +30,8 @@
 	src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/bootstrap.min.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/pgwslider.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/countdown.min.js"></script>
 	<script type="text/javascript"

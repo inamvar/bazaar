@@ -51,77 +51,37 @@
 		<div class="col-sm-10">
 
 			<div class="row">
-				<div id="carousel-example-generic" class="carousel slide col-sm-9"
-					data-ride="carousel">
-
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<c:forEach items="${featureds}" var="featured" varStatus="status">
-							<c:if test="${status.index == 0}">
-								<div class="item active">
-									<img
-										src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
-										alt="${featured.name}">
-									<div class="carousel-caption">
-										<h3>${featured.name}</h3>
-										<p>${featured.description}</p>
-										<a
-											href="${pageContext.request.contextPath}/detail?deal=${featured.id}"
-											class="btn btn-success btn-md btn-block"><spring:message
-												code="kalatag.viewdeal" /></a>
-									</div>
-									<c:if test="${not empty featured.options}">
-										<div class="saleoffrate">
-											<b><fmt:formatNumber type="number" maxFractionDigits="0"
-													value=" ${featured.options[0].discount}" /> %</b><br>
-											<%-- 	<spring:message code="kalatag.off" /> --%>
-										</div>
-									</c:if>
-								</div>
-							</c:if>
-							<c:if test="${status.index > 0}">
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/files/attachments/${featured.images[0].id}/dynamicImage?width=900&height=350"
-										alt="${featured.name}">
-									<div class="carousel-caption">
-										<h3>${featured.name}</h3>
-										<p>${featured.description}</p>
-										<a
-											href="${pageContext.request.contextPath}/detail?deal=${featured.id}"
-											class="btn btn-success btn-md btn-block"><spring:message
-												code="kalatag.viewdeal" /></a>
-									</div>
-									<c:if test="${not empty featured.options}">
-										<div class="saleoffrate">
-											<b><fmt:formatNumber type="number" maxFractionDigits="0"
-													value=" ${featured.options[0].discount}" /> %</b><br>
-											<%-- 	<spring:message code="kalatag.off" /> --%>
-										</div>
-									</c:if>
-								</div>
-							</c:if>
+				<div class="col-sm-8">
+					<ul class="pgwSlider">
+						<c:forEach items="${featureds[0].images}" var="featured"
+							varStatus="status">
+							<li><img
+								src="${pageContext.request.contextPath}/files/attachments/${featured.id}/dynamicImage?width=600&height=320" /></li>
 						</c:forEach>
-					</div>
-
-					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
+					</ul>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-4" style="padding: 15px;">
+					<h3>${featureds[0].name}</h3>
+					<h4>${featureds[0].description}</h4>
+					<p class="text text-info" style="font-size: 1.4em">
+						<spring:message code="kalatag.realPrice" />
+						<fmt:formatNumber type="number" maxFractionDigits="0"
+							value="${featureds[0].price}" />
+						<spring:message code="kalatag.currency" />
+					</p>
+					<p class="text text-danger" style="font-size: 1.4em">
+						<spring:message code="kalatag.yourpay" />
+						<fmt:formatNumber type="number" maxFractionDigits="0"
+							value="${featureds[0].options[0].price}" />
+						<spring:message code="kalatag.currency" />
+					</p>
+					<div class="countdown"
+						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
+            value="${featureds[0].validity}" />"></div>
 
-					<a href="${pageContext.request.contextPath}/register"
-						class="btn btn-primary btn-block"><spring:message
-							code="register" /></a>
-
+					<a class="btn btn-success btn-block"  href="${pageContext.request.contextPath}/detail?deal=${featureds[0].id}"><span
+						class="glyphicon glyphicon-shopping-cart"></span> <spring:message
+							code="kalatag.view" /></a>
 				</div>
 
 
@@ -174,6 +134,16 @@
 	</div>
 </div>
 
+<script>
+	$(document).ready(function() {
+		$('.pgwSlider').pgwSlider({
+			displayList : false,
+			displayControls : true,
+			intervalDuration : 5000
+		});
 
+		startCountdown();
+	});
+</script>
 
 

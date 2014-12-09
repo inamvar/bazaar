@@ -16,3 +16,14 @@ table {
 width:100%;
 min-height:175px;
 }
+
+
+.ps-current{
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 7px #ccc;
+	border:  1px solid #fff;
+	left: -5px;
+	background: #fff;
+	displaye: block;
+}
