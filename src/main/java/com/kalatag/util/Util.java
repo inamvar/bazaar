@@ -3,6 +3,9 @@ package com.kalatag.util;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormatSymbols;
@@ -13,6 +16,12 @@ import org.springframework.security.core.userdetails.User;
 
 public class Util {
 
+	
+	public static String readFile(String path, Charset encoding) throws IOException {
+	  byte[] encoded = Files.readAllBytes(Paths.get(path));
+	  return new String(encoded, encoding);
+	}
+	
 	public static String generateRandomPassword() {
 		String plain = RandomStringUtils.randomAlphabetic(8);
 		return plain;

@@ -1,5 +1,8 @@
 package com.kalatag.service.listener;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.kalatag.domain.Coupon;
 import com.kalatag.domain.Order;
 import com.kalatag.service.order.OrderService;
+import com.kalatag.util.Util;
 
 @Component("orderConfirmationListener")
 public class OrderConfirmationListener {
@@ -66,10 +69,10 @@ public class OrderConfirmationListener {
 	public void sendOrderConfirmEmail(Order order) {
 
 		try {
-
+			
 			String[] params = new String[11];
 			params[0] = order.getPerson().getFirstName();
-			params[1] = order.getDeal().getMerchant().getName();
+			params[1] = order.getPerson().getLastName();
 			params[2] = order.getDeal().getName();
 			params[3] = order.getOption().getName();
 			params[4] = order.getPerson().getFirstName() + " "
@@ -78,9 +81,7 @@ public class OrderConfirmationListener {
 			params[6] = order.getDeal().getMerchant().getContact().getAddress();
 			params[7] = order.getCoupons().get(0).getIssueDate().toString();
 			params[8] = order.getOption().getPrice() + "";
-			params[9] = messageSource.getMessage("kalatag.currency", null,
-					locale);
-			;
+			params[9] = messageSource.getMessage("kalatag.currency", null, locale);
 
 			StringBuffer sb = new StringBuffer();
 			for (Coupon c : order.getCoupons()) {
@@ -89,12 +90,15 @@ public class OrderConfirmationListener {
 			}
 			params[10] = sb.toString();
 
-			String htmlText = messageSource.getMessage("email.user.receipt",
-					params, locale);
-
+			ClassLoader classLoader = getClass().getClassLoader();
+			File file = new File(classLoader.getResource(messageSource.getMessage("mail.user.receipt", null,locale)).getFile());
+			
+			String html = Util.readFile(file.getAbsolutePath(), StandardCharsets.UTF_8);
+			MessageFormat mf = new MessageFormat(html);
+			String htmlText = mf.format(params);
+			
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true,
-					"utf-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true,	"utf-8");
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
 

@@ -81,7 +81,7 @@ public class BarcodeUtil {
 	}
 	
 	public static byte[] byteArrayQrCode(String text){
-		return byteArrayQrCode(text, 125, 125);
+		return byteArrayQrCode(text, 100, 100);
 	}
 	
 	public static byte[] byteArrayQrCode(String text, int height, int width){
