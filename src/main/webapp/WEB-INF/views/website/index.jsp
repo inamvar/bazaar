@@ -10,12 +10,12 @@
 
 
 <div class="container">
-	<div class="alert alert-warning">
-		<h3>
+
+		<h4 class="text text-danger">
 			<span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت
 			در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند
-		</h3>
-	</div>
+		</h4>
+	
 
 	<c:if test="${not empty successMsg}">
 		<div class="alert alert-success">
@@ -48,9 +48,9 @@
 		</div>
 
 
-		<div class="col-sm-10">
+		<div class="col-sm-10 ">
 
-			<div class="row">
+			<div class="row white">
 				<div class="col-sm-8">
 					<ul class="pgwSlider">
 						<c:forEach items="${featureds[0].images}" var="featured"
@@ -60,7 +60,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-				<div class=" col-sm-4" style="padding: 15px;">
+				<div class="col-sm-4" style="padding-right: 15px;padding-left: 15px; padding-top:0;">
 
 					<h3>${featureds[0].name}</h3>
 					<h4>${featureds[0].description}</h4>
@@ -95,7 +95,8 @@
 				</div>
 
 			</div>
-			<div class="row">
+			<hr/>
+			<div class="row white">
 				<c:forEach items="${deals}" var="deal">
 					<div class="col-xs-12 col-sm-4 col-md-3">
 

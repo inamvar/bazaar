@@ -1,6 +1,12 @@
 body {
 	font-family: "B Yekan";
 	font-size: 13;
+	background-color: #F0F0F0;
+}
+
+.white{
+	background-color: #FFF;
+	
 }
 
 h1, h2, h3, h4 {
@@ -19,9 +25,9 @@ table {
 .ps-current {
 	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;
-	box-shadow: 0 0 7px #ccc;
-	border: 1px solid #fff;
-	left: -5px;
+	/* box-shadow: 0 0 7px #ccc; */
+	border: 1px solid #ccc;
+/* 	left: -5px; */
 	background: #fff;
 	displaye: block;
 }
