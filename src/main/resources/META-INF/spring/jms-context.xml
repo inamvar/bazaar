@@ -16,7 +16,7 @@
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>tcp://localhost:61616</value>
+			<value>tcp://192.168.100.200:61616</value>
 		</property>
 	</bean>
 

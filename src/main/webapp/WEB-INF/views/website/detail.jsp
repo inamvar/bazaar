@@ -21,10 +21,11 @@
 							value="${deal.price}" />
 						<spring:message code="kalatag.currency" />
 					</h4>
-						<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
-						<div  class="countdown" data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
+					<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
+					<div class="countdown"
+						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
             value="${deal.validity}" />"></div>
-						
+
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -92,7 +93,7 @@
 			<ul class="list-group col-sm-12">
 				<c:forEach items="${deal.options}" var="opt">
 					<li class="list-group-item col-sm-12">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<span class="glyphicon glyphicon-tag"> </span> ${opt.name}
 						</div>
 						<p class="col-sm-8">${opt.description}</p>
@@ -110,12 +111,31 @@
 						</h4>
 
 
-						<div class="col-sm-2">
-							<a class="btn btn-success  btn-sm btn-block"
-								href="${pageContext.request.contextPath}/buy?dealId=${deal.id}&optionId=${opt.id}&qty=1">
-								<span class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
-										code="kalatag.buy" /></b>
-							</a>
+						<div class="col-sm-4">
+							<c:if test="${not expired}">
+								<form action="${pageContext.request.contextPath}/buy"
+									method="POST" class="btn-buy form-inline" role="form">
+
+
+
+									<input type="hidden" name="dealId" value="${deal.id}" /> <input
+										type="hidden" name="optionId" value="${opt.id}" /> 
+										<spring:message code="order.quantity"/>:
+									<div class="form-group">
+
+										<input type="text" class="form-control input-sm" name="qty"
+											value="1" />
+
+
+									</div>
+									<button type="submit" class="btn btn-success btn-sm">
+										<span class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
+												code="kalatag.buy" /></b>
+									</button>
+
+
+								</form>
+							</c:if>
 						</div>
 					</li>
 				</c:forEach>
@@ -144,15 +164,14 @@
 </div>
 
 <script>
-$(document).ready(function(){
-	var loc = "<c:out value="${deal.merchant.contact.geoLocation}"/>";
-	console.log(loc);
-	startCountdown();
-	showMap(loc);
-	
-});
+	$(document).ready(function() {
+		var loc = "<c:out value="${deal.merchant.contact.geoLocation}"/>";
+		console.log(loc);
+		startCountdown();
+		showMap(loc);
 
+	});
 </script>
 
 <script type="text/javascript"
-src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<c:out value="${pageContext.response.locale.language}"/>"></script>
+	src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<c:out value="${pageContext.response.locale.language}"/>"></script>

@@ -111,18 +111,26 @@ public class SiteController {
 	public String detail(@RequestParam("deal") int dealId, Locale locale,
 			Model uiModel) {
 		Deal deal = dealService.find(dealId);
+		boolean expired = false;
 		if (deal == null)
 			throw new ResourceNotFoundException(dealId + "");
 		else {
 			uiModel.addAttribute("deal", deal);
+			
+			Date now = new Date();
+			if ((deal.getValidity().compareTo(now) < 0 ) || deal.getStatus() != ItemStatus.ON ) {
+				expired = true;				
+			}
+		
 		}
-
+		logger.debug("deal is Expired:" + expired);
+		uiModel.addAttribute("expired",expired);
 		uiModel.addAttribute("title",
 				messageSource.getMessage("website.detail.title", null, locale));
 		return "website/detail";
 	}
 
-	@RequestMapping(value = "/buy", method = RequestMethod.GET)
+	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String newOrder(@RequestParam("dealId") int dealId,
 			@RequestParam("optionId") int optionId,
 			@RequestParam("qty") int qty, Locale locale, Model uiModel)
