@@ -23,6 +23,9 @@ public class Merchant implements Serializable{
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
+	
+
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_point_id", nullable=true)
 	private Person contactPoint;

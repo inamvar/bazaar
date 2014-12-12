@@ -90,8 +90,10 @@ public class PaymentGatewayController {
 				Order order = insertOrder(txn);
 				uiModel.addAttribute("order", order);
 				return "website/orderconfirm";
-			} else
+			} else{
+				//TODO: check for reason and save error code and show better message
 				throw new Exception("Payment Failed");
+			}
 		} else
 			throw new Exception("Broken Transaction! Order failed.");
 
@@ -99,20 +101,21 @@ public class PaymentGatewayController {
 
 	private Order insertOrder(Transaction txn) throws DealExpiredException {
 
+
+		Deal deal = dealService.find(txn.getDealId());
+		DealOption option = optionService.find(txn.getDealOptionId());
+		Person customer = txn.getPerson();
+
 		logger.debug("---------Respose from bank recevied. saving order---------");
 		logger.debug("RefNum=" + txn.getReferenceNumber());
 		logger.debug("ResNum=" + txn.getReservationNumber());
-		Deal deal = dealService.find(txn.getDealId());
 		logger.debug("deal= " + deal.getId() + ", " + deal.getName());
-		DealOption option = optionService.find(txn.getDealOptionId());
 		logger.debug("option= " + option.getId() + ", " + option.getName());
-		Person customer = txn.getPerson();
 		logger.debug("customer= " + customer.getId() + ", "
 				+ customer.getFirstName() + " " + customer.getLastName());
-
+		
 		Order order = new Order(deal, option, customer, txn.getQty());
-		order = orderService.create(order);
-		return order;
+		return orderService.create(order);
 	}
 
 }

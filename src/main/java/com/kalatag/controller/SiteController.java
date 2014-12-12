@@ -155,40 +155,18 @@ public class SiteController {
 	public String newOrder(@RequestParam("dealId") int dealId,
 			@RequestParam("optionId") int optionId,
 			@RequestParam("qty") int qty, Locale locale, Model uiModel)
-			throws DealExpiredException {
-		logger.debug("---------new order---------");
-		Deal deal = dealService.find(dealId);
-		logger.debug("deal= " + deal.getId() + ", " + deal.getName());
-		DealOption option = optionService.find(optionId);
-		logger.debug("option= " + option.getId() + ", " + option.getName());
-		logger.debug("username= " + Util.getCurrentUserName());
-		Person customer = personService.findByUserName(Util
-				.getCurrentUserName());
-		logger.debug("customer= " + customer.getId() + ", "
-				+ customer.getFirstName() + " " + customer.getLastName());
-		Date now = new Date();
-		if ((deal.getValidity().compareTo(now) < 0)
-				|| deal.getStatus() != ItemStatus.ON) {
-			throw new DealExpiredException();
-		} else {
-			Transaction txn = new Transaction();
-			txn.setDate(now);
-			double amount = deal.getPrice()
-					- ((option.getDiscount() / 100) * deal.getPrice()) * qty;
-
-			txn.setAmount(amount);
-			txn.setStatus(TransactiontStatus.PENDING);
-			txn.setDealId(dealId);
-			txn.setDealOptionId(optionId);
-			txn.setQty(qty);
-			txn.setPerson(customer);
-			txn = txnService.create(txn);
-			txn.setReservationNumber(txn.getId() + "");
-			logger.debug("reservation number=" + txn.getReservationNumber());
-			
-			return "redirect:"+ paymentGateway.GetRequestUrl(txn);
-		}
+			{
 		
+		Transaction txn = null;
+		try {
+			txn = orderService.buy(dealId, optionId, qty);
+		} catch (DealExpiredException e) {
+			uiModel.addAttribute("errorMsg", messageSource.getMessage(
+					"deal.expired", null, locale));
+			uiModel = fillModelForIndex(uiModel, locale);
+			return "website/index";
+		}
+		return "redirect:" + paymentGateway.GetRequestUrl(txn);
 	}
 
 	@RequestMapping(value = "/myerror", method = RequestMethod.GET)

@@ -24,6 +24,8 @@ public class Transaction  implements Serializable{
 	private int id;
 
 	private double amount;
+	private double creditAmount;
+	private double TotalAmount;
 	private String note;
 	private TransactiontStatus status;
 	private String referenceNumber;
@@ -32,12 +34,9 @@ public class Transaction  implements Serializable{
 	private String traceNumber;
 	private String terminalId;
 	private String merchantId;
-	
 	private Date date;
 	private Date responseDate;
 	private TransactionType type;
-	
-	
 	private int dealId;
 	private int dealOptionId;
 	private int qty;
@@ -166,6 +165,18 @@ public class Transaction  implements Serializable{
 	}
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	public double getCreditAmount() {
+		return creditAmount;
+	}
+	public void setCreditAmount(double creditAmount) {
+		this.creditAmount = creditAmount;
+	}
+	public double getTotalAmount() {
+		return TotalAmount;
+	}
+	public void setTotalAmount(double totalAmount) {
+		TotalAmount = totalAmount;
 	}
 
 }

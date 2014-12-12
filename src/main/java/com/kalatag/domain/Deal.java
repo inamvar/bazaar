@@ -36,6 +36,9 @@ public class Deal implements Serializable {
 	private double price;
 	private ItemStatus status;
 	private Rate rate;
+	private float merchantPercent;
+	
+	
 	@Lob
 	private String features;
 	@Lob
@@ -65,6 +68,7 @@ public class Deal implements Serializable {
 	@OneToMany(targetEntity = DealOption.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<DealOption> options;
 
+	
 	
 	public void setId(int id) {
 		this.id = id;
@@ -208,6 +212,14 @@ public class Deal implements Serializable {
 
 	public void setLabel(DealLabel label) {
 		this.label = label;
+	}
+
+	public float getMerchantPercent() {
+		return merchantPercent;
+	}
+
+	public void setMerchantPercent(float merchantPercent) {
+		this.merchantPercent = merchantPercent;
 	}
 
 
