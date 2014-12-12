@@ -35,7 +35,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/kalatag?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="2238295" />
+		<property name="password" value="rootroot" />
 	</bean>
 
 
