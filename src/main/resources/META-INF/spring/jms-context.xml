@@ -16,7 +16,7 @@
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>tcp://192.168.100.200:61616</value>
+			<value>tcp://localhost:61616</value>
 		</property>
 	</bean>
 
@@ -42,6 +42,10 @@
 
 	<bean id="resetPasswordNotification" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg value="resetPasswordNotificationQueue" />
+	</bean>
+	
+		<bean id="journalNotification" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="journalNotificationQueue" />
 	</bean>
 
 
@@ -81,6 +85,11 @@
 	<jms:listener-container connection-factory="connectionFactory">
 		<jms:listener destination="resetPasswordNotificationQueue"
 			method="onMessage" ref="resetPasswordListener" />
+	</jms:listener-container>
+	
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="journalNotificationQueue"
+			method="onMessage" ref="journalListener" />
 	</jms:listener-container>
 
 

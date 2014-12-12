@@ -21,25 +21,22 @@
 	<dependencies>
 
 
-<!-- <dependency>
-	<groupId>com.ibm.icu</groupId>
-	<artifactId>icu4j</artifactId>
-	<version>52.1</version>
-</dependency> -->
+		<!-- <dependency> <groupId>com.ibm.icu</groupId> <artifactId>icu4j</artifactId> 
+			<version>52.1</version> </dependency> -->
 
 
 
 
-		<!-- barcode and QR code utility  -->
+		<!-- barcode and QR code utility -->
 		<dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>${zxing-version}</version>
-        </dependency>
-        <dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${zxing-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
-		<version>${zxing-version}</version>
+			<version>${zxing-version}</version>
 		</dependency>
 
 
@@ -293,8 +290,22 @@
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
 
-
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+			<version>4.3.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -332,7 +343,7 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -342,8 +353,8 @@
 					<server>TomcatServer</server>
 					<path>/</path>
 				</configuration>
-		</plugin>
-			
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

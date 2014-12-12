@@ -1,11 +1,21 @@
 package com.kalatag.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kalatag.domain.City;
 import com.kalatag.domain.Contact;
@@ -29,15 +40,18 @@ import com.kalatag.domain.DealLabel;
 import com.kalatag.domain.DealOption;
 import com.kalatag.domain.ItemCategory;
 import com.kalatag.domain.ItemStatus;
-import com.kalatag.domain.Order;
 import com.kalatag.domain.Person;
+import com.kalatag.domain.Transaction;
+import com.kalatag.domain.TransactiontStatus;
 import com.kalatag.exception.DealExpiredException;
+import com.kalatag.gateway.PaymentGateway;
 import com.kalatag.propertyeditor.CityEditor;
 import com.kalatag.service.CityService;
 import com.kalatag.service.CustomerService;
 import com.kalatag.service.DealOptionService;
 import com.kalatag.service.DealService;
 import com.kalatag.service.ItemCategoryService;
+import com.kalatag.service.accounting.TransactionService;
 import com.kalatag.service.order.OrderService;
 import com.kalatag.service.person.PersonService;
 import com.kalatag.util.Util;
@@ -71,6 +85,12 @@ public class SiteController {
 
 	@Autowired
 	private CityService cityService;
+
+	@Autowired
+	private PaymentGateway paymentGateway;
+
+	@Autowired
+	TransactionService txnService;
 
 	private @Autowired CityEditor cityEditor;
 
@@ -116,15 +136,16 @@ public class SiteController {
 			throw new ResourceNotFoundException(dealId + "");
 		else {
 			uiModel.addAttribute("deal", deal);
-			
+
 			Date now = new Date();
-			if ((deal.getValidity().compareTo(now) < 0 ) || deal.getStatus() != ItemStatus.ON ) {
-				expired = true;				
+			if ((deal.getValidity().compareTo(now) < 0)
+					|| deal.getStatus() != ItemStatus.ON) {
+				expired = true;
 			}
-		
+
 		}
 		logger.debug("deal is Expired:" + expired);
-		uiModel.addAttribute("expired",expired);
+		uiModel.addAttribute("expired", expired);
 		uiModel.addAttribute("title",
 				messageSource.getMessage("website.detail.title", null, locale));
 		return "website/detail";
@@ -146,15 +167,28 @@ public class SiteController {
 		logger.debug("customer= " + customer.getId() + ", "
 				+ customer.getFirstName() + " " + customer.getLastName());
 		Date now = new Date();
-		if ((deal.getValidity().compareTo(now) < 0 ) || deal.getStatus() != ItemStatus.ON ) {
+		if ((deal.getValidity().compareTo(now) < 0)
+				|| deal.getStatus() != ItemStatus.ON) {
 			throw new DealExpiredException();
 		} else {
-			Order order = new Order(deal, option, customer, qty);
-			order = orderService.create(order);
-			// order = orderService.find(order.getId());
-			uiModel.addAttribute("order", order);
+			Transaction txn = new Transaction();
+			txn.setDate(now);
+			double amount = deal.getPrice()
+					- ((option.getDiscount() / 100) * deal.getPrice()) * qty;
+
+			txn.setAmount(amount);
+			txn.setStatus(TransactiontStatus.PENDING);
+			txn.setDealId(dealId);
+			txn.setDealOptionId(optionId);
+			txn.setQty(qty);
+			txn.setPerson(customer);
+			txn = txnService.create(txn);
+			txn.setReservationNumber(txn.getId() + "");
+			logger.debug("reservation number=" + txn.getReservationNumber());
+			
+			return "redirect:"+ paymentGateway.GetRequestUrl(txn);
 		}
-		return "website/orderconfirm";
+		
 	}
 
 	@RequestMapping(value = "/myerror", method = RequestMethod.GET)

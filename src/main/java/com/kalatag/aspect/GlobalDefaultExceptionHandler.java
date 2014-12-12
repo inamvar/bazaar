@@ -35,6 +35,7 @@ public class GlobalDefaultExceptionHandler {
 	        String exceptionAsString = sw.toString();
 	        
 	        mav.addObject("exception",exceptionAsString);
+	        mav.addObject("message",e.getLocalizedMessage());
 	        mav.addObject("url", req.getRequestURL());
 	        
 	        mav.setViewName(DEFAULT_ERROR_VIEW);

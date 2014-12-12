@@ -1,8 +1,9 @@
 package com.kalatag.domain;
 
-public enum PaymentStatus {
+public enum TransactiontStatus {
 	PENDING,
 	PAID,
+	FAILED,
 	CANCELED,
 	REVERSED
 }

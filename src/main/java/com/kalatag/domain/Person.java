@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "person")
-public class Person implements Serializable{
+public class Person implements Serializable {
 
 	/**
 	 * 
@@ -46,28 +48,25 @@ public class Person implements Serializable{
 	@NotEmpty
 	@Column(nullable = false, name = "username", unique = true)
 	private String username;
-	
+
 	private String password;
 
-    @Value("true")
-    private Boolean enabled;
-    
-    @ManyToOne
-    @JoinColumn(name = "person_role", nullable = true)
-    private PersonRole personRole;
-    
+	@Value("true")
+	private Boolean enabled;
 
-	@OneToOne(optional = true, mappedBy = "person")
+	@ManyToOne
+	@JoinColumn(name = "person_role", nullable = true)
+	private PersonRole personRole;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "account_id")
 	private Account account;
 
-
-
-	
-	
 	@OneToMany(targetEntity = Comment.class, mappedBy = "author")
 	private Set<Comment> Comments;
-
-
+	
+	@OneToMany(targetEntity = Transaction.class, mappedBy = "person")
+	private Set<Transaction> transactions;
 
 	public String getUsername() {
 		return username;
@@ -96,6 +95,7 @@ public class Person implements Serializable{
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -140,7 +140,7 @@ public class Person implements Serializable{
 		Comments = comments;
 	}
 
-	public String toString(){
+	public String toString() {
 		return firstName + " " + lastName;
 	}
 
@@ -158,6 +158,14 @@ public class Person implements Serializable{
 
 	public void setPersonRole(PersonRole personRole) {
 		this.personRole = personRole;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 
 }

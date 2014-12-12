@@ -76,7 +76,7 @@ public class Order implements Serializable{
 	
 	@OneToOne(optional = true)
 	@JoinColumn(name = "payment_id", unique = true, nullable = true)
-	private Payment payment;
+	private Transaction payment;
 	private OrderStatus status;
 	private double totalPrice;
 
@@ -105,11 +105,11 @@ public class Order implements Serializable{
 		this.note = note;
 	}
 
-	public Payment getPayment() {
+	public Transaction getPayment() {
 		return payment;
 	}
 
-	public void setPayment(Payment payment) {
+	public void setPayment(Transaction payment) {
 		this.payment = payment;
 	}
 

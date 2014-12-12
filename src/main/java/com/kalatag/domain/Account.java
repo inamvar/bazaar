@@ -1,15 +1,17 @@
 package com.kalatag.domain;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity	
 public class Account  implements Serializable{
@@ -21,13 +23,14 @@ public class Account  implements Serializable{
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	private String name;
+	private String code;
 	private String accountNumber;
 	private String cardNumber;
-	@OneToMany(targetEntity = Payment.class, mappedBy = "account")
-	private Set<Payment> payments;	
-    @OneToOne(optional=false)
-    @JoinColumn(
-      name="person_id", unique=true, nullable=false)
+	private double balance;
+	@OneToMany(targetEntity = Journal.class, mappedBy = "account", cascade = CascadeType.ALL)
+	private List<Journal> journals;	
+	@OneToOne(fetch = FetchType.EAGER)
+	@PrimaryKeyJoinColumn
 	private Person person;
 	public int getId() {
 		return id;
@@ -36,12 +39,7 @@ public class Account  implements Serializable{
 		this.id = id;
 	}
 
-	public Set<Payment> getPayments() {
-		return payments;
-	}
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
-	}
+
 
 	public String getName() {
 		return name;
@@ -74,5 +72,23 @@ public class Account  implements Serializable{
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public List<Journal> getJournals() {
+		return journals;
+	}
+	public void setJournals(List<Journal> journals) {
+		this.journals = journals;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 }

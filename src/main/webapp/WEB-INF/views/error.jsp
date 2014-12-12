@@ -4,24 +4,29 @@
 
 
 
-	<div class="text text-danger">
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+		
+			<h4 >
+				<a href="#"  data-toggle="collapse" class="pull-right"
+					data-target="#detail" aria-expanded="true" aria-controls="detail">
+					<span class="glyphicon glyphicon-info-sign"></span>
+					</a>
+			<span class="text text-danger">	<spring:message code="error.message" text="default text" />
+				: ${message}
+				</span>
+			</h4>
 
-		<h4>
-			<spring:message code="error.message" text="default text" />
-			: ${exception}
-		</h4>
-		<p>
-			<spring:message code="error.url" text="default text" />
-			: ${url}
-		</p>
-		<hr/>
-		<a href="${pageContext.request.contextPath}" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> <spring:message
-				code="menu.home" /></a>
-
-
-
-
-
+			<div id="detail" class="collapse" style="direction:ltr;">
+				<hr />
+				<small> ${exception} </small>
+			</div>
+			<hr />
+			<a href="${pageContext.request.contextPath}" class="btn btn-default"><span
+				class="glyphicon glyphicon-home"></span> <spring:message
+					code="menu.home" /></a>
+		</div>
+	</div>
 
 </div>
-

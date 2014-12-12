@@ -36,6 +36,7 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
+
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 	<beans:bean id="tilesConfigurer"

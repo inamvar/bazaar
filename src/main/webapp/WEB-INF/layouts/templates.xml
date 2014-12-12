@@ -16,6 +16,8 @@
 
 	<!-- Default Main Template -->
 	<definition name="error" extends=".adminTemplate">
+	<put-attribute name="header"
+			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
 	</definition>
 	<definition name="error404" extends=".adminTemplate">
@@ -59,6 +61,12 @@
 	
 	<definition name="test" extends=".websiteTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
+	</definition>
+	
+	<definition name="bank-simulation" extends=".websiteTemplate">
+		<put-attribute name="header"
+			value="/WEB-INF/templates/error_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/bank-simulation.jsp" />
 	</definition>
 
 </tiles-definitions>
