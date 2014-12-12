@@ -19,8 +19,6 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.kalatag.service.DealServiceImp;
-
 @Entity
 public class Deal implements Serializable {
 	/**
