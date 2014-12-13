@@ -62,55 +62,57 @@
 		</div>
 
 		<div class="col-xs-12 col-sm-12  col-md-9 col-lg-9">
-
-			<div class="row white box">
-				<div class="col-sm-12 col-md-7 col-lg-7" style="margin:0; padding:0;">
-					<ul class="pgwSlider">
-						<c:forEach items="${featureds[0].images}" var="featured"
-							varStatus="status">
-							<li><img
-								src="${pageContext.request.contextPath}/files/attachments/${featured.id}/dynamicImage?width=600&height=400" /></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div class="col-sm-12 col-md-5 col-lg-5"
-					style="padding-right: 15px; padding-left: 15px; padding-top: 0;">
-
-					<h3>${featureds[0].name}</h3>
-					<h4>${featureds[0].description}</h4>
-					<p class="text text-info" style="font-size: 1.4em">
-						<spring:message code="kalatag.realPrice" />
-						<fmt:formatNumber type="number" maxFractionDigits="0"
-							value="${featureds[0].price}" />
-						<spring:message code="kalatag.currency" />
-					</p>
-					<spring:message
-								code="kalatag.yourpay" />
-					<div class="featured">
-						<span class="square">  <span class="text text-success"
-							style="font-size: 1.6em;"> <fmt:formatNumber type="number"
-									maxFractionDigits="0" value="${featureds[0].options[0].price}" />
-
-						</span> <spring:message code="kalatag.currency" />
-						</span> <span class="discount"> <fmt:formatNumber type="number"
-								maxFractionDigits="0"
-								value="${featureds[0].options[0].discount}" />%
-						</span>
+			<c:if test="${not empty featureds[0].images}">
+				<div class="row white box">
+					<div class="col-sm-12 col-md-7 col-lg-7"
+						style="margin: 0; padding: 0;">
+						<ul class="pgwSlider">
+							<c:forEach items="${featureds[0].images}" var="featured"
+								varStatus="status">
+								<li><img
+									src="${pageContext.request.contextPath}/files/attachments/${featured.id}/dynamicImage?width=600&height=400" /></li>
+							</c:forEach>
+						</ul>
 					</div>
-					<div class="countdown hidden-md"
-						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
+					<div class="col-sm-12 col-md-5 col-lg-5"
+						style="padding-right: 15px; padding-left: 15px; padding-top: 0;">
+
+						<h3>${featureds[0].name}</h3>
+						<h4>${featureds[0].description}</h4>
+						<p class="text text-info" style="font-size: 1.4em">
+							<spring:message code="kalatag.realPrice" />
+							<fmt:formatNumber type="number" maxFractionDigits="0"
+								value="${featureds[0].price}" />
+							<spring:message code="kalatag.currency" />
+						</p>
+						<spring:message code="kalatag.yourpay" />
+						<div class="featured">
+							<span class="square"> <span class="text text-success"
+								style="font-size: 1.6em;"> <fmt:formatNumber
+										type="number" maxFractionDigits="0"
+										value="${featureds[0].options[0].price}" />
+
+							</span> <spring:message code="kalatag.currency" />
+							</span> <span class="discount"> <fmt:formatNumber type="number"
+									maxFractionDigits="0"
+									value="${featureds[0].options[0].discount}" />%
+							</span>
+						</div>
+						<div class="countdown hidden-md"
+							data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
             value="${featureds[0].validity}" />"></div>
 
-					<a class="btn btn-success btn-block"
-						href="${pageContext.request.contextPath}/detail?deal=${featureds[0].id}"><span
-						class="glyphicon glyphicon-shopping-cart"></span> <spring:message
-							code="kalatag.view" /></a>
+						<a class="btn btn-success btn-block"
+							href="${pageContext.request.contextPath}/detail?deal=${featureds[0].id}"><span
+							class="glyphicon glyphicon-shopping-cart"></span> <spring:message
+								code="kalatag.view" /></a>
 
+
+					</div>
 
 				</div>
-
-			</div>
-			<hr />
+				<hr />
+			</c:if>
 			<div class="row">
 				<c:forEach items="${deals}" var="deal">
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">

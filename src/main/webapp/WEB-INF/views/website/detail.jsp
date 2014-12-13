@@ -49,55 +49,26 @@
 
 		</div>
 		<div class="col-sm-9">
-			<div class="col-sm-12">
-				<div id="carousel-example-generic" class="carousel slide"
-					data-ride="carousel">
-
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<c:forEach items="${deal.images}" var="image" varStatus="status">
-							<c:if test="${status.index == 0}">
-								<div class="item active">
-									<img
-										src="${pageContext.request.contextPath}/files/attachments/${deal.images[0].id}/dynamicImage?width=900&height=350"
-										alt="${deal.name}" />
-								</div>
-							</c:if>
-							<c:if test="${status.index > 0}">
-								<div class="item">
-									<img
-										src="${pageContext.request.contextPath}/files/attachments/${deal.images[status.index].id}/dynamicImage?width=900&height=350"
-										alt="${deal.name}" />
-								</div>
-							</c:if>
+			<c:if test="${not empty deal.images}">
+				<div class="col-sm-12  box white">
+					<ul class="pgwSlider">
+						<c:forEach items="${deal.images}" var="deal" varStatus="status">
+							<li><img
+								src="${pageContext.request.contextPath}/files/attachments/${deal.id}/dynamicImage?width=800&height=450" /></li>
 						</c:forEach>
-					</div>
-
-					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-
+					</ul>
 				</div>
-				<hr />
-			</div>
+			</c:if>
 
-
-			<ul class="list-group col-sm-12">
+			<div class="col-sm-12">
+			<hr />
 				<c:forEach items="${deal.options}" var="opt">
-					<li class="list-group-item col-sm-12">
-						<div class="col-sm-3">
+					<div class="col-sm-6">
+						<div>
 							<span class="glyphicon glyphicon-tag"> </span> ${opt.name}
 						</div>
-						<p class="col-sm-8">${opt.description}</p>
-						<h4 class="text-danger col-sm-5">
+						<p>${opt.description}</p>
+						<h4 class="text-danger">
 							<fmt:formatNumber type="number" maxFractionDigits="0"
 								value="${opt.discount}" />
 							%
@@ -111,7 +82,7 @@
 						</h4>
 
 
-						<div class="col-sm-4">
+						<div class="form-inline">
 							<c:if test="${not expired}">
 								<form action="${pageContext.request.contextPath}/buy"
 									method="POST" class="btn-buy form-inline" role="form">
@@ -119,28 +90,31 @@
 
 
 									<input type="hidden" name="dealId" value="${deal.id}" /> <input
-										type="hidden" name="optionId" value="${opt.id}" /> 
-										<spring:message code="order.quantity"/>:
+										type="hidden" name="optionId" value="${opt.id}" />
+									<spring:message code="order.quantity" />
+									:
 									<div class="form-group">
 
-										<input type="text" class="form-control input-sm" name="qty" size="5"
-											value="1" />
+										<input type="text" class="form-control input-sm" name="qty"
+											size="5" value="1" />
 
 
 									</div>
-									<button type="submit" class="btn btn-success btn-sm">
-										<span class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
-												code="kalatag.buy" /></b>
+									<button type="submit" class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class=" glyphicon glyphicon-shopping-cart"> </span>  <b><spring:message
+												code="kalatag.buy" /></b> &nbsp;&nbsp;&nbsp;&nbsp;
 									</button>
 
 
 								</form>
 							</c:if>
 						</div>
-					</li>
+						
+					</div>
+				
 				</c:forEach>
-			</ul>
 
+			</div>
 
 			<div class="col-sm-12">
 				<div class="panel panel-default">
@@ -165,6 +139,15 @@
 
 <script>
 	$(document).ready(function() {
+
+		$('.pgwSlider').pgwSlider({
+			displayList : true,
+			displayControls : true,
+			listPosition : 'left',
+			transitionEffect : 'sliding',
+			intervalDuration : 5000
+		});
+
 		var loc = "<c:out value="${deal.merchant.contact.geoLocation}"/>";
 		console.log(loc);
 		startCountdown();
