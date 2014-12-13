@@ -29,6 +29,9 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/countdown.css" />
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/menu.css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"

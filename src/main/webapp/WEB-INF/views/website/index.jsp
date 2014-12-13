@@ -42,23 +42,33 @@
 
 	<div class="">
 		<div class="col-md-3 col-lg-3 hidden-sm hidden-xs">
-			<div class=" sidebar-nav">
 
-				<ul class="nav nav-pills nav-stacked nav-success white box">
-					<%-- 					<li class="text-info"><a><spring:message
-								code="admin.menu.definitions.categories" /></a></li> --%>
+		
+				<ul class="ca-menu">
 					<li><a style="color: black; font-size: 1em;"
-						href="${pageContext.request.contextPath}/"><i
-							class="glyphicon glyphicon-th"></i> <spring:message
-								code="deal.all" /></a></li>
+						href="${pageContext.request.contextPath}/"><span class="ca-icon"><i
+							class="glyphicon glyphicon-th"></i></span>
+							
+							 <span class="ca-content">
+                               <spring:message
+								code="deal.all" />
+                              
+                            </span>
+							
+							</a></li>
 					<c:forEach items="${categories}" var="category">
 						<li><a style="color: black; font-size: 1em;"
-							href="${pageContext.request.contextPath}?category=${category.id}"><span
-								class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
+							href="${pageContext.request.contextPath}?category=${category.id}"><span class="ca-icon"><i
+								class="glyphicon glyphicon-th"></i> </span>
+								
+								 <span class="ca-content">								
+								 ${category.name}
+								 </span>
+								
+								</a></li>
 					</c:forEach>
 				</ul>
-
-			</div>
+	
 		</div>
 
 		<div class="col-xs-12 col-sm-12  col-md-9 col-lg-9">
