@@ -11,11 +11,11 @@
 
 <div class="container">
 
-		<h4 class="text text-danger">
-			<span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت
-			در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند
-		</h4>
-	
+	<h4 class="text text-danger">
+		<span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت
+		در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند
+	</h4>
+
 
 	<c:if test="${not empty successMsg}">
 		<div class="alert alert-success">
@@ -26,9 +26,9 @@
 		</div>
 
 	</c:if>
-	
-	
-	
+
+
+
 	<c:if test="${not empty errorMsg}">
 		<div class="alert alert-danger">
 			<button type="button" class="close" data-dismiss="alert">
@@ -38,42 +38,43 @@
 		</div>
 
 	</c:if>
-	
 
-	<div class="row">
 
-		<div class="sidebar-nav col-sm-2">
+	<div class="">
+		<div class="col-md-3 col-lg-3 hidden-sm hidden-xs">
+			<div class=" sidebar-nav">
 
-			<ul class="nav nav-pills nav-stacked nav-success">
-				<%-- 					<li class="text-info"><a><spring:message
+				<ul class="nav nav-pills nav-stacked nav-success white box">
+					<%-- 					<li class="text-info"><a><spring:message
 								code="admin.menu.definitions.categories" /></a></li> --%>
-				<li><a class="text-success"
-					href="${pageContext.request.contextPath}/"><i
-						class="glyphicon glyphicon-th"></i> <spring:message
-							code="deal.all" /></a></li>
-				<c:forEach items="${categories}" var="category">
-					<li><a class="text-success"
-						href="${pageContext.request.contextPath}?category=${category.id}"><span
-							class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
-				</c:forEach>
-			</ul>
+					<li><a style="color: black; font-size: 1em;"
+						href="${pageContext.request.contextPath}/"><i
+							class="glyphicon glyphicon-th"></i> <spring:message
+								code="deal.all" /></a></li>
+					<c:forEach items="${categories}" var="category">
+						<li><a style="color: black; font-size: 1em;"
+							href="${pageContext.request.contextPath}?category=${category.id}"><span
+								class="glyphicon glyphicon-th"></span> ${category.name}</a></li>
+					</c:forEach>
+				</ul>
 
+			</div>
 		</div>
 
+		<div class="col-xs-12 col-sm-12  col-md-9 col-lg-9">
 
-		<div class="col-sm-10 ">
-
-			<div class="row white">
-				<div class="col-sm-8">
+			<div class="row white box">
+				<div class="col-sm-12 col-md-7 col-lg-7" style="margin:0; padding:0;">
 					<ul class="pgwSlider">
 						<c:forEach items="${featureds[0].images}" var="featured"
 							varStatus="status">
 							<li><img
-								src="${pageContext.request.contextPath}/files/attachments/${featured.id}/dynamicImage?width=600&height=320" /></li>
+								src="${pageContext.request.contextPath}/files/attachments/${featured.id}/dynamicImage?width=600&height=400" /></li>
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="col-sm-4" style="padding-right: 15px;padding-left: 15px; padding-top:0;">
+				<div class="col-sm-12 col-md-5 col-lg-5"
+					style="padding-right: 15px; padding-left: 15px; padding-top: 0;">
 
 					<h3>${featureds[0].name}</h3>
 					<h4>${featureds[0].description}</h4>
@@ -83,9 +84,10 @@
 							value="${featureds[0].price}" />
 						<spring:message code="kalatag.currency" />
 					</p>
+					<spring:message
+								code="kalatag.yourpay" />
 					<div class="featured">
-						<span class="square"> <spring:message
-								code="kalatag.yourpay" /> <span class="text text-success"
+						<span class="square">  <span class="text text-success"
 							style="font-size: 1.6em;"> <fmt:formatNumber type="number"
 									maxFractionDigits="0" value="${featureds[0].options[0].price}" />
 
@@ -95,7 +97,7 @@
 								value="${featureds[0].options[0].discount}" />%
 						</span>
 					</div>
-					<div class="countdown"
+					<div class="countdown hidden-md"
 						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
             value="${featureds[0].validity}" />"></div>
 
@@ -108,17 +110,17 @@
 				</div>
 
 			</div>
-			<hr/>
-			<div class="row white">
+			<hr />
+			<div class="row">
 				<c:forEach items="${deals}" var="deal">
-					<div class="col-xs-12 col-sm-4 col-md-3">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 
 						<div class="productbox">
 							<a
 								href="${pageContext.request.contextPath}/detail?deal=${deal.id}">
 								<div class="imgthumb img-responsive">
 									<img
-										src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=300&height=250">
+										src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=230&height=200">
 								</div>
 								<div class="caption">
 									<p>${deal.name}

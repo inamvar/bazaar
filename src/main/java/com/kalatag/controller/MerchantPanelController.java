@@ -21,7 +21,7 @@ public class MerchantPanelController {
 	@Autowired
 	private MerchantService merchantSrvice;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/panel", method = RequestMethod.GET)
 	public String panel(@RequestParam("id") int id, Locale locale, Model uiModel) {
 
 		uiModel.addAttribute("merchant", merchantSrvice.find(id));

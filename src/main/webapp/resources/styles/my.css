@@ -2,11 +2,18 @@ body {
 	font-family: "B Yekan", Tahoma;
 	font-size: 13;
 	background-color: #F0F0F0;
+	background-image: url("../images/bg.jpg");
+	background-attachment: fixed;
 }
 
-.white{
+.box {
+border: 1px solid #ccc;
+border-radius:10px;
+  	padding:5px;     
+}
+
+.white {
 	background-color: #FFF;
-	
 }
 
 h1, h2, h3, h4 {
@@ -26,10 +33,9 @@ table {
 	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;
 	/* box-shadow: 0 0 7px #ccc; */
-	border: 1px solid #ccc;
-/* 	left: -5px; */
+	/* border: 1px solid #ccc; */
+	/* 	left: -5px; */
 	background: #fff;
+
 	displaye: block;
 }
-
-

@@ -123,7 +123,7 @@
 										<spring:message code="order.quantity"/>:
 									<div class="form-group">
 
-										<input type="text" class="form-control input-sm" name="qty"
+										<input type="text" class="form-control input-sm" name="qty" size="5"
 											value="1" />
 
 

@@ -22,8 +22,6 @@
 
 	</c:if>
 	
-	
-	
 	<c:if test="${not empty errorMsg}">
 		<div class="alert alert-danger">
 			<button type="button" class="close" data-dismiss="alert">
@@ -33,6 +31,8 @@
 		</div>
 
 	</c:if>
+	
+	
 	
 </div>
 

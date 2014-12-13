@@ -14,8 +14,8 @@
 			<h2 class="text text-danger">
 				<%-- <spring:message code="error.code" />: --%> 403
 			</h2>
-			<%-- <spring:message code="error.403" /> --%>
-			Access Denied
+			<spring:message code="error.403" />
+		
 			<hr />
 			<a href="${pageContext.request.contextPath}" class="btn btn-default"><span
 				class="glyphicon glyphicon-home"></span><%--  <spring:message
