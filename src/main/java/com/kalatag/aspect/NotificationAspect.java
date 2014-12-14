@@ -73,8 +73,8 @@ public class NotificationAspect {
 			merchant = (Merchant) pjp.proceed();
 			person.setPassword(password);
 			template.setDefaultDestination(emailNotification);
-			MessageCreator messageCreator = new GenericMessageCreator<Person>(
-					person);
+			MessageCreator messageCreator = new GenericMessageCreator<Merchant>(
+					merchant);
 			template.send(messageCreator);
 			person.setPassword(encryptedPassword);
 			return merchant;

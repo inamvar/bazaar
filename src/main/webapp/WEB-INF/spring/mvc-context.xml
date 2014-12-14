@@ -19,7 +19,7 @@
 
 	<context:component-scan base-package="com.kalatag" />
 
-	
+
 
 	<mvc:resources mapping="/**" location="/" />
 
@@ -29,12 +29,15 @@
 
 
 
+	<mvc:annotation-driven />
+<!-- 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">
 			<beans:bean id="jacksonMessageConverter"
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
-	</mvc:annotation-driven>
+
+	</mvc:annotation-driven> -->
 
 
 	<beans:bean id="viewResolver"
@@ -55,19 +58,18 @@
 	</beans:bean>
 
 	<aop:aspectj-autoproxy />
-	
+
 	<!-- Aspect -->
 	<bean id="notificationAspect" class="com.kalatag.aspect.NotificationAspect" />
 
 
-	<!-- <beans:bean
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
-		p:fallbackToSystemLocale="true" p:fileEncodings="UTF-8"
-		p:defaultEncoding="UTF-8" /> -->
+	<!-- <beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" 
+		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application" 
+		p:fallbackToSystemLocale="true" p:fileEncodings="UTF-8" p:defaultEncoding="UTF-8" 
+		/> -->
 
 
-	
+
 
 	<mvc:interceptors>
 		<!-- Changes the locale when a 'lang' request parameter is sent; e.g. /?lang=de -->

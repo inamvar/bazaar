@@ -63,7 +63,7 @@ public class EmailSenderListener {
 	public void onMessage(Merchant merchant) {
 
 		try {
-			log.info("Registeration merchant: " + merchant
+			log.info("Registeration merchant: " + merchant.getName() + " " + merchant.getContactPoint().getUsername()
 					+ " registered successfully.");
 			sendCustomerRegisterEmail(merchant.getContactPoint());
 		} catch (Exception e) {
