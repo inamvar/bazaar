@@ -9,6 +9,9 @@
 <head>
 <title>${title}</title>
 <meta charset="UTF-8">
+<meta name="description" content="خرید انواع کالا و خدمات تفریحی و گردشگری و محصولات زییایی و سلامت همراه با بهترین تخفیف و فروش ویژه">
+<meta name="keywords" content="تخفیف,فروش,خرید,معامله,کالا,خدمات,گردشگری,زییایی,لیزر,پوست,مو,رستوران,کافه,غذا,هتل,تخفیفات,فروش ویژه,kalatag,کالاتگ,تگ,tag,پیشنهاد,بهترین,پزشکی,مسافرت,آژانس,تعطیلات,بلیط,کنسرت,ارزان,ارزون,جواهر,زیورآلات,کوپن,نت برگ,روزانه,کالابرگ">
+<meta name="author" content="Iman Namvar">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
