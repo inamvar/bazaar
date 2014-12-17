@@ -1,3 +1,12 @@
+/* @font-face{
+	font-family:'B Yekan';
+	src:url("http://netbarg.com/assets/site/fonts/YekanWeb-Regular.eot");
+	src:url("http://netbarg.com/assets/site/fonts/YekanWeb-Regular.eot?#iefix") format("embedded-opentype"),url("http://netbarg.com/assets/site/fonts/YekanWeb-Regular.woff") format("woff"),url("http://netbarg.com/assets/site/fonts/YekanWeb-Regular.ttf") format("truetype"),url("http://netbarg.com/assets/site/fonts/YekanWeb-Regular.svg#YekanWeb-Regular") format("svg");
+	font-style:normal;
+	font-weight:normal;
+	text-rendering:optimizeLegibility
+} */
+
 body {
 	font-family: "B Yekan", Tahoma;
 	font-size: 13;

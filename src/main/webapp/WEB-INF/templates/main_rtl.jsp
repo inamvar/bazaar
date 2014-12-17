@@ -10,12 +10,17 @@
 <title>${title}</title>
 <meta charset="UTF-8">
 <meta name="description" content="خرید انواع کالا و خدمات تفریحی و گردشگری و محصولات زییایی و سلامت همراه با بهترین تخفیف و فروش ویژه">
-<meta name="keywords" content="تخفیف,فروش,خرید,معامله,کالا,خدمات,گردشگری,زییایی,لیزر,پوست,مو,رستوران,کافه,غذا,هتل,تخفیفات,فروش ویژه,kalatag,کالاتگ,تگ,tag,پیشنهاد,بهترین,پزشکی,مسافرت,آژانس,تعطیلات,بلیط,کنسرت,ارزان,ارزون,جواهر,زیورآلات,کوپن,نت برگ,روزانه,کالابرگ">
+<meta name="keywords" content="تخفیف,فروش,خرید,معامله,کالا,خدمات,گردشگری,زییایی,لیزر,پوست,مو,رستوران,کافه,غذا,هتل,تخفیفات,فروش ویژه,kalatag,کالاتگ,تگ,tag,پیشنهاد,بهترین,پزشکی,مسافرت,آژانس,تعطیلات,بلیط,کنسرت,ارزان,ارزون,جواهر,زیورآلات,کوپن,نت برگ,روزانه,کالابرگ,تخفیفان">
 <meta name="author" content="Iman Namvar">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="Yc1mbk4-I56SbDM4IxVKZuAhCkpqRcJf6mVgHr-umKg" />
+<meta name="msvalidate.01" content="F52DA68057BF2F9C2CDE5FDAEF54BDB0" />
 
-<link rel="stylesheet" href="http://ifont.ir/apicode/38">
+
+<!-- <link rel="stylesheet" href="http://ifont.ir/apicode/38"> -->
+
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
 <%-- 	<link href="${pageContext.request.contextPath}/resources/styles/star-rating.min.css" media="all" rel="stylesheet" type="text/css" /> --%>

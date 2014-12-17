@@ -6,6 +6,7 @@ import com.kalatag.domain.Deal;
 import com.kalatag.domain.DealLabel;
 import com.kalatag.domain.ItemCategory;
 import com.kalatag.domain.ItemStatus;
+import com.kalatag.domain.Merchant;
 
 public interface DealDao  extends GenericDao<Deal> {
 	
@@ -13,7 +14,7 @@ public interface DealDao  extends GenericDao<Deal> {
 	List<Deal> findDealsByLabelAndStatus(DealLabel label, ItemStatus status);
 	List<Deal> findDealsByStatusAndNotLabel(DealLabel label, ItemStatus status);
 	List<Deal> findDealsByCategoryAndStatusAndNotLabel(ItemCategory category, DealLabel label, ItemStatus status);
-	
+	List<Deal> findDealsByMerchant(Merchant merchant);
 	int getSold(Deal deal);
 	
 }

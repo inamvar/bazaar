@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kalatag.controller.SiteController;
 import com.kalatag.dao.OrderDao;
 import com.kalatag.domain.Coupon;
 import com.kalatag.domain.Deal;
@@ -144,6 +143,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 			txn.setPerson(customer);
 			txn = txnService.create(txn);
 			txn.setReservationNumber(txn.getId() + "");
+		
 			logger.debug("reservation number=" + txn.getReservationNumber());
 			return txn;
 		}

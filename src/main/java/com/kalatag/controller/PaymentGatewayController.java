@@ -77,12 +77,11 @@ public class PaymentGatewayController {
 		logger.debug("result received from bank .......");
 		
 		Transaction txn = txnService.find(Integer.parseInt(reservationNumber));
-		
 		if (txn != null && txn.getReferenceNumber() != referenceNumber
 				&& txn.getStatus() != TransactiontStatus.PAID) {
 			txn.setState(state);
 			txn.setReferenceNumber(referenceNumber);
-			txn.setReservationNumber(reservationNumber);
+			//txn.setReservationNumber(reservationNumber);
 			txn.setTraceNumber(traceNumber);
 			txn.setMerchantId(merchantId);
 			txn = paymentGateway.receiveResponse(txn);

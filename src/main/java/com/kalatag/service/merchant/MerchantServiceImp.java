@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kalatag.dao.MerchantDao;
 import com.kalatag.domain.Merchant;
+import com.kalatag.domain.Person;
 import com.kalatag.domain.PersonRole;
 import com.kalatag.service.CRUDServiceImp;
 import com.kalatag.service.PersonRoleService;
@@ -33,6 +34,12 @@ public class MerchantServiceImp extends CRUDServiceImp<Merchant> implements Merc
          }
 		//merchant.getContactPoint().setEnabled(true);
 		return merchantDao.create(merchant);
+	}
+
+	@Override
+	@Transactional
+	public Merchant findByPerson(Person person) {
+		return merchantDao.findByPerson(person);
 	}
 	
 /*	@Override

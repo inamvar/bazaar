@@ -11,6 +11,7 @@ import com.kalatag.domain.Deal;
 import com.kalatag.domain.DealLabel;
 import com.kalatag.domain.ItemCategory;
 import com.kalatag.domain.ItemStatus;
+import com.kalatag.domain.Merchant;
 
 @Service
 public class DealServiceImp extends CRUDServiceImp<Deal> implements DealService {
@@ -51,5 +52,11 @@ public class DealServiceImp extends CRUDServiceImp<Deal> implements DealService 
 			ItemCategory category, DealLabel label, ItemStatus status) {
 		return dealDao.findDealsByCategoryAndStatusAndNotLabel(category, label,
 				status);
+	}
+
+	@Override
+	@Transactional
+	public List<Deal> findDealsByMerchant(Merchant merchant) {
+		return dealDao.findDealsByMerchant(merchant);
 	}
 }
