@@ -1,6 +1,7 @@
 package com.kalatag.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -20,15 +21,19 @@ public class CouponDaoImp extends GenericDaoImp<Coupon> implements CouponDao {
 	@Override
 	public Coupon redeem(Coupon coupon) {
 
-		String hql = "UPDATE Coupon set status = :status"
+		String hql = "UPDATE Coupon set status = :status , redeemDate = :date "
 				+ "WHERE id = :couponId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("status", CouponStatus.REDEMED);
 		query.setParameter("couponId", coupon.getId());
+		Date now = new Date();
+		query.setParameter("date",now);
 		int result = query.executeUpdate();
-		if (result > 0)
+		if (result > 0){
 			coupon.setStatus(CouponStatus.REDEMED);
-		return null;
+			coupon.setRedeemDate(now);
+		}
+		return coupon;
 	}
 
 	@Override
@@ -40,15 +45,18 @@ public class CouponDaoImp extends GenericDaoImp<Coupon> implements CouponDao {
 			ids.add(coupon.getId());
 		}
 
-		String hql = "UPDATE Coupon set status = :status"
+		String hql = "UPDATE Coupon set status = :status , redeemDate = :date "
 				+ "WHERE id in (:idList)";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("status", CouponStatus.REDEMED);
 		query.setParameter("idList", ids);
+		Date now = new Date();
+		query.setParameter("date", now);
 		int result = query.executeUpdate();
 		if (result == ids.size())
 			for (Coupon coupon : coupons) {
 				coupon.setStatus(CouponStatus.REDEMED);
+				coupon.setRedeemDate(now);
 			}
 		return coupons;
 	}
@@ -63,6 +71,17 @@ public class CouponDaoImp extends GenericDaoImp<Coupon> implements CouponDao {
 		coupon = (Coupon) query.uniqueResult();
 		return coupon;
 
+	}
+
+	@Override
+	public Coupon findByCode(String code) {
+		Coupon coupon = null;
+		String hql = "FROM  Coupon C WHERE C.code = :code";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("code", code);
+		query.setMaxResults(1);
+		coupon = (Coupon) query.uniqueResult();
+		return coupon;
 	}
 
 }

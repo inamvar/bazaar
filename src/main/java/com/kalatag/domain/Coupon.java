@@ -41,6 +41,8 @@ public class Coupon implements Serializable{
 	
 	private Date issueDate;
 	
+	private Date redeemDate;
+	
 	private CouponStatus status;
 	
 	private double price;
@@ -142,6 +144,16 @@ public class Coupon implements Serializable{
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+
+	public Date getRedeemDate() {
+		return redeemDate;
+	}
+
+
+	public void setRedeemDate(Date redeemDate) {
+		this.redeemDate = redeemDate;
 	}
 
 }
