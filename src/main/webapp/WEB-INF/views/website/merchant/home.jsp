@@ -67,14 +67,14 @@
 					</p>
 				</button>
 			</div>
-			<div class="btn-group" id="change-pass">
+<%-- 			<div class="btn-group" id="change-pass">
 				<button type="button" class="btn btn-nav">
 					<span class=" glyphicon glyphicon-lock"></span>
 					<p>
 						<spring:message code="merchant.panel.changepass" />
 					</p>
 				</button>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 
@@ -171,13 +171,28 @@
 		<div class="my-pane panel panel-default" id="pane-2"
 			style="min-height: 400px;">
 			<div class="panel-body">
-				<h2>Deals</h2>
-				<c:forEach items="${deals}" var="deal">
-					<div class="row">
-						<p class="col-sm-2">${deal.name}</p>
-						<p class="col-sm-2">${deal.validity}</p>
-					</div>
-				</c:forEach>
+				<h2><spring:message code="merchant.panel.deals" /></h2>
+				<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th><spring:message code="deal.name" /></th>
+						<th><spring:message code="deal.validity" /></th>
+						<th><spring:message code="deal.status" /></th>
+						<th><spring:message code="deal.price" /> (<spring:message code="kalatag.currency" />)</th>
+					
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${deals}" var="deal">
+						<tr >
+							<td >${deal.name}</td>
+							<td >${deal.validity}</td>
+							<td >${deal.status}</td>
+							<td >${deal.price}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				</table>
 
 			</div>
 		</div>
@@ -197,7 +212,7 @@
 												maxFractionDigits="0" value="${paid}" /> <spring:message code="kalatag.currency"/></h4>
 			</div>
 			
-			<h4 class="col-sm-12">Payment history</h4>
+			<h4 class="col-sm-12"><spring:message code="merchant.payment.history"/></h4>
 			<div class="col-sm-9">
 			<table class="table table-responsive">
 			<thead>

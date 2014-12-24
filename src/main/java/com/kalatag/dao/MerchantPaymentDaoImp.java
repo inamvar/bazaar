@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kalatag.domain.Deal;
 import com.kalatag.domain.Merchant;
 import com.kalatag.domain.MerchantPayment;
 import com.kalatag.domain.OrderStatus;
