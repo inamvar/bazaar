@@ -1,18 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
 
 	<div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
-		<div class="panel panel-success">
-			<div class="panel-heading">
-				<spring:message code="order.new.confirm" arguments="${order.id}" />
-			</div>
+		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row">
+				<div class="col-sm-12">
+				<p><spring:message code="order.id"/>: ${order.id }</p>
+				<p><spring:message code="order.date"/>: ${order.orderDate}</p>
+				</div>
 					<div class="col-sm-3">
 						<img class="img-thumbnail"
 							src="${pageContext.request.contextPath}/files/deals/${order.deal.id}/thumbnail?width=300&height=300"
@@ -66,10 +68,10 @@
 								<spring:message code="order.couponsnotyet" />
 							</p>
 						</c:if>
-						<a href="${pageContext.request.contextPath}/"
+						<a href="${pageContext.request.contextPath}/customer/panel"
 							class="btn btn-default btn-sm"><span
-							class="glyphicon glyphicon-home"></span> <spring:message
-								code="menu.home" /></a>
+							class="glyphicon glyphicon-arrow-right"></span> <spring:message
+								code="back" /></a>
 					</div>
 				</div>
 			</div>
@@ -89,4 +91,3 @@ $(document).ready(function(){
 
 <script type="text/javascript"
 src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<c:out value="${pageContext.response.locale.language}"/>"></script>
-

@@ -1,5 +1,6 @@
 package com.kalatag.controller;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +115,9 @@ public class PaymentGatewayController {
 				+ customer.getFirstName() + " " + customer.getLastName());
 		
 		Order order = new Order(deal, option, customer, txn.getQty());
-		return orderService.create(order);
+		order = orderService.create(order);
+		Hibernate.initialize(order.getCoupons());
+		return order;
 	}
 
 }

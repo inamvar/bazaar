@@ -3,6 +3,7 @@ package com.kalatag.controller;
 import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.kalatag.service.DealService;
 import com.kalatag.service.order.OrderService;
 import com.kalatag.service.person.PersonService;
 import com.kalatag.util.Util;
+
 import static ch.lambdaj.Lambda.*;
 
 @Controller
@@ -53,6 +55,22 @@ public class CustomerPanelController {
 
 		return "website/customer/home";
 	}
+	
+	@RequestMapping(value = "/order/detail", method = RequestMethod.GET)
+	public String showOrderDetail(
+			@RequestParam(value = "id", required = true) Integer id,
+			Locale locale, Model uiModel) {
+
+		
+	//	uiModel = fillModel(uiModel, locale);
+		Order order =orderService.find(id);
+		Hibernate.initialize(order.getCoupons());
+		uiModel.addAttribute("order",order);
+
+		return "website/customer/order/detail";
+	}
+	
+	
 
 	private Model fillModel(Model uiModel, Locale locale) {
 

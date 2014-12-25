@@ -60,7 +60,7 @@
 			</div>
 			<div class="btn-group" id="account">
 				<button type="button" class="btn btn-nav">
-					<span class="glyphicon glyphicon-search"></span>
+					<span class="glyphicon glyphicon-leaf"></span>
 					<p>
 						<spring:message code="customer.panel.account" />
 					</p>
@@ -104,7 +104,7 @@
 						<td><fmt:formatNumber type="number" maxFractionDigits="0"
 													value=" ${order.totalPrice}" /></td>
 						<td><a 
-							href="${pageContext.request.contextPath}/customer/panel/order/detail/${order.id}"><span
+							href="${pageContext.request.contextPath}/customer/order/detail?id=${order.id}"><span
 								class="glyphicon glyphicon-zoom-in">  </span> <spring:message code="customer.panel.order.detail"/> </a> 
 					</tr>
 				</c:forEach>
