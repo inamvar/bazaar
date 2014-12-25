@@ -22,9 +22,9 @@
 
 	<bean id="paymentGateway" class="com.kalatag.gateway.TestGateway">
 		<property name="url"
-			value="http://localhost/kalatag/test/payment/simulator" />
+			value="http://localhost:8080/kalatag/test/payment/simulator" />
 		<property name="returnUrl"
-			value="http://localhost/kalatag/payment/gateway/response/test" />
+			value="http://localhost:8080/kalatag/payment/gateway/response/test" />
 		<property name="merchantId" value="111111" />
 	</bean>
 

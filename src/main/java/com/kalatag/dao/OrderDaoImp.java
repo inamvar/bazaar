@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kalatag.domain.Deal;
 import com.kalatag.domain.Order;
+import com.kalatag.domain.Person;
 
 @Repository
 public class OrderDaoImp extends GenericDaoImp<Order> implements OrderDao {
@@ -48,6 +49,19 @@ public class OrderDaoImp extends GenericDaoImp<Order> implements OrderDao {
 		String hql = "FROM Order O WHERE O.deal= :deal";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("deal", deal);
+		results = query.list();
+		if (results == null)
+			results = new ArrayList<Order>();
+		return results;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findOrdersByCustomer(Person customer) {
+		List<Order> results = new ArrayList<Order>();
+		String hql = "FROM Order O WHERE O.person= :customer";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("customer", customer);
 		results = query.list();
 		if (results == null)
 			results = new ArrayList<Order>();

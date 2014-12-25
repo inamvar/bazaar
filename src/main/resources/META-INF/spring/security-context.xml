@@ -15,8 +15,8 @@
 		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
-		<form-login login-page="/login" authentication-failure-url="/login?error" 
-		authentication-success-handler-ref="redirectRoleStrategy"  />
+		<form-login login-page="/login" authentication-failure-url="/login?error"
+			authentication-success-handler-ref="redirectRoleStrategy" />
 		<access-denied-handler error-page="/WEB-INF/templates/error_403_layout.jsp" />
 
 	</http>
@@ -42,19 +42,19 @@
 		<beans:property name="useReferer" value="true" />
 	</beans:bean>
 
-	<!-- 
-		<beans:bean
-			class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-			<beans:property name="defaultFailureUrl" value="/login?login_error=t" />
+	<!-- <beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"> 
+		<beans:property name="defaultFailureUrl" value="/login?login_error=t" /> 
 		</beans:bean> -->
 
 	<beans:bean id="redirectRoleStrategy"
-		class="com.kalatag.security.UrlAuthenticationSuccessHandler"> 
+		class="com.kalatag.security.UrlAuthenticationSuccessHandler">
 		<beans:property name="redirectAdminUrl" value="/admin" />
 		<beans:property name="redirectMerchantUrl" value="/merchant/panel" />
 		<beans:property name="redirectCustomerUrl" value="/" />
 
 	</beans:bean>
 
+	<beans:bean id="webexpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
 </beans:beans>

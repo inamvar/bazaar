@@ -19,6 +19,7 @@ public class CustomerServiceImp extends CRUDServiceImp<Customer> implements
 	PersonRoleService roleService;
 
 	@Override
+	@Transactional
 	public Customer findByUserName(String username) {
 		return CustomerDao.findByUserName(username);
 	}

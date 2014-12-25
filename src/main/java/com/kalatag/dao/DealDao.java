@@ -15,6 +15,7 @@ public interface DealDao  extends GenericDao<Deal> {
 	List<Deal> findDealsByStatusAndNotLabel(DealLabel label, ItemStatus status);
 	List<Deal> findDealsByCategoryAndStatusAndNotLabel(ItemCategory category, DealLabel label, ItemStatus status);
 	List<Deal> findDealsByMerchant(Merchant merchant);
+
 	int getSold(Deal deal);
 	
 }

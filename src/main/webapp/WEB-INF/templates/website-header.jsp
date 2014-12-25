@@ -45,12 +45,30 @@
 								${pageContext.request.userPrincipal.name}<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
+
+								<sec:authorize access="hasRole('ROLE_MERCHANT')">
+									<li><a
+										href="${pageContext.request.contextPath}/merchant/panel"><spring:message
+												code="merchant.panel" /></a></li>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<li><a href="${pageContext.request.contextPath}/admin"><spring:message
+												code="admin.home.title" /></a></li>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_CUSTOMER')">
+									<li><a
+										href="${pageContext.request.contextPath}/customer/panel"><spring:message
+												code="website.customer.panel.title" /></a></li>
+								</sec:authorize>
+
 								<li><a
 									href="${pageContext.request.contextPath}/changepassword"> <spring:message
 											code="security.password.change" /></a></li>
 								<li><a
 									href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message
 											code="security.logout" /></a></li>
+
+
 							</ul>
 					</c:if> <c:if test="${pageContext['request'].userPrincipal == null}">
 						<li><a href="${pageContext.request.contextPath}/register"><spring:message

@@ -149,4 +149,10 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 		}
 
 	}
+
+	@Override
+	@Transactional
+	public List<Order> findOrdersByCustomer(Person customer) {
+		return orderDao.findOrdersByCustomer(customer);
+	}
 }
