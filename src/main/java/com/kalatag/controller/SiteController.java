@@ -1,7 +1,5 @@
 package com.kalatag.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,13 +7,6 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,23 +21,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kalatag.domain.City;
+import com.kalatag.domain.Comment;
 import com.kalatag.domain.Contact;
 import com.kalatag.domain.Customer;
 import com.kalatag.domain.Deal;
 import com.kalatag.domain.DealLabel;
-import com.kalatag.domain.DealOption;
 import com.kalatag.domain.ItemCategory;
 import com.kalatag.domain.ItemStatus;
 import com.kalatag.domain.Person;
 import com.kalatag.domain.Transaction;
-import com.kalatag.domain.TransactiontStatus;
 import com.kalatag.exception.DealExpiredException;
 import com.kalatag.gateway.PaymentGateway;
 import com.kalatag.propertyeditor.CityEditor;
 import com.kalatag.service.CityService;
+import com.kalatag.service.CommentService;
 import com.kalatag.service.CustomerService;
 import com.kalatag.service.DealOptionService;
 import com.kalatag.service.DealService;
@@ -85,6 +75,9 @@ public class SiteController {
 
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	private PaymentGateway paymentGateway;
@@ -142,6 +135,9 @@ public class SiteController {
 					|| deal.getStatus() != ItemStatus.ON) {
 				expired = true;
 			}
+			
+			List<Comment> comments = commentService.findByDeal(deal, true);
+			uiModel.addAttribute("comments", comments);
 
 		}
 		logger.debug("deal is Expired:" + expired);
@@ -151,18 +147,37 @@ public class SiteController {
 		return "website/detail";
 	}
 
+	@RequestMapping(value = "/newcomment", method = RequestMethod.POST)
+	public String newComment(@RequestParam("dealId") int dealId,
+			@RequestParam("memo") String memo, Locale locale, Model uiModel) {
+			Deal deal = dealService.find(dealId);
+			Person author = personService.findByUserName(Util.getCurrentUserName());
+			if(deal !=null && author !=null){
+				Comment comment = new Comment();
+				comment.setDeal(deal);
+				comment.setDate(new Date());
+				comment.setText(memo);
+				comment.setAuthor(author);
+				
+				//in production should be removed
+				comment.setAccepted(true);
+				
+				commentService.create(comment);
+			}
+		return "redirect:/detail?deal=" + dealId;
+	}
+
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String newOrder(@RequestParam("dealId") int dealId,
 			@RequestParam("optionId") int optionId,
-			@RequestParam("qty") int qty, Locale locale, Model uiModel)
-			{
-		
+			@RequestParam("qty") int qty, Locale locale, Model uiModel) {
+
 		Transaction txn = null;
 		try {
 			txn = orderService.buy(dealId, optionId, qty);
 		} catch (DealExpiredException e) {
-			uiModel.addAttribute("errorMsg", messageSource.getMessage(
-					"deal.expired", null, locale));
+			uiModel.addAttribute("errorMsg",
+					messageSource.getMessage("deal.expired", null, locale));
 			uiModel = fillModelForIndex(uiModel, locale);
 			return "website/index";
 		}

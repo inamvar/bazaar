@@ -15,5 +15,7 @@ public interface OrderService extends CRUDService<Order>{
 	List<Order> findPendingOrders(Deal deal);
 	List<Order> findOrdersByDeal(Deal deal);
 	List<Order> findOrdersByCustomer(Person customer);
+	boolean CheckMinimumOrder(Order order);
+	
 	Transaction buy(int dealId, int optionId, int quantity) throws DealExpiredException;
 }

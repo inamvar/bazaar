@@ -14,6 +14,7 @@
 				<div class="col-sm-12">
 				<p><spring:message code="order.id"/>: ${order.id }</p>
 				<p><spring:message code="order.date"/>: ${order.orderDate}</p>
+				<p><spring:message code="order.quantity"/>: ${order.quantity}</p>
 				</div>
 					<div class="col-sm-3">
 						<img class="img-thumbnail"
@@ -21,7 +22,7 @@
 							alt="${order.deal.name}" />
 					</div>
 					<div class="col-sm-5">
-						<p><span class="glyphicon glyphicon-tag"></span> ${order.deal.name}</p>
+						<p><span class="glyphicon glyphicon-tag"></span> <b>${order.deal.name}</b></p>
 						<p>${order.deal.description}</p>
 						
 						<p>${order.option.name} 
@@ -30,13 +31,15 @@
 							<spring:message code="kalatag.currency" />
 						</p>
 						<p>${order.deal.merchant.name}</p>
-						<p>${order.deal.merchant.contact.address}</p>
+						<p><span class="glyphicon glyphicon-map-marker"></span> ${order.deal.merchant.contact.address}</p>
 						<p><span class="glyphicon glyphicon-earphone"></span> ${order.deal.merchant.contact.phone}</p>
 					</div>
 					<div class="col-sm-4">
 					<div class="gmap img-thumbnail" id="gmap"></div>
 					</div>
+					
 					<div class="col-sm-12">
+					<hr/>
 						<p>
 							<spring:message code="order.issue"
 								arguments="${order.deal.merchant.name}" />

@@ -3,13 +3,11 @@ package com.kalatag.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kalatag.domain.Customer;
-import com.kalatag.domain.Person;
 
 @Repository
 public class CustomerDaoImp extends GenericDaoImp<Customer>  implements CustomerDao{ 

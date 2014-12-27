@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
@@ -61,7 +62,7 @@
 			</c:if>
 
 			<div class="col-sm-12">
-			<hr />
+				<hr />
 				<c:forEach items="${deal.options}" var="opt">
 					<div class="col-sm-6">
 						<div>
@@ -100,8 +101,9 @@
 
 
 									</div>
-									<button type="submit" class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;&nbsp;
-										<span class=" glyphicon glyphicon-shopping-cart"> </span>  <b><spring:message
+									<button type="submit" class="btn btn-success btn-sm">
+										&nbsp;&nbsp;&nbsp;&nbsp; <span
+											class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
 												code="kalatag.buy" /></b> &nbsp;&nbsp;&nbsp;&nbsp;
 									</button>
 
@@ -109,9 +111,9 @@
 								</form>
 							</c:if>
 						</div>
-						
+
 					</div>
-				
+
 				</c:forEach>
 
 			</div>
@@ -132,6 +134,49 @@
 					<div class="panel-body">${deal.termsOfUse}</div>
 				</div>
 			</div>
+
+
+			<div class="col-sm-12">
+				<c:if test="${not empty comments}">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-comment"></span>
+							<span > <spring:message code="comments"/></span>
+							<span class="label label-default pull-right"> ${fn:length(comments)}</span>
+						</div>
+						<div class="panel-body">
+
+							<c:forEach items="${comments}" var="comment">
+								<div>
+									<p class="text text-muted"><span class="glyphicon glyphicon-user"></span> ${comment.author.firstName}
+										${comment.author.lastName} | <span>${comment.date}</span>
+
+									<p class="text text-info">${comment.text}
+								</p>
+								<hr/>
+									</div>
+								</c:forEach>
+							
+						</div>
+					</div>
+				</c:if>
+				<hr />
+				<form action="${pageContext.request.contextPath}/newcomment"
+					method="POST">
+					<input type="hidden" value="${deal.id}" name="dealId" />
+					<div class="form-group">
+					<label><spring:message code="deal.comment.write"/></label>
+					<textarea class="form-control" rows="3" cols="8" name="memo"></textarea>
+					</div>
+					<div class="form-group">
+					<button type="submit" class="btn btn-default">
+						<spring:message code="submit" />
+					</button>
+					</div>
+				</form>
+			</div>
+
+
 		</div>
 	</div>
 

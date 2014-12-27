@@ -40,6 +40,15 @@ public class MerchantServiceImp extends CRUDServiceImp<Merchant> implements Merc
 		//merchant.getContactPoint().setEnabled(true);
 		return merchantDao.create(merchant);
 	}
+	
+	@Override
+	@Transactional
+	public Merchant update(Merchant merchant){
+		
+		String email = merchant.getContact().getEmail();
+		merchant.getContactPoint().setUsername(email);
+		return merchantDao.update(merchant);
+	}
 
 	@Override
 	@Transactional

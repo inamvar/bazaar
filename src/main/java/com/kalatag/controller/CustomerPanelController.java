@@ -79,7 +79,9 @@ public class CustomerPanelController {
 			
 				Customer customer = customerService.findByUserName(username);
 				List<Order> orders = orderService.findOrdersByCustomer(customer);
-				double totalOrdersPrice = sumFrom(orders).getTotalPrice();
+				double totalOrdersPrice = 0;
+				if(orders !=null && orders.size() > 0)
+					totalOrdersPrice= sumFrom(orders).getTotalPrice();
 				uiModel.addAttribute("totalOrdersPrice", totalOrdersPrice);
 				uiModel.addAttribute("orders", orders);
 				uiModel.addAttribute("customer", customer);	

@@ -155,4 +155,17 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	public List<Order> findOrdersByCustomer(Person customer) {
 		return orderDao.findOrdersByCustomer(customer);
 	}
+
+	@Override
+	public boolean CheckMinimumOrder(Order order) {
+		Deal deal = order.getDeal();
+		int minimum = deal.getMinCoupon();
+		if (dealService.getSold(deal) >= minimum) {
+			return true;
+		}else{
+			return false;
+		}
+			
+			
+	}
 }

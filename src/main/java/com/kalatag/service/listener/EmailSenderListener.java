@@ -63,7 +63,8 @@ public class EmailSenderListener {
 	public void onMessage(Merchant merchant) {
 
 		try {
-			log.info("Registeration merchant: " + merchant.getName() + " " + merchant.getContactPoint().getUsername()
+			log.info("Registeration merchant: " + merchant.getName() + " "
+					+ merchant.getContactPoint().getUsername()
 					+ " registered successfully.");
 			sendCustomerRegisterEmail(merchant.getContactPoint());
 		} catch (Exception e) {
@@ -75,16 +76,20 @@ public class EmailSenderListener {
 		try {
 			log.debug("---------->new order received from Qserver. order id="
 					+ order.getId());
-			log.debug("Order confirmation: id:" + order.getId() + ", Customer: "
-					+ order.getPerson().getFirstName() + " "
+			log.debug("Order confirmation: id:" + order.getId()
+					+ ", Customer: " + order.getPerson().getFirstName() + " "
 					+ order.getPerson().getLastName() + ", Status: "
 					+ order.getStatus());
 
-			template.setDefaultDestination(orderConfirmation);
-			MessageCreator messageCreator = new GenericMessageCreator<Order>(
-					order);
-			template.send(messageCreator);
-			sendOrderCreateEmail(order);
+			if (orderService.CheckMinimumOrder(order)) {
+				template.setDefaultDestination(orderConfirmation);
+				MessageCreator messageCreator = new GenericMessageCreator<Order>(
+						order);
+				template.send(messageCreator);
+			} else {
+
+				sendOrderCreateEmail(order);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

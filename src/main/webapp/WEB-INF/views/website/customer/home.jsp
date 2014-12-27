@@ -89,6 +89,7 @@
 					<th><spring:message code="order.status" /></th>
 					<th><spring:message code="order.merchant" /></th>
 					<th><spring:message code="order.dealName" /></th>
+					<th><spring:message code="order.quantity" /></th>
 					<th><spring:message code="order.totalprice" /> (<spring:message code="kalatag.currency"/>)</th>
 					<th></th>
 				</tr>
@@ -101,6 +102,7 @@
 						<td><c:out value="${order.status}" /></td>
 						<td><c:out value="${order.deal.merchant.name}" /></td>
 						<td><c:out value="${order.deal.name}" /></td>
+							<td><c:out value="${order.quantity}" /></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="0"
 													value=" ${order.totalPrice}" /></td>
 						<td><a 

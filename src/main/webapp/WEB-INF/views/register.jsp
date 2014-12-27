@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+
 <div class="container">
 
 	<div class="col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">

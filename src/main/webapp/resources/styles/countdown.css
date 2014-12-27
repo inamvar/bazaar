@@ -28,7 +28,7 @@
 .countdown > div > span {
   display: block;
   text-align: center;
-  font-family: "B Yekan", sans-serif;
+  font-family: "Yekan","YekanNumbers", sans-serif;
 }
 span.count {
   font-size: 18px;

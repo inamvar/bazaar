@@ -1,7 +1,6 @@
 package com.kalatag.aspect;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.jms.Destination;
 
@@ -20,11 +19,9 @@ import org.springframework.jms.core.MessageCreator;
 import com.kalatag.domain.Account;
 import com.kalatag.domain.Customer;
 import com.kalatag.domain.Journal;
-import com.kalatag.domain.JournalType;
 import com.kalatag.domain.Merchant;
 import com.kalatag.domain.Order;
 import com.kalatag.domain.Person;
-import com.kalatag.exception.AccountCreditNotEnoughException;
 import com.kalatag.service.accounting.AccountService;
 import com.kalatag.service.listener.GenericMessageCreator;
 import com.kalatag.service.listener.RegistrationListener;
@@ -71,12 +68,14 @@ public class NotificationAspect {
 		setAccount(person);
 		try {
 			merchant = (Merchant) pjp.proceed();
-			person.setPassword(password);
+			//person.setPassword(password);
+			merchant.getContactPoint().setPassword(password);
 			template.setDefaultDestination(emailNotification);
 			MessageCreator messageCreator = new GenericMessageCreator<Merchant>(
 					merchant);
 			template.send(messageCreator);
-			person.setPassword(encryptedPassword);
+			//person.setPassword(encryptedPassword);
+			merchant.getContactPoint().setPassword(encryptedPassword);
 			return merchant;
 		} catch (Exception e) {
 			e.printStackTrace();
