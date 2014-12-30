@@ -34,9 +34,13 @@
 	color: #FFF;
 }
 
-}
-.caption s {
-	font-size: 17px;
+
+.old-price {
+	font-size: 1.4em;
+	text-decoration: line-through;
+	color: #cdcdcd;
+	
+
 }
 
 .finalprice {

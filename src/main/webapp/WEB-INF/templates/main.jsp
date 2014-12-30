@@ -24,6 +24,12 @@
 	href="${pageContext.request.contextPath}/resources/styles/website.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/pgwslider.min.css" />
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/owl.carousel.css" />
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/owl.theme.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/my.css" />
 
@@ -42,6 +48,10 @@
 	src="${pageContext.request.contextPath}/resources/scripts/countdown.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/gmap3.min.js"></script>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/owl.carousel.min.js"></script>
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/myscript.js"></script>
 </head>

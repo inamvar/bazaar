@@ -23,4 +23,16 @@ public class CommentServiceImp extends CRUDServiceImp<Comment> implements
 		return commentDao.findByDeal(deal, accepted);
 	}
 
+	@Override
+	@Transactional
+	public int changeAccept(int id, boolean accept) {
+		return commentDao.changeAccept(id, accept);
+	}
+
+	@Override
+	@Transactional
+	public List<Comment> findAll(String sort, String asc) {
+		return commentDao.findAll(sort, asc);
+	}
+
 }

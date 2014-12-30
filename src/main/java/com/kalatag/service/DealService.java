@@ -22,4 +22,6 @@ public interface DealService extends CRUDService<Deal> {
 			DealLabel label, ItemStatus status);
 	
 	List<Deal> findDealsByMerchant(Merchant merchant);
+	
+	List<Deal> findSimilars(Deal deal);
 }

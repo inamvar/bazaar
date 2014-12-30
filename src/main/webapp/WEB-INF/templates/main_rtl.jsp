@@ -23,7 +23,9 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/bootstrap.rtl.min.css" />
-<%-- 	<link href="${pageContext.request.contextPath}/resources/styles/star-rating.min.css" media="all" rel="stylesheet" type="text/css" /> --%>
+	<link href="${pageContext.request.contextPath}/resources/styles/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/b-roya.css" />
 
@@ -36,10 +38,19 @@
 	href="${pageContext.request.contextPath}/resources/styles/countdown.css" />
 	
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/styles/pgwslider.min.css" />	
+	href="${pageContext.request.contextPath}/resources/styles/pgwslider.min.css" />	 
+	
+		
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/owl.carousel.css" />	
+	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/owl.theme.css" />	
 	
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/menu-rtl.css" />	
+		<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/rtl.css" />	
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
@@ -52,6 +63,10 @@
 	src="${pageContext.request.contextPath}/resources/scripts/countdown.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/gmap3.min.js"></script>
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/owl.carousel.min.js"></script>
+	
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/myscript.js"></script>
 	

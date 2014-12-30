@@ -139,8 +139,8 @@
 										<!-- 									<span class="pull-right label label-success"><i
 										class="glyphicon glyphicon-shopping-cart"></i> <span class="">10</span></span> -->
 									</p>
-									<s class="text-muted"><fmt:formatNumber type="number"
-											maxFractionDigits="0" value="${deal.price}" /></s>
+									<span class="old-price"><fmt:formatNumber type="number"
+											maxFractionDigits="0" value="${deal.price}" /></span>
 									<c:if test="${not empty deal.options}">
 										<b class="finalprice"> <fmt:formatNumber type="number"
 												maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message

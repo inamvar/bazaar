@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Merchant implements Serializable{
 	/**
@@ -28,14 +30,17 @@ public class Merchant implements Serializable{
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_point_id", nullable=true)
+	@JsonIgnore
 	private Person contactPoint;
 	@NotEmpty
 	private String name;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="contact_id", nullable=true)
+	
 	private Contact contact;
 	
 	@OneToMany(targetEntity = Deal.class, mappedBy = "merchant")
+	@JsonIgnore
 	private Set<Deal> items;
 	public Person getContactPoint() {
 		return contactPoint;

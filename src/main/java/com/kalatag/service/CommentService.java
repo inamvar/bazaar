@@ -8,4 +8,6 @@ import com.kalatag.domain.Deal;
 public interface CommentService extends CRUDService<Comment> {
 
 	List<Comment> findByDeal(Deal deal, boolean accepted);
+	int changeAccept(int id, boolean accept);
+	List<Comment> findAll(String sort,String asc);
 }

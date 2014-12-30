@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="country")
 public class Country  implements Serializable{
@@ -30,6 +32,7 @@ public class Country  implements Serializable{
 	private String Code;
 	
 	@OneToMany(fetch=FetchType.EAGER, targetEntity = Province.class, mappedBy = "country")
+	@JsonIgnore
 	private Set<Province> provinces = new HashSet<Province>();	
 	
 	public String getName() {

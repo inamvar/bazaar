@@ -45,9 +45,12 @@
 				<li><a href="${pageContext.request.contextPath}/admin/deal"><spring:message
 							code="admin.menu.deals" /></a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/customer"><spring:message
-							code="admin.menu.definitions.customers" /></a></li></li>
-								<li><a href="${pageContext.request.contextPath}/admin/order"><spring:message
+							code="admin.menu.definitions.customers" /></a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/order"><span class="glyphicon glyphicon-shopping-cart"></span> <spring:message
 							code="admin.menu.orders" /></a></li>
+															<li><a href="${pageContext.request.contextPath}/admin/comment"><span class="glyphicon glyphicon-comment"></span> <spring:message
+							code="comment.list" /></a></li>
+							
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

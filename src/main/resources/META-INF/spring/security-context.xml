@@ -11,6 +11,7 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/merchant/**" access="ROLE_MERCHANT" />
 		<intercept-url pattern="/customer/**" access="ROLE_CUSTOMER" />
+		<intercept-url pattern="/newcomment" access="ROLE_CUSTOMER,ROLE_MERCHANT" />
 		<intercept-url pattern="/buy*" access="ROLE_CUSTOMER,ROLE_MERCHANT" />
 		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />

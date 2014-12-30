@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Province  implements Serializable{
@@ -35,6 +37,7 @@ public class Province  implements Serializable{
 	private Country country;
 	
 	@OneToMany(targetEntity = City.class, mappedBy = "province")
+	@JsonIgnore
     private Set<City> cities = new HashSet<City>();
 
 	public Country getCountry() {

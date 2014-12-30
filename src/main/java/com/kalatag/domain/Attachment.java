@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Attachment  implements Serializable{
+public class Attachment implements Serializable {
 
 	/**
 	 * 
@@ -22,6 +24,7 @@ public class Attachment  implements Serializable{
 	private long size;
 	private String contentType;
 	private String fileName;
+	@JsonIgnore
 	@Column(length = 10000000)
 	private byte[] content;
 

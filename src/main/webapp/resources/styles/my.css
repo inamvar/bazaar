@@ -1,7 +1,7 @@
 @font-face{
 	font-family:'Yekan';
 	src:url("../fonts/YekanWeb-Regular.eot");
-	src:url("../fonts/YekanWeb-Regular.eot?#iefix") format("embedded-opentype"),url("..fonts/YekanWeb-Regular.woff") format("woff"),url("../fonts/YekanWeb-Regular.ttf") format("truetype"),url("../fonts/YekanWeb-Regular.svg#YekanWeb-Regular") format("svg");
+	src:url("../fonts/YekanWeb-Regular.eot?#iefix") format("embedded-opentype"),url("../fonts/YekanWeb-Regular.woff") format("woff"),url("../fonts/YekanWeb-Regular.ttf") format("truetype"),url("../fonts/YekanWeb-Regular.svg#YekanWeb-Regular") format("svg");
 	font-style:normal;
 	font-weight:normal;
 	text-rendering:optimizeLegibility
@@ -58,3 +58,4 @@ table {
 
 	displaye: block;
 }
+

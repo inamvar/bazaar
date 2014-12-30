@@ -23,6 +23,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
@@ -49,6 +51,7 @@ public class Person implements Serializable {
 	@Column(nullable = false, name = "username", unique = true)
 	private String username;
 
+	@JsonIgnore
 	private String password;
 
 	@Value("true")
@@ -60,12 +63,15 @@ public class Person implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "account_id")
+	@JsonIgnore
 	private Account account;
 
 	@OneToMany(targetEntity = Comment.class, mappedBy = "author")
+	@JsonIgnore
 	private Set<Comment> Comments;
 	
 	@OneToMany(targetEntity = Transaction.class, mappedBy = "person")
+	@JsonIgnore
 	private Set<Transaction> transactions;
 
 	public String getUsername() {

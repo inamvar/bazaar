@@ -1,0 +1,12 @@
+.similars{
+	direction:ltr;
+}
+
+.caption{
+	direction:rtl;
+	
+}
+
+.item a:hover{
+	text-decoration:none;
+}

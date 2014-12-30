@@ -59,4 +59,10 @@ public class DealServiceImp extends CRUDServiceImp<Deal> implements DealService 
 	public List<Deal> findDealsByMerchant(Merchant merchant) {
 		return dealDao.findDealsByMerchant(merchant);
 	}
+
+	@Override
+	@Transactional
+	public List<Deal> findSimilars(Deal deal) {
+		return dealDao.findSimilars(deal);
+	}
 }

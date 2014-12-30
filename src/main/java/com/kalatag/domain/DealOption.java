@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class DealOption  implements Serializable{
 	
@@ -35,6 +37,7 @@ public class DealOption  implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="deal_id", nullable=false)
+	@JsonIgnore
 	private Deal deal;
 	
 	public Deal getDeal() {

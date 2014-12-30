@@ -138,6 +138,11 @@ public class SiteController {
 			
 			List<Comment> comments = commentService.findByDeal(deal, true);
 			uiModel.addAttribute("comments", comments);
+			
+			List<Deal> similars = dealService.findSimilars(deal);
+			
+			//List<Deal> similars = dealService.findAll();
+			uiModel.addAttribute("similars", similars);
 
 		}
 		logger.debug("deal is Expired:" + expired);
@@ -158,9 +163,8 @@ public class SiteController {
 				comment.setDate(new Date());
 				comment.setText(memo);
 				comment.setAuthor(author);
-				
-				//in production should be removed
-				comment.setAccepted(true);
+
+				comment.setAccepted(false);
 				
 				commentService.create(comment);
 			}

@@ -16,6 +16,7 @@
 		<activmq-version>5.4.2</activmq-version>
 		<javamail-version>1.4.1</javamail-version>
 		<zxing-version>3.1.0</zxing-version>
+		<jackson.version>1.9.10</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -70,17 +71,17 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.3.3</version>
+			<version>2.4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.3.3</version>
+			<version>2.4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.3.3</version>
+			<version>2.4.4</version>
 		</dependency>
 
 		<!-- Spring -->

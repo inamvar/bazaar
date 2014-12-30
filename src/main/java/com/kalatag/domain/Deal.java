@@ -19,7 +19,11 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Deal implements Serializable {
 	/**
 	 * 
@@ -32,11 +36,11 @@ public class Deal implements Serializable {
 	@NotEmpty
 	private String name;
 	private double price;
+	@JsonIgnore
 	private ItemStatus status;
 	private Rate rate;
 	private float merchantPercent;
-	
-	
+
 	@Lob
 	private String features;
 	@Lob
@@ -47,16 +51,19 @@ public class Deal implements Serializable {
 	private int maxCoupon;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date validity;
-
+	@JsonIgnore
 	private DealLabel label;
 	@ManyToOne
 	@JoinColumn(name = "cat_id", nullable = false)
+	@JsonIgnore
 	private ItemCategory category;
 
 	@ManyToOne
 	@JoinColumn(name = "merchant_id", nullable = false)
 	private Merchant merchant;
+	
 	@Column(length = 10000000)
+	@JsonIgnore
 	private byte[] thumbnail;
 
 	@OneToMany(targetEntity = Attachment.class, cascade = CascadeType.ALL)
@@ -66,8 +73,6 @@ public class Deal implements Serializable {
 	@OneToMany(targetEntity = DealOption.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<DealOption> options;
 
-	
-	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -219,7 +224,5 @@ public class Deal implements Serializable {
 	public void setMerchantPercent(float merchantPercent) {
 		this.merchantPercent = merchantPercent;
 	}
-
-
 
 }
