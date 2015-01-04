@@ -43,32 +43,22 @@
 	<div class="">
 		<div class="col-md-3 col-lg-3 hidden-sm hidden-xs">
 
-		
-				<ul class="ca-menu">
+
+			<ul class="ca-menu">
+				<li><a style="color: black; font-size: 1em;"
+					href="${pageContext.request.contextPath}/"><span
+						class="ca-icon"><i class="glyphicon glyphicon-th"></i></span> <span
+						class="ca-content"> <spring:message code="deal.all" />
+
+					</span> </a></li>
+				<c:forEach items="${categories}" var="category">
 					<li><a style="color: black; font-size: 1em;"
-						href="${pageContext.request.contextPath}/"><span class="ca-icon"><i
-							class="glyphicon glyphicon-th"></i></span>
-							
-							 <span class="ca-content">
-                               <spring:message
-								code="deal.all" />
-                              
-                            </span>
-							
-							</a></li>
-					<c:forEach items="${categories}" var="category">
-						<li><a style="color: black; font-size: 1em;"
-							href="${pageContext.request.contextPath}?category=${category.id}"><span class="ca-icon"><i
-								class="glyphicon glyphicon-th"></i> </span>
-								
-								 <span class="ca-content">								
-								 ${category.name}
-								 </span>
-								
-								</a></li>
-					</c:forEach>
-				</ul>
-	
+						href="${pageContext.request.contextPath}?category=${category.id}"><span
+							class="ca-icon"><i class="${category.iconCss}"></i> </span> <span
+							class="ca-content"> ${category.name} </span> </a></li>
+				</c:forEach>
+			</ul>
+
 		</div>
 
 		<div class="col-xs-12 col-sm-12  col-md-9 col-lg-9">
@@ -121,19 +111,35 @@
 					</div>
 
 				</div>
-				<hr />
+
 			</c:if>
 			<div class="row">
+				<br />
+
+				<div class="btn-group pull-right" data-toggle="buttons">
+					<label class="btn btn-default btn-sm active" id="btn-grid">
+						<input type="radio" name="listMode" id="option1"
+						autocomplete="off" value="0" checked> <i class=" icon-th"></i>
+					</label> <label class="btn btn-default btn-sm" id="btn-list"> <input
+						type="radio" name="options" id="option2" autocomplete="off"
+						value="1"> <i class="icon-list"></i>
+					</label>
+
+				</div>
+				<hr />
+
+			</div>
+			<div class="row" id="grid">
 				<c:forEach items="${deals}" var="deal">
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 
 						<div class="productbox">
 							<a
 								href="${pageContext.request.contextPath}/detail?deal=${deal.id}">
-								<div class="imgthumb img-responsive">
-									<img
-										src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=230&height=200">
-								</div>
+
+								<img class="img-responsive"
+								src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=230&height=200" />
+
 								<div class="caption">
 									<p>${deal.name}
 										<!-- 									<span class="pull-right label label-success"><i
@@ -142,10 +148,11 @@
 									<span class="old-price"><fmt:formatNumber type="number"
 											maxFractionDigits="0" value="${deal.price}" /></span>
 									<c:if test="${not empty deal.options}">
-										<b class="finalprice"> <fmt:formatNumber type="number"
-												maxFractionDigits="0" value="${deal.options[0].price}" /> <spring:message
+										<span class="finalprice"> &nbsp; <fmt:formatNumber
+												type="number" maxFractionDigits="0"
+												value="${deal.options[0].price}" /> <spring:message
 												code="kalatag.currency" />
-										</b>
+										</span>
 										<!-- from <b>Amazon</b> -->
 									</c:if>
 
@@ -155,7 +162,7 @@
 								</div> <c:if test="${not empty deal.options}">
 									<div class="saleoffrate">
 										<b><fmt:formatNumber type="number" maxFractionDigits="0"
-												value=" ${deal.options[0].discount}" /> %</b><br>
+												value=" ${deal.options[0].discount}" />%</b><br>
 										<%-- 	<spring:message code="kalatag.off" /> --%>
 									</div>
 								</c:if> <%-- 						<button type="button" class="btn btn-success btn-md btn-block">
@@ -167,6 +174,57 @@
 					</div>
 				</c:forEach>
 			</div>
+
+
+
+			<div class="row hidden" id="list">
+				<div class="list-group">
+					<c:forEach items="${deals}" var="deal">
+
+
+						<a class="list-group-item"
+							href="${pageContext.request.contextPath}/detail?deal=${deal.id}">
+							<div class="row">
+								<img class="img-responsive col-sm-2"
+									src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=160&height=145" />
+
+
+								<div class="col-sm-10">
+									<h4>${deal.name}</h4>
+									<p>${deal.description}</p>
+									<p>
+										<span class="old-price"><fmt:formatNumber type="number"
+												maxFractionDigits="0" value="${deal.price}" /></span>
+										<c:if test="${not empty deal.options}">
+											<span class="finalprice"> &nbsp; <fmt:formatNumber
+													type="number" maxFractionDigits="0"
+													value="${deal.options[0].price}" /> <spring:message
+													code="kalatag.currency" />
+													&nbsp;&nbsp;
+													 <c:if test="${not empty deal.options}">
+									
+										<span class="text text-danger">%<fmt:formatNumber type="number" maxFractionDigits="0"
+												value=" ${deal.options[0].discount}" />&nbsp; <spring:message code="kalatag.off"/></span>
+										<%-- 	<spring:message code="kalatag.off" /> --%>
+									
+								</c:if>
+											</span>
+											<!-- from <b>Amazon</b> -->
+										</c:if>
+									</p>
+
+								</div>
+							</div>
+						</a>
+
+
+
+					</c:forEach>
+				</div>
+
+			</div>
+
+
 		</div>
 	</div>
 </div>
@@ -180,6 +238,25 @@
 		});
 
 		startCountdown();
+
+		$('#btn-list').click(function() {
+
+			$('#grid').fadeOut('slow', function() {
+				$('#list').removeClass('hidden');
+				$('#list').show();
+			});
+
+		});
+
+		$('#btn-grid').click(function() {
+
+			$('#list').fadeOut('slow', function() {
+
+				$('#grid').show();
+			});
+
+		});
+
 	});
 </script>
 

@@ -27,6 +27,8 @@ public class ItemCategory  implements Serializable {
 	@NotEmpty
 	private String name;
 	private String description;
+	
+	private String iconCss;
 
 	@OneToMany(targetEntity = Deal.class, mappedBy = "category")
 	private Set<Deal> deal;
@@ -60,6 +62,14 @@ public class ItemCategory  implements Serializable {
 
 	public void setDeals(Set<Deal> deals) {
 		this.deal = deals;
+	}
+
+	public String getIconCss() {
+		return iconCss;
+	}
+
+	public void setIconCss(String iconCss) {
+		this.iconCss = iconCss;
 	}
 
 }

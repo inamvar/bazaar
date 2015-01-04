@@ -123,7 +123,7 @@ public class DealDaoImp extends GenericDaoImp<Deal> implements DealDao {
 	@SuppressWarnings("unchecked")
 	public List<Deal> findSimilars(Deal deal) {
 		List<Deal> results = new ArrayList<Deal>();
-		String hql = "from Deal D WHERE D.category = :category and D.id != :id  D.status= :status order by D.id DESC";
+		String hql = "from Deal D WHERE D.category = :category and D.id != :id and D.status= :status order by D.id DESC";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("category", deal.getCategory());
 		query.setParameter("id", deal.getId());

@@ -27,7 +27,7 @@
 
 	
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/styles/b-roya.css" />
+	href="${pageContext.request.contextPath}/resources/styles/font_awesome.css" />
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/website.css" />

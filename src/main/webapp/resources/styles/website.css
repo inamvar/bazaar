@@ -13,8 +13,10 @@
 /* CSS used here will be applied after bootstrap.css */
 .productbox {
 	position: relative;
-	border: 2px solid #ddd;
-	border-radius: 10px;
+	color: #000000;
+	background-color: #fff;
+	border: 1px solid #cacaca;
+	border-radius: 10px; 
 	-webkit-transition: all .2s ease-in-out;
 	font-size: 20px;
 	margin-bottom:15px;
@@ -22,30 +24,34 @@
 	padding:0;
 }
 
+
+.productbox img{
+	width:100%;
+	padding: 5px;
+	border-radius: 10px; 
+}
 .caption {
-	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.8);
+	padding: 5px;
+
 	position: relative;
-	bottom: 0;
-	width: 100%;
-	max-height: 50%;
-	overflow: hidden;
+	bottom:0;
 	font-size: 13px;
-	color: #FFF;
+	color: #000000;
+
 }
 
 
 .old-price {
-	font-size: 1.4em;
+	font-size: 1.3em;
 	text-decoration: line-through;
-	color: #cdcdcd;
+	color: #808080;
 	
 
 }
 
 .finalprice {
-	font-size: 17px;
-	color: #AAFCAE;
+	font-size: 1.2em;
+	color: #008000;
 }
 
 .caption h5 {
@@ -82,7 +88,7 @@
 	left: 10px;
 	padding-top: 18px;
 	text-align: center;
-	background-color: rgba(76, 174, 76, 0.8);
+	background-color: rgba(162, 211, 95, 0.8);
 	color: #FFFFFF;
 	border-radius: 50%;
 	height: 50px;
@@ -107,7 +113,7 @@
 	line-height: 27px;
 	height: 60px;
 	width: 60px;
-	background-color: rgba(76, 174, 76, 1);
+	background-color: rgba(162, 211, 95, 1);
 	color: #FFFFFF;
 	text-align: center;	
 	padding: 15px;
@@ -139,11 +145,11 @@
 	line-height: 20px;
 	font-size: 1.4em;
 	padding-top: 30px;
-	background-color: rgba(76, 174, 76, 1);
+	background-color: rgba(162, 211, 95, 1);
 }
 
 .productbox:hover .caption {
-	background-color: rgba(0, 0, 0, 0.8);
+	/* background-color: rgba(0, 0, 0, 0.8); */
 }
 
 
@@ -232,6 +238,5 @@ Inspired by http://dribbble.com/shots/890759-Ui-Kit-Metro/attachments/97174
         padding-top: 12px;
         font-size: 26px;
     }
-
 
 

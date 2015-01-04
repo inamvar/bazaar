@@ -100,8 +100,7 @@ public class SiteController {
 		model.addAttribute("title",
 				messageSource.getMessage("website.home.title", null, locale));
 		model.addAttribute("categories", categoryService.findAll());
-		model.addAttribute("featureds", dealService.findDealsByLabelAndStatus(
-				DealLabel.FEATURED, ItemStatus.ON));
+		
 		if (catergoryId != null && catergoryId > 0) {
 			ItemCategory category = categoryService.find(catergoryId);
 			if (category != null) {
@@ -110,12 +109,15 @@ public class SiteController {
 								DealLabel.FEATURED, ItemStatus.ON));
 			} else {
 				model.addAttribute("deals", new ArrayList<Deal>());
+				
 			}
 
 		} else {
 			model.addAttribute("deals", dealService
 					.findDealsByStatusAndNotLabel(DealLabel.FEATURED,
 							ItemStatus.ON));
+			model.addAttribute("featureds", dealService.findDealsByLabelAndStatus(
+					DealLabel.FEATURED, ItemStatus.ON));
 		}
 		return "website/index";
 	}

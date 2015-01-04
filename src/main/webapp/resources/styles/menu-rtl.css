@@ -6,15 +6,15 @@
 }
 .ca-menu li{
   /*   width: 500px; */
-    height: 35px;
+    height: 30px;
     overflow: hidden;
     display: block;
     background: #fff;
-    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    margin-bottom: 4px;
-    border-right: 7px solid #000;
+    -webkit-box-shadow: 1px 1px 2px rgba(162, 211, 95,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(162, 211, 95,0.2);
+    box-shadow: 1px 1px 2px rgba(162, 211, 95,0.2);
+    margin-bottom: 2px;
+    border-right: 7px solid #a2d35f;
     -webkit-transition: all 300ms ease-in-out;
 	-moz-transition: all 300ms ease-in-out;
 	-o-transition: all 300ms ease-in-out;
@@ -26,21 +26,22 @@
 }
 .ca-menu li a{
    /*  text-align: left; */
-   padding:5px;
+   padding:2px;
+  padding-right:10px;
     display: block;
     width: 100%;
     height: 100%;
-    color: #333;
+    color: #008000;
     position:relative;
+       text-decoration: none;
 }
 .ca-icon{
     font-family: 'WebSymbolsRegular', cursive;
     font-size: 15px;
-    text-shadow: 0px 0px 1px #333;
+    text-shadow: 0px 0px 1px #008000;
     diplay:inline;
     position: relative;
-    padding:10px;
-   
+    
    /*  right: 20px; */
    
     -webkit-transition: all 300ms linear;
@@ -50,16 +51,17 @@
     transition: all 300ms linear;
 }
 .ca-content{
+	font-size: 12px;
     position: relative;
     diplay:inline;
-    padding:10px;
+    padding:5px;
   /*   right: 120px; */
    /*  width: 370px; */
   /*   height: 60px; */
    /*  top: 20px; */
 }
 .ca-main{
-    font-size: 12px;
+    font-size: 11px;
     -webkit-transition: all 300ms linear;
     -moz-transition: all 300ms linear;
     -o-transition: all 300ms linear;
@@ -67,7 +69,7 @@
     transition: all 300ms linear;
 }
 .ca-sub{
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     -webkit-transition: all 300ms linear;
     -moz-transition: all 300ms linear;
@@ -76,20 +78,24 @@
     transition: all 300ms linear; 
 }
 .ca-menu li:hover{
-    border-color: #00ff80;
-    background: #000;
+    border-color: #ebf103;
+    background: #a2d35f;
     padding-right:20px;
+    text-decoration: none;
 }
 .ca-menu li:hover .ca-icon{
-    color: #00ff80;
-    text-shadow: 0px 0px 1px #00ff80;
+    color: #008000;
+    text-shadow: 0px 0px 1px #a2d35f;
+     text-decoration: none;
    /*  font-size: 20px; */
 }
 .ca-menu li:hover .ca-content{
-    color: #00ff80;
+    color: #ffffff;
+  
    /*  font-size: 14px; */
 }
 .ca-menu li:hover .ca-sub{
     color: #fff;
+       text-decoration: none;
    /*  font-size: 20px; */
 }

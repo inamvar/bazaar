@@ -8,7 +8,7 @@
 
 <style>
 #owl-demo .item {
-	padding: 30px 0px;
+	/* padding: 30px 0px; */
 	margin: 5px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -204,7 +204,7 @@
 					<div id="owl-demo" class="owl-carousel">
 						<c:forEach items="${similars}" var="sim" varStatus="stat">
 
-							<div class="item">
+							<div class="item productbox">
 
 								<a
 									href="${pageContext.request.contextPath}/detail?deal=${sim.id}">
