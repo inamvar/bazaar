@@ -57,9 +57,48 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<spring:message code="person.birthday" />
-							<form:input class="form-control input-sm"
-								placeholder="e.g 1983/10/23" path="birthday"></form:input>
+
+
+							<%-- <c:if test="${pageContext.response.locale.language == 'fa'} "> --%>
+
+							<div class="input-group">
+								<span class="btn btn-default" id="date_btn"><i
+									class="icon-calendar"></i> </span> <span id="display_area"
+									class="form-control input-sm"></span>
+							</div>
+
+							<!-- 							
+								<div class="form-control">
+								<span id="display_area" style="cursor: pointer;"
+									class="icon-calendar"></span>
+									
+								</div> -->
+							<form:input class="form-control input-sm" id="date_input"
+								type="hidden" path="birthday" />
+
+							<script type="text/javascript">
+								Calendar.setup({
+									inputField : "date_input", // id of the input field
+									displayArea : "display_area",
+									ifFormat : "%Y/%m/%d", // format of the input field
+									dateType : 'jalali',
+									ifDateType : 'gregorian',
+									button : "date_btn",
+									langNumbers : true,
+									weekNumbers : false
+								});
+							</script>
+
+							<%-- </c:if> --%>
+
+							<%-- 							<c:if test="${pageContext.response.locale.language != 'fa'} ">
+								<form:input class="form-control input-sm"
+									placeholder="e.g 1983/10/23" path="birthday"></form:input>
+							</c:if> --%>
+
+
 							<form:errors path="birthday" cssClass="text text-danger" />
+
 						</div>
 					</div>
 

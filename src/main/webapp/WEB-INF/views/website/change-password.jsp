@@ -5,7 +5,7 @@
 
 <div class="container">
 
-	<div class="col-sm-4">
+	<div class="col-sm-4 col-sm-offset-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<spring:message code="security.password.change.message" />

@@ -84,22 +84,40 @@
 
 .saleoffrate {
 	position: absolute;
-	top: 10px;
-	left: 10px;
-	padding-top: 18px;
-	text-align: center;
-	background-color: rgba(162, 211, 95, 0.8);
+	top: 0px;
+	left: -20px;
+	padding-top: 15px;
+	text-align: left;
+	/* background-color: #ED513C; */
 	color: #FFFFFF;
-	border-radius: 50%;
-	height: 50px;
-	width: 50px;
-	line-height: 13px;
+	/* border-radius: 50%; */
+	height: 100px;
+	width: 80px;
+	font-size:0.9em;
+	line-height: 50px;
 	z-index: 2;
+	background-image: url("../images/tag.png");
+	    background-repeat: no-repeat;
+    padding-left:12;
+	 background-size: contain;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+	
+	
+
+	
+}
+
+.rotate{
+	
+    -webkit-transform: rotate(308deg);
+    -moz-transform: rotate(308deg);
+    -o-transform: rotate(308deg);
+    writing-mode: lr-tb;
+	
 }
 
 .featured{
@@ -113,7 +131,7 @@
 	line-height: 27px;
 	height: 60px;
 	width: 60px;
-	background-color: rgba(162, 211, 95, 1);
+	background-color:#ED513C;
 	color: #FFFFFF;
 	text-align: center;	
 	padding: 15px;
@@ -140,12 +158,23 @@
 }
 
 .productbox:hover .saleoffrate {
-	height: 80px;
-	width: 80px;
-	line-height: 20px;
-	font-size: 1.4em;
-	padding-top: 30px;
-	background-color: rgba(162, 211, 95, 1);
+	height: 110px;
+	width: 90px;
+	line-height: 35px;
+	font-size: 1em;
+	padding-top: 26px;
+	 padding-left:15;
+	 
+	 
+	 
+
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+    writing-mode: lr-tb;
+
+	 
+	/* background-color: rgba(162, 211, 95, 1); */
 }
 
 .productbox:hover .caption {

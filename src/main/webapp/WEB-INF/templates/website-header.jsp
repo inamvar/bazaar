@@ -22,7 +22,13 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<div class="nav navbar-nav"></div>
+			<ul class="nav navbar-nav">
+				<li><a href="#" >
+		<span class="glyphicon glyphicon-warning-sign"></span> <b>توجه: </b>سایت
+		در دست ساخت است. کلیه محتوای سایت آزمایشی و غیر واقعی هستند</a>
+	</li>
+			
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><c:out

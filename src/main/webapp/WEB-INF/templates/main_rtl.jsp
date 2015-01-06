@@ -28,6 +28,9 @@
 	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/font_awesome.css" />
+	
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/styles/calendar/skins/aqua/theme.css" />	
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/styles/website.css" />
@@ -63,6 +66,22 @@
 	src="${pageContext.request.contextPath}/resources/scripts/countdown.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/gmap3.min.js"></script>
+	
+		
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/calendar/jalali.js"></script>
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/calendar/calendar.js"></script>
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/calendar/calendar-setup.js"></script>
+	
+
+
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/calendar/lang/calendar-fa.js"></script>
 	
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/owl.carousel.min.js"></script>
