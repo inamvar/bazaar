@@ -52,8 +52,32 @@
 								<p>
 									<spring:message code="deal.validity" />
 								</p>
-								<form:input class="form-control input-sm" path="validity" placeholder="eg 2001/11/09"></form:input>
+								<%-- <form:input class="form-control input-sm" path="validity" placeholder="eg 2001/11/09"></form:input> --%>
+								
+								
+								<div class="input-group">
+								<span class="btn btn-default" id="date_btn"><i
+									class="icon-calendar"></i> </span> <span id="display_area"
+									class="form-control input-sm"></span>
+							</div>
+							<form:input class="form-control input-sm" id="date_input"
+								type="hidden" path="validity" />
+
+							<script type="text/javascript">
+								Calendar.setup({
+									inputField : "date_input", // id of the input field
+									displayArea : "display_area",
+									ifFormat : "%Y/%m/%d", // format of the input field
+									dateType : 'jalali',
+									ifDateType : 'gregorian',
+									button : "date_btn",
+									langNumbers : true,
+									weekNumbers : false
+								});
+							</script>
+								
 								<form:errors path="validity" cssClass="text text-danger" />
+								
 							</div>
 						</div>
 

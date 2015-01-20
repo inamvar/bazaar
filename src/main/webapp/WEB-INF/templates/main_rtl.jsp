@@ -83,8 +83,23 @@
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/calendar/lang/calendar-fa.js"></script>
 	
+
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/owl.carousel.min.js"></script>
+
+
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/jquery.calendars.min.js"></script>
+	
+	
+		<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/jquery.calendars.plus.min.js"></script>
+	
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/scripts/jquery.calendars.persian.min.js"></script>
+	
+
+
 	
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/scripts/myscript.js"></script>
@@ -100,5 +115,24 @@
 	<div id="content">
 		<tiles:insertAttribute name="body" />
 	</div>
+	<script  type="text/javascript">
+	
+	$('.persian-date').each(function(index, element) {
+		try {
+			var date = $(element).text().split('/');
+			var year = parseInt(date[0], 10);
+			var month = parseInt(date[1], 10);
+			var day = parseInt(date[2], 10);
+			/* console.log(year + '-' + month + '-' + day); */
+			var gc = $.calendars.instance();
+			var d = gc.newDate(year, month, day);
+			var pCal = $.calendars.instance('persian').fromJD(d.toJD());
+			$(element).text(pCal.formatDate('yyyy/mm/dd'));
+		} catch (e) {
+			console.log(e);
+		}
+
+	});
+	</script>
 </body>
 </html>

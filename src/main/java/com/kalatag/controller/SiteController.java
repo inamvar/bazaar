@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kalatag.domain.City;
 import com.kalatag.domain.Comment;
@@ -155,6 +156,7 @@ public class SiteController {
 	}
 
 	@RequestMapping(value = "/newcomment", method = RequestMethod.POST)
+	@ResponseBody
 	public String newComment(@RequestParam("dealId") int dealId,
 			@RequestParam("memo") String memo, Locale locale, Model uiModel) {
 			Deal deal = dealService.find(dealId);
@@ -163,14 +165,15 @@ public class SiteController {
 				Comment comment = new Comment();
 				comment.setDeal(deal);
 				comment.setDate(new Date());
-				comment.setText(memo);
+				comment.setCommentText(memo);
 				comment.setAuthor(author);
 
 				comment.setAccepted(false);
 				
 				commentService.create(comment);
 			}
-		return "redirect:/detail?deal=" + dealId;
+		//return "redirect:/detail?deal=" + dealId;
+		return memo;
 	}
 
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)

@@ -23,7 +23,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Locale locale, Model uiModel) {
 
 		uiModel.addAttribute("comments",
@@ -43,13 +43,13 @@ public class CommentController {
 			accepted = false;
 
 		commentService.changeAccept(id, accepted);
-		return "redirect: ";
+		return "redirect:list";
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") Integer id, Locale locale,
 			Model uiModel) {
 		commentService.delete(id);
-		return "redirect: ";
+		return "redirect:list";
 	}
 }

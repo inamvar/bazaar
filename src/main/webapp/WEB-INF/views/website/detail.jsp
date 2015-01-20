@@ -161,8 +161,14 @@
 								<div>
 									<p class="text text-muted">
 										<span class="glyphicon glyphicon-user"></span>
-										${comment.author.firstName} ${comment.author.lastName} | <span>${comment.date}</span>
-									<p class="text text-info">${comment.text}</p>
+										${comment.author.firstName} ${comment.author.lastName} | <span
+											class="persian-date"><fmt:formatDate
+												pattern="yyyy/MM/dd" value="${comment.date}" /> </span>
+												
+												<span
+											><fmt:formatDate
+												type="time"  value="${comment.date}" /> </span>
+									<p class="text text-info">${comment.commentText}</p>
 									<hr />
 								</div>
 							</c:forEach>
@@ -211,14 +217,15 @@
 									<img
 									src="${pageContext.request.contextPath}/files/deals/${sim.id}/thumbnail?width=255&height=170"
 									class="img img-responsive" />
-									<div class="caption" >
+									<div class="caption">
 										<p>${sim.name }</p>
-										<span class="old-price" style="font-size: 0.9em;"><fmt:formatNumber type="number"
-												maxFractionDigits="0" value="${deal.price}" /></span>
+										<span class="old-price" style="font-size: 0.9em;"><fmt:formatNumber
+												type="number" maxFractionDigits="0" value="${deal.price}" /></span>
 										<c:if test="${not empty deal.options}">
-											<b class="finalprice" style="font-size: 0.9em;"> <fmt:formatNumber type="number"
-													maxFractionDigits="0" value="${deal.options[0].price}" />
-												<spring:message code="kalatag.currency" />
+											<b class="finalprice" style="font-size: 0.9em;"> <fmt:formatNumber
+													type="number" maxFractionDigits="0"
+													value="${deal.options[0].price}" /> <spring:message
+													code="kalatag.currency" />
 											</b>
 											<!-- from <b>Amazon</b> -->
 										</c:if>
@@ -245,6 +252,8 @@
 </div>
 
 <script>
+
+
 	$(document).ready(function() {
 
 		$("#owl-demo").owlCarousel({

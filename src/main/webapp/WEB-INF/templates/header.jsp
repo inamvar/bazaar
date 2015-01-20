@@ -48,7 +48,7 @@
 							code="admin.menu.definitions.customers" /></a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/order"><span class="glyphicon glyphicon-shopping-cart"></span> <spring:message
 							code="admin.menu.orders" /></a></li>
-															<li><a href="${pageContext.request.contextPath}/admin/comment"><span class="glyphicon glyphicon-comment"></span> <spring:message
+															<li><a href="${pageContext.request.contextPath}/admin/comment/list"><span class="glyphicon glyphicon-comment"></span> <spring:message
 							code="comment.list" /></a></li>
 							
 			</ul>

@@ -34,7 +34,8 @@
 					<th><spring:message code="order.customer" /></th>
 					<th><spring:message code="order.merchant" /></th>
 					<th><spring:message code="order.dealName" /></th>
-					<th><spring:message code="order.totalprice" /> (<spring:message code="kalatag.currency"/>)</th>
+					<th><spring:message code="order.totalprice" /> (<spring:message
+							code="kalatag.currency" />)</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -42,20 +43,22 @@
 				<c:forEach var="order" items="${orders}">
 					<tr>
 						<td><c:out value="${order.id}" /></td>
-						<td><c:out value="${order.orderDate}" /></td>
+						<td><span class="persian-date"><fmt:formatDate
+									pattern="yyyy/MM/dd" value="${order.orderDate}" /> </span> <span><fmt:formatDate
+									type="time" value="${order.orderDate}" /> </span></td>
 						<td><c:out value="${order.status}" /></td>
 						<td><c:out
 								value="${order.person.firstName} ${order.person.lastName}" /></td>
 						<td><c:out value="${order.deal.merchant.name}" /></td>
 						<td><c:out value="${order.deal.name}" /></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="0"
-													value=" ${order.totalPrice}" /></td>
-						<td><a 
+								value=" ${order.totalPrice}" /></td>
+						<td><a
 							href="${pageContext.request.contextPath}/admin/order/detail/${order.id}"><span
-								class="glyphicon glyphicon-th"> </span></a> 
-								<a class="btn btn-danger btn-xs"
+								class="glyphicon glyphicon-th"> </span></a> <a
+							class="btn btn-danger btn-xs"
 							href="${pageContext.request.contextPath}/admin/order/delete/${order.id}"><span
-								class="glyphicon glyphicon-trash"> </span></a> 
+								class="glyphicon glyphicon-trash"> </span></a>
 					</tr>
 				</c:forEach>
 			</tbody>
