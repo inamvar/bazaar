@@ -114,7 +114,9 @@
 	</div>
 	<div id="content">
 		<tiles:insertAttribute name="body" />
+			<tiles:insertAttribute name="footer" />
 	</div>
+
 	<script  type="text/javascript">
 	
 	$('.persian-date').each(function(index, element) {

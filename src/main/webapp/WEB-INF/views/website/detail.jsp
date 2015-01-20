@@ -17,6 +17,29 @@
 </style>
 
 <div class="container">
+
+	<c:if test="${not empty successMsg}">
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+			</button>
+			<p>${successMsg}</p>
+		</div>
+
+	</c:if>
+
+
+
+	<c:if test="${not empty errorMsg}">
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+			</button>
+			<p>${errorMsg}</p>
+		</div>
+
+	</c:if>
+
 	<div class="row">
 		<div class="col-sm-3">
 			<div class="panel panel-default">
@@ -161,13 +184,16 @@
 								<div>
 									<p class="text text-muted">
 										<span class="glyphicon glyphicon-user"></span>
-										${comment.author.firstName} ${comment.author.lastName} | <span
+										${comment.author.firstName} ${comment.author.lastName} |
+										<span
+											><fmt:formatDate
+												pattern="hh:mm:ss"  value="${comment.date}" /> </span>
+										
+										 <span
 											class="persian-date"><fmt:formatDate
 												pattern="yyyy/MM/dd" value="${comment.date}" /> </span>
 												
-												<span
-											><fmt:formatDate
-												type="time"  value="${comment.date}" /> </span>
+												
 									<p class="text text-info">${comment.commentText}</p>
 									<hr />
 								</div>

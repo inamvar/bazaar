@@ -43,6 +43,7 @@
 		<put-attribute name="header"
 			value="/WEB-INF/templates/website-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/templates/blank.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/templates/footer-website.jsp" />
 	</definition>
 
 	<definition name="website/index" extends=".websiteTemplate">

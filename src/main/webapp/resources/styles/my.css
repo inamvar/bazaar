@@ -17,6 +17,18 @@
 }
 
 
+.footer{
+	margin-top:20px;
+	padding:30px;
+	background-color: #f1f1f1;	
+	border-top: 1px solid  #c1c1c1;
+
+}
+
+.footer a{
+	text-decoration: none;
+}
+
 body {
 	font-family:  "Yekan","YekanNumbers", Tahoma;
 	font-size: 13;
@@ -77,6 +89,11 @@ table {
 .navbar-default {
 	background-color: #f1f1f1;
 	border-color: #c1c1c1;
+	border-radius: 0;
+	border-left : 0px;
+	border-right:0px;
+	margin-right:-3px;
+	margin-left:-1px;
 }
 .navbar-default .navbar-brand {
 	color: #3a3a3a;

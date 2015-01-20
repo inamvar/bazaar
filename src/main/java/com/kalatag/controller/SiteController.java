@@ -126,37 +126,11 @@ public class SiteController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detail(@RequestParam("deal") int dealId, Locale locale,
 			Model uiModel) {
-		Deal deal = dealService.find(dealId);
-		boolean expired = false;
-		if (deal == null)
-			throw new ResourceNotFoundException(dealId + "");
-		else {
-			uiModel.addAttribute("deal", deal);
-
-			Date now = new Date();
-			if ((deal.getValidity().compareTo(now) < 0)
-					|| deal.getStatus() != ItemStatus.ON) {
-				expired = true;
-			}
-			
-			List<Comment> comments = commentService.findByDeal(deal, true);
-			uiModel.addAttribute("comments", comments);
-			
-			List<Deal> similars = dealService.findSimilars(deal);
-			
-			//List<Deal> similars = dealService.findAll();
-			uiModel.addAttribute("similars", similars);
-
-		}
-		logger.debug("deal is Expired:" + expired);
-		uiModel.addAttribute("expired", expired);
-		uiModel.addAttribute("title",
-				messageSource.getMessage("website.detail.title", null, locale));
+		uiModel = fillDetail(dealId, locale, uiModel);		
 		return "website/detail";
 	}
 
 	@RequestMapping(value = "/newcomment", method = RequestMethod.POST)
-	@ResponseBody
 	public String newComment(@RequestParam("dealId") int dealId,
 			@RequestParam("memo") String memo, Locale locale, Model uiModel) {
 			Deal deal = dealService.find(dealId);
@@ -170,10 +144,44 @@ public class SiteController {
 
 				comment.setAccepted(false);
 				
-				commentService.create(comment);
+				 Comment com = commentService.create(comment);
+				 if(com !=null)
+				 {
+					 uiModel.addAttribute("successMsg",
+								messageSource.getMessage("comment.insert.success", null, locale));
+				 }else{
+					 uiModel.addAttribute("errorMsg",
+								messageSource.getMessage("comment.insert.failed", null, locale));
+				 }
 			}
-		//return "redirect:/detail?deal=" + dealId;
-		return memo;
+		uiModel = fillDetail(dealId, locale, uiModel);
+		return "website/detail";
+	}
+	
+	private Model fillDetail(int dealId, Locale locale, Model uiModel){
+		
+		Deal deal = dealService.find(dealId);
+		boolean expired = false;
+		if (deal == null)
+			throw new ResourceNotFoundException(dealId + "");
+		else {
+			uiModel.addAttribute("deal", deal);
+
+			Date now = new Date();
+			if ((deal.getValidity().compareTo(now) < 0)
+					|| deal.getStatus() != ItemStatus.ON) {
+				expired = true;
+			}
+			List<Comment> comments = commentService.findByDeal(deal, true);
+			uiModel.addAttribute("comments", comments);
+			List<Deal> similars = dealService.findSimilars(deal);
+			uiModel.addAttribute("similars", similars);
+
+		}
+		uiModel.addAttribute("expired", expired);
+		uiModel.addAttribute("title",
+		messageSource.getMessage("website.detail.title", null, locale));
+		return uiModel;
 	}
 
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
