@@ -98,7 +98,14 @@
 				<c:forEach var="order" items="${orders}">
 					<tr>
 						<td><c:out value="${order.id}" /></td>
-						<td><c:out value="${order.orderDate}" /></td>
+						<td>		<span
+											><fmt:formatDate
+												pattern="hh:mm:ss"  value="${order.orderDate}" /> </span>
+										
+										 <span
+											class="persian-date"><fmt:formatDate
+												pattern="yyyy/MM/dd" value="${order.orderDate}" /> </span>
+				</td>
 						<td><c:out value="${order.status}" /></td>
 						<td><c:out value="${order.deal.merchant.name}" /></td>
 						<td><c:out value="${order.deal.name}" /></td>

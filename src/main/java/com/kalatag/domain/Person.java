@@ -19,7 +19,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,10 +37,10 @@ public class Person implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@NotEmpty
+	@NotBlank
 	@Column(nullable = false, name = "firstname")
 	private String firstName;
-	@NotEmpty
+	@NotBlank
 	@Column(nullable = false, name = "lastname")
 	private String lastName;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -47,8 +48,9 @@ public class Person implements Serializable {
 	@Past
 	private Date birthday;
 	private Gender gender;
-	@NotEmpty
 	@Column(nullable = false, name = "username", unique = true)
+	@NotBlank
+	@Email
 	private String username;
 
 	@JsonIgnore

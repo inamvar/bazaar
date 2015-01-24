@@ -175,6 +175,7 @@ public class SiteController {
 			List<Comment> comments = commentService.findByDeal(deal, true);
 			uiModel.addAttribute("comments", comments);
 			List<Deal> similars = dealService.findSimilars(deal);
+			uiModel.addAttribute("sold", dealService.getSold(deal));
 			uiModel.addAttribute("similars", similars);
 
 		}
@@ -267,7 +268,7 @@ public class SiteController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String RegisterCustomerPost(
-			@ModelAttribute("customer") @Valid Customer customer,
+			 @Valid @ModelAttribute("customer") Customer customer,
 			BindingResult result, Locale locale, Model uiModel) {
 
 		if (result.hasErrors()) {

@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 @Entity
 public class Customer extends Person {
@@ -15,6 +16,7 @@ public class Customer extends Person {
 
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "contact_id", nullable = true )
+	@Valid
 	private Contact contact;
 
 	public Contact getContact() {

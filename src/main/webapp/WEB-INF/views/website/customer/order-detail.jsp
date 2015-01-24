@@ -13,7 +13,17 @@
 				<div class="row">
 				<div class="col-sm-12">
 				<p><spring:message code="order.id"/>: ${order.id }</p>
-				<p><spring:message code="order.date"/>: ${order.orderDate}</p>
+				<p><spring:message code="order.date"/>: 
+				
+				<span
+											><fmt:formatDate
+												pattern="hh:mm:ss"  value="${order.orderDate}" /> </span>
+										
+										 <span
+											class="persian-date"><fmt:formatDate
+												pattern="yyyy/MM/dd" value="${order.orderDate}" /> </span>
+				
+				</p>
 				<p><spring:message code="order.quantity"/>: ${order.quantity}</p>
 				</div>
 					<div class="col-sm-3">
@@ -25,7 +35,7 @@
 						<p><span class="glyphicon glyphicon-tag"></span> <b>${order.deal.name}</b></p>
 						<p>${order.deal.description}</p>
 						
-						<p>${order.option.name} 
+						<p><spring:message code="kalatag.paid" />: 
 							<fmt:formatNumber type="number" maxFractionDigits="0"
 								value="${order.option.price}" />
 							<spring:message code="kalatag.currency" />
@@ -38,14 +48,9 @@
 					<div class="gmap img-thumbnail" id="gmap"></div>
 					</div>
 					
+
 					<div class="col-sm-12">
 					<hr/>
-						<p>
-							<spring:message code="order.issue"
-								arguments="${order.deal.merchant.name}" />
-						</p>
-					</div>
-					<div class="col-sm-12">
 						<c:if test="${ not empty order.coupons}">
 							<p class="text text-info">
 								<spring:message code="order.herecoupons" />

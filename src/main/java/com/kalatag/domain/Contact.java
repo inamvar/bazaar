@@ -25,7 +25,6 @@ public class Contact  implements Serializable{
 	private int id;
 	private String mobile;
 	private String fax;
-	@NotEmpty
 	private String phone;
 	private String website;
 	@ManyToOne 
@@ -38,8 +37,6 @@ public class Contact  implements Serializable{
 	@Lob
 	private String geoLocation;
 	
-	
-	@NotEmpty
 	@Email
 	private String email;
 

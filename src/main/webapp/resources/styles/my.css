@@ -60,6 +60,12 @@ table {
 	min-height: 175px;
 }
 
+ .form-control{
+	padding-top:2px;
+	
+
+}
+
 .ps-current {
 	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;

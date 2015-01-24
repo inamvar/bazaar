@@ -17,11 +17,11 @@
 
 			</div>
 			<div class="panel-body">
-
+		
 				<form:form name='f'
 					action="${pageContext.request.contextPath}/register"
 					commandName="customer" method='POST'>
-
+					<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<p>
@@ -37,11 +37,14 @@
 								<spring:message code="person.gender" />
 							</p>
 							<form:select class="form-control input-sm" path="gender">
-								<form:options />
+								<form:option value="MALE"><spring:message code="gender.MALE"/></form:option>
+									<form:option value="Female"><spring:message code="gender.FEMALE"/></form:option>
 							</form:select>
 							<form:errors path="gender" cssClass="text text-danger" />
 						</div>
 					</div>
+					</div>
+					<div class="row">
 					<div class="col-sm-4">
 						<div class="form-group">
 							<spring:message code="person.firstname" />
@@ -87,7 +90,8 @@
 
 						</div>
 					</div>
-
+</div>
+<div class="row">
 					<div class="col-sm-4">
 
 						<div class="form-group">
@@ -114,6 +118,8 @@
 							<form:errors path="contact.city" cssClass="text text-danger" />
 						</div>
 					</div>
+					</div>
+					<div class="row">
 					<div class="col-sm-2">
 						<div class="form-group">
 
@@ -122,12 +128,13 @@
 
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-10">
 						<div class="form-group">
 							<p></p>
 							<a href="${pageContext.request.contextPath}/login"><spring:message
 									code="register.already" /></a>
 						</div>
+					</div>
 					</div>
 				</form:form>
 			</div>

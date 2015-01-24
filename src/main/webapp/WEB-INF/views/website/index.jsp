@@ -199,11 +199,11 @@
 					<a class="list-group-item"
 						href="${pageContext.request.contextPath}/detail?deal=${deal.id}">
 						<div class="row">
-							<img class="img-responsive col-sm-2"
+							<img class="img-responsive col-sm-2 col-xs-4"
 								src="${pageContext.request.contextPath}/files/deals/${deal.id}/thumbnail?width=160&height=145" />
 
 
-							<div class="col-sm-10">
+							<div class="col-sm-10 col-xs-8">
 								<h4>${deal.name}</h4>
 								<p>${deal.description}</p>
 								<p>

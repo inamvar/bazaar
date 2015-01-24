@@ -55,6 +55,7 @@
 							value="${deal.price}" />
 						<spring:message code="kalatag.currency" />
 					</h4>
+					<p class="text text-primary"><spring:message code="deal.sold"/>: <c:out value="${sold}"/> </p>
 					<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
 					<div class="countdown"
 						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
@@ -129,7 +130,7 @@
 									:
 									<div class="form-group">
 
-										<input type="text" class="form-control input-sm" name="qty"
+										<input type="number" class="form-control input-sm" name="qty"
 											size="5" value="1" />
 
 
