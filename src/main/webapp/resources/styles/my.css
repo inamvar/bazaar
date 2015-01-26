@@ -31,7 +31,7 @@
 
 body {
 	font-family:  "Yekan","YekanNumbers", Tahoma;
-	font-size: 13;
+	font-size: 12;
 /* 	background-color: #F0F0F0;
 	background-image: url("../images/symphony.png");
 	background-attachment: fixed; */
@@ -98,8 +98,8 @@ table {
 	border-radius: 0;
 	border-left : 0px;
 	border-right:0px;
-	margin-right:-3px;
-	margin-left:-1px;
+/* 	margin-right:-3px;
+	margin-left:-1px */;
 }
 .navbar-default .navbar-brand {
 	color: #3a3a3a;

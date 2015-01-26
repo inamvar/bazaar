@@ -62,10 +62,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/reset-pass.jsp" />
 	</definition>
 
-<definition name="bank-simulation" template="/WEB-INF/templates/main.jsp">
+<definition name="bank-simulation" extends=".websiteTemplate">
 		<put-attribute name="header"
 			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/bank-simulation.jsp" />
+			<put-attribute name="footer" value="/WEB-INF/templates/blank.jsp" />
 	</definition>
 
 

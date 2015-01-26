@@ -69,6 +69,7 @@
 		<put-attribute name="header"
 			value="/WEB-INF/templates/error_header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/bank-simulation.jsp" />
+			<put-attribute name="footer" value="/WEB-INF/templates/blank.jsp" />
 	</definition>
 
 </tiles-definitions>

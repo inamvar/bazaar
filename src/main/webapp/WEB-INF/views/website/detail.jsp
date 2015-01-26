@@ -55,7 +55,11 @@
 							value="${deal.price}" />
 						<spring:message code="kalatag.currency" />
 					</h4>
-					<p class="text text-primary"><spring:message code="deal.sold"/>: <c:out value="${sold}"/> </p>
+					<p class="text text-primary">
+						<spring:message code="deal.sold" />
+						:
+						<c:out value="${sold}" />
+					</p>
 					<%-- <div class="countdown countdown-inline" data-countdown="${deal.validity}"></div> --%>
 					<div class="countdown"
 						data-countdown="<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" 
@@ -92,65 +96,75 @@
 								src="${pageContext.request.contextPath}/files/attachments/${deal.id}/dynamicImage?width=800&height=450" /></li>
 						</c:forEach>
 					</ul>
+						
 				</div>
 			</c:if>
 
-			<div class="col-sm-12">
-				<hr />
+				<div class="col-sm-12"><hr /></div>
+			
 				<c:forEach items="${deal.options}" var="opt">
-					<div class="col-sm-6">
-						<div>
-							<span class="glyphicon glyphicon-tag"> </span> ${opt.name}
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="glyphicon glyphicon-tag"> </span> ${opt.name}
+							</div>
+							<div class="panel-body">
+								<p>${opt.description}</p>
+								<h4 class="col-sm-6 text-danger" >
+									<fmt:formatNumber type="number" maxFractionDigits="0"
+										value="${opt.discount}" />
+									%
+
+									<spring:message code="kalatag.off" />
+									.
+									<spring:message code="kalatag.yourpay" />
+									<fmt:formatNumber type="number" maxFractionDigits="0"
+										value="${opt.price}" />
+									<spring:message code="kalatag.currency" />
+								</h4>
+
+
+								<div class="col-sm-6 form-inline">
+									<c:if test="${not expired}">
+										<form action="${pageContext.request.contextPath}/buy"
+											method="POST" class="btn-buy form-inline" role="form">
+
+
+
+											<input type="hidden" name="dealId" value="${deal.id}" /> <input
+												type="hidden" name="optionId" value="${opt.id}" />
+											<spring:message code="order.quantity" />
+											:
+											<div class="form-group">
+												<span class="badge" id="range">1</span>
+												<input type="range" 
+													name="qty" size="5" step="1" max="10" min="1" value="1" onchange="showValue(this.value)"  />
+												
+												<script type="text/javascript">
+												function showValue(newValue)
+												{
+													document.getElementById("range").innerHTML=newValue;
+												}
+												</script>
+													
+											</div>
+											<button type="submit" class="btn btn-success btn-sm">
+												&nbsp;&nbsp;&nbsp;&nbsp; <span
+													class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
+														code="kalatag.buy" /></b> &nbsp;&nbsp;&nbsp;&nbsp;
+											</button>
+
+
+										</form>
+									</c:if>
+								</div>
+							</div>
 						</div>
-						<p>${opt.description}</p>
-						<h4 class="text-danger">
-							<fmt:formatNumber type="number" maxFractionDigits="0"
-								value="${opt.discount}" />
-							%
-
-							<spring:message code="kalatag.off" />
-							.
-							<spring:message code="kalatag.yourpay" />
-							<fmt:formatNumber type="number" maxFractionDigits="0"
-								value="${opt.price}" />
-							<spring:message code="kalatag.currency" />
-						</h4>
-
-
-						<div class="form-inline">
-							<c:if test="${not expired}">
-								<form action="${pageContext.request.contextPath}/buy"
-									method="POST" class="btn-buy form-inline" role="form">
-
-
-
-									<input type="hidden" name="dealId" value="${deal.id}" /> <input
-										type="hidden" name="optionId" value="${opt.id}" />
-									<spring:message code="order.quantity" />
-									:
-									<div class="form-group">
-
-										<input type="number" class="form-control input-sm" name="qty"
-											size="5" value="1" />
-
-
-									</div>
-									<button type="submit" class="btn btn-success btn-sm">
-										&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class=" glyphicon glyphicon-shopping-cart"> </span> <b><spring:message
-												code="kalatag.buy" /></b> &nbsp;&nbsp;&nbsp;&nbsp;
-									</button>
-
-
-								</form>
-							</c:if>
-						</div>
-
 					</div>
 
 				</c:forEach>
 
-			</div>
+			
 
 			<div class="col-sm-12">
 				<div class="panel panel-default">
@@ -185,16 +199,10 @@
 								<div>
 									<p class="text text-muted">
 										<span class="glyphicon glyphicon-user"></span>
-										${comment.author.firstName} ${comment.author.lastName} |
-										<span
-											><fmt:formatDate
-												pattern="hh:mm:ss"  value="${comment.date}" /> </span>
-										
-										 <span
+										${comment.author.firstName} ${comment.author.lastName} | <span><fmt:formatDate
+												pattern="hh:mm:ss" value="${comment.date}" /> </span> <span
 											class="persian-date"><fmt:formatDate
 												pattern="yyyy/MM/dd" value="${comment.date}" /> </span>
-												
-												
 									<p class="text text-info">${comment.commentText}</p>
 									<hr />
 								</div>
@@ -279,8 +287,6 @@
 </div>
 
 <script>
-
-
 	$(document).ready(function() {
 
 		$("#owl-demo").owlCarousel({

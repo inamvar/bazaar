@@ -6,7 +6,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<script>
 
+var markers= [];
+</script>
 
 
 <div class="container">
@@ -119,6 +122,16 @@
 						class="ca-content"> ${category.name} </span> </a></li>
 			</c:forEach>
 		</ul>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			
+			<!-- button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Large Map</button -->
+			</div>
+			<div class="panel-body">
+				<div id="gmap" class="gmap"></div>
+			</div>
+		</div>
 
 	</div>
 
@@ -145,6 +158,11 @@
 			<p></p>
 
 			<c:forEach items="${deals}" var="deal">
+			
+			<script type="text/javascript">
+			markers.push({latLng:[<c:out value="${deal.merchant.contact.geoLocation}"/>], data:"<c:out value="${deal.name}"/> - <c:out value="${deal.merchant.name}"/> "});
+			</script>
+			
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 
 					<div class="productbox">
@@ -242,9 +260,33 @@
 
 	</div>
 
+	
+<!-- Large modal -->
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="panel panel-default"  >
+    	<div class="panel-body ">
+    	
+    	 <div id="gmap-large" class="gmap"  style="height:550px"></div>
+    	</div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+	
 </div>
 
+
+
+
 <script>
+
+
 	$(document).ready(function() {
 		$('.pgwSlider').pgwSlider({
 			displayList : false,
@@ -271,8 +313,34 @@
 			});
 
 		});
+		
+		
+		
+		console.log(markers);
+	    try {
+	       $('.gmap').gmap3({
+	            marker:{
+	                values:
+	                	 markers,
+	                      options:{
+	                        draggable: false
+	                      }
+	            },
+	            map: {
+	                options: {
+	                	center:[35.701186,51.405102],
+	                    zoom: 10
+	                }
+	            }
+	        });
+	    	
+
+	    }catch(e) {};
+		
 
 	});
 </script>
 
 
+<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<c:out value="${pageContext.response.locale.language}"/>"></script>
