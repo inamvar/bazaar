@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -106,6 +108,23 @@ public class Util {
 			month = months[num - 1];
 		}
 		return month;
+	}
+	
+	public static Date getDateWithoutTime(Date date) {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    cal.set(Calendar.HOUR_OF_DAY, 0);
+	    cal.set(Calendar.MINUTE, 0);
+	    cal.set(Calendar.SECOND, 0);
+	    cal.set(Calendar.MILLISECOND, 0);
+	    return cal.getTime();
+	}
+
+	public static Date getTomorrowDate(Date date) {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    cal.add(Calendar.DATE, 1);
+	    return cal.getTime();
 	}
 
 }

@@ -53,7 +53,7 @@
 							
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<%-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"><c:out
 							value="${pageContext.response.locale.language}" /> <span
 						class="caret"></span> </a>
@@ -67,7 +67,9 @@
 						<li><a href="?lang=fa"><img
 								src="${pageContext.request.contextPath}/resources/images/ir.gif" />
 								فارسی</a></li>
-					</ul> <c:if test="${pageContext['request'].userPrincipal != null}">
+					</ul> --%>
+					
+					 <c:if test="${pageContext['request'].userPrincipal != null}">
 					<li><a>${pageContext.request.userPrincipal.name} </a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/j_spring_security_logout"><spring:message

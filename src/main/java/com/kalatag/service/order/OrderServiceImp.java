@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kalatag.dao.OrderDao;
 import com.kalatag.domain.Coupon;
+import com.kalatag.domain.Customer;
 import com.kalatag.domain.Deal;
 import com.kalatag.domain.DealOption;
 import com.kalatag.domain.ItemStatus;
+import com.kalatag.domain.Merchant;
 import com.kalatag.domain.Order;
 import com.kalatag.domain.OrderStatus;
 import com.kalatag.domain.Person;
@@ -114,7 +116,8 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	}
 
 	@Override
-	public Transaction buy(int dealId, int optionId, int qty) throws DealExpiredException {
+	public Transaction buy(int dealId, int optionId, int qty)
+			throws DealExpiredException {
 		logger.debug("---------new order---------");
 		Deal deal = dealService.find(dealId);
 		logger.debug("deal= " + deal.getId() + ", " + deal.getName());
@@ -143,7 +146,7 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 			txn.setPerson(customer);
 			txn = txnService.create(txn);
 			txn.setReservationNumber(txn.getId() + "");
-		
+
 			logger.debug("reservation number=" + txn.getReservationNumber());
 			return txn;
 		}
@@ -157,15 +160,23 @@ public class OrderServiceImp extends CRUDServiceImp<Order> implements
 	}
 
 	@Override
+	@Transactional
 	public boolean CheckMinimumOrder(Order order) {
 		Deal deal = order.getDeal();
 		int minimum = deal.getMinCoupon();
 		if (dealService.getSold(deal) >= minimum) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
-			
-			
+
+	}
+
+	@Override
+	@Transactional
+	public List<Order> findOrders(Date startDate, Date endDate,
+			String customerFirstName, String customerLastName,String merchantName, String dealName, int id) {
+		return orderDao.findOrders(startDate, endDate, customerFirstName,customerLastName,
+				merchantName, dealName, id);
 	}
 }

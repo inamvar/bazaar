@@ -1,6 +1,11 @@
 package com.kalatag.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -47,9 +52,10 @@ public class OrderController {
 			uiModel.addAttribute("orders",
 					deal != null ? orderService.findOrdersByDeal(deal)
 							: new ArrayList<Order>());
-		} else {
+		} 
+/*		else {
 			uiModel.addAttribute("orders", orderService.findAll());
-		}
+		}*/
 
 		if (msg != null) {
 			uiModel.addAttribute("successMsg", msg);
@@ -58,7 +64,43 @@ public class OrderController {
 				messageSource.getMessage("admin.menu.orders", null, locale));
 		return "order/list";
 	}
-	
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String list(@RequestParam(required = false, value="startDate") String startDateString,
+			@RequestParam(required = false, value= "endDate") String endDateString,
+			@RequestParam("customer_firstname") String customerFirstName,
+			@RequestParam("customer_lastname") String customerLastName,
+			@RequestParam("merchant_name") String merchantName,
+			@RequestParam("deal_name") String dealName,
+			@RequestParam("order_id") Integer orderId,
+			Locale locale, Model uiModel) {
+
+		Date startDate = null;
+		Date endDate =null;
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+		if(startDateString != null && !startDateString.isEmpty()){
+			try {
+				startDate = df.parse(startDateString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(endDateString != null && !endDateString.isEmpty()){
+			try {
+				endDate = df.parse(endDateString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		List<Order> orders = orderService.findOrders(startDate, endDate, customerFirstName, customerLastName, merchantName, dealName, orderId ==null ? 0 : orderId);
+		uiModel.addAttribute("orders",orders);
+		uiModel.addAttribute("title",
+				messageSource.getMessage("admin.menu.orders", null, locale));
+		return "order/list";
+	}
+
 	@RequestMapping(value = "/admin/order/filter", method = RequestMethod.GET)
 	public String getBetweenDate(
 			@RequestParam(value = "fromDate", required = true) String fromDate,
@@ -69,8 +111,6 @@ public class OrderController {
 				messageSource.getMessage("admin.menu.orders", null, locale));
 		return "order/list";
 	}
-	
-	
 
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable int id) {
