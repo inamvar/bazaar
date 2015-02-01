@@ -160,9 +160,9 @@
 						<td><c:out value="${order.deal.name}" /></td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="0"
 								value=" ${order.totalPrice}" /></td>
-						<td><a
-							href="${pageContext.request.contextPath}/admin/order/detail/${order.id}"><span
-								class="glyphicon glyphicon-th"> </span></a> <a
+						<td><a class="btn btn-default btn-xs"
+							href="${pageContext.request.contextPath}/admin/order/detail?id=${order.id}"><span
+								class="glyphicon glyphicon-th"> </span> <spring:message code="order.detail" /> </a> <a
 							class="btn btn-danger btn-xs"
 							href="${pageContext.request.contextPath}/admin/order/delete/${order.id}"><span
 								class="glyphicon glyphicon-trash"> </span></a>

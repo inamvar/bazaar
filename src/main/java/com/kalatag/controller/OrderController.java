@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,16 +102,21 @@ public class OrderController {
 		return "order/list";
 	}
 
-	@RequestMapping(value = "/admin/order/filter", method = RequestMethod.GET)
-	public String getBetweenDate(
-			@RequestParam(value = "fromDate", required = true) String fromDate,
-			@RequestParam(value = "toDate", required = true) String toDate,
+
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String showOrderDetail(
+			@RequestParam(value = "id", required = true) Integer id,
 			Locale locale, Model uiModel) {
 
-		uiModel.addAttribute("title",
-				messageSource.getMessage("admin.menu.orders", null, locale));
-		return "order/list";
+		Order order =orderService.find(id);
+		Hibernate.initialize(order.getCoupons());
+		uiModel.addAttribute("order",order);
+
+		return "order/detail";
 	}
+	
+	
 
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable int id) {

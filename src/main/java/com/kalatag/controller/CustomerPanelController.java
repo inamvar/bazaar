@@ -1,5 +1,7 @@
 package com.kalatag.controller;
 
+import static ch.lambdaj.Lambda.sumFrom;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -13,16 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kalatag.domain.Customer;
+import com.kalatag.domain.Deal;
 import com.kalatag.domain.Order;
-import com.kalatag.domain.Person;
 import com.kalatag.service.CouponService;
 import com.kalatag.service.CustomerService;
 import com.kalatag.service.DealService;
 import com.kalatag.service.order.OrderService;
 import com.kalatag.service.person.PersonService;
 import com.kalatag.util.Util;
-
-import static ch.lambdaj.Lambda.*;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -66,7 +66,8 @@ public class CustomerPanelController {
 		Order order =orderService.find(id);
 		Hibernate.initialize(order.getCoupons());
 		uiModel.addAttribute("order",order);
-
+		List<Deal> similars = dealService.findSimilars(order.getDeal());
+		uiModel.addAttribute("similars",similars);
 		return "website/customer/order/detail";
 	}
 	

@@ -85,11 +85,75 @@
 			</div>
 		</div>
 	</div>
+	<!-- Similar offers -->
+
+		<c:if test="${not empty similars}">
+
+
+			<div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+				<h3>
+					<spring:message code="deal.similars" />
+				</h3>
+				<hr />
+
+				<div class="similars">
+					<div id="owl-demo" class="owl-carousel">
+						<c:forEach items="${similars}" var="sim" varStatus="stat">
+
+							<div class="item productbox">
+
+								<a
+									href="${pageContext.request.contextPath}/detail?deal=${sim.id}">
+									<img
+									src="${pageContext.request.contextPath}/files/deals/${sim.id}/thumbnail?width=255&height=170"
+									class="img img-responsive" />
+									<div class="caption">
+										<p>${sim.name }</p>
+										<span class="old-price" style="font-size: 0.9em;"><fmt:formatNumber
+												type="number" maxFractionDigits="0" value="${deal.price}" /></span>
+										<c:if test="${not empty deal.options}">
+											<b class="finalprice" style="font-size: 0.9em;"> <fmt:formatNumber
+													type="number" maxFractionDigits="0"
+													value="${deal.options[0].price}" /> <spring:message
+													code="kalatag.currency" />
+											</b>
+											<!-- from <b>Amazon</b> -->
+										</c:if>
+
+
+									</div>
+								</a>
+
+							</div>
+						</c:forEach>
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</c:if>
+	
 </div>
 
 
 <script>
 $(document).ready(function(){
+	
+	$("#owl-demo").owlCarousel({
+		//	items : 4, //4 items above 1000px browser width
+		autoPlay : 3000,
+		itemsDesktop : [ 1000, 5 ], //5 items between 1000px and 901px
+		itemsDesktopSmall : [ 900, 3 ], // betweem 900px and 601px
+		itemsTablet : [ 600, 2 ], //2 items between 600 and 0
+		itemsMobile : false
+	// itemsMobile disabled - inherit from itemsTablet option
+	});
+
+	
 	var loc = "<c:out value="${order.deal.merchant.contact.geoLocation}"/>";	
 	showMap(loc);
 	

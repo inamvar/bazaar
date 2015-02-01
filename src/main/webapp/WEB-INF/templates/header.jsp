@@ -13,7 +13,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><spring:message
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/admin"><spring:message
 					code="admin.header.brand" /></a>
 		</div>
 

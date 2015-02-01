@@ -16,6 +16,9 @@
     <put-attribute name="body" value="/WEB-INF/views/admin/order/update.jsp"/>
   </definition>
   
+   <definition extends=".adminTemplate" name="order/detail">
+    <put-attribute name="body" value="/WEB-INF/views/admin/order/order-detail.jsp"/>
+  </definition>
 
 
 </tiles-definitions>

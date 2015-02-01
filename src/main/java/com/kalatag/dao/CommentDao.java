@@ -9,5 +9,7 @@ public interface CommentDao extends GenericDao<Comment>{
 
 	List<Comment> findByDeal(Deal deal, boolean accepted);
 	List<Comment> findAll(String sort,String asc);
+	List<Comment> findAccepted(boolean accepted);
+	void acceptAllComments();
 	int changeAccept(int id, boolean accept);
 }

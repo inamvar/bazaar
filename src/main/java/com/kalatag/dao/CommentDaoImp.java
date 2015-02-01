@@ -52,4 +52,28 @@ public class CommentDaoImp extends GenericDaoImp<Comment> implements CommentDao 
 		return results;
 	}
 
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Comment> findAccepted(boolean accepted) {
+		List<Comment> results = new ArrayList<Comment>();
+		String hql = "FROM  Comment C  where C.isAccepted= :accepted order by C.date desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("accepted", accepted);
+		results = query.list();
+		if(results == null)
+			 results = new ArrayList<Comment>();
+		return results;
+	}
+
+
+	@Override
+
+	public void acceptAllComments() {
+		String hql = "UPDATE  Comment C  SET C.isAccepted = true WHERE C.isAccepted= false";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.executeUpdate();
+		
+	}
+
 }
