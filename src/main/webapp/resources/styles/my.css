@@ -16,6 +16,14 @@
 	text-rendering:optimizeLegibility
 }
 
+.affix{
+	position:fixed;
+	top:20px;
+	width:200px;
+	z-index: 12;
+	background-color:white;
+}
+
 
 .footer{
 	margin-top:20px;

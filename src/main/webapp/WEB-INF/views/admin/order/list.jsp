@@ -117,6 +117,18 @@
 							name="deal_name" />
 					</div>
 					<div class="form-group">
+						<label for="order_status"><spring:message code="order.status" /></label>
+						<select  class="form-control" 
+							name="order_status" >
+							 <option value=""> --- </option>
+							 <c:forEach items="${statusValues}" var="item">
+							  <option value="${item}">${item}</option>
+							 </c:forEach>
+     						
+							</select>
+					</div>
+					
+					<div class="form-group">
 					<label></label>
 						<button type="submit" class="btn btn-danger">
 							<spring:message code="report.create" />

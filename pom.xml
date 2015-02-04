@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com</groupId>
-	<artifactId>kalatag</artifactId>
-	<name>kalatag</name>
+	<artifactId>offeronline</artifactId>
+	<name>OfferOnline</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -367,4 +367,6 @@
 
 		</plugins>
 	</build>
+	<description>Online deal management system</description>
+	<url>http://www.offeronline.com</url>
 </project>

@@ -48,7 +48,7 @@
 		</beans:bean> -->
 
 	<beans:bean id="redirectRoleStrategy"
-		class="com.kalatag.security.UrlAuthenticationSuccessHandler">
+		class="com.offeronline.security.UrlAuthenticationSuccessHandler">
 		<beans:property name="redirectAdminUrl" value="/admin" />
 		<beans:property name="redirectMerchantUrl" value="/merchant/panel" />
 		<beans:property name="redirectCustomerUrl" value="/" />

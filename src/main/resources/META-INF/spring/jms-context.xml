@@ -11,7 +11,7 @@
                            http://activemq.apache.org/schema/core
                            http://activemq.apache.org/schema/core/activemq-core.xsd">
 
-	<context:component-scan base-package="com.kalatag" />
+	<context:component-scan base-package="com.offeronline" />
 
 	<!-- Broker -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -46,6 +46,10 @@
 	
 		<bean id="journalNotification" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg value="journalNotificationQueue" />
+	</bean>
+	
+			<bean id="canceledOrdersNotification" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="canceledOrdersQueue" />
 	</bean>
 
 
@@ -90,6 +94,11 @@
 	<jms:listener-container connection-factory="connectionFactory">
 		<jms:listener destination="journalNotificationQueue"
 			method="onMessage" ref="journalListener" />
+	</jms:listener-container>
+	
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="canceledOrdersQueue"
+			method="onMessage" ref="canceledOrdersListener" />
 	</jms:listener-container>
 
 

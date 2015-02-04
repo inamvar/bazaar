@@ -43,7 +43,7 @@ var markers= [];
 
 
 
-	<div class="col-sm-12">
+	<div class="col-sm-12" id="featured">
 		<c:if test="${not empty featureds[0].images}">
 			<h3>
 				<i class="icon-tag"></i>
@@ -108,7 +108,7 @@ var markers= [];
 	<div class="col-md-3 col-lg-3 hidden-sm hidden-xs">
 
 
-		<ul class="ca-menu">
+		<ul class="ca-menu" data-spy="affix" id="myAffix">
 			<li><a style="color: black; font-size: 1em;"
 				href="${pageContext.request.contextPath}/"><span class="ca-icon"><i
 						class="glyphicon glyphicon-th"></i></span> <span class="ca-content">
@@ -294,6 +294,18 @@ var markers= [];
 			intervalDuration : 5000
 		});
 
+		
+		$('#myAffix').affix({
+			  offset: {
+			    top: function () {
+				      return (this.top = $('#featured').outerHeight(true) + $('#header').outerHeight(true)+ 50)
+				      },
+			    bottom: function () {
+			      return (this.bottom = $('.footer').outerHeight(true))
+			    }
+			  }
+			})
+		
 		startCountdown();
 
 		$('#btn-list').click(function() {

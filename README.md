@@ -1,4 +1,5 @@
-bazaar
+OfferOnline
 ======
 
-Spring mvc online deal management system
+Online deal management system
+powered by spring sources.

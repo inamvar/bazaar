@@ -2,14 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
 	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-
-
+	<task:annotation-driven/>
+	
+    <bean id="checkOrdersTask" class="com.offeronline.schedule.CheckOrdersTask" />
+    <task:scheduled-tasks>
+        <task:scheduled ref="checkOrdersTask" method="checkForCanceledOrders" fixed-rate="50000"></task:scheduled>
+    </task:scheduled-tasks>
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="defaultEncoding" value="UTF-8" />
@@ -22,11 +29,11 @@
 		</property>
 	</bean>
 
-	<bean id="paymentGateway" class="com.kalatag.gateway.TestGateway">
+	<bean id="paymentGateway" class="com.offeronline.gateway.TestGateway">
 		<property name="url"
-			value="http://kalatag.com/test/payment/simulator" />
+			value="http://www.offeronline.com/test/payment/simulator" />
 		<property name="returnUrl"
-			value="http://kalatag.com/payment/gateway/response/test" />
+			value="http://www.offeronline.com/payment/gateway/response/test" />
 		<property name="merchantId" value="111111" />
 	</bean>
 
@@ -35,7 +42,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/kalatag?characterEncoding=UTF-8" />
+			value="jdbc:mysql://localhost:3306/offeronline?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="rootroot" />
 	</bean>
@@ -45,7 +52,7 @@
 	<bean id="hibernate4AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.kalatag" />
+		<property name="packagesToScan" value="com.offeronline" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.connection.useUnicode">true</prop>
