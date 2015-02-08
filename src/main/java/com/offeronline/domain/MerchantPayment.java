@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class MerchantPayment implements Serializable {
 
@@ -24,8 +26,9 @@ public class MerchantPayment implements Serializable {
 	private int id;
 	private String note;
 	private String referenceNumber;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date paymentDate;
-	private Date IssueDate;
+	private Date issueDate;
 	private double amount;
 	private String chequeNumber;
 	private String chequeDate;
@@ -48,10 +51,10 @@ public class MerchantPayment implements Serializable {
 		this.id = id;
 	}
 	public Date getIssueDate() {
-		return IssueDate;
+		return issueDate;
 	}
 	public void setIssueDate(Date issueDate) {
-		IssueDate = issueDate;
+		this.issueDate = issueDate;
 	}
 	public Date getPaymentDate() {
 		return paymentDate;

@@ -32,7 +32,7 @@
 				<c:forEach var="merchant" items="${merchants}">
 					<tr>
 
-						<td><c:out value="${merchant.name}" /></td>
+						<td><a href="${pageContext.request.contextPath}/admin/merchant/detail/${merchant.id}" > <c:out value="${merchant.name}" /></a></td>
 						<td><c:out value="${merchant.contactPoint.firstName}" /></td>
 						<td><c:out value="${merchant.contactPoint.lastName}" /></td>
 						<td><c:out value="${merchant.contact.email}"/></td>
@@ -43,7 +43,13 @@
 									code="crud.delete" /></a> <a class="btn btn-success btn-xs"
 							href="${pageContext.request.contextPath}/admin/merchant/update/${merchant.id}"><span
 								class=" glyphicon glyphicon-pencil"> </span> <spring:message
-									code="crud.edit" /></a></td>
+									code="crud.edit" /></a>
+									<!--a class="btn btn-default btn-xs"
+							href="${pageContext.request.contextPath}/admin/merchant/insertPayment/${merchant.id}"><span
+								class="icon-credit-card"> </span> <spring:message
+									code="merchant.payment.insert" /></a-->
+									
+									</td>
 					</tr>
 				</c:forEach>
 			</tbody>

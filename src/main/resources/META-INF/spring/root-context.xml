@@ -14,7 +14,7 @@
 	
     <bean id="checkOrdersTask" class="com.offeronline.schedule.CheckOrdersTask" />
     <task:scheduled-tasks>
-        <task:scheduled ref="checkOrdersTask" method="checkForCanceledOrders" fixed-rate="50000"></task:scheduled>
+        <task:scheduled ref="checkOrdersTask" method="checkForCanceledOrders" fixed-rate="300000"></task:scheduled>
     </task:scheduled-tasks>
 	
 	<bean id="messageSource"

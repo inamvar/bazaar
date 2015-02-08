@@ -46,19 +46,19 @@ public class CheckOrdersTask {
 
 		try {
 			List<Order> orders = orderService.findOrders(null, null, null,
-					null, null, null, OrderStatus.DONE, 0);
+					null, null, null, OrderStatus.PENDING, 0);
 
 			for (Order order : orders) {
 				boolean isReached = orderService.CheckMinimumOrder(order);
-				if (isReached) {
-					order.setStatus(OrderStatus.ClOSED);
+				/*if (isReached) {*/
+					/*order.setStatus(OrderStatus.ClOSED);
 					List<Order> closedOrders = new ArrayList<Order>();
 					closedOrders.add(order);
 					orderService.updateStatus(closedOrders, OrderStatus.ClOSED);
 					logger.info(String.format(
-							"Order number {0} closed. ", order.getId()));
-				} else {
-
+							"Order number {0} closed. ", order.getId()));*/
+				//} else {
+				if (!isReached){
 					if (dealService.isExpired(order.getDeal())) {
 						order.setStatus(OrderStatus.CANCELED);
 						List<Order> canceledOrders = new ArrayList<Order>();

@@ -16,6 +16,13 @@
     <put-attribute name="body" value="/WEB-INF/views/admin/merchant/update.jsp"/>
   </definition>
   
+   <definition extends=".adminTemplate" name="merchant/insertPayment">
+    <put-attribute name="body" value="/WEB-INF/views/admin/merchant/insert-payment.jsp"/>
+  </definition>
+
+   <definition extends=".adminTemplate" name="merchant/detail">
+    <put-attribute name="body" value="/WEB-INF/views/admin/merchant/detail.jsp"/>
+  </definition>
 
 
 </tiles-definitions>
