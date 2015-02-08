@@ -24,5 +24,10 @@
     <put-attribute name="body" value="/WEB-INF/views/admin/merchant/detail.jsp"/>
   </definition>
 
+   <definition extends=".adminTemplate" name="merchant/paymentList">
+    <put-attribute name="body" value="/WEB-INF/views/admin/merchant/payment-list.jsp"/>
+  </definition>
+
+
 
 </tiles-definitions>

@@ -1,6 +1,7 @@
 package com.offeronline.controller;
 
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -108,6 +109,15 @@ public class MerchantController {
 	}
 	
 	
+	@RequestMapping(value = "/paymentList/{merchantId}", method = RequestMethod.GET)
+	public String paymentList(@PathVariable Integer merchantId, Locale locale, Model uiModel){
+		
+		Merchant merchant = merchantService.find(merchantId);
+		List<MerchantPayment> payments = mpService.findByMerchant(merchant);
+		uiModel.addAttribute("payments", payments);
+		uiModel.addAttribute("merchant", merchant);
+		return "merchant/paymentList";
+	}
 	
 	@RequestMapping(value = "/insertPayment/{merchantId}", method = RequestMethod.GET)
 	public String insertPayment(@PathVariable Integer merchantId, Locale locale, Model uiModel){
@@ -116,9 +126,26 @@ public class MerchantController {
 		Merchant merchant = merchantService.find(merchantId);
 		MerchantPayment payment = new MerchantPayment();
 		payment.setMerchant(merchant);
+		uiModel.addAttribute("merchant", merchant);
 		uiModel.addAttribute("payment", payment);
 		return "merchant/insertPayment";
 	}
+	
+	@RequestMapping(value = "/deletePayment/{merchantId}/{paymentId}", method = RequestMethod.GET)
+	public String deletePayment(@PathVariable Integer merchantId, @PathVariable Integer paymentId, Locale locale, Model uiModel){
+		
+		
+		mpService.delete(paymentId);
+		
+		Merchant merchant = merchantService.find(merchantId);
+		List<MerchantPayment> payments = mpService.findByMerchant(merchant);
+		uiModel.addAttribute("payments", payments);
+		uiModel.addAttribute("merchant", merchant);
+		return "merchant/paymentList";
+		
+		
+	}
+	
 	
 	
 	@RequestMapping(value = "/insertPayment/{merchantId}", method = RequestMethod.POST)
@@ -134,9 +161,13 @@ public class MerchantController {
 		payment.setIssueDate(new java.util.Date());
 		Merchant merchant = merchantService.find(merchantId);
 		payment.setMerchant(merchant);
+		uiModel.addAttribute("merchant", merchant);
 		mpService.create(payment);
 		
-		return "redirect:/admin/merchant";
+		List<MerchantPayment> payments = mpService.findByMerchant(merchant);
+		uiModel.addAttribute("payments", payments);
+		
+		return "merchant/paymentList";
 	}
 
 
